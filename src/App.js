@@ -1,16 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
-import Product from './Components/User/Product';
+import Product from './Components/User/Product.js';
 import { Route, Routes } from 'react-router-dom';
-import ViewMore from './Components/User/ViewMore';
+import ViewMore from './Components/User/ViewMore.js';
+import SignUp from './Components/User/Signup.js';
 import CartItems from './Components/User/CartItems';
 
 function App() {
-  return<>
+  return <>
     <Routes>
-      <Route  path="/" element={<Product/>}/>
-      <Route path='/viewmore' element={<ViewMore/>}/>
-      <Route  path="/cartitems" element={<CartItems/>}/>
+      <Route path='/signup' element={<SignUp />} />
+      <Route path="/" element={<Product />} />
+      <Route path='/viewmore' element={<ViewMore />} />
     </Routes>
   </>
 }
