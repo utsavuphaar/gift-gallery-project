@@ -66,17 +66,17 @@
 /* ------------------------------------------------Cart CSS--------------------------------------------- */
 #main-cart{
   width: 100%;
-  border: 10px solid green;
   height: 90vh;
+  display: flex;
 }
 #cart-left{
-  width:'70%' !important;
+  width:70% !important;
   height: inherit;
   border: 1px solid blue;
 }
 
 #cart-right{
-  width:'30%';
+  width:30%;
   height: inherit;
   border: 1px solid red;
 }
