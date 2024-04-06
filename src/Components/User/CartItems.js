@@ -32,7 +32,7 @@ export default function CartItems(){
                 <button className="btn btn-primary">Back To Shop</button>
             </div>
             <div id="cart-right">
-
+                
             </div>
         </section>
     </>
