@@ -7,7 +7,7 @@ import { PiShoppingCartSimpleThin } from "react-icons/pi";
 import { AiOutlineEye } from "react-icons/ai";
 import { BiRupee } from "react-icons/bi";
 import { AiFillStar } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Product() {
     const dispatch = useDispatch();
     const navigate = useNavigate("")
@@ -15,9 +15,9 @@ export default function Product() {
     useEffect(() => {
         dispatch(fetchProduct());
     }, [])
-    
-    const viewMore = (product)=>{
-        navigate("/viewmore",{state:product})
+
+    const viewMore = (product) => {
+        navigate("/viewmore", { state: product })
     }
     return <>
         <div className="container-fluid">
@@ -25,15 +25,17 @@ export default function Product() {
                 {productList.products?.map((product, index) => <div key={index} id="product-box" className="m-2 p-2 border d-flex flex-column rounded position-relative">
                     <img width="100%" height="250px" src={product.thumbnail} />
                     <div className="d-flex position-absolute" id="buttons">
-                        <div><CiHeart style={{ width: '25px', height: '25px' }} /></div>
-                        <div><PiShoppingCartSimpleThin style={{ width: '20px', height: '20px' }} /></div>
-                        <div><AiOutlineEye onClick={()=>viewMore(product)} style={{ width: '20px', height: '20px' }} /></div>
+                        <div>
+                            <CiHeart style={{ width: '25px', height: '25px' }} />
+                        </div>
+                        <div><Link to="/cartitems"><PiShoppingCartSimpleThin style={{ width: '20px', height: '20px' }} /> </Link></div>
+                        <div><AiOutlineEye onClick={() => viewMore(product)} style={{ width: '20px', height: '20px' }} /></div>
                     </div>
                     <h6 className="mt-4">{product.title.split(" ").slice(0, 3).join(' ')}</h6>
                     <div>
-                        <BiRupee /><span style={{fontWeight:'bold'}}>{product.price} </span><span className="text-secondary"><del>{product.price}</del></span>
-                        &nbsp; <span className="text-success p-1" style={{backgroundColor:'lightgrey', fontSize:'14px',borderRadius:'5px', fontWeight:'bold'}}>({product.discountPercentage} % off )</span>
-                        &nbsp;&nbsp; <span className="bg-success p-1 text-light"><AiFillStar style={{color:'white'}}/> {product.rating}</span>
+                        <BiRupee /><span style={{ fontWeight: 'bold' }}>{product.price} </span><span className="text-secondary"><del>{product.price}</del></span>
+                        &nbsp; <span className="text-success p-1" style={{ backgroundColor: 'lightgrey', fontSize: '14px', borderRadius: '5px', fontWeight: 'bold' }}>({product.discountPercentage} % off )</span>
+                        &nbsp;&nbsp; <span className="bg-success p-1 text-light"><AiFillStar style={{ color: 'white' }} /> {product.rating}</span>
                     </div>
                 </div>)}
             </div>

@@ -4,6 +4,7 @@ import Product from './Components/User/Product.js';
 import { Route, Routes } from 'react-router-dom';
 import ViewMore from './Components/User/ViewMore.js';
 import SignUp from './Components/User/Signup.js';
+import CartItems from './Components/User/CartItems';
 
 function App() {
   return <>

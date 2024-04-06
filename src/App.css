@@ -38,17 +38,46 @@
 /* --------------------------------------------------ViewMore CSS---------------------------------------------- */
 
 #view-left{
+  display: grid;
+  place-items: center;
   width: 20%;
-  height: 70vh;
+  height: 80vh;
   border: 1px solid blue;
 }
+#view-left div{
+  width: 180px;
+  height: 140px;
+  border: 1px solid blue;
+  padding: 10px;
+  margin: 10px;
+}
 #view-mid{
-
+  width: 450px !important;
+  height: 80vh;
 }
 #view-right{
-
+  width: 40%;
+  height: 80vh;
+}
+#qty{
+  width: 50px;
+}
+/* --------------------------------------------------END------------------------------------------------- */
+/* ------------------------------------------------Cart CSS--------------------------------------------- */
+#main-cart{
+  width: 100%;
+  border: 10px solid green;
+  height: 90vh;
+}
+#cart-left{
+  width:'70%' !important;
+  height: inherit;
+  border: 1px solid blue;
 }
 
-
-/* ----------------------------SignUp------------------------- */
+#cart-right{
+  width:'30%';
+  height: inherit;
+  border: 1px solid red;
+}
 
