@@ -14,6 +14,19 @@ export const fetchCartItems = createAsyncThunk("cart/cartItems", async (userId) 
     let res = await axios.get(`http://localhost:3000/cart/list/${userId}/`)
     return res.data.data;
 })
+export const insertdata = createAsyncThunk("create/signup", async({name,email,password})=>{
+        let res;
+    try {
+         res = await axios.post('http://localhost:3000/user/signUp',{name,email,password})
+         console.log(res);
+         return res.data.message;
+    } catch (error) {
+        console.log(error);
+        return "Something went wrong"
+    }
+    // console.log(res.data.message);
+})
+
 const slice = createSlice({
     name:"ProductSlice",
     initialState:{
@@ -22,6 +35,8 @@ const slice = createSlice({
         isLoading:false,
         error:false,
         cartItems:[],
+        signup: ""
+
     },
     reducers:{
         deleteProduct:(state,action)=>{
@@ -49,6 +64,12 @@ const slice = createSlice({
         }).addCase(fetchCartItems.fulfilled,(state,action)=>{
             state.cartItems = action.payload;
         }).addCase(fetchCartItems.rejected,(state,action)=>{
+            state.error = true;
+        }).addCase(insertdata.pending,(state,action)=>{
+            state.isLoading = true;
+        }).addCase(insertdata.fulfilled,(state,action)=>{
+            state.signup = action.payload;
+        }).addCase(insertdata.rejected,(state,action)=>{
             state.error = true;
         })
     },
