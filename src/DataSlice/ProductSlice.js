@@ -10,45 +10,106 @@ export const fetchProductByCategory = createAsyncThunk("products/fetchProductByC
     let res = await axios.post(`http://localhost:3000/product/viewProductByCategory/${category}/`)
     return res.data.data;
 })
+
 export const fetchCartItems = createAsyncThunk("cart/cartItems", async (userId) => {
     let res = await axios.get(`http://localhost:3000/cart/list/${userId}/`)
     return res.data.data;
 })
+
+export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ userId, productId }) => {
+    try {
+        let res = await axios.post("http://localhost:3000/cart/addToCart", { userId, productId })
+        alert(res.data.message)
+        return res.data;
+    } catch (err) {
+        console.log(err)
+    }
+})
+
+export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct", async ({userId}) => {
+    try {
+        let res = await axios.post("http://localhost:3000/wishlist/viewAllfavoriteproduct",{userId:userId})
+        return res.data.wishlist;
+    } catch (err) {
+        console.log(err)
+    }
+})
+
+export const deleteProductFromCart = createAsyncThunk(
+    'cart/deleteProductFromCart', // Action type prefix
+    async ({ userId, productId }, thunkAPI) => {
+        try {
+            const response = await axios.delete(`http://localhost:3000/cart/removeItem/${userId}/${productId}`);
+            alert("Item deleted successfully");
+            return response.data;
+        } catch (error) {
+            alert("Something went wrong while deleting the item.");
+            console.error(error);
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const deleteAllProductsFromCart = createAsyncThunk("cart/removeAllItems", async ({ userId }) => {
+    try {
+        let res = await axios.delete(`http://localhost:3000/cart/removeAllItems/${userId}`)
+        alert("Removed all items successfully");
+        return res.data;
+    } catch (err) {
+        alert("something wrong")
+        console.log(err)
+    }
+})
+
+
 const slice = createSlice({
-    name:"ProductSlice",
-    initialState:{
-        productList:[],
-        categoryProduct:[],
-        isLoading:false,
-        error:false,
-        cartItems:[],
+    name: "ProductSlice",
+    initialState: {
+        productList: [],
+        categoryProduct: [],
+        cartItems: [],
+        wishList:[],
+        isLoading: false,
+        error: false,
     },
-    reducers:{
-        deleteProduct:(state,action)=>{
-            const index= state.productList.findIndex(item=> item.id=== action.payload)
-            if (index !== -1){
+    reducers: {
+        deleteProduct: (state, action) => {
+            const index = state.productList.findIndex(item => item.id === action.payload)
+            if (index !== -1) {
                 state.productList.splice(index, 1);
-            }    
+            }
         },
+        removeProductFromCart: (state, action) => {
+            state.cartItems.splice(action.payload, 1);
+        },
+        removeAllProductsFromCart: (state, action) => {
+            state.cartItems.splice(0);
+        }
     },
-    extraReducers:(builder)=>{
-        builder.addCase(fetchProduct.pending,(state,action)=>{
+    extraReducers: (builder) => {
+        builder.addCase(fetchProduct.pending, (state, action) => {
             state.isLoading = true;
-        }).addCase(fetchProduct.fulfilled,(state,action)=>{
+        }).addCase(fetchProduct.fulfilled, (state, action) => {
             state.productList = action.payload;
-        }).addCase(fetchProduct.rejected,(state,action)=>{
+        }).addCase(fetchProduct.rejected, (state, action) => {
             state.error = true;
-        }).addCase(fetchProductByCategory.pending,(state,action)=>{
+        }).addCase(fetchProductByCategory.pending, (state, action) => {
             state.isLoading = true;
-        }).addCase(fetchProductByCategory.fulfilled,(state,action)=>{
+        }).addCase(fetchProductByCategory.fulfilled, (state, action) => {
             state.categoryProduct = action.payload;
-        }).addCase(fetchProductByCategory.rejected,(state,action)=>{
+        }).addCase(fetchProductByCategory.rejected, (state, action) => {
             state.error = true;
-        }).addCase(fetchCartItems.pending,(state,action)=>{
+        }).addCase(fetchCartItems.pending, (state, action) => {
             state.isLoading = true;
-        }).addCase(fetchCartItems.fulfilled,(state,action)=>{
+        }).addCase(fetchCartItems.fulfilled, (state, action) => {
             state.cartItems = action.payload;
-        }).addCase(fetchCartItems.rejected,(state,action)=>{
+        }).addCase(fetchCartItems.rejected, (state, action) => {
+            state.error = true;
+        }).addCase(fetchWishList.pending, (state, action) => {
+            state.isLoading = true;
+        }).addCase(fetchWishList.fulfilled, (state, action) => {
+            state.wishList = action.payload;
+        }).addCase(fetchWishList.rejected, (state, action) => {
             state.error = true;
         })
     },
@@ -56,3 +117,4 @@ const slice = createSlice({
 
 
 export default slice.reducer;
+export const { removeProductFromCart,removeAllProductsFromCart } = slice.actions;
