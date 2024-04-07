@@ -67,17 +67,54 @@
 #main-cart{
   width: 100%;
   height: 90vh;
+  background-color: #F7FAFC;
   display: flex;
+  margin: auto;
 }
 #cart-left{
-  width:70% !important;
+  width:65% !important;
   height: inherit;
-  border: 1px solid blue;
+  margin-left: auto;
 }
 
 #cart-right{
-  width:30%;
-  height: inherit;
-  border: 1px solid red;
+  width:25%;
+  background-color: #F7FAFC;
+  float: left;
+  height: 400px;
+  display: grid;
+  place-items: center;
 }
+#cart-right-child1{
+  width: 80%;
+  border-radius: 10px;
+  height: 300px;
+  margin: auto;
+  background-color: white;
+}
+.icon{
+  /* width: 0%; */
+}
+.icon div{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background-color: rgb(194, 187, 187);
+}
+/* --------------------------------------------------END------------------------------------------------- */
 
+/* ---------------------------------------------------Wishlist Section---------------------------------------- */
+
+
+#wishlist-section{
+  width: 100%;
+  height: auto;
+  background-color: #F7FAFC;
+}
+#wishlist-component{
+  width: 25%;
+  height: auto;
+  padding: 10px;
+}

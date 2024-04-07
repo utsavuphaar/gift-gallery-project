@@ -12,7 +12,6 @@ export default function Signup() {
                 <div className='col-md-6 right border'>
                     <h2 className='mt-5 ms-5'>Create an account</h2>
                     <span className='ms-5'>Enter your details</span>
-                  
                     <TextField className='mt-3 ms-5 w-75' label="Name" type='name' variant="standard" />
                     <TextField className='mt-3 ms-5 w-75' label="Email Address" type='email' variant="standard" />
                     <TextField className='mt-3 ms-5 w-75' id="standard-password-input" label="Password" type="password" autoComplete="current-password" variant="standard"/>
