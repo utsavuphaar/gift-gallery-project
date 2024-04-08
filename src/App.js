@@ -7,15 +7,14 @@ import CartItems from './Components/User/CartItems';
 import Signin from './Components/User/Signin.js';
 import Signup from './Components/User/Signup-page.js';
 
-
-
 function App() {
   return <>
     <Routes>
       <Route path="/" element={<Product />} />
-      <Route path='/signup' element={<Signup/>} />
       <Route path='/signin' element={<Signin/>}/>
-      <Route path='/viewmore' element={<ViewMore />} />
+      <Route path='/signup' element={<Signup/>}/>
+      <Route path='/viewmore' element={<ViewMore/>}/>
+      <Route  path="/cartitems" element={<CartItems/>}/>
     </Routes>
   </>
 }
