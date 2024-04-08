@@ -15,6 +15,31 @@ export const fetchCartItems = createAsyncThunk("cart/cartItems", async (userId) 
     let res = await axios.get(`http://localhost:3000/cart/list/${userId}/`)
     return res.data.data;
 })
+export const insertdata = createAsyncThunk("create/signup", async ({ name, email, password }) => {
+    try {
+        let res = await axios.post('http://localhost:3000/user/signUp', { name, email, password })
+        console.log(res);
+        return res.data.message;
+    } catch (error) {
+        // alert("something went wrong")
+        console.log(error);
+    }
+})
+export const fetchuser = createAsyncThunk("login/signin",async ({email,password})=>{
+    try {
+        let res = await axios.post('http://localhost:3000/user/signIn',{email,password})
+        console.log(res);
+        console.log(res.data.user);
+        if(res.status===200){
+            alert("Sign in successfully....")
+        }
+        return res.data.user
+    } catch (error) {
+        // alert("Unauthorized User...")
+        console.log(error);
+    }
+})
+
 
 export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ userId, productId }) => {
     try {
@@ -67,11 +92,12 @@ const slice = createSlice({
     initialState: {
         productList: [],
         categoryProduct: [],
+        user:""
         cartItems: [],
         wishList:[],
         isLoading: false,
         error: false,
-    },
+ },
     reducers: {
         deleteProduct: (state, action) => {
             const index = state.productList.findIndex(item => item.id === action.payload)
@@ -105,12 +131,20 @@ const slice = createSlice({
             state.cartItems = action.payload;
         }).addCase(fetchCartItems.rejected, (state, action) => {
             state.error = true;
+       }).addCase(insertdata.fulfilled,(state,action)=>{
+            state.error = true;
+        }).addCase(fetchuser.pending, (state, action) => {
+            state.isLoading = true;
+        }).addCase(fetchuser.fulfilled, (state, action) => {
+            state.user = action.payload;
         }).addCase(fetchWishList.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(fetchWishList.fulfilled, (state, action) => {
             state.wishList = action.payload;
         }).addCase(fetchWishList.rejected, (state, action) => {
             state.error = true;
+        }).addCase(fetchuser.rejected, (state, action) => {
+            state.error = false;
         })
     },
 })
