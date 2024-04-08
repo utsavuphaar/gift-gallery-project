@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom"
 import { FiHeart } from "react-icons/fi";
 import store from "../../Store/store"
 import { CiHeart } from "react-icons/ci";
-import { fetchProduct } from "../../DataSlice/ProductSlice";
+import { addProductIntoCart, fetchProduct } from "../../DataSlice/ProductSlice";
 import { PiShoppingCartSimpleThin } from "react-icons/pi";
 import { AiOutlineEye } from "react-icons/ai";
 import { BiRupee } from "react-icons/bi";
@@ -44,6 +44,9 @@ export default function ViewMore() {
           setInputValue(inputValue - 1);
         }
       };
+      const addToCart = (productId)=>{
+        dispatch(addProductIntoCart({userId:1,productId:productId}))
+    }
     // alert(inputValue)
     return <>
         <h3>view more</h3>
@@ -84,7 +87,7 @@ export default function ViewMore() {
                         <AddIcon onClick={()=>setInputValue(inputValue+1)} />
                     </Fab>
                     </span>
-                <button style={{ width: '250px', height: '50px' }} className="btn btn-outline-primary fw-bold">ADD TO CART</button> &nbsp;
+                <button onClick={()=>addToCart(state.id)} style={{ width: '250px', height: '50px' }} className="btn btn-outline-primary fw-bold">ADD TO CART</button> &nbsp;
                 </Box>
                 <br /><button style={{ width: '90%', height: '50px' }} className="mt-2 btn btn-primary fw-bold">BUY NOW</button>
 

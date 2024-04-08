@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import store from "../../Store/store"
 import { CiHeart } from "react-icons/ci";
 import { useEffect } from "react";
-import { fetchProduct } from "../../DataSlice/ProductSlice";
+import { addProductIntoCart, fetchProduct } from "../../DataSlice/ProductSlice";
 import { PiShoppingCartSimpleThin } from "react-icons/pi";
 import { AiOutlineEye } from "react-icons/ai";
 import { BiRupee } from "react-icons/bi";
@@ -19,7 +19,12 @@ export default function Product() {
     const viewMore = (product) => {
         navigate("/viewmore", { state: product })
     }
+    const addToCart = (productId)=>{
+        dispatch(addProductIntoCart({userId:1,productId:productId}))
+    }
     return <>
+    <Link to="/cartitems"><button className="btn btn-primary">CartItems</button></Link>&nbsp;
+    <Link to="/wishlist"  ><button className="btn btn-warning">Wishlist</button></Link>
         <div className="container-fluid">
             <div className="container border p-2 d-flex flex-wrap justify-content-around align-items-center">
                 {productList.products?.map((product, index) => <div key={index} id="product-box" className="m-2 p-2 border d-flex flex-column rounded position-relative">
@@ -28,7 +33,7 @@ export default function Product() {
                         <div>
                             <CiHeart style={{ width: '25px', height: '25px' }} />
                         </div>
-                        <div><Link to="/cartitems"><PiShoppingCartSimpleThin style={{ width: '20px', height: '20px' }} /> </Link></div>
+                        <div onClick={()=>addToCart(product.id)}><PiShoppingCartSimpleThin style={{ width: '20px', height: '20px' }} /></div>
                         <div><AiOutlineEye onClick={() => viewMore(product)} style={{ width: '20px', height: '20px' }} /></div>
                     </div>
                     <h6 className="mt-4">{product.title.split(" ").slice(0, 3).join(' ')}</h6>
