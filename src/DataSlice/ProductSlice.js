@@ -30,8 +30,9 @@ export const fetchuser = createAsyncThunk("login/signin",async ({email,password}
         let res = await axios.post('http://localhost:3000/user/signIn',{email,password})
         console.log(res);
         console.log(res.data.user);
+        localStorage.setItem('userId',res.data.user.Id)
         if(res.status===200){
-            alert("Sign in successfully....")
+            // alert("Sign in successfully....")
         }
         return res.data.user
     } catch (error) {
