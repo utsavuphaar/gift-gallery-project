@@ -119,7 +119,7 @@ const slice = createSlice({
     initialState: {
         productList: [],
         categoryProduct: [],
-        user:""
+        user:"",
         cartItems: [],
         wishList:[],
         isLoading: false,
