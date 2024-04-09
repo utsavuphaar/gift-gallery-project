@@ -7,7 +7,6 @@ export default function Signup() {
         <div className="container-fluid d-flex justify-content-center align-items-center border main">
             <div className='row border signup'>
                 <div className='col-md-6 left border'>
-
                 </div>
                 <div className='col-md-6 right border'>
                     <h2 className='mt-5 ms-5'>Create an account</h2>
