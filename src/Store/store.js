@@ -4,7 +4,6 @@ import ProductSlice from "../DataSlice/ProductSlice";
 const store = configureStore({
    reducer:{
        Product:ProductSlice
-       
    }
 })
 
