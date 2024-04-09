@@ -6,6 +6,7 @@ import ViewMore from './Components/User/ViewMore.js';
 import SignUp from './Components/User/Signup.js';
 import CartItems from './Components/User/CartItems';
 import Wishlist from './Components/User/Wishlist.js';
+import Checkout from './Components/User/Checkout.js';
 
 function App() {
   return <>
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" element={<Product />} />
       <Route path='/viewmore' element={<ViewMore />} />
       <Route path ="/wishlist" element= {<Wishlist/>}/>
+      <Route path ="/checkout" element= {<Checkout/>}/>
       <Route path='/cartitems' element={<CartItems />} />
     </Routes>
   </>
