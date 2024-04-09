@@ -1,3 +1,5 @@
+/* -------------SignUp------------------ */
+
 .main{
     width: 90vw;
     height: 100vh;
@@ -144,6 +146,7 @@
     filter: brightness(.8);
    }
 
+   
    /* --------------SignIn----------- */
 
    .signin{
@@ -174,4 +177,87 @@
     cursor: pointer;
     color: #0D6EFD;
    }
+
+   /* -------------Header----------- */
+
+   .header{
+    width: 100vw;
+    height: auto;
+    /* border: 1px solid red; */
+    /* padding: 15px; */
+   }
+   .header-1{
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    /* border: 1px solid black; */
+   }
+   .title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+   .icon{
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow: 1px 0px 2px 2px gainsboro ;
+    /* margin-top: 35px;
+    margin-left: 130px; */
+    background-color: #0D6EFD;
+   }
+   .name{
+    font-weight: 600;
+    color: #8CB7F5;
+    text-shadow:  0.7px 0.7px #0D6EFD;
+   }
+   .search-bar{
+    width: 60vw;
+    height: 40px;
+    /* padding: 5px; */
+    border: 2px solid #0D6EFD;
+    display: flex;
+    border-radius: 10px;
+   }
    
+   .search{
+    width: 65%;
+    height: 100%;
+    padding-left: 10px;
+    border-radius: 10px;
+    outline: none;
+   }
+   
+   
+   .dropdown1{
+    height: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-left: 1px solid #0D6EFD;
+   }
+
+   .searchbutton{
+    width: 120px;
+    background-color: #0D6EFD;
+    color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+   }
+
+   .profile{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+   }
+   #icons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   }
+
+.iconstext{
+    font-size: 13px;
+    color: #8B96A5;
+}
