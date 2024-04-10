@@ -17,6 +17,7 @@ function Checkout() {
     }
     return (
         <>
+        <section className='container fluid p-4'>
             <section className='container p-2 justify-content-center row align-content-around m-auto d-flex' id='checkout-page'>
                 <div id='checkout-left' className='col-md-8 border'>
                     <div className='bg-primary text-white p-2 justify-content-around align-content-center d-flex rounded'>
@@ -25,7 +26,7 @@ function Checkout() {
                         <h6>Confirmation</h6>
                     </div>
                     <form>
-                        <div className='row form-group p-3'>
+                        <div className='row form-group p-2'>
                             <div className='col-md-6 mt-2'>
                                 <label>First Name*</label><br/>
                                 <input type='text' required onChange={(event)=>setFirstName(event.target.value)} className='form-control'/>
@@ -71,6 +72,7 @@ function Checkout() {
                         </table>
                 </div>
             </section>       
+        </section>
         </>
     )
 }

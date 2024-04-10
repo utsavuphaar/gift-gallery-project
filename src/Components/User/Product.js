@@ -25,6 +25,9 @@ export default function Product() {
     const addToWishlist = (productId)=>{
         dispatch(addProductIntoWishlist({userId:2,productId}))
     }
+
+    
+
     return <>
     <Link to="/cartitems"><button className="btn btn-primary">CartItems</button></Link>&nbsp;
     <Link to="/wishlist"  ><button className="btn btn-warning">Wishlist</button></Link>
