@@ -54,7 +54,8 @@ export default function Signup() {
                     <TextField onChange={event =>setemail(event.target.value)}    className='mt-3  w-75' label="Email Address" type='email' variant="standard" />
                     <TextField onChange={event =>setpassword(event.target.value)} className='mt-3  w-75' id="standard-password-input" label="Password" type="password" autoComplete="current-password" variant="standard"/>
                     <button onClick={()=>createAccount()} className="w-75 mt-5  button" type='submit'>Create Account</button>
-                    <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3'/>Sign up with google</button>
+                    <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3'/>Sign up with google</button> 
+                    <FcGoogle className='fs-3 me-3 d-none google' />
                     <p className=' mt-3' id='log'>Already have account?<span className=' text-primary ms-2 log-in'  onClick={()=>navigate("/signin")}><u>Log in</u></span></p>
                 </form>
             </div>

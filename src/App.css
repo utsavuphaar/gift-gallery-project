@@ -30,6 +30,11 @@
   cursor: pointer;
 }
 
+#product-box {
+  width: 250px;
+  box-shadow: 1px 1px 1px 0px gray;
+  height: auto;
+}
 
 /* --------------------------------------------------END---------------------------------------------------- */
 
@@ -65,6 +70,43 @@
   width: 50px;
 }
 
+/* --------------------------------------------------END------------------------------------------------- */
+/* ------------------------------------------------Cart CSS--------------------------------------------- */
+
+#main-cart {
+  width: 100%;
+  height: 90vh;
+  background-color: #F7FAFC;
+  display: flex;
+  margin: auto;
+}
+
+#cart-left {
+  width: 65% !important;
+  height: inherit;
+  margin-left: auto;
+}
+
+#cart-right {
+  width: 25%;
+  background-color: #F7FAFC;
+  float: left;
+  height: 400px;
+  display: grid;
+  place-items: center;
+}
+
+#cart-right-child1 {
+  width: 80%;
+  border-radius: 10px;
+  height: 300px;
+  margin: auto;
+  background-color: white;
+}
+
+.icon {
+  /* width: 0%; */
+}
 #related-products {
   white-space: nowrap;
   display: flex;
@@ -105,6 +147,7 @@
 }
 
 #wishlist-component {
+  width: 25%;
   width: 24%;
   height: auto;
   padding: 10px;

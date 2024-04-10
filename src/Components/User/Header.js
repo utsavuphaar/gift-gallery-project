@@ -7,14 +7,17 @@ import { BiMessageDetail } from "react-icons/bi";
 import { AiFillHeart } from "react-icons/ai";
 import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom'
+import ViewListIcon from '@mui/icons-material/ViewList';
+import ToggleButton from '@mui/material/ToggleButton';
 
 export default function Header() {
     const { user } = useSelector(store => store.Product);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
     return <>
         <div className="container-fluid header">
             <div className='row header-1'>
-                <div className='col-md-3  title'>
+                <div className='col-md-3 title'>
                     <div className='mt-3 mb-2 icon  d-flex justify-content-center align-items-center'>
                         <IoIosGift className='fs-2 text-light' />
                     </div>
@@ -22,20 +25,17 @@ export default function Header() {
                         UtsavUphaar
                     </span>
                 </div>
-                <div className='col-md-6 d-flex justify-content-center align-items-center'>
+                <div className='col-md-6 d-flex justify-content-center align-items-center '>
                     <div className='me-5 mt-3 mb-2 search-bar'>
                         <input className='search' placeholder='Search' />
-                        <div className="dropdown">
-                            <button className="dropdown1  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                All category
-                            </button>
-                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a className="dropdown-item" href="#">Action</a></li>
-                                <li><a className="dropdown-item" href="#">Another action</a></li>
-                                <li><a className="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                        <button className='searchbutton'>Search</button>
+                        {/* <div className="dropdown"> */}
+                        <select className='btn dropdown1'>
+                            <option className='border-0'>All category</option>
+                            <option>Favorite</option>
+
+                        </select>
+                        {/* </div> */}
+                        <button className=' searchbutton ' style={{ border: 'none' }}>Search</button>
                     </div>
                 </div>
                 <div className='col-md-3  profile'>
@@ -69,6 +69,38 @@ export default function Header() {
                             </li>
                         </ul>
                     </div>
+        <nav className="navbar navbar-expand-lg navbar-dark p-2 border">
+            <div className="container">
+                <button className="navbar-toggler bg-primary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon text-dark"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+
+                        </li>
+                        <li className="nav-item">
+                            <div className=' d-flex'>
+                        <ToggleButton className=' p-0 display-inline' style={{ border: 'none' }} value="list" aria-label="list">
+                            <ViewListIcon className='fs-5' />
+                        </ToggleButton>
+                            <a className="ms-2 nav-link text-dark " href="#">All category</a>
+
+                            </div>
+                        </li>
+                        <li className="nav-item">
+                            <a className=" ms-4 nav-link text-dark " href="#">Home</a>
+                        </li>
+                        <li className=" ms-4 nav-item">
+                            <a className="nav-link text-dark " href="#">About</a>
+                        </li>
+                        <li className=" ms-4 nav-item">
+                            <a className="nav-link text-dark " href="#">Contact</a>
+                        </li>
+                        <li className=" ms-4 nav-item">
+                            <a className="nav-link text-dark " href="#">Help</a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </div>
