@@ -10,9 +10,12 @@ import Wishlist from './Components/User/Wishlist.js';
 import Header from './Components/User/Header.js';
 import Home from './Components/User/Home.js';
 import Checkout from './Components/User/Checkout.js';
+import Payment from './Components/User/Payment.js';
+import PaymentForm from './Components/User/Payment.js';
 
 function App() {
   return <>
+  <PaymentForm/>
     <Routes>
       <Route path="/" element={<Product />} />
       <Route path='/signin' element={<Signin/>}/>
