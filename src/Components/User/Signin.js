@@ -39,9 +39,16 @@ export default function Signin() {
                     <h2 className='mt-5 '>Login</h2>
                     <TextField onChange={event =>setemail(event.target.value)}    className='mt-4  w-75' label="Email Address" type='email' variant="standard" />
                     <TextField onChange={event =>setpassword(event.target.value)} className='mt-4  w-75' label="Password" type='password' variant="standard" />
-                    <p className='mt-3 forget'>Forget Password ?</p>
+                    <div className='mt-3 row'>
+                        <div className='col-md-12 forget'>
+                            Forget Password ?
+                        </div>
+                    </div>
+                    
+                    {/* <span className='mt-3 forget'>Forget Password ?</span> */}
                     <button className="w-75 mt-4  button" onClick={()=>signin()}>Sign In</button>
                     <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3' />Sign in with google</button>
+                    <FcGoogle className='fs-1 me-3 d-none google' />
                     <p className=' mt-3 mb-4' id='log-2'>Do not have an account,<span className=' text-primary ms-2 create' onClick={()=>navigate('/signup')}><u>create a new one.</u></span></p>
                 </div>
                 <div className='col-md-6  p-0'>

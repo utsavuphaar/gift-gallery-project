@@ -1,6 +1,5 @@
-
 /* ----------------------------------------------Product.js CSS-------------------------------------------------- */
-#buttons{
+#buttons {
   width: 90%;
   height: 40px;
   top: 0;
@@ -11,7 +10,8 @@
   transition: all ease-in-out 1s;
   transform: scale(0.95);
 }
-#buttons div{
+
+#buttons div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,14 +20,17 @@
   background-color: white;
   border-radius: 50%;
 }
-#buttons:hover{
+
+#buttons:hover {
   display: block !important;
 }
-#product-box:hover #buttons{
+
+#product-box:hover #buttons {
   display: flex !important;
   cursor: pointer;
 }
-#product-box{
+
+#product-box {
   width: 250px;
   box-shadow: 1px 1px 1px 0px gray;
   height: auto;
@@ -37,65 +40,75 @@
 
 /* --------------------------------------------------ViewMore CSS---------------------------------------------- */
 
-#view-left{
+#view-left {
   display: grid;
   place-items: center;
   width: 20%;
   height: 80vh;
   border: 1px solid blue;
 }
-#view-left div{
+
+#view-left div {
   width: 180px;
   height: 140px;
   border: 1px solid blue;
   padding: 10px;
   margin: 10px;
 }
-#view-mid{
+
+#view-mid {
   width: 450px !important;
   height: 80vh;
 }
-#view-right{
+
+#view-right {
   width: 40%;
   height: 80vh;
 }
-#qty{
+
+#qty {
   width: 50px;
 }
+
 /* --------------------------------------------------END------------------------------------------------- */
 /* ------------------------------------------------Cart CSS--------------------------------------------- */
-#main-cart{
+
+#main-cart {
   width: 100%;
   height: 90vh;
   background-color: #F7FAFC;
   display: flex;
   margin: auto;
 }
-#cart-left{
-  width:65% !important;
+
+#cart-left {
+  width: 65% !important;
   height: inherit;
   margin-left: auto;
 }
 
-#cart-right{
-  width:25%;
+#cart-right {
+  width: 25%;
   background-color: #F7FAFC;
   float: left;
   height: 400px;
   display: grid;
   place-items: center;
 }
-#cart-right-child1{
+
+#cart-right-child1 {
   width: 80%;
   border-radius: 10px;
   height: 300px;
   margin: auto;
   background-color: white;
 }
-.icon{
+
+.icon {
   /* width: 0%; */
 }
-.icon div{
+
+.icon div {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -103,17 +116,19 @@
   place-items: center;
   background-color: rgb(194, 187, 187);
 }
+
 /* --------------------------------------------------END------------------------------------------------- */
 
 /* ---------------------------------------------------Wishlist Section---------------------------------------- */
 
 
-#wishlist-section{
+#wishlist-section {
   width: 100%;
   height: auto;
   background-color: #F7FAFC;
 }
-#wishlist-component{
+
+#wishlist-component {
   width: 25%;
   height: auto;
   padding: 10px;
