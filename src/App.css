@@ -107,6 +107,24 @@
 .icon {
   /* width: 0%; */
 }
+#related-products {
+  white-space: nowrap;
+  display: flex;
+  overflow-y: scroll;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#product-box {
+  height: 96px;
+  width: 250px;
+  box-shadow: 1px 1px 1px 0px gray;
+  height: auto;
+}
+
+/* --------------------------------------------------END------------------------------------------------- */
+/* ------------------------------------------------Cart CSS--------------------------------------------- */
 
 .icon div {
   width: 50px;
@@ -130,6 +148,10 @@
 
 #wishlist-component {
   width: 25%;
+  width: 24%;
   height: auto;
   padding: 10px;
 }
+
+/* ----------------------------------------------------------Checkout Page ---------------------------------- */
+

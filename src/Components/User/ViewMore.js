@@ -113,7 +113,7 @@ export default function ViewMore() {
         <h4>Related Products</h4>
         
         <div >
-            <div className="container border p-2 d-flex flex-wrap justify-content-around align-items-center">
+            <div className="container border p-2 " id="related-products">
                 {categoryProduct?.map((product, index) => <div key={index} id="product-box" className="m-2 p-2 border d-flex flex-column rounded position-relative">
                     <img width="100%" height="250px" src={product.thumbnail} />
                     <div className="d-flex position-absolute" id="buttons">

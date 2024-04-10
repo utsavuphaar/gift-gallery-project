@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import store from "../../Store/store"
 import { CiHeart } from "react-icons/ci";
 import { useEffect } from "react";
-import { addProductIntoCart, fetchProduct } from "../../DataSlice/ProductSlice";
+import { addProductIntoCart, addProductIntoWishlist, fetchProduct } from "../../DataSlice/ProductSlice";
 import { PiShoppingCartSimpleThin } from "react-icons/pi";
 import { AiOutlineEye } from "react-icons/ai";
 import { BiRupee } from "react-icons/bi";
@@ -22,6 +22,9 @@ export default function Product() {
     const addToCart = (productId)=>{
         dispatch(addProductIntoCart({userId:1,productId:productId}))
     }
+    const addToWishlist = (productId)=>{
+        dispatch(addProductIntoWishlist({userId:2,productId}))
+    }
     return <>
     <Link to="/cartitems"><button className="btn btn-primary">CartItems</button></Link>&nbsp;
     <Link to="/wishlist"  ><button className="btn btn-warning">Wishlist</button></Link>
@@ -31,7 +34,7 @@ export default function Product() {
                     <img width="100%" height="250px" src={product.thumbnail} />
                     <div className="d-flex position-absolute" id="buttons">
                         <div>
-                            <CiHeart style={{ width: '25px', height: '25px' }} />
+                            <CiHeart onClick={()=>addToWishlist(product.id)} style={{ width: '25px', height: '25px' }} />
                         </div>
                         <div onClick={()=>addToCart(product.id)}><PiShoppingCartSimpleThin style={{ width: '20px', height: '20px' }} /></div>
                         <div><AiOutlineEye onClick={() => viewMore(product)} style={{ width: '20px', height: '20px' }} /></div>

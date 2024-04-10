@@ -42,6 +42,15 @@ export const fetchuser = createAsyncThunk("login/signin",async ({email,password}
 })
 
 
+export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct", async ({userId}) => {
+    try {
+        let res = await axios.post("http://localhost:3000/wishlist/viewAllfavoriteproduct",{userId:userId})
+        return res.data.wishlist;
+    } catch (err) {
+        console.log(err)
+    }
+})
+
 export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ userId, productId }) => {
     try {
         let res = await axios.post("http://localhost:3000/cart/addToCart", { userId, productId })
@@ -52,14 +61,17 @@ export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ us
     }
 })
 
-export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct", async ({userId}) => {
+export const addProductIntoWishlist = createAsyncThunk("wishlist/addProductIntoWishlist", async ({ userId, productId }) => {
     try {
-        let res = await axios.post("http://localhost:3000/wishlist/viewAllfavoriteproduct",{userId:userId})
-        return res.data.wishlist;
+        let res = await axios.post("http://localhost:3000/wishlist/addWishlist", { userId, productId })
+        alert(res.data.message)
+        return res.data;
     } catch (err) {
         console.log(err)
     }
 })
+
+
 
 export const deleteProductFromCart = createAsyncThunk(
     'cart/deleteProductFromCart', // Action type prefix
@@ -87,6 +99,21 @@ export const deleteAllProductsFromCart = createAsyncThunk("cart/removeAllItems",
     }
 })
 
+export const deleteProductFromWishList = createAsyncThunk(
+    'wishlist/deleteProductFromCart', // Action type prefix
+    async ({ userId, productId }, thunkAPI) => {
+        try {
+            const response = await axios.delete(`http://localhost:3000/wishlist/removeItemFromWishList/${userId}/${productId}`);
+            alert("Item deleted successfully");
+            return response.data;
+        } catch (error) {
+            alert("Something went wrong while deleting the item.");
+            console.error(error);
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+
 
 const slice = createSlice({
     name: "ProductSlice",
@@ -111,7 +138,10 @@ const slice = createSlice({
         },
         removeAllProductsFromCart: (state, action) => {
             state.cartItems.splice(0);
-        }
+        },
+        removeProductFromWishlist: (state, action) => {
+            state.wishList.splice(action.payload, 1);
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchProduct.pending, (state, action) => {
@@ -152,4 +182,4 @@ const slice = createSlice({
 
 
 export default slice.reducer;
-export const { removeProductFromCart,removeAllProductsFromCart } = slice.actions;
+export const { removeProductFromCart,removeAllProductsFromCart,removeProductFromWishlist } = slice.actions;

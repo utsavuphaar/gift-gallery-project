@@ -9,6 +9,7 @@ import Signup from './Components/User/Signup-page.js';
 import Wishlist from './Components/User/Wishlist.js';
 import Header from './Components/User/Header.js';
 import Home from './Components/User/Home.js';
+import Checkout from './Components/User/Checkout.js';
 
 function App() {
   return <>
@@ -20,6 +21,7 @@ function App() {
       <Route path='/header' element={<Header/>}/>
       <Route path='/viewmore' element={<ViewMore />} />
       <Route path ="/wishlist" element= {<Wishlist/>}/>
+      <Route path ="/checkout" element= {<Checkout/>}/>
       <Route path='/cartitems' element={<CartItems />} />
     </Routes>
   </>
