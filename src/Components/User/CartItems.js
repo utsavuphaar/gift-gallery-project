@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { deleteAllProductsFromCart, deleteProductFromCart, fetchCartItems, removeAllProductsFromCart, removeProductFromCart } from "../../DataSlice/ProductSlice";
 import { AiFillLock } from "react-icons/ai";
@@ -9,16 +9,19 @@ import { Link } from "react-router-dom";
 import { BsCurrencyRupee } from "react-icons/bs";
 export default function CartItems() {
     const { cartItems } = useSelector(store => store.Product);
+    let quantity = useRef(null);
     let [totalAmt, setTotalAmt] = useState(0)
     let [discountPrice, setDiscountPrice] = useState(0)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchCartItems(1));
     }, [])
+
+    
     const qty = ["Qty: 1", "Qty: 2", "Qty: 3", "Qty: 4", "Qty: 5", "Qty: 6", "Qty: 7", "Qty: 8", "Qty: 9", "Qty: 10"];
     for (let item of cartItems) {
         totalAmt = totalAmt + item["products.price"];
-        discountPrice = discountPrice + (((parseInt(item["products.discountPercentage"] * item["products.price"]) / 100).toFixed(2)) * 1)
+        discountPrice = discountPrice + (((parseInt(item["products.discountPercentage"] * item["products.price"]) / 100).toFixed(2)) * 1);
     }
 
     const removeItemFromCart = (index, productId) => {
@@ -34,8 +37,23 @@ export default function CartItems() {
             dispatch(deleteAllProductsFromCart({userId:1}));
         }
     }
-    return <>
 
+    const updateQty = (index)=>{
+        let q = quantity.current.value.replace("Qty: ", "");
+        alert(q+" "+index)
+        totalAmt = 0;
+        totalAmt += (q*1)*(cartItems[index]['products.price']);
+        setTotalAmt(totalAmt)
+        for(let i=0; i<cartItems.length; i++){
+            console.log(cartItems[i]["products.price"]);
+            // totalAmt = totalAmt + productItem["products.price"] * productItem.qty;
+            // discountPrice = discountPrice + (((parseInt(productItem["products.discountPercentage"] * productItem["products.price"]) / 100).toFixed(2)) * 1) * productItem.qty;
+        }
+    }
+
+
+
+    return <>
         <h3 className="container-fluid p-4 m-0" style={{ backgroundColor: '#F7FAFC' }}><h5 className="container"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Cart ({cartItems.length}) </h5></h3>
         {cartItems.length != 0 ? (
             <section className="row m-auto container-fluid"  style={{backgroundColor:"#F7FAFC"}}>
@@ -54,8 +72,8 @@ export default function CartItems() {
                         </div>
                         <div style={{ width: '100px', height: '100px' }} className="">
                             <p className="fw-bold"><BsCurrencyRupee />{cart["products.price"]}</p>
-                            <select className="btn border">
-                                {qty.map((value, index) => <option key={index}>
+                            <select className="btn border" ref={quantity} onChange={()=>updateQty(index)}>
+                                {qty.map((value, index) => <option value={value} key={index}>
                                     {value} </option>)}
                             </select>
                         </div>

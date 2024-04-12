@@ -14,15 +14,18 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return <>
-      <Routes>
-        <Route path='/' element={<Signup />} />
-        <Route path='signin' element={<Signin />} />
-        <Route path='home' element={<Home />} />
-        <Route path='/viewmore' element={<ViewMore />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path='/cartitems' element={<CartItems />} />
-      </Routes>
+  <PaymentForm/>
+    <Routes>
+      <Route path="/" element={<Product />} />
+      <Route path='/signin' element={<Signin/>}/>
+      <Route path='/signup' element={<Signup/>}/>
+      <Route path='/home' element={<Home/>}/>
+      <Route path='/header' element={<Header/>}/>
+      <Route path='/viewmore' element={<ViewMore />} />
+      <Route path ="/wishlist" element= {<Wishlist/>}/>
+      <Route path ="/checkout" element= {<Checkout/>}/>
+      <Route path='/cartitems' element={<CartItems />} />
+    </Routes>
   </>
 }
 
