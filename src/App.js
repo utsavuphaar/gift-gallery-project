@@ -3,7 +3,6 @@ import './App.css';
 import Product from './Components/User/Product.js';
 import { Route, Routes } from 'react-router-dom';
 import ViewMore from './Components/User/ViewMore.js';
-import CartItems from './Components/User/CartItems';
 import Signin from './Components/User/Signin.js';
 import Signup from './Components/User/Signup-page.js';
 import Wishlist from './Components/User/Wishlist.js';
@@ -30,7 +29,6 @@ function App() {
       <Route path='/viewmore' element={<ViewMore />} />
       <Route path ="/wishlist" element= {<Wishlist/>}/>
       <Route path ="/checkout" element= {<Checkout/>}/>
-      <Route path='/cartitems' element={<CartItems />} />
       <Route path="/paymentform" element={<DummyPay/>}/> //home 
         <Route path="/paymentsuccess" element={<PaymentSuccess />} /> //
     </Routes>

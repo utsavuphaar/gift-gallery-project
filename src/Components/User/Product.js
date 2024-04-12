@@ -9,6 +9,7 @@ import { BiRupee } from "react-icons/bi";
 import { AiFillStar } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 export default function Product() {
+    let userId = localStorage.getItem("userId")
     const dispatch = useDispatch();
     const navigate = useNavigate("")
     const { productList } = useSelector(store => store.Product);
@@ -20,10 +21,10 @@ export default function Product() {
         navigate("/viewmore", { state: product })
     }
     const addToCart = (productId) => {
-        dispatch(addProductIntoCart({ userId: 1, productId: productId }))
+        dispatch(addProductIntoCart({ userId, productId: productId }))
     }
     const addToWishlist = (productId) => {
-        dispatch(addProductIntoWishlist({ userId: 2, productId }))
+        dispatch(addProductIntoWishlist({ userId, productId }))
     }
 
     

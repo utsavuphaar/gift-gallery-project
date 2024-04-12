@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import Home from './Home';
 import { ToastContainer, toast } from 'react-toastify'
 export default function Signin() {
+    let userDetail=[];
     const navigate = useNavigate();
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
@@ -94,8 +95,10 @@ export default function Signin() {
             axios.post(URL.signin, { email, password })
                 .then(res => {
                     console.log(res.data.user);
-                    setuserId(userId)
-                    console.log(userId);
+                    setuserId(userId);
+                    let user = JSON.stringify(res.data.user);
+                    localStorage.setItem("user",user);
+                    localStorage.setItem("userId",res.data.user.id)
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -103,7 +106,7 @@ export default function Signin() {
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    navigate('/home')
+                    navigate('/')
                 })
                 .catch(err => {
                     Swal.fire({
