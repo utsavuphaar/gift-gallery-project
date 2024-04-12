@@ -12,8 +12,8 @@ function Checkout() {
     const [price,setPrice] = useState("");
     const [quantity,setQuantity] = useState("")
     const sendData = ()=>{
-        axios.post("http://localhost:3000/order/placeOrder",{firstName,lastName,contact,address,city,pin,status,userId,price,quantity})
-        // console.log(firstName+" "+lastName+" "+contact+" "+address+" "+city+" "+pin)
+        // axios.post("http://localhost:3000/order/placeOrder",{firstName,lastName,contact,address,city,pin,status,userId,price,quantity})
+        alert(firstName+" "+lastName+" "+contact+" "+address+" "+city+" "+pin)
     }
     return (
         <>
