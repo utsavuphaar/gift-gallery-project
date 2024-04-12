@@ -2,8 +2,9 @@
 #buttons {
   width: 90%;
   height: 40px;
-  top: 0;
-  margin-top: 220px;
+  top: 70%;
+  left: 5%;
+  /* margin-top: 220px; */
   justify-content: space-around;
   align-items: center;
   display: none !important;
@@ -117,10 +118,26 @@
 }
 
 #product-box {
-  height: 96px;
-  width: 250px;
+  /* height: 100px; */
+  width: 300px;
   box-shadow: 1px 1px 1px 0px gray;
   height: auto;
+  border-radius: 15px !important;
+  margin: 12px;
+  padding: 0 !important;
+  /* border: 1px solid red !important; */
+}
+
+.productlist{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 16px;
+  /* padding: 0; */
+}
+
+#gift{
+  border-radius: 15px 15px 0px 0px;
 }
 
 /* --------------------------------------------------END------------------------------------------------- */

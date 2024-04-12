@@ -10,9 +10,13 @@ import Wishlist from './Components/User/Wishlist.js';
 import Header from './Components/User/Header.js';
 import Home from './Components/User/Home.js';
 import Checkout from './Components/User/Checkout.js';
+
 import Cart from './Components/User/cart.js';
 import DummyPay from './Components/User/DummyPay.js';
 import PaymentSuccess from './Components/User/PaymentSuccess.js';
+
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return <>
