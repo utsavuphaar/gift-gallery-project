@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import {useLocation} from "react-router-dom"
+import React, { useEffect, useState } from 'react'
 import axios from "axios";
+import { BsCurrencyRupee } from "react-icons/bs";
 function Checkout() {
     const [firstName,setFirstName] = useState("")
     const [lastName,setLastName] = useState("")
@@ -11,11 +13,28 @@ function Checkout() {
     const userId = localStorage.getItem("userId");
     const [price,setPrice] = useState("");
     const [quantity,setQuantity] = useState("")
+    const {state} = useLocation();
+    console.log(state)
+    // useEffect(()=>{
+        
+        // },[])
+        // setTotalAmt(totalAmt);
+        const getTotalAmt=(state)=>{
+         
+            let totalAmt=0;
+            for(let item of state){
+            totalAmt+=item["products.price"]*(parseInt(item.qty))
+            
+        }
+       
+        return totalAmt;
+    }
     const sendData = ()=>{
         // axios.post("http://localhost:3000/order/placeOrder",{firstName,lastName,contact,address,city,pin,status,userId,price,quantity})
         alert(firstName+" "+lastName+" "+contact+" "+address+" "+city+" "+pin)
     }
     return (
+
         <>
         <section className='container fluid p-4'>
             <section className='container p-2 justify-content-center row align-content-around m-auto d-flex' id='checkout-page'>
@@ -69,6 +88,30 @@ function Checkout() {
                                     <th>Subtotal</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                {state.map((product,index)=><tr>    
+                                    <td>{product["products.title"]}</td>
+                                    <td>{product.qty}</td>
+                                    <td>{parseInt(product.qty)*(product["products.price"])}</td>
+                                </tr>)}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>Subtotal</td>
+                                    <td></td>
+                                    <td>{getTotalAmt(state)}</td>
+                                </tr>
+                                <tr>
+                                    <th>Shipping</th>
+                                    <td></td>
+                                    <th className="text-success"><BsCurrencyRupee/>100</th>
+                                </tr>
+                                <tr>
+                                    <th>Total</th>
+                                    <td></td>
+                                    <th>{getTotalAmt(state)-100}</th>
+                                </tr>
+                            </tfoot>
                         </table>
                 </div>
             </section>       

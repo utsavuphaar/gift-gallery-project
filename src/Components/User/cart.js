@@ -16,7 +16,6 @@ export default () => {
     let [totalamount, settotalamount] = useState(0);
     let [discountPrice, setDiscountPrice] = useState(0)
     const dispatch = useDispatch();
-    
     const navigate = useNavigate();
     useEffect(() => {
         // let userId = sessionStorage.getItem("user_id");
@@ -37,7 +36,7 @@ export default () => {
             })
     }, []);
 
-    
+
     const updateQty = (index, value) => {
         let product = cartItemList[index];
         product.qty = value;
@@ -115,7 +114,7 @@ export default () => {
                             <label className="fs-5">Sub Total : {totalamount}</label>
                             <label className="fs-5">Discount : {discountPrice.toFixed(2)}</label><hr />
                             <h4 className="fw-bold">Total Bill : <BsCurrencyRupee />{totalamount - discountPrice}</h4>
-                            <button onClick={()=>navigate("/checkout")} className="btn btn-success mt-3 fw-bold" >Checkout</button>
+                            <button onClick={()=>navigate("/checkout",{state:cartItemList})} className="btn btn-success mt-3 fw-bold" >Checkout</button>
                             
                         </div>
 
