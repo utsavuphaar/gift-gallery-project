@@ -200,8 +200,10 @@
 /* -------------Header----------- */
 
 .header {
-    width: 100vw;
+    width: 100%;
     height: auto;
+    margin: 0 !important;
+    padding: 0 !important;
     /* border: 1px solid red; */
     /* padding: 15px; */
 }
@@ -286,6 +288,10 @@
     align-items: center;
     justify-content: center;
 }
+#icons:hover{
+    cursor: pointer;
+    color: #0D6EFD;
+}
 
 .iconstext {
     font-size: 13px;
@@ -303,24 +309,28 @@
     .google{
         display: block !important;
         margin-top: 15px;
-        margin-bottom: 0;
+        margin-bottom: 0;   
         cursor: pointer;
         width: 40px !important;
         height: 40px !important;
+    }
+    .home-navbar{
+        border: none !important;
     }
 }
 
 /* -------------- Home --------------- */
 .home{
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: auto;
     /* border: 1px solid red; */
     display: flex;
     justify-content: center;
+    margin-bottom: 40px;
 }
 .banner{
     width: 90%;
-    height: 70%;
+    /* height: 90%; */
     /* border: 1px solid red; */
     margin-top: 50px; 
     padding-left: 20px;
@@ -340,10 +350,10 @@
 }
 .banner-img{
     width: 100% important;
-    height: 100% !important;
+    /* height: 100% !important; */
 }
 .middle{
-    height: 100%;
+    /* height: 100%; */
     /* border: 1px solid red !important; */
 }
 .user{
