@@ -37,7 +37,7 @@ export default function Product() {
 
                 </div>
                 <div className="col-md-9 p-2 d-flex flex-wrap justify-content-around align-items-center">
-                    {/* <div className="row productlist">
+                    <div className="row productlist">
                         {productList.products?.map((product, index) => <div key={index} id="product-box" className="col-md-4  border position-relative">
                             <img width="100%" height="250px" id="gift" src={product.thumbnail} />
 
@@ -68,8 +68,8 @@ export default function Product() {
                             </div>
 
                         </div>)}
-                    </div> */}
-                    {/* {productList.products?.map((product, index) => <div key={index} id="product-box" className="p-0 border d-flex flex-column rounded position-relative">
+                    </div>
+                    {productList.products?.map((product, index) => <div key={index} id="product-box" className="p-0 border d-flex flex-column rounded position-relative">
                         <img width="100%" height="250px" id="gift" src={product.thumbnail} />
 
 
@@ -84,7 +84,7 @@ export default function Product() {
 
                             </div>
                         </div>
-                    </div>)} */}
+                    </div>)}
                 </div>
             </div>
         </div>

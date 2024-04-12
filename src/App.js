@@ -21,11 +21,11 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return <>
     <Routes>
-      <Route path="/" element={<Product />} />
+      <Route path='/' element={<Home/>}/>
+      <Route path="/product" element={<Product />} />
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/signin' element={<Signin/>}/>
       <Route path='/signup' element={<Signup/>}/>
-      <Route path='/home' element={<Home/>}/>
       <Route path='/header' element={<Header/>}/>
       <Route path='/viewmore' element={<ViewMore />} />
       <Route path ="/wishlist" element= {<Wishlist/>}/>

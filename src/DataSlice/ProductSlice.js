@@ -17,17 +17,6 @@ export const fetchCartItems = createAsyncThunk("cart/cartItems", async (userId) 
     let res = await axios.get(`http://localhost:3000/cart/list/${userId}/`)
     return res.data.data;
 })
-// export const insertdata = createAsyncThunk("create/signup", async ({ name, email, password }) => {
-//     try {
-//         let res = await axios.post('http://localhost:3000/user/signUp', { name, email, password })
-//         console.log(res);
-//         return res.data.message;
-//     } catch (error) {
-//         // alert("something went wrong")
-//         console.log(error);
-//     }
-// })
-// e
 
 
 export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct", async ({userId}) => {

@@ -176,7 +176,7 @@ export default function Signin() {
                     <button className="w-75 mt-4  button" onClick={() => signin()}>Sign In</button>
                     <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3' />Sign in with google</button>
                     <FcGoogle className='fs-1 me-3 d-none google' />
-                    <p className=' mt-3 mb-4' id='log-2'>Do not have an account,<span className=' text-primary ms-2 create' onClick={() => navigate('/')}><u>create a new one.</u></span></p>
+                    <p className=' mt-3 mb-4' id='log-2'>Do not have an account,<span className=' text-primary ms-2 create' onClick={() => navigate('/signup')}><u>create a new one.</u></span></p>
                 </div>
                 <div className='col-md-6  p-0'>
                     <img src={image} className='image' />
