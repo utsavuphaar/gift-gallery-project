@@ -16,7 +16,7 @@ export default function Header() {
 
     return <>
         <div className="container-fluid header">
-            <div className='row header-1'>
+            <div className='row header-1  p-0 m-0'>
                 <div className='col-md-3 title'>
                     <div className='mt-3 mb-2 icon  d-flex justify-content-center align-items-center'>
                         <IoIosGift className='fs-2 text-light' />
@@ -38,7 +38,7 @@ export default function Header() {
                         <button className=' searchbutton ' style={{ border: 'none' }}>Search</button>
                     </div>
                 </div>
-                <div className='col-md-3  profile'>
+                <div className='col-md-3 profile'>
                     <div className='mt-4' id='icons'><FaUser className='fs-5  mt-2 text-secondary' /><span className='iconstext mb-2 mt-1'>Profile</span></div>
                     <div className='mt-4' id='icons'><BiMessageDetail className=' fs-5 mt-2  text-secondary' /><span className='iconstext mb-2 mt-1'>Message</span></div>
                     <div className='mt-4' id='icons'><AiFillHeart className=' fs-5 mt-2  text-secondary' /><span className='iconstext mb-2 mt-1'>Favourite</span></div>
@@ -46,6 +46,21 @@ export default function Header() {
                 </div>
             </div>
         </div >
+        <ul className="mt-2 nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" style={{ '--bs-nav-link-color': 'var(--bs-white)', '--bs-nav-pills-link-active-color': 'var(--bs-primary)', '--bs-nav-pills-link-active-bg': 'var(--bs-white)' }}>
+            <li className="nav-item" role="presentation">
+                <button className="nav-link active rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Home</button>
+            </li>
+            <li className="nav-item" role="presentation">
+                <button className="nav-link rounded-5" id="profile-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">About</button>
+            </li>
+            <li className="nav-item" role="presentation">
+                <button className="nav-link rounded-5" id="profile-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Contact</button>
+            </li>
+            <li className="nav-item" role="presentation">
+                <button className="nav-link rounded-5" id="profile-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Help</button>
+            </li>
+         
+        </ul>
         <div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
