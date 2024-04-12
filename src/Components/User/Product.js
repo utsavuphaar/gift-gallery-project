@@ -9,6 +9,7 @@ import { BiRupee } from "react-icons/bi";
 import { AiFillStar } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 export default function Product() {
+    let userId = localStorage.getItem("userId")
     const dispatch = useDispatch();
     const navigate = useNavigate("")
     const { productList } = useSelector(store => store.Product);
@@ -20,10 +21,10 @@ export default function Product() {
         navigate("/viewmore", { state: product })
     }
     const addToCart = (productId) => {
-        dispatch(addProductIntoCart({ userId: 1, productId: productId }))
+        dispatch(addProductIntoCart({ userId, productId: productId }))
     }
     const addToWishlist = (productId) => {
-        dispatch(addProductIntoWishlist({ userId: 2, productId }))
+        dispatch(addProductIntoWishlist({ userId, productId }))
     }
 
     
@@ -37,7 +38,7 @@ export default function Product() {
 
                 </div>
                 <div className="col-md-9 p-2 d-flex flex-wrap justify-content-around align-items-center">
-                    {/* <div className="row productlist">
+                    <div className="row productlist">
                         {productList.products?.map((product, index) => <div key={index} id="product-box" className="col-md-4  border position-relative">
                             <img width="100%" height="250px" id="gift" src={product.thumbnail} />
 
@@ -68,8 +69,8 @@ export default function Product() {
                             </div>
 
                         </div>)}
-                    </div> */}
-                    {/* {productList.products?.map((product, index) => <div key={index} id="product-box" className="p-0 border d-flex flex-column rounded position-relative">
+                    </div>
+                    {productList.products?.map((product, index) => <div key={index} id="product-box" className="p-0 border d-flex flex-column rounded position-relative">
                         <img width="100%" height="250px" id="gift" src={product.thumbnail} />
 
 
@@ -84,7 +85,7 @@ export default function Product() {
 
                             </div>
                         </div>
-                    </div>)} */}
+                    </div>)}
                 </div>
             </div>
         </div>

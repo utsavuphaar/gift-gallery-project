@@ -4,7 +4,8 @@ import Card from './Card';
 import axios from "axios";
 
 const DummyPay = () => {
-
+  const userArr = localStorage.getItem("user");
+  const user  = JSON.parse(userArr);
     const checkoutHandler = async (amount) => {
       console.log(window)
         try {
@@ -21,15 +22,15 @@ const DummyPay = () => {
                 key,
                 amount: order.amount,
                 currency: "INR",
-                name: "6 Pack Programmer",
+                name: "Gift Gallery App",
                 description: "Tutorial of RazorPay",
                 image: "https://avatars.githubusercontent.com/u/25058652?v=4",
                 order_id: order.id,
                 callback_url: "http://localhost:3000/payment/paymentverification",
                 prefill: {
-                    name: "Gaurav Kumar",
-                    email: "gaurav.kumar@example.com",
-                    contact: "9999999999"
+                    name: user.name,
+                    email: user.email,
+                    contact: user.contact
                 },
                 notes: {
                     "address": "Razorpay Corporate Office"

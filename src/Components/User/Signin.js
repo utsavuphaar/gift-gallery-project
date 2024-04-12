@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import Home from './Home';
 import { ToastContainer, toast } from 'react-toastify'
 export default function Signin() {
+    let userDetail=[];
     const navigate = useNavigate();
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
@@ -94,8 +95,10 @@ export default function Signin() {
             axios.post(URL.signin, { email, password })
                 .then(res => {
                     console.log(res.data.user);
-                    setuserId(userId)
-                    console.log(userId);
+                    setuserId(userId);
+                    let user = JSON.stringify(res.data.user);
+                    localStorage.setItem("user",user);
+                    localStorage.setItem("userId",res.data.user.id)
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -103,7 +106,7 @@ export default function Signin() {
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    navigate('/home')
+                    navigate('/')
                 })
                 .catch(err => {
                     Swal.fire({
@@ -176,7 +179,7 @@ export default function Signin() {
                     <button className="w-75 mt-4  button" onClick={() => signin()}>Sign In</button>
                     <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3' />Sign in with google</button>
                     <FcGoogle className='fs-1 me-3 d-none google' />
-                    <p className=' mt-3 mb-4' id='log-2'>Do not have an account,<span className=' text-primary ms-2 create' onClick={() => navigate('/')}><u>create a new one.</u></span></p>
+                    <p className=' mt-3 mb-4' id='log-2'>Do not have an account,<span className=' text-primary ms-2 create' onClick={() => navigate('/signup')}><u>create a new one.</u></span></p>
                 </div>
                 <div className='col-md-6  p-0'>
                     <img src={image} className='image' />

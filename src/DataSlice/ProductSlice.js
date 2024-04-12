@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import URL from "../Components/ApiUrl";
     
 
 export const fetchProduct = createAsyncThunk("products/fetchProducts", async () => {
-    let res = await axios.get("http://localhost:3000/product/viewAllProducts")
+    let res = await axios.get(URL.getProducts)
     return res.data;
 })
 
@@ -17,22 +17,11 @@ export const fetchCartItems = createAsyncThunk("cart/cartItems", async (userId) 
     let res = await axios.get(`http://localhost:3000/cart/list/${userId}/`)
     return res.data.data;
 })
-// export const insertdata = createAsyncThunk("create/signup", async ({ name, email, password }) => {
-//     try {
-//         let res = await axios.post('http://localhost:3000/user/signUp', { name, email, password })
-//         console.log(res);
-//         return res.data.message;
-//     } catch (error) {
-//         // alert("something went wrong")
-//         console.log(error);
-//     }
-// })
-// e
 
 
 export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct", async ({userId}) => {
     try {
-        let res = await axios.post("http://localhost:3000/wishlist/viewAllfavoriteproduct",{userId:userId})
+        let res = await axios.post(URL.getWishlist,{userId:userId})
         return res.data.wishlist;
     } catch (err) {
         console.log(err)
@@ -41,7 +30,7 @@ export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct",
 
 export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ userId, productId }) => {
     try {
-        let res = await axios.post("http://localhost:3000/cart/addToCart", { userId, productId })
+        let res = await axios.post(URL.addToCart, { userId, productId })
         alert(res.data.message)
         return res.data;
     } catch (err) {
@@ -51,7 +40,7 @@ export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ us
 
 export const addProductIntoWishlist = createAsyncThunk("wishlist/addProductIntoWishlist", async ({ userId, productId }) => {
     try {
-        let res = await axios.post("http://localhost:3000/wishlist/addWishlist", { userId, productId })
+        let res = await axios.post(URL.addToWishlist, { userId, productId })
         alert(res.data.message)
         return res.data;
     } catch (err) {

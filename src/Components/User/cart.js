@@ -11,6 +11,7 @@ import { BsCurrencyRupee } from "react-icons/bs";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { TbMessage } from "react-icons/tb";
 export default () => {
+    let userId = localStorage.getItem("userId");
     const [cartItemList, setCartItemList] = useState([]);
     let [totalamount, settotalamount] = useState(0);
     let [discountPrice, setDiscountPrice] = useState(0)
@@ -19,7 +20,7 @@ export default () => {
     const navigate = useNavigate();
     useEffect(() => {
         // let userId = sessionStorage.getItem("user_id");
-        axios.get(`http://localhost:3000/cart/list/${1}/`)
+        axios.get(`http://localhost:3000/cart/list/${userId}/`)
             .then(response => {
                 for (let product of response.data.data) {
                     product.qty = 1;
@@ -35,6 +36,8 @@ export default () => {
                 console.log(err);
             })
     }, []);
+
+    
     const updateQty = (index, value) => {
         let product = cartItemList[index];
         product.qty = value;
@@ -51,37 +54,23 @@ export default () => {
         setDiscountPrice(discountPrice)
         settotalamount(totalamount);
     }
-    const removeFromCart = (index, productId) => {
-        if (window.confirm("Are you sure ?")) {
-            let userId = sessionStorage.getItem("user_id");
-            axios.delete(`http://localhost:3000/cart/remove-from-cart/${1}/${productId}`)
-                .then(response => {
-                    toast.info(response.data.message);
-                    cartItemList.splice(index, 1);
-                    setCartItemList([...cartItemList]);
-                })
-                .catch(err => {
-                    toast.error("Oops! something went wrong...");
-                });
-        }
-    }
 
     const removeItemFromCart = (index, productId) => {
         if (window.confirm("Are your sure ?")) {
             cartItemList.splice(index, 1);
             dispatch(removeProductFromCart(index))
-            dispatch(deleteProductFromCart({ userId: 1, productId }));
+            dispatch(deleteProductFromCart({ userId, productId }));
         }
     }
     const addToWishlist = (productId) => {
-        dispatch(addProductIntoWishlist({ userId: 2, productId }))
+        dispatch(addProductIntoWishlist({ userId, productId }))
     }
 
     const removeAllItems = () => {
         if (window.confirm('Remove all items?')) {
             setCartItemList([]);
             dispatch(removeAllProductsFromCart());
-            dispatch(deleteAllProductsFromCart({ userId: 1 }));
+            dispatch(deleteAllProductsFromCart({ userId }));
         }
     }
     return <>

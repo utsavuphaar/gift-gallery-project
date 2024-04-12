@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux"
 import { deleteProductFromWishList, fetchWishList, removeProductFromWishlist } from '../../DataSlice/ProductSlice';
 import { BsCart2 } from "react-icons/bs";
 import { BsCurrencyRupee } from 'react-icons/bs';
+
 function Wishlist() {
+  const userId = localStorage.getItem("userId")
   const {wishList} = useSelector(store=>store.Product);
   const dispatch = useDispatch();
   useEffect(()=>{
-    dispatch(fetchWishList({userId:2}));
+    dispatch(fetchWishList({userId}));
   },[])
 
   let products =  Object.values(wishList.flatMap(user => user.Wishlists.map(wishlist => wishlist.product)));
@@ -15,7 +17,7 @@ function Wishlist() {
     if (window.confirm("Are your sure ?")) {
         // dispatch(removeProductFromWishlist(index))
         products.slice(index,1);
-        dispatch(deleteProductFromWishList({ userId: 2, productId }));
+        dispatch(deleteProductFromWishList({ userId, productId }));
     }
 }
   return (
