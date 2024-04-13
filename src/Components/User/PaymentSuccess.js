@@ -9,13 +9,10 @@ const PaymentSuccess = () => {
     return (
         <Box>
             <VStack h="100vh" justifyContent={"center"}>
-
                 <Heading textTransform={"uppercase"}> Order Successfull</Heading>
-
                 <Text>
                     Reference No.{referenceNum}
                 </Text>
-
             </VStack>
         </Box>
     )
