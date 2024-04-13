@@ -42,7 +42,6 @@ export default () => {
         product.qty = value;
         totalamount = 0;
         discountPrice = 0;
-
         cartItemList.splice(index, 1);
         cartItemList.splice(index, 0, product);
         setCartItemList([...cartItemList]);
