@@ -1,15 +1,17 @@
 import { useLocation } from "react-router-dom"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from "axios";
 import { BsCurrencyRupee } from "react-icons/bs";
 function Checkout() {
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [contact, setContact] = useState("")
-    const [address, setAddress] = useState("")
-    const [city, setCity] = useState("")
-    const [pinCode, setPin] = useState("")
-    const status = "Order Confirmed";
+
+    let firstName = useRef(null);
+    let lastName = useRef(null);
+    let contact = useRef(null);
+    let address = useRef(null);
+    let city = useRef(null);
+    let pinCode = useRef(null);
+
+    let status = "Order Confirmed";
     const userId = localStorage.getItem("userId");
     const { state } = useLocation();
 
@@ -36,6 +38,13 @@ function Checkout() {
 
     //Payment API called
     const checkoutHandler = async (amount) => {
+        firstName=firstName.current.value;
+        lastName=lastName.current.value;
+        contact=contact.current.value;
+        address=address.current.value;
+        city=city.current.value;
+        pinCode=pinCode.current.value;
+        window.alert(firstName+" "+lastName+" "+contact+" "+address+" "+city+" "+pinCode+" "+status)
         console.log(window)
         try {
             // Fetching payment key
@@ -47,8 +56,6 @@ function Checkout() {
             });
             // console.log("Order Data ..")
             // console.log(order.id)
-
-
             const myOrder = await axios.post("http://localhost:3000/order/placeOrder",{id:order.id,firstName,lastName,contact,address,city,pinCode,status,quantity:1,userId})//price,quantity
             // Configuring Razorpay options
             const options = {
@@ -97,27 +104,27 @@ function Checkout() {
                             <div className='row form-group p-2'>
                                 <div className='col-md-6 mt-2'>
                                     <label>First Name*</label><br />
-                                    <input type='text' required onChange={(event) => setFirstName(event.target.value)} className='form-control' />
+                                    <input type='text' required  ref={firstName} className='form-control' />
                                 </div>
                                 <div className='col-md-6 mt-2'>
                                     <label>Last Name*</label><br />
-                                    <input type='text' required onChange={(event) => setLastName(event.target.value)} className='form-control' />
+                                    <input type='text' required ref={lastName} className='form-control' />
                                 </div>
                                 <div className='col-md-12 mt-2'>
                                     <label>Phone Number*</label><br />
-                                    <input type='number' onChange={(event) => setContact(event.target.value)} className='form-control' />
+                                    <input type='number' ref={contact} className='form-control' />
                                 </div>
                                 <div className='col-md-12 mt-2'>
                                     <label>Street Address*</label><br />
-                                    <input type='text' onChange={(event) => setAddress(event.target.value)} className='form-control' />
+                                    <input type='text' ref={address} className='form-control' />
                                 </div>
                                 <div className='col-md-12 mt-2'>
                                     <label>Town/City*</label><br />
-                                    <input type='text' onChange={(event) => setCity(event.target.value)} className='form-control' />
+                                    <input type='text' ref={city} className='form-control' />
                                 </div>
                                 <div className='col-md-12 mt-2'>
                                     <label>Pincode*</label><br />
-                                    <input type='number' onChange={(event) => setPin(event.target.value)} className='form-control' />
+                                    <input type='number' ref={pinCode} className='form-control' />
                                 </div>
                                 <div className='col-md-6 mt-2'>
                                     <button onClick={() => checkoutHandler(totalAmt - discountPrice)} className='btn btn-primary mt-2'>Proceed to Pay</button>

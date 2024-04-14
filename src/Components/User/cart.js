@@ -15,7 +15,6 @@ export default () => {
     // const [cartItems, setCartItemList] = useState([]);
     let [totalamount, settotalamount] = useState(0);
     let [discountPrice, setDiscountPrice] = useState(0);
-    const [showPage, setShowPage] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {cartItems,isLoading} = useSelector(store=>store.Product);
@@ -35,7 +34,6 @@ export default () => {
 
     const updateQty = (index,productId, quantity) => {
         dispatch(updateQtyOfProductInCart({ userId,productId,quantity }));
-        setShowPage(!showPage);
         let product = cartItems[index];
         totalamount = 0;
         discountPrice = 0;
