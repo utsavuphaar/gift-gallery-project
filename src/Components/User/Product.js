@@ -6,12 +6,11 @@ import { useEffect } from "react";
 import { addProductIntoCart, addProductIntoWishlist, fetchProduct } from "../../DataSlice/ProductSlice";
 import { Link, useNavigate } from "react-router-dom";
 export default function Product() {
+    let userId = localStorage.getItem("userId")
     const dispatch = useDispatch();
     const navigate = useNavigate("")
     const { productList } = useSelector(store => store.Product);
-
     useEffect(() => {
-        console.log("Hello");
         dispatch(fetchProduct());
     }, [])
 
@@ -19,11 +18,12 @@ export default function Product() {
         navigate("/viewmore", { state: product })
     }
     const addToCart = (productId) => {
-        dispatch(addProductIntoCart({ userId: 1, productId: productId }))
+        dispatch(addProductIntoCart({ userId, productId: productId }))
     }
     const addToWishlist = (productId) => {
-        dispatch(addProductIntoWishlist({ userId: 2, productId }))
+        dispatch(addProductIntoWishlist({ userId, productId }))
     }
+
     return <>
         <div className="container-fluid border">
             <div className="row p-0 border ">
@@ -31,7 +31,7 @@ export default function Product() {
 
                 </div>
                 <div className="col-lg-9 p-0 border d-flex flex-wrap justify-content-around align-items-center">
-                    {productList.products?.map((product, index) => <div className=" mt-2 col-lg-4 d-flex justify-content-center align-items-center">
+                    {productList?.map((product, index) => <div className=" mt-2 col-lg-4 d-flex justify-content-center align-items-center">
                         <div style={{ width: "270px" }} className="p-2 m-2 gift-card">
 
                             <img src={product.thumbnail} style={{ width: "250px", height: "230px", borderRadius: "10px" }} />

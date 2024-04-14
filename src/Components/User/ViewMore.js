@@ -26,7 +26,7 @@ import { fetchProductByCategory } from "../../DataSlice/ProductSlice";
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function ViewMore() {
-    const [inputValue,setInputValue] = useState(1)
+    const [inputValue, setInputValue] = useState(1)
     const navigate = useNavigate("")
     const { categoryProduct } = useSelector(store => store.Product);
     const dispatch = useDispatch();
@@ -41,11 +41,11 @@ export default function ViewMore() {
     }
     const decrement = () => {
         if (inputValue > 1) {
-          setInputValue(inputValue - 1);
+            setInputValue(inputValue - 1);
         }
-      };
-      const addToCart = (productId)=>{
-        dispatch(addProductIntoCart({userId:1,productId:productId}))
+    };
+    const addToCart = (productId) => {
+        dispatch(addProductIntoCart({ userId: 1, productId: productId }))
     }
     // alert(inputValue)
     return <>
@@ -79,15 +79,15 @@ export default function ViewMore() {
                 <p>{state.description}</p>
                 <Box sx={{ '& > :not(style)': { m: 1 } }}>
                     <span className="border p-3">
-                    <Fab size="small" color="secondary" aria-label="remove">
-                        <RemoveIcon onClick={decrement}  />
-                    </Fab>
-                        <input min={1} readOnly  type="number" value={inputValue} className="p-1 m-1" id="qty" width="20px"/>
-                    <Fab size="small" color="secondary" aria-label="add">
-                        <AddIcon onClick={()=>setInputValue(inputValue+1)} />
-                    </Fab>
+                        <Fab size="small" color="secondary" aria-label="remove">
+                            <RemoveIcon onClick={decrement} />
+                        </Fab>
+                        <input min={1} readOnly type="number" value={inputValue} className="p-1 m-1" id="qty" width="20px" />
+                        <Fab size="small" color="secondary" aria-label="add">
+                            <AddIcon onClick={() => setInputValue(inputValue + 1)} />
+                        </Fab>
                     </span>
-                <button onClick={()=>addToCart(state.id)} style={{ width: '250px', height: '50px' }} className="btn btn-outline-primary fw-bold">ADD TO CART</button> &nbsp;
+                    <button onClick={() => addToCart(state.id)} style={{ width: '250px', height: '50px' }} className="btn btn-outline-primary fw-bold">ADD TO CART</button> &nbsp;
                 </Box>
                 <br /><button style={{ width: '90%', height: '50px' }} className="mt-2 btn btn-primary fw-bold">BUY NOW</button>
 
@@ -111,10 +111,10 @@ export default function ViewMore() {
         </section>
         {/* -------------------------------------------Related Products-------------------------------- */}
         <h4>Related Products</h4>
-        
+
         <div >
             <div className="container border p-2 " id="related-products">
-                {categoryProduct?.map((product, index) => <div key={index} id="product-box" className="m-2 p-2 border d-flex flex-column rounded position-relative">
+                {categoryProduct?.map((product, index) => <div key={index} className="m-2 p-2 h-auto border d-flex flex-column rounded position-relative">
                     <img width="100%" height="250px" src={product.thumbnail} />
                     <div className="d-flex position-absolute" id="buttons">
                         <div><CiHeart style={{ width: '25px', height: '25px' }} /></div>

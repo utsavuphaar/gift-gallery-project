@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import URL from "../Components/ApiUrl";
+
 
 export const fetchProduct = createAsyncThunk("products/fetchProducts", async () => {
-    let res = await axios.get("http://localhost:3000/product/viewAllProducts")
-    return res.data;
+    let res = await axios.get(URL.getProducts)
+    return res.data.products;
 })
 
 export const fetchProductByCategory = createAsyncThunk("products/fetchProductByCategory", async (category) => {
@@ -15,22 +17,11 @@ export const fetchCartItems = createAsyncThunk("cart/cartItems", async (userId) 
     let res = await axios.get(`http://localhost:3000/cart/list/${userId}/`)
     return res.data.data;
 })
-// export const insertdata = createAsyncThunk("create/signup", async ({ name, email, password }) => {
-//     try {
-//         let res = await axios.post('http://localhost:3000/user/signUp', { name, email, password })
-//         console.log(res);
-//         return res.data.message;
-//     } catch (error) {
-//         // alert("something went wrong")
-//         console.log(error);
-//     }
-// })
-// e
 
 
-export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct", async ({userId}) => {
+export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct", async ({ userId }) => {
     try {
-        let res = await axios.post("http://localhost:3000/wishlist/viewAllfavoriteproduct",{userId:userId})
+        let res = await axios.post(URL.getWishlist, { userId: userId })
         return res.data.wishlist;
     } catch (err) {
         console.log(err)
@@ -39,7 +30,7 @@ export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct",
 
 export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ userId, productId }) => {
     try {
-        let res = await axios.post("http://localhost:3000/cart/addToCart", { userId, productId })
+        let res = await axios.post(URL.addToCart, { userId, productId })
         alert(res.data.message)
         return res.data;
     } catch (err) {
@@ -49,7 +40,7 @@ export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ us
 
 export const addProductIntoWishlist = createAsyncThunk("wishlist/addProductIntoWishlist", async ({ userId, productId }) => {
     try {
-        let res = await axios.post("http://localhost:3000/wishlist/addWishlist", { userId, productId })
+        let res = await axios.post(URL.addToWishlist, { userId, productId })
         alert(res.data.message)
         return res.data;
     } catch (err) {
@@ -101,17 +92,26 @@ export const deleteProductFromWishList = createAsyncThunk(
 );
 
 
+export const updateQtyOfProductInCart = createAsyncThunk("cart/updateQty", async ({ userId, productId, quantity }) => {
+    try {
+        const response = await axios.post("http://localhost:3000/cart/updateQty", { userId, productId, quantity })
+        return response.data;
+    } catch (err) {
+        console.log(err)
+    }
+})
+
 const slice = createSlice({
     name: "ProductSlice",
     initialState: {
         productList: [],
         categoryProduct: [],
-        user:"",
+        user: "",
         cartItems: [],
-        wishList:[],
+        wishList: [],
         isLoading: false,
         error: false,
- },
+    },
     reducers: {
         deleteProduct: (state, action) => {
             const index = state.productList.findIndex(item => item.id === action.payload)
@@ -128,6 +128,18 @@ const slice = createSlice({
         removeProductFromWishlist: (state, action) => {
             state.wishList.splice(action.payload, 1);
         },
+        searchProduct: (state, action) => {
+            if (!action.payload.trim()) {
+                fetchProduct();
+            }
+            const filteredProducts = state.productList.filter(product =>
+                product.title.toUpperCase().includes(action.payload.toUpperCase())
+            );
+            return {
+                ...state,
+                productList: filteredProducts
+            };
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchProduct.pending, (state, action) => {
@@ -140,6 +152,7 @@ const slice = createSlice({
             state.isLoading = true;
         }).addCase(fetchProductByCategory.fulfilled, (state, action) => {
             state.categoryProduct = action.payload;
+            state.productList = action.payload;
         }).addCase(fetchProductByCategory.rejected, (state, action) => {
             state.error = true;
         }).addCase(fetchCartItems.pending, (state, action) => {
@@ -148,7 +161,7 @@ const slice = createSlice({
             state.cartItems = action.payload;
         }).addCase(fetchCartItems.rejected, (state, action) => {
             state.error = true;
-       }).addCase(fetchWishList.pending, (state, action) => {
+        }).addCase(fetchWishList.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(fetchWishList.fulfilled, (state, action) => {
             state.wishList = action.payload;
@@ -160,4 +173,4 @@ const slice = createSlice({
 
 
 export default slice.reducer;
-export const { removeProductFromCart,removeAllProductsFromCart,removeProductFromWishlist } = slice.actions;
+export const { removeProductFromCart, searchProduct, removeAllProductsFromCart, removeProductFromWishlist } = slice.actions;
