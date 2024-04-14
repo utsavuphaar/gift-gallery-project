@@ -1,0 +1,107 @@
+    .user-picture {
+          width: 60px;
+          background-color: white;
+          opacity: 0.6;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+
+    }
+    h2{
+      margin-left: 10px;
+    }
+
+    .name-client {
+          margin: 0;
+          margin-top: 20px;
+          font-weight: 600;
+          font-size: 18px;
+    }
+
+    .name-client span {
+          display: block;
+          font-weight: 200;
+          font-size: 16px;
+    }
+
+    .aboutus-img:hover {
+          opacity: 0.8;
+    }
+
+    .about-us-container {
+          position: relative;
+          width: 100%;
+          max-width: 500px;
+    }
+
+    .card-container {
+          transition: box-shadow 0.3s, transform 0.3s;
+          /* Add transition for smoother effect */
+
+    }
+
+    .card-container:hover {
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          /* Define box-shadow properties on hover */
+          transform: scale(1.05);
+          /* Apply zoom effect on hover */
+    }
+
+    .icon-circle {
+
+          width: 50px;
+          height: 50px;
+          border-radius: 50px;
+          background-color: black;
+          margin-left: 5px;
+          margin-top: 5px;
+    }
+
+    .icon-decoration-border {
+          width: 65px;
+          height: 65px;
+          border: 2px solid gray;
+          border-radius: 50px;
+          background-color: gray;
+    }
+
+    .icon-decoration-border:hover {
+          /* border: 2px solid red; */
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          /* Define box-shadow properties on hover */
+          transform: scale(1.3);
+          transition: 1s ease-out;
+          /* Apply zoom effect on hover */
+    }
+
+    .container {
+          position: relative;
+
+    }
+
+    .about-image:hover {
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          transform: scale(1.04);
+          transition: 0.7s ease;
+
+    }
+
+    .overlay-2 {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.5s ease;
+    }
+
+    .about-us-container:hover .overlay-2 {
+          margin-top: 40px;
+          opacity: 2;
+          visibility: visible;
+          transition: 1s ease-in;
+          cursor: pointer;
+    }
