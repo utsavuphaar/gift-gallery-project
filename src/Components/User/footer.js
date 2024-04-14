@@ -1,95 +1,74 @@
-
-import { HiShoppingBag } from "react-icons/hi";
-import { BsFacebook } from "react-icons/bs";
+import { IoIosGift } from "react-icons/io";
+import './footer.css';
+import { FaFacebook } from "react-icons/fa";
 import { AiFillTwitterCircle } from "react-icons/ai";
-import { TiSocialInstagram } from "react-icons/ti";
-import { BsLinkedin } from "react-icons/bs";
-import { BsYoutube } from "react-icons/bs";
-
+import { RiInstagramFill } from "react-icons/ri";
+import { FaYoutube } from "react-icons/fa6";
+import './footer.css'
 export const Footer = () => {
-      return (
-            <div className="container-fluid bg-light ">
-                  <div className="row justify-content-center">
-                        <div className="col-md-3">
-                              <div className="row">
-                                    <div className="shopping-bag-div ml-5 mt-5 text-sm-center">
-                                          <span>
-                                                <HiShoppingBag className="bag-icon text-md-center justify-content-md-center" />
+      return <>
+            <footer class="footer">
+                  <div class="container">
+                        <div class="row">
+                              <div class="footer-col ml-3">
+                                    <div className='col-md-6 ms-1 title' style={{ width: "250px" }}>
+                                          <div className='mt-1 mb-2 icon  d-flex justify-content-center align-items-center'>
+                                                <IoIosGift className='fs-3 text-light' />
+                                          </div>
+                                          <span className='ms-3 fs-3 name'>
+                                                UtsavUphaar
                                           </span>
-                                          <a href="#" className="logo-UtsavUphar text-center">
-                                                UtsavUphar
-                                          </a>
                                     </div>
-                              </div>
-                              <div className="row">
-                                    <div className="col text-left">
-                                          <p className="mt-3 ml-4 text-md-center text-lg-left text-center text">
-                                                Best information about the company
-                                                <br />
-                                                goes here but now lorem ipsum is
+                                    <div className="p-3">
+                                          <p style={{ color: "black" }}>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis consequat. Nulla facilisi. Sed id nisi sit amet tellus hendrerit aliquam.
                                           </p>
+
+                                    </div>
+                                    <div class="social-links mt-0">
+                                          <a href="https://www.facebook.com/" target="_blank"> <FaFacebook className="fs-4" />   </a>
+                                          <a href="https://www.twitter.com/" target="_blank"><AiFillTwitterCircle className="fs-4" /></a>
+                                          <a href="https://www.instagram.com/" target="_blank"><RiInstagramFill className="fs-4" /></a>
+                                          <a href="https://www.youtube.com/" target="_blank"><FaYoutube className="fs-4" /></a>
                                     </div>
                               </div>
-                              <div className="ml-4 text-lg-left text-sm-center">
-                                    <a href="https://www.facebook.com" target="_blank">
-
-                                          <BsFacebook className="facebookk-icon" />
-                                    </a>
-                                    <a href="https://www.twitter.com/" target="_blank">
-                                          <AiFillTwitterCircle className="facebookk-icon" />
-                                    </a>
-                                    <a href="https://www.Instagram.com/" target="_blank">
-                                          <TiSocialInstagram className="facebookk-icon" />
-                                    </a>
-                                    <a href="https://www.Linkedin.com/" target="_blank">
-                                          <BsLinkedin className="facebookk-icon" />
-                                    </a>
-                                    <a href="https://www.YouTube.com/" target="_blank">
-                                          <BsYoutube className="facebookk-icon" />
-                                    </a>
+                              <div class="footer-col">
+                                    <h4 className="mt-3">company</h4>
+                                    <ul>
+                                          <li><a href="#">about us</a></li>
+                                          <li><a href="#">our services</a></li>
+                                          <li><a href="#">privacy policy</a></li>
+                                          <li><a href="#">affiliate program</a></li>
+                                    </ul>
                               </div>
-
-                        </div>
-                        <div className="col-md-9">
-                              <div className="row">
-                                    <div className="col-md-3 mt-5 text-center text-sm-center text-lg-left">
-                                          <h5>About</h5>
-                                          <span>About <br></br></span>
-                                          <span>Find Store <br></br></span>
-                                          <span>Categories<br></br></span>
-                                          <span>Blogs<br></br></span>
-
-
-                                    </div>
-                                    <div className="col-md-3 mt-5 text-center text-sm-center text-sx-center text-lg-left">
-                                          <h5>Partnership<br></br></h5>
-                                          <span>About Us<br></br></span>
-                                          <span>Find Store <br></br></span>
-                                          <span>Categories <br></br></span>
-                                          <span>Blogs<br></br></span>
-                                    </div>
-                                    <div className="col-md-3 mt-5 text-center text-sm-center text-lg-left">
-                                          <h5>Information</h5>
-                                          <span>Help Center <br></br></span>
-                                          <span>Money Refund<br></br></span>
-                                          <span>Shipping<br></br></span>
-                                          <span>Contact Us<br></br></span>
-
-                                    </div>
-                                    <div className="col-md-3 mt-5 text-center text-sm-center text-lg-left">
-                                          <h5>For Users</h5>
-                                          <span>Login<br></br></span>
-                                          <span>Register<br></br></span>
-                                          <span>Settings<br></br></span>
-                                          <span>My Orders<br></br></span>
-                                    </div>
-
+                              <div class="footer-col">
+                                    <h4 className="mt-3">get help</h4>
+                                    <ul>
+                                          <li><a href="#">FAQ</a></li>
+                                          <li><a href="#">shipping</a></li>
+                                          <li><a href="#">returns</a></li>
+                                          <li><a href="#">order status</a></li>
+                                          <li><a href="#">payment options</a></li>
+                                    </ul>
                               </div>
-
+                              <div class="footer-col">
+                                    <h4 className="mt-3">Gift Gallery</h4>
+                                    <ul>
+                                          <li><a href="#">watch</a></li>
+                                          <li><a href="#">bag</a></li>
+                                          <li><a href="#">shoes</a></li>
+                                          <li><a href="#">dress</a></li>
+                                    </ul>
+                              </div>
                         </div>
                   </div>
-            </div >
-      );
+            </footer>
+            <div className="container-fluid footer-end">
+                  <div class="copyright">
+                       <p> &copy; 2024 UtsavUphar. All rights reserved.</p>
+                  </div>
+            </div>
+      </>
 
 };
 
