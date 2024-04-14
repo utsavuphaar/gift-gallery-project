@@ -1,18 +1,17 @@
 import { useDispatch, useSelector } from "react-redux"
 import store from "../../Store/store"
+import { AiFillStar } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
 import { useEffect } from "react";
 import { addProductIntoCart, addProductIntoWishlist, fetchProduct } from "../../DataSlice/ProductSlice";
-import { PiShoppingCartSimpleThin } from "react-icons/pi";
-import { AiOutlineEye } from "react-icons/ai";
-import { BiRupee } from "react-icons/bi";
-import { AiFillStar } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 export default function Product() {
     const dispatch = useDispatch();
     const navigate = useNavigate("")
     const { productList } = useSelector(store => store.Product);
+
     useEffect(() => {
+        console.log("Hello");
         dispatch(fetchProduct());
     }, [])
 
@@ -26,75 +25,45 @@ export default function Product() {
         dispatch(addProductIntoWishlist({ userId: 2, productId }))
     }
     return <>
-        {/* <Link to="/cartitems"><button className="btn btn-primary">CartItems</button></Link>&nbsp;
-    <Link to="/wishlist"  ><button className="btn btn-warning">Wishlist</button></Link> */}
         <div className="container-fluid border">
-            <div className="row p-0">
-                <div className="col-md-3 border">
+            <div className="row p-0 border ">
+                <div className="col-lg-3">
 
                 </div>
-                <div className="col-md-9 p-2 d-flex flex-wrap justify-content-around align-items-center">
-                    {/* <div className="row productlist">
-                        {productList.products?.map((product, index) => <div key={index} id="product-box" className="col-md-4  border position-relative">
-                            <img width="100%" height="250px" id="gift" src={product.thumbnail} />
+                <div className="col-lg-9 p-0 border d-flex flex-wrap justify-content-around align-items-center">
+                    {productList.products?.map((product, index) => <div className=" mt-2 col-lg-4 d-flex justify-content-center align-items-center">
+                        <div style={{ width: "270px" }} className="p-2 m-2 gift-card">
 
-
-                            <div className="d-flex position-absolute" id="buttons">
-                                <div>
-                                    <CiHeart onClick={() => addToWishlist(product.id)} style={{ width: '25px', height: '25px' }} />
-                                </div>
-                                <div onClick={() => addToCart(product.id)}><PiShoppingCartSimpleThin style={{ width: '20px', height: '20px' }} /></div>
-                                <div><AiOutlineEye onClick={() => viewMore(product)} style={{ width: '20px', height: '20px' }} /></div>
+                            <img src={product.thumbnail} style={{ width: "250px", height: "230px", borderRadius: "10px" }} />
+                            <div className="w-100">
+                                <h6 className=" ms-2 mt-2">{product.title}</h6>
                             </div>
-                            <h6 className="mt-2 fs-5 ms-3">{product.title.split(" ").slice(0, 3).join(' ')}</h6>
-                            <div className="p-0 m-0 d-flex justify-content-between">
-                                <div className=" col-md-3 col-sm-5 fs-4 d-flex justify-content-center align-items-center" style={{ fontWeight: "600", paddingLeft: "10px", paddingRight: "5px" }}>
-                                    ₹ {product.price} <del className="ms-2" style={{ fontSize: '16px', color: 'gray' }}> ₹ {product.price}</del>
-                                </div>
-                                <div className=" col-md-3 col-sm-4 p-3 d-flex justify-content-center align-items-center ">
-                                    <div className=" text-primary p-1" style={{ backgroundColor: ' #A4C9FE', borderRadius: '5px', fontSize: '12px' }}>
+                            <div className="w-100  d-flex justify-content-center align-items-center">
+                                <div className="d-flex align-items-center">
+                                    <h5 className="">₹{product.price}</h5>
+                                    <del style={{ fontSize: '10px' }} className="ms-2 text-secondary">MRP{product.price}</del>
+                                    <div className="ms-2 me-2 d-flex align-items-center justify-content-center text-primary" style={{ borderRadius: "5px", width: "60px", height: "20px", fontSize: '10px', backgroundColor: "#C7E1FF" }}>
                                         {product.discountPercentage}% off
+                                    </div>
+                                </div>
+                                <div className=" d-flex align-items-center justify-content-center " >
+                                    <div className="d-flex align-items-center justify-content-center ms-2" style={{ width: "50px" }}>
+                                        <AiFillStar className="text-primary" />
+                                        <span style={{ fontSize: "13px" }} className="fw-bold">{product.rating}</span>
+
 
                                     </div>
                                 </div>
-                                <div className=" col-md-3 col-sm-3 d-flex justify-content-center align-items-center me-2" style={{paddingLeft:"5px",paddingRight:'5px'}} >
-                                    <div style={{ borderRadius: "5px",fontSize:"14px" }} className=" text-white bg-primary p-1"><div />
-                                      <AiFillStar style={{ color: 'white' }}/> {product.rating}
-                                  </div>
-                                </div>
                             </div>
-
-                        </div>)}
-                    </div> */}
-                    {/* {productList.products?.map((product, index) => <div key={index} id="product-box" className="p-0 border d-flex flex-column rounded position-relative">
-                        <img width="100%" height="250px" id="gift" src={product.thumbnail} />
-
-
-                        <div className="row border p-0 m-0">
-                            <div className="col-md-6 ms-3 fs-5 p-0 m-0">
-                                ₹ {product.price} <del className="ms-2" style={{fontSize:'16px', color:'gray'}}> ₹ {product.price}</del>
-                            </div>
-                            <div className=" border col-md-2">
-                                    {product.discountPercentage}
-                            </div>
-                            <div className="col-md-2">
-
+                            <div className="w-100 mt-1 d-flex justify-content-around align-items-center mb-1" >
+                                <button className="btn btn-outline-primary">Move to cart</button>
+                                <button className="btn btn-primary">Buy now</button>
                             </div>
                         </div>
-                    </div>)} */}
+                    </div>)}
                 </div>
             </div>
         </div>
+
     </>
 }
-// <div className="row border ms-1 p-2 w-100 d-flex justify-content-center align-items-center">
-//     <div className="col-md-5 border p-0">
-//         <span style={{ fontWeight: 'bold', fontSize:'18px' }} className="ms-3">₹{product.price} </span><span className="text-secondary" style={{fontSize:'12px'}}><del>₹{product.price}</del></span>
-//     </div>
-//     <div className="col-md-3 border p-0 ">
-//         <span className=" ms-2 text-primary p-1" style={{ backgroundColor: 'lightgrey', fontSize: '10px', borderRadius: '5px', fontWeight: 'bold' }}>{product.discountPercentage} % off </span>
-//     </div>
-//     <div className="col-md-4 border p-0"><div />
-//         <span style={{ borderRadius: "5px" }} className="ms-4 bg-primary p-1 text-light"><AiFillStar style={{ color: 'white' }} /> {product.rating}</span>
-//     </div>
-// </div>

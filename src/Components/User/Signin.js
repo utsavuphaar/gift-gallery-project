@@ -136,8 +136,8 @@ export default function Signin() {
         <div className='container-fluid d-flex justify-content-center align-items-center p-0 main'>
             <div className='row signin'>
                 <div className='col-md-6  form'>
-                    <h2 className='mt-5 text-danger '>Login</h2>
-                    <TextField onChange={event => setemail(event.target.value)} onKeyUp={() => validationemail()} className='mt-4  w-75' label="Email Address" type='email' variant="standard" />
+                    <h2 className='mt-5 text-primary fw-bold'>Login</h2>
+                    <TextField onChange={event => setemail(event.target.value)} onKeyUp={() => validationemail()} className='mt-4  w-75 ' label="Email Address" type='email' variant="standard" />
                     <div className='container-fluid w-75'>
                         <div className='row '>
                             <div className='mt-1 p-0 col-md-12 d-flex '>
@@ -157,7 +157,7 @@ export default function Signin() {
 
 
                     <div className='container-fluid mt-3 d-flex justify-content-center align-items-center'>
-                        <div className='row  w-100  text-danger' style={{ fontSize: "13px" }}>
+                        <div className='row  w-100  text-primary' style={{ fontSize: "13px" }}>
                             <div className=' col-md-7 d-flex justify-content-start align-items-center'>
                                 <small className='ms-4 p-1'>Login with Phone</small>
                             </div>
