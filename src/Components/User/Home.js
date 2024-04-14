@@ -3,8 +3,14 @@ import Header from './Header';
 import Product from './Product';
 import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
 import { SlUser } from "react-icons/sl";
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
+import { useState } from 'react';
 export default function Home() {
+    // const [buttonDisabled, setButtonDisabled] = useState(false);
+    const navigate = useNavigate();
+    let buttonDisabled = false;
+    if(localStorage.getItem("userId"))
+            buttonDisabled = true;
     return <>
         <Header/>
         <div className="container-fluid home ">
@@ -64,12 +70,10 @@ export default function Home() {
                             </div>
                             <span className='ms-3' style={{ color: "#353738", fontWeight: "600" }}>Hi, user<br />let's get started</span>
                         </div>
-                        <Link to="/signup">
-                        <button className='mt-3 btn btn-primary w-100'>Join now</button>
-                        </Link>
-                        <Link to="/signin">
-                        <button className='mt-2 btn btn-light text-primary w-100'>Log in</button>
-                        </Link>
+
+                        <button className='mt-3 btn btn-primary w-100' onClick={()=>navigate("/signup")} disabled={buttonDisabled}>Join now</button>
+                        <button className='mt-2 btn btn-light text-primary w-100' onClick={()=>navigate("/signin")} disabled={buttonDisabled}>Log in</button>
+
                     </div>
                 </div>
             </div>

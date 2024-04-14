@@ -1,7 +1,9 @@
-import loading from './loading.gif'
+import loadingImg from './loading.gif'
 import './App.css';
 import Product from './Components/User/Product.js';
 import { Route, Routes } from 'react-router-dom';
+import {useEffect, useState } from 'react';
+
 import ViewMore from './Components/User/ViewMore.js';
 import Signin from './Components/User/Signin.js';
 import Signup from './Components/User/Signup-page.js';
@@ -19,12 +21,14 @@ import AdminProfile from './Components/Admin/Admin.js';
 
 
 function App() {
+
   let {isLoading,productList} = useSelector(store =>store.Product);
+
   return <>
 
     {!productList?(
       <div className='h-100 w-100 d-flex justify-content-center align-content-center'>
-        <img src={loading}/>
+        <img src={loadingImg}/>
       </div>
     ):(
     <Routes>
