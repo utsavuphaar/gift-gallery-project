@@ -114,7 +114,7 @@ export default function ViewMore() {
 
         <div >
             <div className="container border p-2 " id="related-products">
-                {categoryProduct?.map((product, index) => <div key={index} id="product-box" className="m-2 p-2 border d-flex flex-column rounded position-relative">
+                {categoryProduct?.map((product, index) => <div key={index} className="m-2 p-2 h-auto border d-flex flex-column rounded position-relative">
                     <img width="100%" height="250px" src={product.thumbnail} />
                     <div className="d-flex position-absolute" id="buttons">
                         <div><CiHeart style={{ width: '25px', height: '25px' }} /></div>

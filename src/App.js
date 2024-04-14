@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import loading from './loading.gif'
 import './App.css';
 import Product from './Components/User/Product.js';
 import { Route, Routes } from 'react-router-dom';
@@ -14,12 +14,21 @@ import Cart from './Components/User/cart.js';
 import PaymentSuccess from './Components/User/PaymentSuccess.js';
 
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from 'react-redux';
+import AdminProfile from './Components/Admin/Admin.js';
 
 
 function App() {
+  let {isLoading,productList} = useSelector(store =>store.Product);
   return <>
+    {!productList?(
+      <div className='h-100 w-100 d-flex justify-content-center align-content-center'>
+        <img src={loading}/>
+      </div>
+    ):(
     <Routes>
       <Route path='/' element={<Home/>}/>
+      <Route path='/admin' element={<AdminProfile/>}/>
       <Route path="/product" element={<Product />} />
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/signin' element={<Signin/>}/>
@@ -30,6 +39,7 @@ function App() {
       <Route path ="/checkout" element= {<Checkout/>}/>
         <Route path="/paymentsuccess" element={<PaymentSuccess />} /> //
     </Routes>
+    )}
   </>
 }
 

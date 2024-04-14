@@ -1,0 +1,298 @@
+/* .shopping-bag-div {
+    width: 35px;
+    height: 35px;
+    background-color: #056DFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+  
+  }
+  
+  .bag-icon {
+    color: white;
+    margin-left: 8px;
+    margin-top: 1px;
+    width: 20px;
+    height: 20px;
+  
+  }
+  
+  .logo-UtsavUphar {
+    font-weight: bold;
+    color: #8CB7F5;
+    font-size: large;
+    margin-top: 1px;
+    margin-left:15px;
+  } */
+
+
+/* -------------Header----------- */
+
+.header {
+    width: 100%;
+    height: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+    /* border: 1px solid red; */
+    /* padding: 15px; */
+  }
+  
+  .header-1 {
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    /* border: 1px solid black; */
+  }
+  
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow: 1px 0px 2px 2px gainsboro;
+    /* margin-top: 35px;
+    margin-left: 130px; */
+    background-color: #0D6EFD;
+  }
+  
+  .name {
+    font-weight: 600;
+    color: #8CB7F5;
+    text-shadow: 0.7px 0.7px #0D6EFD;
+  }
+  
+  .search-bar {
+    width: 60vw;
+    height: 40px;
+    /* padding: 5px; */
+    border: 2px solid #0D6EFD !important;
+    display: flex;
+    outline: none;
+    border: none;
+    border-bottom: #0D6EFD;
+    border-radius: 10px;
+  }
+  
+  .search {
+    width: 65%;
+    height: 100%;
+    padding-left: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+  }
+  
+  
+  .dropdown1 {
+    height: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-left: 1px solid #0D6EFD !important;
+  
+  }
+  
+  .searchbutton {
+    width: 120px;
+    background-color: #0D6EFD;
+    color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  
+  #icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #icons:hover{
+    cursor: pointer;
+    color: #0D6EFD;
+  }
+  
+  .iconstext {
+    font-size: 13px;
+    color: #8B96A5;
+  }
+  
+  @media only screen and (max-width: 600px){
+    .dropdown1{
+        display: none;
+    }
+    .button-2{
+        /* font-size: 10px; */
+        display: none;
+    }
+    .google{
+        display: block !important;
+        margin-top: 15px;
+        margin-bottom: 0;   
+        cursor: pointer;
+        width: 40px !important;
+        height: 40px !important;
+    }
+    .home-navbar{
+        border: none !important;
+    }
+  }
+  
+    /* new order */
+    .block{
+      height: 60vh;
+      width: 15vw;
+      background-color: #8CB7F5;
+      
+    }
+     .dashboard{
+      width: 100%;
+      height: auto;
+    }
+    .admin{
+  
+       border: 1px solid black;
+       /* border-radius: 400px; */
+       max-height: 5vh;
+       max-width: 19vw;
+       text-shadow: #8CB7F5;
+       
+      }
+      
+    
+      .moni{
+        height: 30px;
+       width: 30px;
+       
+      }
+      .order{
+        color: gray;
+        /* background-color: white; */
+      }
+  
+      /* cards bolk */
+  
+      .card {
+        border-radius: 25px;
+        background: #fff;
+        box-shadow: 5px 5px 20px #bebebe,
+                   -9px -9px 20px #ffffff;
+      }
+      .usericon{
+        background-color: #8280FF;
+        border-radius: 13px;
+        color:#8eb4e9 ;
+      }
+      .autline{
+        color: green;
+      }
+      .cobeicon{
+        color: rgb(154, 154, 86);
+        background-color: #FEC53D;
+        border-radius: 13px;
+      }
+      .graphicon{
+        color: rgb(102, 164, 9);
+        background-color: #4AD991;
+        border-radius: 13px;
+      }
+      .watchicon{
+         color: orangered;
+         background-color: #FF9066;
+         border-radius: 13px;
+      }
+      .imgwatch{
+        height: 25px;
+        width: 25px;
+            }
+      .textcolor{
+        color: rgb(175, 166, 166);
+       font-size: 10px;
+      }
+      .linemar{
+        margin-top: 100px;
+      }
+      .success{
+        background-color: #00B69B;
+        color: white;
+        
+      }
+  
+      .warning{
+        background-color: #FCBE2D;
+        color: white;
+        
+      }
+      .danger{
+        background-color: #FD5454;
+        color: white;
+      }
+      .heding{
+        background-color: #6a8abd;
+      }
+      .run{
+        height: 500px;
+      }
+  
+  
+  
+  
+      /* meri mediquery */
+      @media only screen and (max-width: 600px){
+        .threeline{
+          /* margin-top: 10px; */
+          display: none;
+        }
+        .moni{
+          display: none;
+        }
+        .searchbar{
+          text-decoration: none;
+          width: 1;
+          margin-top: 10px;
+         margin-bottom: 10px;
+        }
+        .seting{
+          margin-top:-30%;
+        }
+        .seting1{
+          margin-top:-5%;
+        }
+        .admin{
+          display: none;
+        }
+        .textadmin{
+          display: none;
+        }
+        .orderlist{
+          text-align: center;
+        }
+        .oderdata{
+          margin-top: 10px;
+          /* border: 1px solid black; */
+          
+        }
+       .filter2{
+        
+           
+           display: none !important;
+           border: none !important;
+           text-decoration: none !important;
+       }
+       .filter3{
+        margin-left: -30px;
+       }
+       .order{
+       margin-left: auto !important;
+       }
+     }

@@ -1,53 +1,48 @@
 import { useEffect, useState } from "react"
 import Header from "./Header"
 import axios from "axios";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import { AiFillLock, AiOutlineArrowLeft } from "react-icons/ai";
-import { addProductIntoWishlist, deleteAllProductsFromCart, deleteProductFromCart, removeAllProductsFromCart, removeProductFromCart } from "../../DataSlice/ProductSlice";
+import { addProductIntoWishlist, deleteAllProductsFromCart, deleteProductFromCart, fetchCartItems, removeAllProductsFromCart, removeProductFromCart, updateQtyOfProductInCart } from "../../DataSlice/ProductSlice";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { TbMessage } from "react-icons/tb";
 export default () => {
     let userId = localStorage.getItem("userId");
-    const [cartItemList, setCartItemList] = useState([]);
+    // const [cartItems, setCartItemList] = useState([]);
     let [totalamount, settotalamount] = useState(0);
-    let [discountPrice, setDiscountPrice] = useState(0)
+    let [discountPrice, setDiscountPrice] = useState(0);
+    const [showPage, setShowPage] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {cartItems,isLoading} = useSelector(store=>store.Product);
+
     useEffect(() => {
-        // let userId = sessionStorage.getItem("user_id");
-        axios.get(`http://localhost:3000/cart/list/${userId}/`)
-            .then(response => {
-                for (let product of response.data.data) {
-                    product.qty = 1;
-                    totalamount = totalamount + product["products.price"];
-                    discountPrice = discountPrice + (((parseInt(product["products.discountPercentage"] * product["products.price"]) / 100).toFixed(2)) * 1);
-                    cartItemList.push(product);
-                }
-                // console.log(response.data.data.products["cartItem.quantity"])
-                setCartItemList([...cartItemList]);
-                setDiscountPrice(discountPrice)
-                settotalamount(totalamount);
-            }).catch(err => {
-                console.log(err);
-            })
+        dispatch(fetchCartItems(userId));
+        setCart();
     }, []);
+    const setCart = ()=>{
+        for (let product of cartItems) {
+            totalamount = totalamount + product["products.price"]*product["products.cartItem.quantity"];
+            discountPrice = discountPrice + (((parseInt(product["products.discountPercentage"] * product["products.price"]*product["products.cartItem.quantity"]) / 100).toFixed(2)) * 1);
+        }
+        setDiscountPrice(discountPrice)
+        settotalamount(totalamount);
+    }
 
-
-    const updateQty = (index, value) => {
-        let product = cartItemList[index];
-        product.qty = value;
+    const updateQty = (index,productId, quantity) => {
+        dispatch(updateQtyOfProductInCart({ userId,productId,quantity }));
+        setShowPage(!showPage);
+        let product = cartItems[index];
         totalamount = 0;
         discountPrice = 0;
-        cartItemList.splice(index, 1);
-        cartItemList.splice(index, 0, product);
-        setCartItemList([...cartItemList]);
-        for (let productItem of cartItemList) {
-            totalamount = totalamount + productItem["products.price"] * productItem.qty;
-            discountPrice = discountPrice + ((((parseInt(product["products.discountPercentage"] * product["products.price"]) / 100)) * productItem.qty).toFixed(2) * 1);
+        for (let productItem of cartItems) {
+            totalamount = totalamount + productItem["products.price"] * productItem["products.cartItem.quantity"];
+            // alert(productItem["products.cartItem.quantity"])
+            discountPrice = discountPrice + ((((parseInt(product["products.discountPercentage"] * product["products.price"]) / 100)) * productItem["products.cartItem.quantity"]).toFixed(2) * 1);
         }
         setDiscountPrice(discountPrice)
         settotalamount(totalamount);
@@ -55,9 +50,9 @@ export default () => {
 
     const removeItemFromCart = (index, productId) => {
         if (window.confirm("Are your sure ?")) {
-            cartItemList.splice(index, 1);
-            dispatch(removeProductFromCart(index))
+            // cartItems.splice(index, 1);
             dispatch(deleteProductFromCart({ userId, productId }));
+            dispatch(removeProductFromCart(index))
         }
     }
     const addToWishlist = (productId) => {
@@ -66,7 +61,7 @@ export default () => {
 
     const removeAllItems = () => {
         if (window.confirm('Remove all items?')) {
-            setCartItemList([]);
+            // setCartItemList([]);
             dispatch(removeAllProductsFromCart());
             dispatch(deleteAllProductsFromCart({ userId }));
         }
@@ -74,12 +69,11 @@ export default () => {
     return <>
         <ToastContainer />
         <Header />
-        <h5 className="container">My Cart ({cartItemList.length})</h5>
-        {
-            cartItemList.length != 0 ? (
+        <h5 className="container">My Cart ({cartItems.length})</h5>
+        {      cartItems.length != 0 ? (
                 <section className="row border m-0 p-0">
                     <div className="col-md-9 border d-flex justify-content-center align-content-center flex-column">
-                        {cartItemList.map((product, index) =>
+                        {cartItems.map((product, index) =>
                             <div className="row container border m-0 p-0">
                                 <div className="col-md-3 float-end center-div justify-content-end align-items-end d-flex">
                                     <img className="m-auto" src={product["products.thumbnail"]} width="150px" height="150px" alt="abc" />
@@ -99,7 +93,7 @@ export default () => {
                                         <span className="fs-5 text-success">({product["products.discountPercentage"]} % off )</span>
                                     </div>  
                                     <h5 className="mt-2">
-                                        Qty. :  <input type="number" min={1} onClick={(event) => updateQty(index, event.target.value)} defaultValue={1} style={{ width: '50px', height: '30px' }} />
+                                        Qty. :  <input type="number" min={1} onClick={(event) => updateQty(index,product["products.id"], event.target.value)} defaultValue={product["products.cartItem.quantity"]} style={{ width: '50px', height: '30px' }} />
                                     </h5>
                                     </center>
                                 </div>
@@ -109,11 +103,11 @@ export default () => {
                     <div className="col-md-3 p-0 m-0">
                         <div className="container border d-flex flex-column p-4" >
                             <h5 className="text-center fw-bold mb-2">Order summary</h5>
-                            <label className="fs-5">Item purchased : <span className="text-success">{cartItemList.length}</span></label>
+                            <label className="fs-5">Item purchased : <span className="text-success">{cartItems.length}</span></label>
                             <label className="fs-5">Sub Total : {totalamount}</label>
                             <label className="fs-5">Discount : {discountPrice.toFixed(2)}</label><hr />
-                            <h4 className="fw-bold">Total Bill : <BsCurrencyRupee />{totalamount - discountPrice}</h4>
-                            <button onClick={()=>navigate("/checkout",{state:cartItemList})} className="btn btn-success mt-3 fw-bold" >Checkout</button>
+                            <h4 className="fw-bold">Total Bill : <BsCurrencyRupee />{(totalamount - discountPrice).toFixed(2)}</h4>
+                            <button onClick={()=>navigate("/checkout",{state:cartItems})} className="btn btn-success mt-3 fw-bold" >Checkout</button>
                             
                         </div>
 
