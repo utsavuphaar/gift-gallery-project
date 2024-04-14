@@ -132,15 +132,12 @@ const slice = createSlice({
             if (!action.payload.trim()) {
                 fetchProduct();
             }
-            const filteredProducts = state.productList.products.filter(product =>
+            const filteredProducts = state.productList.filter(product =>
                 product.title.toUpperCase().includes(action.payload.toUpperCase())
             );
             return {
                 ...state,
-                productList: {
-                    ...state.productList,
-                    products: filteredProducts
-                }
+                productList: filteredProducts
             };
         }
     },
