@@ -32,24 +32,25 @@ export default function Product() {
                 </div>
                 <div className="col-lg-9 p-0 border d-flex flex-wrap justify-content-around align-items-center">
                     {productList?.map((product, index) => <div className=" mt-2 col-lg-4 d-flex justify-content-center align-items-center">
-                        <div style={{ width: "270px" }} className="p-2 m-2 gift-card">
+                        <div style={{ width: "280px" }} className="border p-2 m-2 gift-card">
 
                             <img src={product.thumbnail} onClick={()=>viewMore(product)} style={{cursor:'pointer', width: "250px", height: "230px", borderRadius: "10px" }} />
                             <div className="w-100">
-                                <h6 className=" ms-2 mt-2">{product.title}</h6>
+                                <h6 className=" ms-2 mt-2">{product.title.slice(0,22)}</h6>
                             </div>
                             <div className="w-100  d-flex justify-content-center align-items-center">
                                 <div className="d-flex align-items-center">
-                                    <h5 className="">₹{product.price}</h5>
+                                    <h5 className="">₹ {(product.price-(((parseInt(product.discountPercentage* product.price) / 100).toFixed(2)) * 1)).toFixed(2)}</h5>
                                     <del style={{ fontSize: '10px' }} className="ms-2 text-secondary">MRP{product.price}</del>
-                                    <div className="ms-2 me-2 d-flex align-items-center justify-content-center text-primary" style={{ borderRadius: "5px", width: "60px", height: "20px", fontSize: '10px', backgroundColor: "#C7E1FF" }}>
+                                    <div className="ms-2 d-flex align-items-center justify-content-center text-primary" style={{ borderRadius: "5px", width: "60px", height: "20px", fontSize: '10px', backgroundColor: "#C7E1FF" }}>
                                         {product.discountPercentage}% off
                                     </div>
                                 </div>
                                 <div className=" d-flex align-items-center justify-content-center " >
                                     <div className="d-flex align-items-center justify-content-center ms-2" style={{ width: "50px" }}>
-                                        <AiFillStar className="text-primary" />
-                                        <span style={{ fontSize: "13px" }} className="fw-bold">{product.rating}</span>
+                                        <span style={{ fontSize: "13px" }} className="p-1 rounded fw-bold text-white bg-success">
+                                        <AiFillStar className="text-white mb-1 me-1" />
+                                            {product.rating}</span>
                                     </div>
                                 </div>
                             </div>

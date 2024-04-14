@@ -5,6 +5,7 @@ import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8
 import { SlUser } from "react-icons/sl";
 import {Link, useNavigate} from "react-router-dom"
 import { useState } from 'react';
+import Footer from './footer';
 export default function Home() {
     // const [buttonDisabled, setButtonDisabled] = useState(false);
     const navigate = useNavigate();
@@ -80,5 +81,6 @@ export default function Home() {
         </div>
         <Product/>
         <Outlet/>
+        <Footer/>
     </>
 }

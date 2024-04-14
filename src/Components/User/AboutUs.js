@@ -1,5 +1,8 @@
 import about from "./Images/aboutUs-image.jpg"
-
+import img1 from "./Images/img1.png"
+import img2 from "./Images/img2.png"
+import img3 from "./Images/person1.png"
+import img4 from "./Images/img4.png"
 import { FaUsers } from "react-icons/fa6";
 import { FaGifts } from "react-icons/fa6";
 import { TbTruckDelivery } from "react-icons/tb";
@@ -9,8 +12,11 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaTwitterSquare } from "react-icons/fa";
 import './AboutUs.css';
+import Header from "./Header";
+import Footer from "./footer"
 export const AboutUs =()=>{
       return<>
+      <Header/>
       <div className="container-fluid">
       <div className="row">
         <div className="col-md-6 p-5 mt-5">
@@ -43,7 +49,7 @@ export const AboutUs =()=>{
       <div className="row justify-content-center mt-5">
         <div className="col-sm-12 col-md-6 col-lg-4 mb-2 mb-sm-0 mt-sm-5 d-flex justify-content-center">
           <div className="card card-container" style={{ width: "20rem" }}>
-            <img src="person1.png" className="card-img-top mt-3" alt="Placeholder Image" style={{ maxHeight: "350px" }} />
+            <img src={img3} className="card-img-top" alt="Placeholder Image" style={{ maxHeight: "350px" }} />
             <div className="card-body">
               <h5 className="card-title">Tom Cruise</h5>
               <p className="card-text">Founder and Chairman</p>
@@ -53,7 +59,7 @@ export const AboutUs =()=>{
 
         <div className="col-sm-12 col-md-6 col-lg-4 mb-2 mb-sm-0 mt-sm-5 d-flex justify-content-center">
           <div className="card card-container" style={{ width: "20rem" }}>
-            <img src="person1.png" className="card-img-top mt-3" alt="Placeholder Image" style={{ maxHeight: "350px" }} />
+            <img src={img4} className="card-img-top" alt="Placeholder Image" style={{ maxHeight: "350px" }} />
             <div className="card-body">
               <h5 className="card-title">Emma Watson</h5>
               <p className="card-text">Managing Director</p>
@@ -63,7 +69,7 @@ export const AboutUs =()=>{
 
         <div className="col-sm-12 col-md-6 col-lg-4 d-flex mt-xs-4 mt-sm-5 justify-content-center">
           <div className="card card-container" style={{ width: "20rem" }}>
-            <img src="person1.png" className="card-img-top mt-3" alt="Placeholder Image" style={{ maxHeight: "350px" }} />
+            <img src={img2} className="card-img-top mt-3" alt="Placeholder Image" style={{ maxHeight: "350px" }} />
             <div className="card-body">
               <h5 className="card-title">Will Smith</h5>
               <p className="card-text">Product Designer</p>
@@ -73,13 +79,13 @@ export const AboutUs =()=>{
       </div>
     </div>
     &nbsp;
-    <div className='container-fluid mt-5 mb-5' style={{ width: "70%" }}>
+    <div className='container-fluid mt-5 mb-5' style={{ width: "100%" }}>
 
       <div className='row'>
         <div className='col-md-4 '>
           <div className='icon-decoration d-flex justify-content-center mb-4'>
             <div className='icon-decoration-border'>
-              <div class="icon-circle">
+              <div class="icon-circle d-flex justify-content-center align-content-center">
                 <TbTruckDelivery className='ml-2 mt-2 icon-design' size={30} style={{ color: "white" }} />
 
               </div>
@@ -98,7 +104,7 @@ export const AboutUs =()=>{
         <div className='col-md-4'>
           <div className='icon-decoration d-flex justify-content-center mb-4'>
             <div className='icon-decoration-border'>
-              <div class="icon-circle">
+              <div class="icon-circle d-flex justify-content-center align-content-center">
 
                 <RiCustomerServiceLine className='ml-2 mt-2 icon-design' size={30} style={{ color: "white" }} />
 
@@ -108,17 +114,17 @@ export const AboutUs =()=>{
           </div>
           <div className='content d-flex flex-column'  >
             <div className='paragraph-1 text-center'>
-              <h5>24/7 Customer Service</h5>
+              <h5 className="text-center">24/7 Customer Service</h5>
             </div>
             <div className='paragraph-2 text-center'>
-              <p>Friendly 24/7 Customer Support</p>
+              <p className="text-center">Friendly 24/7 Customer Support</p>
             </div>
           </div>
         </div>
         <div className='col-md-4'>
           <div className='icon-decoration d-flex justify-content-center mb-4'>
             <div className='icon-decoration-border'>
-              <div class="icon-circle">
+              <div class="icon-circle d-flex justify-content-center align-content-center">
 
                 <SiAdguard className='ml-2 mt-3 icon-design' size={25} style={{ color: "white" }} />
               </div>
@@ -135,6 +141,8 @@ export const AboutUs =()=>{
           </div>
         </div>
       </div>
-    </div></>
+    </div>
+    <Footer/>
+    </>
 }
 export default AboutUs;

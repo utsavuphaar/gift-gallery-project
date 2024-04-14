@@ -2,6 +2,8 @@ import { useLocation } from "react-router-dom"
 import React, { useEffect, useRef, useState } from 'react'
 import axios from "axios";
 import { BsCurrencyRupee } from "react-icons/bs";
+import Header from "./Header";
+import Footer from "./footer";
 function Checkout() {
 
     let firstName = useRef(null);
@@ -92,6 +94,7 @@ function Checkout() {
     return (
 
         <>
+        <Header/>
             <section className='container-fluid  p-4'>
                 <section className='container p-2 justify-content-center row align-content-around m-auto d-flex' id='checkout-page'>
                     <div id='checkout-left' className='col-md-7 me-3 border'>
@@ -165,13 +168,14 @@ function Checkout() {
                                 <tr>
                                     <th>Total</th>
                                     <td></td>
-                                    <th>{totalAmt - discountPrice}</th>
+                                    <th>{(totalAmt - discountPrice).toFixed(2)}</th>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
                 </section>
             </section>
+        <Footer/>
         </>
     )
 }

@@ -22,6 +22,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchProductByCategory } from "../../DataSlice/ProductSlice";
+import Header from "./Header";
+import Footer from "./footer";
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -49,8 +51,8 @@ export default function ViewMore() {
     }
     // alert(inputValue)
     return <>
-        <h3>view more</h3>
-        <section className="p3 d-flex" style={{ width: '100%', height: '80vh', }}>
+    <Header/>
+        <section className="p3 mt-4 d-flex" style={{ width: '100%', height: '80vh', }}>
             <div id="view-left">
                 <div></div>
                 <div></div>
@@ -110,10 +112,10 @@ export default function ViewMore() {
             </div>
         </section>
         {/* -------------------------------------------Related Products-------------------------------- */}
-        <h4>Related Products</h4>
+        <h4 className="container p-4">Related Products</h4>
 
-        <div >
-            <div className="container border p-2 " id="related-products">
+        <div>
+            <div className="container border p-2 mb-4 " id="related-products">
                 {categoryProduct?.map((product, index) => <div key={index} className="m-2 p-2 h-auto border d-flex flex-column rounded position-relative">
                     <img width="100%" height="250px" src={product.thumbnail} />
                     <div className="d-flex position-absolute" id="buttons">
@@ -130,6 +132,7 @@ export default function ViewMore() {
                 </div>)}
             </div>
         </div>
+    <Footer/>
     </>
 }
 

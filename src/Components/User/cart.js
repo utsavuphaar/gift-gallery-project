@@ -67,7 +67,7 @@ export default () => {
     return <>
         <ToastContainer />
         <Header />
-        <h5 className="container">My Cart ({cartItems.length})</h5>
+        <h5 className="container p-4">My Cart ({cartItems.length})</h5>
         {      cartItems.length != 0 ? (
                 <section className="row border m-0 p-0">
                     <div className="col-md-9 border d-flex justify-content-center align-content-center flex-column">

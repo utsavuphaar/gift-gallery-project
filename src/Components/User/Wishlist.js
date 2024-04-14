@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { deleteProductFromWishList, fetchWishList, removeProductFromWishlist } from '../../DataSlice/ProductSlice';
 import { BsCart2 } from "react-icons/bs";
 import { BsCurrencyRupee } from 'react-icons/bs';
+import Footer from './footer';
+import Header from './Header';
 
 function Wishlist() {
   const userId = localStorage.getItem("userId")
@@ -21,9 +23,11 @@ function Wishlist() {
     }
 }
   return (
+    <>
+    <Header/>
     <section id='wishlist-section'>
       <div className='container p-4 fs-3'>Wishlist ({products.length})</div>
-      <div className='d-flex flex-wrap container'>
+      <div className='d-flex flex-wrap container mb-4'>
       {products.map((product,index)=>
       <div key={index} className='container bg-white border rounded m-1' id='wishlist-component'>
           <img width="230px" height="280px" src={product.thumbnail} alt='image'/>
@@ -34,6 +38,8 @@ function Wishlist() {
       </div>)}
       </div>
     </section>
+        <Footer/>
+    </>
   )
 }
 
