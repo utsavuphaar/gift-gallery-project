@@ -170,8 +170,8 @@ export default function Signup() {
                     <img className='left' src={image} />
                 </div>
                 <form className='col-md-6 form right p-0 '>
-                    <h2 className='mt-4 '>Create an account</h2>
-                    <span className=''>Enter your details</span>
+                    <h2 className='mt-4 text-primary fw-bold'>Create an account</h2>
+                    <span className='text-secondary'>Enter your details</span>
                     <TextField onChange={event => setName(event.target.value)} onKeyUp={() => validationname()} className='mt-3  w-75' label="Name" type='name' variant="standard" />
                     <div className='container-fluid w-75'>
                         <div className='row '>

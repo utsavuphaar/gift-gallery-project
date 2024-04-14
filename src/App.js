@@ -21,6 +21,7 @@ import AdminProfile from './Components/Admin/Admin.js';
 function App() {
   let {isLoading,productList} = useSelector(store =>store.Product);
   return <>
+
     {!productList?(
       <div className='h-100 w-100 d-flex justify-content-center align-content-center'>
         <img src={loading}/>
