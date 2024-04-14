@@ -1,21 +1,19 @@
 import '../Style.css'
 import { IoIosGift } from "react-icons/io";
 import { useSelector } from 'react-redux'
-import { useState } from 'react';
+
 import { FaUser } from "react-icons/fa6";
 import { BiMessageDetail } from "react-icons/bi";
 import { AiFillHeart } from "react-icons/ai";
 import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom'
-import ViewListIcon from '@mui/icons-material/ViewList';
-import ToggleButton from '@mui/material/ToggleButton';
 
 export default function Header() {
     const { user } = useSelector(store => store.Product);
     const navigate = useNavigate();
 
     return <>
-        <div className="container-fluid header">
+        <div className="container-fluid header">    
             <div className='row header-1  p-0 m-0'>
                 <div className='col-md-3 title'>
                     <div className='mt-3 mb-2 icon  d-flex justify-content-center align-items-center'>
@@ -32,7 +30,6 @@ export default function Header() {
                         <select className='btn dropdown1'>
                             <option className='border-0'>All category</option>
                             <option>Favorite</option>
-
                         </select>
                         {/* </div> */}
                         <button className=' searchbutton ' style={{ border: 'none' }}>Search</button>
@@ -41,7 +38,7 @@ export default function Header() {
                 <div className='col-md-3 profile'>
                     <div className='mt-4' id='icons'><FaUser className='fs-5  mt-2 text-secondary' /><span className='iconstext mb-2 mt-1'>Profile</span></div>
                     <div className='mt-4' id='icons'><BiMessageDetail className=' fs-5 mt-2  text-secondary' /><span className='iconstext mb-2 mt-1'>Message</span></div>
-                    <div className='mt-4' id='icons'><AiFillHeart className=' fs-5 mt-2  text-secondary' /><span className='iconstext mb-2 mt-1'>Favourite</span></div>
+                    <div className='mt-4' id='icons' onClick={()=>navigate("/wishlist")}><AiFillHeart className=' fs-5 mt-2  text-secondary' /><span className='iconstext mb-2 mt-1'>Favourite</span></div>
                     <div className='mt-4' id='icons' onClick={() => navigate("/cart")}><FaCartShopping className=' fs-5 mt-2  text-secondary' /><span className='iconstext mb-2 mt-1'>My cart</span></div>
                 </div>
             </div>

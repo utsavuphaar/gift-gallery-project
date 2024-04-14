@@ -17,8 +17,8 @@ function Checkout() {
     let totalAmt = 0;
     const getTotalAmt = (state) => {
         for (let item of state) {
-            totalAmt += item["products.price"] * (parseInt(item.qty))
-            discountPrice = discountPrice + ((((parseInt(item["products.discountPercentage"] * item["products.price"]) / 100)) * item.qty).toFixed(2) * 1);
+            totalAmt += item["products.price"] * item["products.cartItem.quantity"];
+            discountPrice = discountPrice + ((((parseInt(item["products.discountPercentage"] * item["products.price"]) / 100)) * item["products.cartItem.quantity"]).toFixed(2) * 1);
         }
         // alert(discountPrice)
         return totalAmt;
@@ -140,8 +140,8 @@ function Checkout() {
                             <tbody>
                                 {state?.map((product, index) => <tr key={index}>
                                     <td>{product["products.title"]}</td>
-                                    <td className="text-center">{product.qty}</td>
-                                    <td className="text-center">{parseInt(product.qty) * (product["products.price"])}</td>
+                                    <td className="text-center">{product["products.cartItem.quantity"]}</td>
+                                    <td className="text-center">{product["products.cartItem.quantity"] * (product["products.price"])}</td>
                                 </tr>)}
                             </tbody>
                             <tfoot>
@@ -153,7 +153,7 @@ function Checkout() {
                                 <tr>
                                     <th>Discount</th>
                                     <td className="float-end"><BsCurrencyRupee /></td>
-                                    <th className="text-success">-{discountPrice}</th>
+                                    <th className="text-success">-{discountPrice.toFixed(2)}</th>
                                 </tr>
                                 <tr>
                                     <th>Total</th>

@@ -92,6 +92,15 @@ export const deleteProductFromWishList = createAsyncThunk(
 );
 
 
+export const updateQtyOfProductInCart = createAsyncThunk("cart/updateQty",async({userId,productId,quantity})=>{
+    try{
+        const response = await axios.post("http://localhost:3000/cart/updateQty",{userId,productId,quantity})
+        return response.data;
+    }catch(err){
+        console.log(err)
+    }
+})
+
 const slice = createSlice({
     name: "ProductSlice",
     initialState: {
