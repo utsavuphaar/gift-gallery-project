@@ -18,6 +18,7 @@ import PaymentSuccess from './Components/User/PaymentSuccess.js';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
 import AdminProfile from './Components/Admin/Admin.js';
+import AboutUs from './Components/User/AboutUs.js';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
     ):(
     <Routes>
       <Route path='/' element={<Home/>}/>
+      <Route path='/aboutus' element={<AboutUs/>}/>
       <Route path='/admin' element={<AdminProfile/>}/>
       <Route path="/product" element={<Product />} />
       <Route path='/cart' element={<Cart/>}/>

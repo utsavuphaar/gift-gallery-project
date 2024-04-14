@@ -34,7 +34,7 @@ export default function Product() {
                     {productList?.map((product, index) => <div className=" mt-2 col-lg-4 d-flex justify-content-center align-items-center">
                         <div style={{ width: "270px" }} className="p-2 m-2 gift-card">
 
-                            <img src={product.thumbnail} style={{ width: "250px", height: "230px", borderRadius: "10px" }} />
+                            <img src={product.thumbnail} onClick={()=>viewMore(product)} style={{cursor:'pointer', width: "250px", height: "230px", borderRadius: "10px" }} />
                             <div className="w-100">
                                 <h6 className=" ms-2 mt-2">{product.title}</h6>
                             </div>
@@ -50,13 +50,11 @@ export default function Product() {
                                     <div className="d-flex align-items-center justify-content-center ms-2" style={{ width: "50px" }}>
                                         <AiFillStar className="text-primary" />
                                         <span style={{ fontSize: "13px" }} className="fw-bold">{product.rating}</span>
-
-
                                     </div>
                                 </div>
                             </div>
                             <div className="w-100 mt-1 d-flex justify-content-around align-items-center mb-1" >
-                                <button className="btn btn-outline-primary">Move to cart</button>
+                                <button className="btn btn-outline-primary" onClick={()=>addToCart(product.id)}>Move to cart</button>
                                 <button className="btn btn-primary">Buy now</button>
                             </div>
                         </div>
