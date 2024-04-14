@@ -90,7 +90,6 @@ export default function Signin() {
     }
 
     const signin = () => {
-
         if (validation()) {
             axios.post(URL.signin, { email, password })
                 .then(res => {

@@ -30,19 +30,17 @@ export default function Product() {
     
 
     return <>
+    
         {/* <Link to="/cartitems"><button className="btn btn-primary">CartItems</button></Link>&nbsp;
     <Link to="/wishlist"  ><button className="btn btn-warning">Wishlist</button></Link> */}
         <div className="container-fluid border">
             <div className="row p-0">
                 <div className="col-md-3 border">
-
                 </div>
                 <div className="col-md-9 p-2 d-flex flex-wrap justify-content-around align-items-center">
                     <div className="row productlist">
-                        {productList.products?.map((product, index) => <div key={index} id="product-box" className="col-md-4  border position-relative">
+                        {productList?.map((product, index) => <div key={index} id="product-box" className="col-md-4  border position-relative">
                             <img width="100%" height="250px" id="gift" src={product.thumbnail} />
-
-
                             <div className="d-flex position-absolute" id="buttons">
                                 <div>
                                     <CiHeart onClick={() => addToWishlist(product.id)} style={{ width: '25px', height: '25px' }} />
@@ -50,7 +48,8 @@ export default function Product() {
                                 <div onClick={() => addToCart(product.id)}><PiShoppingCartSimpleThin style={{ width: '20px', height: '20px' }} /></div>
                                 <div><AiOutlineEye onClick={() => viewMore(product)} style={{ width: '20px', height: '20px' }} /></div>
                             </div>
-                            <h6 className="mt-2 fs-5 ms-3">{product.title.split(" ").slice(0, 3).join(' ')}</h6>
+                            {/* <h6 className="mt-2 fs-5 ms-3">{product.title.split(" ").slice(0, 3).join(' ')}</h6> */}
+                            <h6 className="mt-2 fs-5 ms-3">{product.title}</h6>
                             <div className="p-0 m-0 d-flex justify-content-between">
                                 <div className=" col-md-3 col-sm-5 fs-4 d-flex justify-content-center align-items-center" style={{ fontWeight: "600", paddingLeft: "10px", paddingRight: "5px" }}>
                                     ₹ {product.price} <del className="ms-2" style={{ fontSize: '16px', color: 'gray' }}> ₹ {product.price}</del>
