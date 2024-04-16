@@ -19,20 +19,32 @@ export default () => {
     const navigate = useNavigate();
     const {cartItems,isLoading} = useSelector(store=>store.Product);
 
-    useEffect(() => {
-        dispatch(fetchCartItems(userId));
-        setCart();
-    }, []);
     const setCart = ()=>{
-        for (let product of cartItems) {
-            totalamount = totalamount + product["products.price"]*product["products.cartItem.quantity"];
-            discountPrice = discountPrice + (((parseInt(product["products.discountPercentage"] * product["products.price"]*product["products.cartItem.quantity"]) / 100).toFixed(2)) * 1);
+        totalamount = 0;
+        discountPrice = 0;
+        for (let productItem of cartItems) {
+            totalamount = totalamount + productItem["products.price"] * productItem["products.cartItem.quantity"];
+            // alert(productItem["products.cartItem.quantity"])
+            discountPrice = discountPrice + ((((parseInt(productItem["products.discountPercentage"] * productItem["products.price"]) / 100)) * productItem["products.cartItem.quantity"]).toFixed(2) * 1);
         }
         setDiscountPrice(discountPrice)
         settotalamount(totalamount);
     }
+    useEffect(() => {
+        dispatch(fetchCartItems(userId));
+        totalamount = 0;
+        discountPrice = 0;
+        for (let productItem of cartItems) {
+            totalamount = totalamount + productItem["products.price"] * productItem["products.cartItem.quantity"];
+            // alert(productItem["products.cartItem.quantity"])
+            discountPrice = discountPrice + ((((parseInt(productItem["products.discountPercentage"] * productItem["products.price"]) / 100)) * productItem["products.cartItem.quantity"]).toFixed(2) * 1);
+        }
+        setDiscountPrice(discountPrice)
+        settotalamount(totalamount);
+    }, []);
 
     const updateQty = (index,productId, quantity) => {
+        
         dispatch(updateQtyOfProductInCart({ userId,productId,quantity }));
         let product = cartItems[index];
         totalamount = 0;
@@ -106,7 +118,6 @@ export default () => {
                             <label className="fs-5">Discount : {discountPrice.toFixed(2)}</label><hr />
                             <h4 className="fw-bold">Total Bill : <BsCurrencyRupee />{(totalamount - discountPrice).toFixed(2)}</h4>
                             <button onClick={()=>navigate("/checkout",{state:cartItems})} className="btn btn-success mt-3 fw-bold" >Checkout</button>
-                            
                         </div>
 
                     </div>

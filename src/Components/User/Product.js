@@ -35,7 +35,7 @@ export default function Product() {
                         <div style={{ width: "280px" }} className="border p-2 m-2 gift-card">
 
                             <img src={product.thumbnail} onClick={()=>viewMore(product)} style={{cursor:'pointer', width: "250px", height: "230px", borderRadius: "10px" }} />
-                            <div className="w-100">
+                            <div className="w-100"> 
                                 <h6 className=" ms-2 mt-2">{product.title.slice(0,22)}</h6>
                             </div>
                             <div className="w-100  d-flex justify-content-center align-items-center">
