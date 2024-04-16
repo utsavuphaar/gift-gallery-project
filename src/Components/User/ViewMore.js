@@ -112,6 +112,7 @@ export default function ViewMore() {
             </div>
         </section>
         {/* -------------------------------------------Related Products-------------------------------- */}
+        
         <h4 className="container p-4">Related Products</h4>
 
         <div>

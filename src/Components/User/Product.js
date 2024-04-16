@@ -40,7 +40,7 @@ export default function Product() {
                             </div>
                             <div className="w-100  d-flex justify-content-center align-items-center">
                                 <div className="d-flex align-items-center">
-                                    <h5 className="">₹ {(product.price-(((parseInt(product.discountPercentage* product.price) / 100).toFixed(2)) * 1)).toFixed(2)}</h5>
+                                    <h5 className="" style={{fontSize:"15px"}}>₹ {(product.price-(((parseInt(product.discountPercentage* product.price) / 100).toFixed(2)) * 1)).toFixed(2)}</h5>
                                     <del style={{ fontSize: '10px' }} className="ms-2 text-secondary">MRP{product.price}</del>
                                     <div className="ms-2 d-flex align-items-center justify-content-center text-primary" style={{ borderRadius: "5px", width: "60px", height: "20px", fontSize: '10px', backgroundColor: "#C7E1FF" }}>
                                         {product.discountPercentage}% off
@@ -48,13 +48,13 @@ export default function Product() {
                                 </div>
                                 <div className=" d-flex align-items-center justify-content-center " >
                                     <div className="d-flex align-items-center justify-content-center ms-2" style={{ width: "50px" }}>
-                                        <span style={{ fontSize: "13px" }} className="p-1 rounded fw-bold text-white bg-success">
-                                        <AiFillStar className="text-white mb-1 me-1" />
+                                        <span style={{ fontSize: "12px" }} className="p-1 rounded fw-bold text-white bg-success">
+                                        <AiFillStar className="text-white mb-1" />
                                             {product.rating}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-100 mt-1 d-flex justify-content-around align-items-center mb-1" >
+                            <div className="w-100 mt-2 d-flex justify-content-around align-items-center mb-1" >
                                 <button className="btn btn-outline-primary" onClick={()=>addToCart(product.id)}>Move to cart</button>
                                 <button className="btn btn-primary">Buy now</button>
                             </div>

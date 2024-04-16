@@ -63,8 +63,8 @@ export const Footer = () => {
                         </div>
                   </div>
             </footer>
-            <div className="container-fluid footer-end">
-                  <div class="copyright">
+            <div className="container-fluid  footer-end">
+                  <div className=" d-flex justify-content-center align-items-center p-1 copyright">
                        <p> &copy; 2024 UtsavUphar. All rights reserved.</p>
                   </div>
             </div>

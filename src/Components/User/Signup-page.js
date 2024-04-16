@@ -129,7 +129,7 @@ export default function Signup() {
         if (validation()) {
             axios.post(URL.signup, { name, email, password,contact })
                 .then(res => {
-                    navigate("/signin")
+                    navigate("/home")
                     Swal.fire({
                         position: "center",
                         icon: "success",
