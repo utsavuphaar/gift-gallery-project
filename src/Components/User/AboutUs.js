@@ -1,6 +1,6 @@
 import about from "./Images/aboutUs-image.jpg"
 import img1 from "./Images/img1.png"
-import img2 from "./Images/img2.png"
+import img5 from "./Images/Img5.png"
 import img3 from "./Images/person1.png"
 import img4 from "./Images/img4.png"
 import { FaUsers } from "react-icons/fa6";
@@ -69,7 +69,7 @@ export const AboutUs =()=>{
 
         <div className="col-sm-12 col-md-6 col-lg-4 d-flex mt-xs-4 mt-sm-5 justify-content-center">
           <div className="card card-container" style={{ width: "20rem" }}>
-            <img src={img2} className="card-img-top mt-3" alt="Placeholder Image" style={{ maxHeight: "350px" }} />
+            <img src={img5} className="card-img-top mt-3" alt="Placeholder Image" style={{ maxHeight: "350px" }} />
             <div className="card-body">
               <h5 className="card-title">Will Smith</h5>
               <p className="card-text">Product Designer</p>

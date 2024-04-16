@@ -52,7 +52,7 @@ export default function ViewMore() {
     // alert(inputValue)
     return <>
     <Header/>
-        <section className="p3 mt-4 d-flex" style={{ width: '100%', height: '80vh', }}>
+        <section className="p3 mt-4 d-flex" style={{ width: '100%',height:'auto' }}>
             <div id="view-left">
                 <div></div>
                 <div></div>
