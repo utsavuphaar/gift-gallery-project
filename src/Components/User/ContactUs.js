@@ -2,6 +2,7 @@ import { IoMdMail } from "react-icons/io";
 import { LuPhoneCall } from "react-icons/lu";
 import './ContactUs.css';
 import Header from "./Header";
+import Footer from "./footer";
 
 export const ContactUs = () => {
       return (
@@ -79,6 +80,7 @@ export const ContactUs = () => {
                                     </div>
                               </div>
                         </div>
+                  <Footer/>
             </>
       );
 };

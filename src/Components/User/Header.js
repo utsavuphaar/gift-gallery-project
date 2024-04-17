@@ -8,6 +8,8 @@ import { BiMessageDetail } from "react-icons/bi";
 import { AiFillHeart } from "react-icons/ai";
 import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom'
+import { GiNotebook } from "react-icons/gi";
+import { PiNotebookBold } from "react-icons/pi";
 import { useState } from 'react';
 import { fetchProduct, fetchProductByCategory, searchProduct } from '../../DataSlice/ProductSlice';
 // import URL from "./Components/ApiUrl";
@@ -76,7 +78,7 @@ export default function Header() {
                 </div>
                 <div className='col-md-3 profile'>
                     <div className='mt-4' id='icons'><FaUser className='fs-5  mt-2 text-secondary' /><span className='iconstext mb-2 mt-1'>Profile</span></div>
-                    <div className='mt-4' id='icons'><BiMessageDetail className=' fs-5 mt-2  text-secondary' /><span className='iconstext mb-2 mt-1'>Message</span></div>
+                    <div className='mt-4' id='icons' onClick={()=>navigate("/order")}><PiNotebookBold className='fs-5  mt-2 text-secondary'/><span className='iconstext mb-2 mt-1'>Orders</span></div>
                     <div className='mt-4' id='icons' onClick={() => navigate("/wishlist")}><AiFillHeart className=' fs-5 mt-2  text-secondary' /><span className='iconstext mb-2 mt-1'>Favourite</span></div>
                     <div className='mt-4' id='icons' onClick={() => navigate("/cart")}><FaCartShopping className=' fs-5 mt-2  text-secondary' /><span className='iconstext mb-2 mt-1'>My cart</span></div>
                 </div>

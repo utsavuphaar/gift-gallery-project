@@ -3,17 +3,22 @@ import Header from './Header';
 import Product from './Product';
 import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
 import { SlUser } from "react-icons/sl";
-import {Link, useNavigate} from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from 'react';
 import Footer from './footer';
 export default function Home() {
     // const [buttonDisabled, setButtonDisabled] = useState(false);
     const navigate = useNavigate();
     let buttonDisabled = false;
-    if(localStorage.getItem("userId"))
-            buttonDisabled = true;
+    if (localStorage.getItem("userId"))
+        buttonDisabled = true;
+    const clearStorage = () => {
+        localStorage.clear();
+
+    }
     return <>
-        <Header/>
+        <button onClick={clearStorage} className='btn btn-primary m-2'>Clear Local Storage</button>
+        <Header />
         <div className="container-fluid home ">
             <div className="row banner ">
                 <div className="col-md-3  mt-3 first p-0">
@@ -72,15 +77,15 @@ export default function Home() {
                             <span className='ms-3' style={{ color: "#353738", fontWeight: "600" }}>Hi, user<br />let's get started</span>
                         </div>
 
-                        <button className='mt-3 btn btn-primary w-100' onClick={()=>navigate("/signup")} disabled={buttonDisabled}>Join now</button>
-                        <button className='mt-2 btn btn-light text-primary w-100' onClick={()=>navigate("/signin")} disabled={buttonDisabled}>Log in</button>
+                        <button className='mt-3 btn btn-primary w-100' onClick={() => navigate("/signup")} disabled={buttonDisabled}>Join now</button>
+                        <button className='mt-2 btn btn-light text-primary w-100' onClick={() => navigate("/signin")} disabled={buttonDisabled}>Log in</button>
 
                     </div>
                 </div>
             </div>
         </div>
-        <Product/>
-        <Outlet/>
-        <Footer/>
+        <Product />
+        <Outlet />
+        <Footer />
     </>
 }
