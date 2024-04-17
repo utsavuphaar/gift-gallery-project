@@ -25,17 +25,17 @@ function Wishlist() {
   return (
     <>
     <Header/>
-    <div className='container p-4 fs-3'>Wishlist ({products.length})</div>
+    <div className='container p-4 fs-4'>Wishlist ({products.length})</div>
     {products.length!=0?(
     <section id='wishlist-section'>
       <div className='d-flex flex-wrap container mb-4'>
       {products.map((product,index)=>
       <div key={index} className='container bg-white border rounded m-1' id='wishlist-component'>
           <img width="230px" height="280px" src={product.thumbnail} alt='image'/>
-          <h6><BsCurrencyRupee/>{product.price}</h6>
+          <h6><BsCurrencyRupee className='d-inline'/>{product.price}</h6>
           <p className='text-secondary m-1'>{(product.description).slice(0,50)}</p>
           <button onClick={()=>removeItemFromWishlist(index,product.id)} className='btn btn-outline-primary'>Remove</button> &nbsp;
-          <button className='btn btn-primary'><BsCart2 className='mb-2'/> Move to Cart</button>
+          <button className='btn btn-primary'><BsCart2 className='d-inline mb-2'/> Move to Cart</button>
       </div>)}
       </div>
     </section>

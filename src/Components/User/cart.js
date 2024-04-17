@@ -19,21 +19,7 @@ export default () => {
     const navigate = useNavigate();
     const {cartItems,isLoading} = useSelector(store=>store.Product);
 
-    useEffect(() => {
-        dispatch(fetchCartItems(userId));
-        setCart();
-    }, []);
-    const setCart = ()=>{
-        totalamount = 0;
-        discountPrice = 0;
-        for (let productItem of cartItems) {
-            totalamount = totalamount + productItem["products.price"] * productItem["products.cartItem.quantity"];
-            // alert(productItem["products.cartItem.quantity"])
-            discountPrice = discountPrice + ((((parseInt(productItem["products.discountPercentage"] * productItem["products.price"]) / 100)) * productItem["products.cartItem.quantity"]).toFixed(2) * 1);
-        }
-        setDiscountPrice(discountPrice)
-        settotalamount(totalamount);
-    }
+
     useEffect(() => {
         dispatch(fetchCartItems(userId));
         totalamount = 0;
@@ -83,7 +69,7 @@ export default () => {
     return <>
         <ToastContainer />
         <Header />
-        <h5 className="container p-4">My Cart ({cartItems.length})</h5>
+        <h5 className="container p-4 fs-4">My Cart ({cartItems.length})</h5>
         {      cartItems.length != 0 ? (
                 <section className="row border m-0 p-0">
                     <div className="col-md-9 border d-flex justify-content-center align-content-center flex-column">
@@ -102,12 +88,12 @@ export default () => {
                                 </div>
                                 <div className="col-md-3 flex-column d-flex justify-content-center align-content-center">
                                     <center>
-                                    <div >
-                                        <span className="mt-2 " style={{fontSize:'15px'}}><BsCurrencyRupee />{product["products.price"]} </span>&nbsp;
+                                    <div className="d-flex fs-6">
+                                        <span className="d-flex" style={{fontSize:'15px'}}><BsCurrencyRupee className="mt-1"/>{product["products.price"]} </span>&nbsp;
                                         <span className=" text-primary" style={{fontSize:'12px'}}>({product["products.discountPercentage"]} % off )</span>
                                     </div>  
                                     <h5 className="mt-2" style={{fontSize:'15px'}}>
-                                        Qty :  <input className="p-1 rounded" style={{border:'none',outline:'none'}} type="number" min={1} onClick={(event) => updateQty(index,product["products.id"], event.target.value)} defaultValue={product["products.cartItem.quantity"]} style={{ width: '50px', height: '30px' }} />
+                                        Qty :  <input className="p-1 rounded" style={{border:'none',outline:'none',width: '50px', height: '30px' }} type="number" min={1} onClick={(event) => updateQty(index,product["products.id"], event.target.value)} defaultValue={product["products.cartItem.quantity"]}  />
                                     </h5>
                                     </center>
                                 </div>
@@ -121,16 +107,21 @@ export default () => {
                             <h5 className="text-center fw-bold mb-2">Order summary</h5>
                             <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"space-evenly"}}>
                             <div className="container d-flex w-100 justify-content-around align-items-center">
-                            <label className="" style={{fontSize:"14px"}}>Item purchased : </label>
+                            <label className="" >Item purchased : </label>
                             <span className="text-success">{cartItems.length}</span>
 
                             </div>
-                            <label className="" style={{fontSize:"14px"}}>Sub Total : {totalamount}</label>
-                            <label className="" style={{fontSize:"14px"}}>Discount : {discountPrice.toFixed(2)}</label><hr />
+                            <p className="fs-5 w-100" >Sub Total : {totalamount}</p>
+                            <label className="fs-5 w-100">Discount : {discountPrice.toFixed(2)}</label><hr />
+
+                            </div>
+                            <hr className="m-2"/>
+                            <h4 className="fw-bold fs-4 d-flex">Total Bill : <BsCurrencyRupee />{(totalamount - discountPrice).toFixed(2)}</h4>
+
+                            <button onClick={()=>navigate("/checkout",{state:cartItems})} className="btn btn-primary mt-3 w-100 fw-bold" >Checkout</button>
 
                             </div>
                             <h4 className="fw-bold">Total Bill : <BsCurrencyRupee />{(totalamount - discountPrice).toFixed(2)}</h4>
-                            <button onClick={()=>navigate("/checkout",{state:cartItems})} className="btn btn-success mt-3 fw-bold" >Checkout</button>
                             <button onClick={()=>navigate("/checkout",{state:cartItems})} className="btn btn-primary mt-3 w-100 fw-bold" >Checkout</button>
 
                             </div>
@@ -140,7 +131,7 @@ export default () => {
                     </div>
                     <div className="d-flex justify-content-between p-4 border me-3 mt-3 bg-whit w-75">
                         <Link to="/">
-                            <button className="btn m-2 btn-primary"><AiOutlineArrowLeft className="fs-5 me-2" />Back To Shop</button>
+                            <button className="btn m-2 btn-primary"><AiOutlineArrowLeft className="fs-5 d-inline me-2" />Back To Shop</button>
                         </Link>
                         <button  onClick={removeAllItems} className="btn m-2 btn-outline-danger">Remove all</button>
                         {/* <button onClick={removeAllItems} className="btn btn-outline-danger" style={{ height: 'auto' }}>Remove all</button> */}

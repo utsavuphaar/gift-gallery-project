@@ -70,13 +70,10 @@ export default function ViewMore() {
                     <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
                 </span>
                 <br />
-                <div> <span className="fs-3 me-3">
+                <div categoryName="d-flex"> 
+                <span className="fs-3 d-inline me-3">
                     Rs. {state.price} |
-                </span>
-                    <span className="text-warning m">
-                        <AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar />
-                    </span>
-                    <span>(23 review)</span><hr />
+                </span><hr />
                 </div>
                 <p>{state.description}</p>
                 <Box sx={{ '& > :not(style)': { m: 1 } }}>
@@ -118,17 +115,17 @@ export default function ViewMore() {
         <div>
             <div className="container border p-2 mb-4 " id="related-products">
                 {categoryProduct?.map((product, index) => <div key={index} className="m-2 p-2 h-auto border d-flex flex-column rounded position-relative">
-                    <img width="100%" height="250px" src={product.thumbnail} />
+                    <img width="100%" onClick={()=>viewMore(product)} height="250px" id="view-image" src={product.thumbnail} />
                     <div className="d-flex position-absolute" id="buttons">
                         <div><CiHeart style={{ width: '25px', height: '25px' }} /></div>
                         <div><PiShoppingCartSimpleThin style={{ width: '20px', height: '20px' }} /></div>
                         <div><AiOutlineEye onClick={() => viewMore(product)} style={{ width: '20px', height: '20px' }} /></div>
                     </div>
                     <h6 className="mt-4">{product.title.split(" ").slice(0, 3).join(' ')}</h6>
-                    <div>
+                    <div className="d-flex">
                         <BiRupee /><span style={{ fontWeight: 'bold' }}>{product.price} </span><span className="text-secondary"><del>{product.price}</del></span>
                         &nbsp; <span className="text-success p-1" style={{ backgroundColor: 'lightgrey', fontSize: '14px', borderRadius: '5px', fontWeight: 'bold' }}>({product.discountPercentage} % off )</span>
-                        &nbsp;&nbsp; <span className="bg-success p-1 text-light"><AiFillStar style={{ color: 'white' }} /> {product.rating}</span>
+                        &nbsp;&nbsp; <span className="bg-success d-flex p-1 text-light"><AiFillStar style={{ color: 'white' }} /> {product.rating}</span>
                     </div>
                 </div>)}
             </div>
