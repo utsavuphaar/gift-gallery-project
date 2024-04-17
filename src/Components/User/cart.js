@@ -19,6 +19,7 @@ export default () => {
     const navigate = useNavigate();
     const {cartItems,isLoading} = useSelector(store=>store.Product);
 
+
     useEffect(() => {
         dispatch(fetchCartItems(userId));
         totalamount = 0;
@@ -120,6 +121,11 @@ export default () => {
                             <button onClick={()=>navigate("/checkout",{state:cartItems})} className="btn btn-primary mt-3 w-100 fw-bold" >Checkout</button>
 
                             </div>
+                            <h4 className="fw-bold">Total Bill : <BsCurrencyRupee />{(totalamount - discountPrice).toFixed(2)}</h4>
+                            <button onClick={()=>navigate("/checkout",{state:cartItems})} className="btn btn-primary mt-3 w-100 fw-bold" >Checkout</button>
+
+                            </div>
+
                         </div>
 
                     </div>
