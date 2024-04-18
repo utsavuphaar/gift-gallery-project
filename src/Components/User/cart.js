@@ -47,9 +47,10 @@ export default () => {
         settotalamount(totalamount);
     }
 
-    const removeItemFromCart = (index, productId) => {
+    const removeItemFromCart = (price,index, productId) => {
         if (window.confirm("Are your sure ?")) {
-            // cartItems.splice(index, 1);
+            totalamount-=price;
+            settotalamount(totalamount);
             dispatch(deleteProductFromCart({ userId, productId }));
             dispatch(removeProductFromCart(index))
         }
@@ -60,6 +61,8 @@ export default () => {
 
     const removeAllItems = () => {
         if (window.confirm('Remove all items?')) {
+            settotalamount(0);
+            setDiscountPrice(0);
             // setCartItemList([]);
             dispatch(removeAllProductsFromCart());
             dispatch(deleteAllProductsFromCart({ userId }));
@@ -68,23 +71,20 @@ export default () => {
     return <>
         <ToastContainer />
         <Header />
-        <div className="d-flex align-items-center mt-3 container">
-        <p style={{width:"20px",height:"40px",borderRadius:"5px",backgroundColor:"#0D6EFD"}}></p>
-        <h5 className="ms-2">My Cart ({cartItems.length})</h5>
-        </div>
-        {cartItems.length != 0 ? (
-            <section className="row border m-0 p-0">
-                <div className="col-md-9 border d-flex justify-content-center align-content-center flex-column">
-                    {cartItems.map((product, index) =>
-                        <div className="row container mt-2 border m-0 p-0" style={{}}>
-                            <div className="col-md-3 float-end center-div justify-content-end align-items-end d-flex">
-                                <img className="mt-2 mb-2" style={{borderRadius:"5px"}} src={product["products.thumbnail"]} width="150px" height="150px" alt="abc" />
-                            </div>
-                            <div className="col-md-6">
-                                <h6 className="mt-2 text-uppercase">{product["products.title"]}</h6>
-                                <p style={{ fontSize: '14px' }}>{(product['products.description']).slice(0, 100)}</p>
-                                <div>
-                                    <button onClick={() => removeItemFromCart(index, product["products.id"])} className="m-2 btn btn-outline-danger">Remove</button>
+        <h5 className="container p-4 fs-4">My Cart ({cartItems.length})</h5>
+        {      cartItems.length != 0 ? (
+                <section className="row border m-0 p-0">
+                    <div className="col-md-9 border d-flex justify-content-center align-content-center flex-column">
+                        {cartItems.map((product, index) =>
+                            <div className="row container mt-2 border m-0 p-0" style={{}}>
+                                <div className="col-md-3 float-end center-div justify-content-end align-items-end d-flex">
+                                    <img className="m-auto" src={product["products.thumbnail"]} id="cart-img" width="150px" height="150px" alt="abc" />
+                                </div>
+                                <div className="col-md-6">
+                                    <h6 className="mt-2 text-uppercase">{product["products.title"]}</h6>
+                                    <p style={{fontSize:'14px'}}>{(product['products.description']).slice(0, 100)}</p>
+                                    <div>
+                                    <button onClick={() => removeItemFromCart((product["products.price"]*product["products.cartItem.quantity"]),index, product["products.id"])} className="m-2 btn btn-outline-danger">Remove</button>
                                     &nbsp;<button onClick={() => addToWishlist(product['products.id'])} className="btn btn-outline-primary m-2">Save For Later</button>
                                 </div>
                             </div>
@@ -134,14 +134,14 @@ export default () => {
                     {/* <button onClick={removeAllItems} className="btn btn-outline-danger" style={{ height: 'auto' }}>Remove all</button> */}
                 </div>
             </section>
-
-        ) : (
-            <div className='container-fluid d-flex p-4 justify-content-center align-content-center border' id='blackCart'>
-                <div>
-                    <img width={'450px'} height={'300px'} src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" />
-                    <h6 className='text-center'>Your cart is empty!</h6>
-                    <p className='text-center m-2'>Add item to it now</p>
-                    <center> <Link to="/"><button className='btn btn-primary' style={{ width: '200px' }}>Shop Now</button> </Link></center>
+            ) : (
+                <div className='container-fluid d-flex p-4 justify-content-center align-content-center border' id='blackCart'>
+                    <div>
+                        <img width='450px' height='300px' src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" />
+                        <h6 className='text-center'>Your cart is empty!</h6>
+                        <p className='text-center m-2'>Add item to it now</p>
+                        <center> <Link to="/"><button className='btn btn-primary' style={{ width: '200px' }}>Shop Now</button> </Link></center>
+                    </div>
                 </div>
             </div>
         )
