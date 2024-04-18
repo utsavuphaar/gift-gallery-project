@@ -17,24 +17,24 @@ export default () => {
     let [discountPrice, setDiscountPrice] = useState(0);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {cartItems,isLoading} = useSelector(store=>store.Product);
+    const { cartItems, isLoading } = useSelector(store => store.Product);
 
     useEffect(() => {
         dispatch(fetchCartItems(userId));
-        totalamount = 0;
-        discountPrice = 0;
-        for (let productItem of cartItems) {
-            totalamount = totalamount + productItem["products.price"] * productItem["products.cartItem.quantity"];
-            // alert(productItem["products.cartItem.quantity"])
-            discountPrice = discountPrice + ((((parseInt(productItem["products.discountPercentage"] * productItem["products.price"]) / 100)) * productItem["products.cartItem.quantity"]).toFixed(2) * 1);
+        setCart();
+        console.log(cartItems);
+    }, []);
+    const setCart = () => {
+        for (let product of cartItems) {
+            totalamount = totalamount + product["products.price"] * product["products.cartItem.quantity"];
+            discountPrice = discountPrice + (((parseInt(product["products.discountPercentage"] * product["products.price"] * product["products.cartItem.quantity"]) / 100).toFixed(2)) * 1);
         }
         setDiscountPrice(discountPrice)
         settotalamount(totalamount);
-    }, []);
+    }
 
-    const updateQty = (index,productId, quantity) => {
-        
-        dispatch(updateQtyOfProductInCart({ userId,productId,quantity }));
+    const updateQty = (index, productId, quantity) => {
+        dispatch(updateQtyOfProductInCart({ userId, productId, quantity }));
         let product = cartItems[index];
         totalamount = 0;
         discountPrice = 0;
@@ -86,55 +86,54 @@ export default () => {
                                     <div>
                                     <button onClick={() => removeItemFromCart((product["products.price"]*product["products.cartItem.quantity"]),index, product["products.id"])} className="m-2 btn btn-outline-danger">Remove</button>
                                     &nbsp;<button onClick={() => addToWishlist(product['products.id'])} className="btn btn-outline-primary m-2">Save For Later</button>
+                                </div>
+                            </div>
+                            <div className="col-md-3 flex-column d-flex justify-content-center align-content-center">
+                                <center>
+                                    <div >
+                                        <span className="mt-2 " style={{ fontSize: '15px' }}><BsCurrencyRupee />{product["products.price"]} </span>&nbsp;
+                                        <span className=" text-primary" style={{ fontSize: '12px' }}>({product["products.discountPercentage"]} % off )</span>
                                     </div>
-                                </div>
-                                <div className="col-md-3 flex-column d-flex justify-content-center align-content-center">
-                                    <center>
-                                    <div className="d-flex fs-6">
-                                        <span className="d-flex" style={{fontSize:'15px'}}><BsCurrencyRupee className="mt-1"/>{product["products.price"]} </span>&nbsp;
-                                        <span className=" text-primary" style={{fontSize:'12px'}}>({product["products.discountPercentage"]} % off )</span>
-                                    </div>  
-                                    <h5 className="mt-2" style={{fontSize:'15px'}}>
-                                        Qty :  <input className="p-1 rounded" style={{border:'none',outline:'none',width: '50px', height: '30px' }} type="number" min={1} onClick={(event) => updateQty(index,product["products.id"], event.target.value)} defaultValue={product["products.cartItem.quantity"]}  />
+                                    <h5 className="mt-2" style={{ fontSize: '15px' }}>
+                                        Qty :  <input className="p-1 rounded" style={{ width: '50px', height: '30px',border: 'none', outline: 'none' }} type="number" min={1} onClick={(event) => updateQty(index, product["products.id"], event.target.value)} defaultValue={product["products.cartItem.quantity"]}/>
                                     </h5>
-                                    </center>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                    <div className="col-md-3 p-0 m-0">
-                        <div className="container border d-flex flex-column p-4" >
-                            <div className="container border p-3" style={{borderRadius:"15px"}}>
-
-                            <h5 className="text-center fw-bold mb-2">Order summary</h5>
-                            <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"space-evenly"}}>
-                            <div className="container d-flex w-100 justify-content-around align-items-center">
-                            <label className="" >Item purchased : </label>
-                            <span className="text-success">{cartItems.length}</span>
-
-                            </div>
-                            <p className="fs-5 w-100" >Sub Total : {totalamount}</p>
-                            <label className="fs-5 w-100">Discount : {discountPrice.toFixed(2)}</label><hr />
-
-                            </div>
-                            <hr className="m-2"/>
-                            <h4 className="fw-bold fs-4 d-flex">Total Bill : <BsCurrencyRupee />{(totalamount - discountPrice).toFixed(2)}</h4>
-
-                            <button onClick={()=>navigate("/checkout",{state:cartItems})} className="btn btn-primary mt-3 w-100 fw-bold" >Checkout</button>
-
+                                </center>
                             </div>
                         </div>
+                    )}
+                </div>
+                <div className="col-md-3 p-0 m-0">
+                    <div className="container border d-flex flex-column p-4" >
+                        <div className="container border p-3" style={{ borderRadius: "10px",boxShadow:"0px 0px 1px 1px gainsboro" }}>
 
+                            <h5 className="text-center fw-bold mb-2">Order summary</h5>
+                            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-evenly" }}>
+                                <div className="p-0 container mt-2  d-flex w-100 justify-content-between align-items-center">
+                                    <label className="" style={{ fontSize: "14px" }}>Item purchased : </label>
+                                    <span className=" text-success">{cartItems.length}</span>
+                                </div>
+                                <div className="p-0 container mt-2  d-flex w-100 justify-content-between align-items-center">
+                                    <label className="" style={{ fontSize: "14px" }}>Sub Total : </label>
+                                    <span className=" text-success">{totalamount}</span>
+                                </div>
+                                <div className="p-0 container mt-2 d-flex w-100 justify-content-between align-items-center">
+                                    <label className="" style={{ fontSize: "14px" }}>Discount : </label>
+                                    <span className=" text-success">{discountPrice.toFixed(2)}</span>
+                                </div>
+                            </div>
+                            <h4 className="fw-bold mt-2">Total Bill : <BsCurrencyRupee />{(totalamount - discountPrice).toFixed(2)}</h4>
+                            <button onClick={() => navigate("/checkout", { state: cartItems })} className="btn btn-primary mt-3 w-100 fw-bold" >Checkout</button>
+                        </div>
                     </div>
-                    <div className="d-flex justify-content-between p-4 border me-3 mt-3 bg-whit w-75">
-                        <Link to="/">
-                            <button className="btn m-2 btn-primary"><AiOutlineArrowLeft className="fs-5 d-inline me-2" />Back To Shop</button>
-                        </Link>
-                        <button  onClick={removeAllItems} className="btn m-2 btn-outline-danger">Remove all</button>
-                        {/* <button onClick={removeAllItems} className="btn btn-outline-danger" style={{ height: 'auto' }}>Remove all</button> */}
-                    </div>
-                </section>
-
+                </div>
+                <div className="d-flex justify-content-between p-4 border me-3 mt-3 bg-whit w-75">
+                    <Link to="/">
+                        <button className="btn m-2 btn-primary"><AiOutlineArrowLeft className="fs-5 me-2" />Back To Shop</button>
+                    </Link>
+                    <button onClick={removeAllItems} className="btn m-2 btn-outline-danger">Remove all</button>
+                    {/* <button onClick={removeAllItems} className="btn btn-outline-danger" style={{ height: 'auto' }}>Remove all</button> */}
+                </div>
+            </section>
             ) : (
                 <div className='container-fluid d-flex p-4 justify-content-center align-content-center border' id='blackCart'>
                     <div>
@@ -144,7 +143,8 @@ export default () => {
                         <center> <Link to="/"><button className='btn btn-primary' style={{ width: '200px' }}>Shop Now</button> </Link></center>
                     </div>
                 </div>
-            )
+            </div>
+        )
 
         }
         <div className="p-2 ms-2 row d-flex m-2 justify-content-around row container-fluid ">

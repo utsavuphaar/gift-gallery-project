@@ -10,6 +10,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2';
 import Home from './Home';
 import { ToastContainer, toast } from 'react-toastify'
+import GoogleSign from './GoogleSign';
 export default function Signin() {
     let userDetail=[];
     const navigate = useNavigate();
@@ -176,7 +177,8 @@ export default function Signin() {
 
                     {/* <span className='mt-3 forget'>Forget Password ?</span> */}
                     <button className="w-75 mt-4  button" onClick={() => signin()}>Sign In</button>
-                    <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3' />Sign in with google</button>
+                    {/* <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3' />Sign in with google</button> */}
+                    <GoogleSign />
                     <FcGoogle className='fs-1 me-3 d-none google' />
                     <p className=' mt-3 mb-4' id='log-2'>Do not have an account,<span className=' text-primary ms-2 create' onClick={() => navigate('/signup')}><u>create a new one.</u></span></p>
                 </div>

@@ -1,9 +1,12 @@
 import { Box, Heading, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
-import { useSearchParams } from "react-router-dom"
+import Home from './Home'
+import { useNavigate, useSearchParams } from "react-router-dom"
+import { AiOutlineArrowLeft } from 'react-icons/ai'
 const PaymentSuccess = () => {
 
     const seachQuery = useSearchParams()[0]
+    const navigate = useNavigate();
 
     const referenceNum = seachQuery.get("reference")
     return (
@@ -13,8 +16,11 @@ const PaymentSuccess = () => {
                 <Text>
                     Reference No.{referenceNum}
                 </Text>
+                    <button onClick={()=>navigate("/")} className='btn btn-outline-success'><AiOutlineArrowLeft className="fs-5 me-2" />Back to shop</button>
+                    
             </VStack>
         </Box>
+    
     )
 }
 
