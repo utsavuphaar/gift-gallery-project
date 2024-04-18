@@ -1,0 +1,174 @@
+.h6-tag{
+    margin-left: 20px;
+}
+.p-tag{
+    margin-left: 20px;
+}
+
+.label-name {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    transition: 0.2s ease all;
+    /* color: #999; */
+}
+
+.your-message-text-area {
+    padding-top: 40px;
+    margin-top: 20px;
+    /* Increase padding for the textarea to accommodate the label */
+}
+.box-1 {
+    background-color: #0D6EFD;
+    border-radius: 25px;
+    color: white;
+}
+.box-1:hover{
+    transition: 2s ease-out;
+    box-shadow: 0px 0px 2px 1px #999;
+
+}
+.input-field {
+    position: relative;
+    width: 150px;
+    height: 0px;
+   
+}
+
+.label-name {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #999;
+    transition: 0.2s all;
+    cursor: text;
+}
+.contactUs-icons-circle{
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color: black;
+}
+.contactUs-icons{
+    margin-left: 8px;
+}
+
+.input-tag {
+    width:100%;
+    border: 0;
+    outline: 0;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid #d3d3d3;
+    box-shadow: none;
+    color: #111;
+}
+.input-tag:focus,
+.input-tag:valid {
+    border-color: #0D6EFD;
+}
+
+.input-tag:focus~.label-name,
+.input-tag:valid~.label-name {
+    font-size: 14px;
+    top: -5px;
+    color: #0D6EFD;
+}
+
+.form-class {
+    width: 50%;
+    position: relative;
+    margin-top: 5px;
+    margin: 70px;
+}
+
+.form-group {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+}
+
+.form-field {
+  
+    width: 100%;
+    font-size: 16px;
+    padding: 7px 4px;
+    background: transparent;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+    margin: 0 0 3em 0;
+    border: 1px solid #0D6EFD;
+    resize: none;
+    outline: none;    
+}
+
+.input-tag[type="text"],
+.input-tag[type="email"] {
+    height: calc(3em + 2px);
+}
+
+.form-field::placeholder {
+    color: transparent;
+}
+
+.form-field:placeholder-shown~.form-label {
+    font-size: 16px;
+    cursor: text;
+    top: 5px;
+}
+
+.label-name,
+.form-field:focus~.form-label {
+    position: absolute;
+    top: 5px;
+    left: 8px;
+    display: block;
+    transition: 0.2s;
+    font-size: 12px;
+    background-size: 105% 5px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.form-field:focus~.form-label {
+    color: #0D6EFD;
+}
+
+.form-field:focus {
+    padding-bottom: 6px;
+    border: 1px solid #0D6EFD;
+}
+
+.form-field:valid {
+    border-color: #0D6EFD;
+}
+
+.form-field:valid~.form-label {
+    color: #0D6EFD;
+}
+.your-message-text-area{
+    margin-left: 80px;
+    width: 60%;
+    margin-bottom: 20px;
+  
+}
+.send-button{
+    margin-left: 80px;
+}
+.send-button:hover{
+     border: 2px solid #0D6EFD;
+     background-color: white;
+     color: black;
+}
+
+@media(max-width: 990px) {
+    .your-message-text-area{
+          width: 50%;
+    }
+    .input-field{
+          height: 10px;
+    }
+    .box-1{
+          margin-top: 20px;
+      }
+}

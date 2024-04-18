@@ -2,7 +2,7 @@ import loadingImg from './loading.gif'
 import './App.css';
 import Product from './Components/User/Product.js';
 import { Route, Routes } from 'react-router-dom';
-import {useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ViewMore from './Components/User/ViewMore.js';
 import Signin from './Components/User/Signin.js';
@@ -21,36 +21,42 @@ import AdminProfile from './Components/Admin/Admin.js';
 import AboutUs from './Components/User/AboutUs.js';
 import ContactUs from './Components/User/ContactUs.js';
 import GoogleSign from "./Components/User/GoogleSign.js"
+import Order from './Components/User/Order.js';
+import ProductList from './Components/Admin/ProductList.js';
+import User from './Components/User/User.js';
+import AdminHomePage from './Components/Admin/AdminHomePage.js';
+import Userlist from './Components/Admin/Userlist.js';
+import OrderList from './Components/Admin/OrderList.js';
+
 
 
 function App() {
 
-  let {isLoading,productList} = useSelector(store =>store.Product);
+  let { isLoading, productList } = useSelector(store => store.Product);
 
   return <>
-  
-    {!productList?(
-      <div className='h-100 w-100 d-flex justify-content-center align-content-center'>
-        <img src={loadingImg}/>
-      </div>
-    ):(
-      
       <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/aboutus' element={<AboutUs/>}/>
-      <Route path='/contactus' element={<ContactUs/>}/>
-      <Route path='/admin' element={<AdminProfile/>}/>
-      <Route path="/product" element={<Product />} />
-      <Route path='/cart' element={<Cart/>}/>
-      <Route path='/signin' element={<Signin/>}/>
-      <Route path='/signup' element={<Signup/>}/>
-      <Route path='/header' element={<Header/>}/>
-      <Route path='/viewmore' element={<ViewMore />} />
-      <Route path ="/wishlist" element= {<Wishlist/>}/>
-      <Route path ="/checkout" element= {<Checkout/>}/>
+        <Route path='/' element={<Home />} />
+        <Route path='/aboutus' element={<AboutUs />} />
+        <Route path='/contactus' element={<ContactUs />} />
+        <Route path='/user' element={<User />} />
+        <Route path="/product" element={<Product />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/signin' element={<Signin />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/header' element={<Header />} />
+        <Route path='/viewmore' element={<ViewMore />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path='/order' element={<Order />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/paymentsuccess" element={<PaymentSuccess />} /> //
-    </Routes>
-    )}
+        <Route path='admin' element={<AdminProfile />} >
+        <Route index element={<AdminHomePage/>}/>
+        <Route path="productList" element={<ProductList/>}/>
+        <Route path='userList' element={<Userlist/>}/>
+        <Route path="orderList" element={<OrderList/>}/>
+        </Route>
+      </Routes>
   </>
 }
 

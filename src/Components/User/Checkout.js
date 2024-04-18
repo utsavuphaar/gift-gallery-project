@@ -61,7 +61,7 @@ function Checkout() {
                 });
                 // console.log("Order Data ..")
                 // console.log(order.id)
-                const myOrder = await axios.post("http://localhost:3000/order/placeOrder", { id: order.id, firstName, lastName, contact, address, city, pinCode, status, quantity: 1, userId })//price,quantity
+                const myOrder = await axios.post("http://localhost:3000/order/placeOrder", { orderID: order.id, firstName, lastName, contact, address, city, pinCode, status:"Order Confirmed", quantity: 1, userId })//price,quantity
                 // Configuring Razorpay options
                 const options = {
                     key,
