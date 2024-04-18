@@ -140,9 +140,6 @@ const slice = createSlice({
             state.wishList.splice(action.payload, 1);
         },
         searchProduct: (state, action) => {
-            if (!action.payload.trim()) {
-                fetchProduct();
-            }
             const filteredProducts = state.productList.filter(product =>
                 product.title.toUpperCase().includes(action.payload.toUpperCase())
             );
