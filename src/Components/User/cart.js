@@ -47,9 +47,9 @@ export default () => {
         settotalamount(totalamount);
     }
 
-    const removeItemFromCart = (price,index, productId) => {
+    const removeItemFromCart = (price, index, productId) => {
         if (window.confirm("Are your sure ?")) {
-            totalamount-=price;
+            totalamount -= price;
             settotalamount(totalamount);
             dispatch(deleteProductFromCart({ userId, productId }));
             dispatch(removeProductFromCart(index))
@@ -72,30 +72,30 @@ export default () => {
         <ToastContainer />
         <Header />
         <h5 className="container p-4 fs-4">My Cart ({cartItems.length})</h5>
-        {      cartItems.length != 0 ? (
-                <section className="row border m-0 p-0">
-                    <div className="col-md-9 border d-flex justify-content-center align-content-center flex-column">
-                        {cartItems.map((product, index) =>
-                            <div className="row container mt-2 border m-0 p-0" style={{}}>
-                                <div className="col-md-3 float-end center-div justify-content-end align-items-end d-flex">
-                                    <img className="m-auto" src={product["products.thumbnail"]} id="cart-img" width="150px" height="150px" alt="abc" />
-                                </div>
-                                <div className="col-md-6">
-                                    <h6 className="mt-2 text-uppercase">{product["products.title"]}</h6>
-                                    <p style={{fontSize:'14px'}}>{(product['products.description']).slice(0, 100)}</p>
-                                    <div>
-                                    <button onClick={() => removeItemFromCart((product["products.price"]*product["products.cartItem.quantity"]),index, product["products.id"])} className="m-2 btn btn-outline-danger">Remove</button>
+        {cartItems.length != 0 ? (
+            <section className="row border m-0 p-0">
+                <div className="col-md-9 border d-flex justify-content-center align-content-center flex-column">
+                    {cartItems.map((product, index) =>
+                        <div className="row container mt-2 border m-0 p-0" style={{}}>
+                            <div className="col-md-3 float-end center-div justify-content-end align-items-end d-flex">
+                                <img className="m-auto" src={product["products.thumbnail"]} id="cart-img" width="150px" height="150px" alt="abc" />
+                            </div>
+                            <div className="col-md-6">
+                                <h6 className="mt-2 text-uppercase">{product["products.title"]}</h6>
+                                <p style={{ fontSize: '14px' }}>{(product['products.description']).slice(0, 100)}</p>
+                                <div>
+                                    <button onClick={() => removeItemFromCart((product["products.price"] * product["products.cartItem.quantity"]), index, product["products.id"])} className="m-2 btn btn-outline-danger">Remove</button>
                                     &nbsp;<button onClick={() => addToWishlist(product['products.id'])} className="btn btn-outline-primary m-2">Save For Later</button>
                                 </div>
                             </div>
                             <div className="col-md-3 flex-column d-flex justify-content-center align-content-center">
                                 <center>
                                     <div >
-                                        <span className="mt-2 " style={{ fontSize: '15px' }}><BsCurrencyRupee />{product["products.price"]} </span>&nbsp;
+                                        <span className="mt-2 " style={{ fontSize: '15px' }}><BsCurrencyRupee className="d-inline" />{product["products.price"]} </span>&nbsp;
                                         <span className=" text-primary" style={{ fontSize: '12px' }}>({product["products.discountPercentage"]} % off )</span>
                                     </div>
                                     <h5 className="mt-2" style={{ fontSize: '15px' }}>
-                                        Qty :  <input className="p-1 rounded" style={{ width: '50px', height: '30px',border: 'none', outline: 'none' }} type="number" min={1} onClick={(event) => updateQty(index, product["products.id"], event.target.value)} defaultValue={product["products.cartItem.quantity"]}/>
+                                        Qty :  <input className="p-1 rounded" style={{ width: '50px', height: '30px', border: 'none', outline: 'none' }} type="number" min={1} onClick={(event) => updateQty(index, product["products.id"], event.target.value)} defaultValue={product["products.cartItem.quantity"]} />
                                     </h5>
                                 </center>
                             </div>
@@ -104,7 +104,7 @@ export default () => {
                 </div>
                 <div className="col-md-3 p-0 m-0">
                     <div className="container border d-flex flex-column p-4" >
-                        <div className="container border p-3" style={{ borderRadius: "10px",boxShadow:"0px 0px 1px 1px gainsboro" }}>
+                        <div className="container border p-3" style={{ borderRadius: "10px", boxShadow: "0px 0px 1px 1px gainsboro" }}>
 
                             <h5 className="text-center fw-bold mb-2">Order summary</h5>
                             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-evenly" }}>
@@ -121,7 +121,7 @@ export default () => {
                                     <span className=" text-success">{discountPrice.toFixed(2)}</span>
                                 </div>
                             </div>
-                            <h4 className="fw-bold mt-2">Total Bill : <BsCurrencyRupee />{(totalamount - discountPrice).toFixed(2)}</h4>
+                            <h4 className="fw-bold mt-2">Total Bill : <BsCurrencyRupee className="d-inline"/>{(totalamount - discountPrice).toFixed(2)}</h4>
                             <button onClick={() => navigate("/checkout", { state: cartItems })} className="btn btn-primary mt-3 w-100 fw-bold" >Checkout</button>
                         </div>
                     </div>
@@ -134,53 +134,53 @@ export default () => {
                     {/* <button onClick={removeAllItems} className="btn btn-outline-danger" style={{ height: 'auto' }}>Remove all</button> */}
                 </div>
             </section>
-            ) : (
-                <div className='container-fluid d-flex p-4 justify-content-center align-content-center border' id='blackCart'>
-                    <div>
-                        <img width='450px' height='300px' src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" />
-                        <h6 className='text-center'>Your cart is empty!</h6>
-                        <p className='text-center m-2'>Add item to it now</p>
-                        <center> <Link to="/"><button className='btn btn-primary' style={{ width: '200px' }}>Shop Now</button> </Link></center>
-                    </div>
+        ) : (
+            <div className='container-fluid d-flex p-4 justify-content-center align-content-center border' id='blackCart'>
+                <div>
+                    <img width='450px' height='300px' src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" />
+                    <h6 className='text-center'>Your cart is empty!</h6>
+                    <p className='text-center m-2'>Add item to it now</p>
+                    <center> <Link to="/"><button className='btn btn-primary' style={{ width: '200px' }}>Shop Now</button> </Link></center>
                 </div>
             </div>
+           
         )
 
-        }
-        <div className="p-2 ms-2 row d-flex m-2 justify-content-around row container-fluid ">
-            <div className="d-flex col-md-4" style={{ width: '30%' }}>
-                <div className="icon" >
-                    <div>
-                        <AiFillLock style={{ width: '30px', height: '30px', color: 'grey' }} />
-                    </div>
-                </div>
-                <div className="ms-2">
-                    <p className="m-0">Secure Payment</p>
-                    <p className="text-secondary">Have you ever finally just </p>
-                </div>
-            </div>
-            <div className="d-flex col-md-4" style={{ width: '30%' }}>
-                <div className="icon" >
-                    <div>
-                        <TbMessage style={{ width: '30px', height: '30px', color: 'grey' }} />
-                    </div>
-                </div>
-                <div className="ms-2">
-                    <p className="m-0">Customer Support</p>
-                    <p className="text-secondary">Have you ever finally just </p>
-                </div>
-            </div>
-            <div className="d-flex col-md-4" style={{ width: '30%' }}>
-                <div className="icon">
-                    <div>
-                        <CiDeliveryTruck style={{ width: '30px', height: '30px', color: 'grey' }} />
-                    </div>
-                </div>
-                <div className="ms-2">
-                    <p className="m-0">Free delivery</p>
-                    <p className="text-secondary">Have you ever finally just </p>
-                </div>
+}
+<div className="p-2 ms-2 row d-flex m-2 justify-content-around row container-fluid ">
+    <div className="d-flex col-md-4" style={{ width: '30%' }}>
+        <div className="icon" >
+            <div>
+                <AiFillLock style={{ width: '30px', height: '30px', color: 'grey' }} />
             </div>
         </div>
+        <div className="ms-2">
+            <p className="m-0">Secure Payment</p>
+            <p className="text-secondary">Have you ever finally just </p>
+        </div>
+    </div>
+    <div className="d-flex col-md-4" style={{ width: '30%' }}>
+        <div className="icon" >
+            <div>
+                <TbMessage style={{ width: '30px', height: '30px', color: 'grey' }} />
+            </div>
+        </div>
+        <div className="ms-2">
+            <p className="m-0">Customer Support</p>
+            <p className="text-secondary">Have you ever finally just </p>
+        </div>
+    </div>
+    <div className="d-flex col-md-4" style={{ width: '30%' }}>
+        <div className="icon">
+            <div>
+                <CiDeliveryTruck style={{ width: '30px', height: '30px', color: 'grey' }} />
+            </div>
+        </div>
+        <div className="ms-2">
+            <p className="m-0">Free delivery</p>
+            <p className="text-secondary">Have you ever finally just </p>
+        </div>
+    </div>
+</div>
     </>
 }
