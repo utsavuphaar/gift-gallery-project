@@ -20,6 +20,7 @@ import { useSelector } from 'react-redux';
 import AdminProfile from './Components/Admin/Admin.js';
 import AboutUs from './Components/User/AboutUs.js';
 import ContactUs from './Components/User/ContactUs.js';
+import GoogleSign from "./Components/User/GoogleSign.js"
 import Order from './Components/User/Order.js';
 import ProductList from './Components/Admin/ProductList.js';
 import User from './Components/User/User.js';
@@ -28,17 +29,12 @@ import Userlist from './Components/Admin/Userlist.js';
 import OrderList from './Components/Admin/OrderList.js';
 
 
+
 function App() {
 
   let { isLoading, productList } = useSelector(store => store.Product);
 
   return <>
-
-    {!productList ? (
-      <div className='h-100 w-100 d-flex justify-content-center align-content-center'>
-        <img src={loadingImg} />
-      </div>
-    ) : (
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/aboutus' element={<AboutUs />} />
@@ -54,8 +50,6 @@ function App() {
         <Route path='/order' element={<Order />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/paymentsuccess" element={<PaymentSuccess />} /> //
-        {/* <Route path="/userlist" element={<Userlist/>}/> */}
-
         <Route path='admin' element={<AdminProfile />} >
         <Route index element={<AdminHomePage/>}/>
         <Route path="productList" element={<ProductList/>}/>
@@ -63,7 +57,6 @@ function App() {
         <Route path="orderList" element={<OrderList/>}/>
         </Route>
       </Routes>
-    )}
   </>
 }
 
