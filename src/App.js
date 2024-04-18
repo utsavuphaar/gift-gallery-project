@@ -20,6 +20,7 @@ import { useSelector } from 'react-redux';
 import AdminProfile from './Components/Admin/Admin.js';
 import AboutUs from './Components/User/AboutUs.js';
 import ContactUs from './Components/User/ContactUs.js';
+import GoogleSign from "./Components/User/GoogleSign.js"
 
 
 function App() {
@@ -27,13 +28,14 @@ function App() {
   let {isLoading,productList} = useSelector(store =>store.Product);
 
   return <>
-
+  
     {!productList?(
       <div className='h-100 w-100 d-flex justify-content-center align-content-center'>
         <img src={loadingImg}/>
       </div>
     ):(
-    <Routes>
+      
+      <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/aboutus' element={<AboutUs/>}/>
       <Route path='/contactus' element={<ContactUs/>}/>
