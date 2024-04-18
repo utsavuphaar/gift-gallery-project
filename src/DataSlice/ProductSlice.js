@@ -2,11 +2,21 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import URL from "../Components/ApiUrl";
 
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 export const fetchProduct = createAsyncThunk("products/fetchProducts", async () => {
-    let res = await axios.get(URL.getProducts)
-    return res.data.products;
-})
+    try {
+        const response = await axios.get(URL.getProducts);
+        // process.env.GET_PRODUCT
+        return response.data.products;
+    } catch (error) {
+        // Handle error
+        console.error("Error fetching products:", error);
+        throw error; // Rethrow the error for the caller to handle
+    }
+});
+
 
 export const fetchProductByCategory = createAsyncThunk("products/fetchProductByCategory", async (category) => {
     let res = await axios.post(`http://localhost:3000/product/viewProductByCategory/${category}/`)

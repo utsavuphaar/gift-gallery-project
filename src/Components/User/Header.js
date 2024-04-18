@@ -51,6 +51,7 @@ export default function Header() {
             call(fetchProduct())
         call(fetchProductByCategory(category));
     }
+    
     return <>
         <div className="container-fluid header">
             <div className='row header-1  p-0 m-0'>
