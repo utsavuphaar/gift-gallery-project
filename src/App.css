@@ -1,3 +1,7 @@
+.react-icon {
+  display: inline-block !important; /* or display: inline; */
+}
+
 /* ----------------------------------------------Product.js CSS-------------------------------------------------- */
 #buttons {
   width: 90%;
@@ -191,10 +195,25 @@
 /* -------------------------------user profile ---------- */
 
 
-@media(max-width: 770px) {
+/* @media(max-width: 300px)  */
+@media only screen and (max-width: 600px){
   #checkout-left{
         margin-top: 40px;
   }
+  #checkout-left{
+      height:3000px;
+      /* color: blueviolet; */
+
+  }
+  .checkout-right{
+      height: 580px !important;
+      border: 1px solid black;
+  }
+  .text-mdia{
+      /* width: 500px; */
+      margin-left: -1px !important;
+  }
+  
 }
 
 /* ------------------------------------ */

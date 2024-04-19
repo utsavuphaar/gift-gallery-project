@@ -23,7 +23,6 @@ import ContactUs from './Components/User/ContactUs.js';
 import GoogleSign from "./Components/User/GoogleSign.js"
 import Order from './Components/User/Order.js';
 import ProductList from './Components/Admin/ProductList.js';
-import User from './Components/User/User.js';
 import AdminHomePage from './Components/Admin/AdminHomePage.js';
 import Userlist from './Components/Admin/Userlist.js';
 import OrderList from './Components/Admin/OrderList.js';
@@ -41,7 +40,6 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/aboutus' element={<AboutUs />} />
         <Route path='/contactus' element={<ContactUs />} />
-        <Route path='/user' element={<User />} />
         <Route path="/product" element={<Product />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/ChatBot' element={<ChatBot/>}/>
