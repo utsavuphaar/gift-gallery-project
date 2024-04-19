@@ -46,24 +46,24 @@ export default function Product() {
         fetchData();
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-      }, []);
-    
-      const fetchData = () => {
+    }, []);
+
+    const fetchData = () => {
         dispatch(fetchProduct(page));
-      };
-    
-      const handleScroll = () => {
+    };
+
+    const handleScroll = () => {
         if (
-          window.innerHeight + document.documentElement.scrollTop ===
-          document.documentElement.offsetHeight
+            window.innerHeight + document.documentElement.scrollTop ===
+            document.documentElement.offsetHeight
         ) {
-          if (!isLoading && !error) {
-            const nextPage = productList.length > 0 ? page + 1 : page - 1;
-            dispatch(fetchProduct(nextPage));
-          }
+            if (!isLoading && !error) {
+                const nextPage = productList.length > 0 ? page + 1 : page - 1;
+                dispatch(fetchProduct(nextPage));
+            }
         }
-      };
-    
+    };
+
     const viewMore = (product) => {
         navigate("/viewmore", { state: product });
     };
@@ -153,6 +153,8 @@ export default function Product() {
                                 <Typography className="text-dark fw-bold">Price range</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
+
+
                                 <Box sx={{ width: 300 }}>
                                     <Slider
                                         getAriaLabel={() => 'Temperature range'}
@@ -265,10 +267,9 @@ export default function Product() {
                     </div>)}
                 </div>
             </div>
-            {isLoading && <div className="container text-center fs-4">Loading...</div>}
-            {/* {error && <div>Error: {error}</div>} */}
-        </>
-    );
+        </div>
+        {/* {isLoading && <div className="container text-center fs-4">Loading...</div>}s */}
+    </>
 };
 
 export default Product;

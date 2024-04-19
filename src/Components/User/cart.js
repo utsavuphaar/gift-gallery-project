@@ -141,7 +141,7 @@ export default () => {
                 </div>
                 <div className="d-flex justify-content-between p-4 bg-whit w-75">
                     <Link to="/">
-                        <button className="btn m-2 btn-primary"><AiOutlineArrowLeft className="fs-5 me-2" />Back To Shop</button>
+                        <button className="btn m-2 btn-primary"><AiOutlineArrowLeft className="fs-5 d-inline me-2" />Back To Shop</button>
                     </Link>
                     <button onClick={removeAllItems} className="btn m-2 btn-outline-danger">Remove all</button>
                     {/* <button onClick={removeAllItems} className="btn btn-outline-danger" style={{ height: 'auto' }}>Remove all</button> */}

@@ -12,12 +12,8 @@ export default function Home() {
     let buttonDisabled = false;
     if (localStorage.getItem("userId"))
         buttonDisabled = true;
-    const clearStorage = () => {
-        localStorage.clear();
 
-    }
     return <>
-        <button onClick={clearStorage} className='btn btn-primary m-2'>Clear Local Storage</button>
         <Header />
         <div className="container-fluid home ">
             <div className="row banner ">

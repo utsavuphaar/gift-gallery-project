@@ -79,7 +79,7 @@ export default function Header() {
                         </div>
                     </div>
                     <div className='col-md-3 profile'>
-                        <div className='mt-4' id='icons'><FaUser className='fs-5  mt-2 text-secondary' /><span className='iconstext mb-2 mt-1'>Profile</span></div>
+                        <div className='mt-4' id='icons' onClick={()=>navigate("/user")}><FaUser className='fs-5  mt-2 text-secondary' /><span className='iconstext mb-2 mt-1'>Profile</span></div>
                         <div className='mt-4' id='icons' onClick={() => navigate("/order")}><PiNotebookBold className='fs-5  mt-2 text-secondary' /><span className='iconstext mb-2 mt-1'>Orders</span></div>
                         <div className='mt-4' id='icons' onClick={() => navigate("/wishlist")}><AiFillHeart className=' fs-5 mt-2  text-secondary' /><span className='iconstext mb-2 mt-1'>Favourite</span></div>
                         <div className='mt-4' id='icons' onClick={() => navigate("/cart")}><FaCartShopping className=' fs-5 mt-2  text-secondary' /><span className='iconstext mb-2 mt-1'>My cart</span></div>
