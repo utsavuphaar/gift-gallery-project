@@ -25,6 +25,7 @@ import { AiFillStar } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
 import { useEffect } from "react";
 import { addProductIntoCart, addProductIntoWishlist, fetchProduct } from "../../DataSlice/ProductSlice";
+
 import { Link, useNavigate } from "react-router-dom";
 
 // -------------price range----------------
@@ -37,22 +38,45 @@ function valuetext(value) {
 
 export default function Product() {
     let userId = localStorage.getItem("userId")
-    const dispatch = useDispatch();
-    const navigate = useNavigate("")
-    const { productList } = useSelector(store => store.Product);
-    useEffect(() => {
-        dispatch(fetchProduct());
-    }, [])
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { productList, isLoading, error, page } = useSelector(store => store.Product);
+    useEffect(() => {
+        fetchData();
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+    
+      const fetchData = () => {
+        dispatch(fetchProduct(page));
+      };
+    
+      const handleScroll = () => {
+        if (
+          window.innerHeight + document.documentElement.scrollTop ===
+          document.documentElement.offsetHeight
+        ) {
+          if (!isLoading && !error) {
+            const nextPage = productList.length > 0 ? page + 1 : page - 1;
+            dispatch(fetchProduct(nextPage));
+          }
+        }
+      };
+    
     const viewMore = (product) => {
-        navigate("/viewmore", { state: product })
-    }
+        navigate("/viewmore", { state: product });
+    };
+
     const addToCart = (productId) => {
-        dispatch(addProductIntoCart({ userId, productId: productId }))
-    }
+        dispatch(addProductIntoCart({ userId, productId }));
+    };
+
+
     const addToWishlist = (productId) => {
-        dispatch(addProductIntoWishlist({ userId, productId }))
-    }
+        dispatch(addProductIntoWishlist({ userId, productId }));
+    };
+
 
     const [expanded, setExpanded] = React.useState(false);
 
@@ -241,7 +265,10 @@ export default function Product() {
                     </div>)}
                 </div>
             </div>
-        </div>
+            {isLoading && <div className="container text-center fs-4">Loading...</div>}
+            {/* {error && <div>Error: {error}</div>} */}
+        </>
+    );
+};
 
-    </>
-}
+export default Product;

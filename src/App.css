@@ -186,3 +186,15 @@
   width: 150px;
   height: 150px;
 }
+
+
+/* -------------------------------user profile ---------- */
+
+
+@media(max-width: 770px) {
+  #checkout-left{
+        margin-top: 40px;
+  }
+}
+
+/* ------------------------------------ */
