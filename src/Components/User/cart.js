@@ -10,6 +10,9 @@ import { addProductIntoWishlist, deleteAllProductsFromCart, deleteProductFromCar
 import { BsCurrencyRupee } from "react-icons/bs";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { TbMessage } from "react-icons/tb";
+import '../Style.css';
+import Footer from "./footer";
+
 export default () => {
     let userId = localStorage.getItem("userId");
     // const [cartItems, setCartItemList] = useState([]);
@@ -73,12 +76,12 @@ export default () => {
         <h5 className="ms-2">My Cart ({cartItems.length})</h5>
         </div>
         {cartItems.length != 0 ? (
-            <section className="row border m-0 p-0">
-                <div className="col-md-9 border d-flex justify-content-center align-content-center flex-column">
+            <section className="row  m-0 p-0">
+                <div className="col-md-9  d-flex justify-content-center align-content-center flex-column">
                     {cartItems.map((product, index) =>
-                        <div className="row container mt-2 border m-0 p-0" style={{}}>
+                        <div className="row container  mt-2 mb-2 m-0 p-0" style={{boxShadow:"0px 1px 1px 2px #0D6EFD"}}>
                             <div className="col-md-3 float-end center-div justify-content-end align-items-end d-flex">
-                                <img className="mt-2 mb-2" style={{borderRadius:"5px"}} src={product["products.thumbnail"]} width="150px" height="150px" alt="abc" />
+                                <img className="mt-2 mb-2" style={{borderRadius:"5px"}} src={product["products.thumbnail"]} width="130px" height="130px" alt="abc" />
                             </div>
                             <div className="col-md-6">
                                 <h6 className="mt-2 text-uppercase">{product["products.title"]}</h6>
@@ -95,7 +98,7 @@ export default () => {
                                         <span className=" text-primary" style={{ fontSize: '12px' }}>({product["products.discountPercentage"]} % off )</span>
                                     </div>
                                     <h5 className="mt-2" style={{ fontSize: '15px' }}>
-                                        Qty :  <input className="p-1 rounded" style={{ width: '50px', height: '30px',border: 'none', outline: 'none' }} type="number" min={1} onClick={(event) => updateQty(index, product["products.id"], event.target.value)} defaultValue={product["products.cartItem.quantity"]}/>
+                                        Qty :  <input className="p-1 rounded" style={{ width: '50px', height: '30px',border:"1px solid blue", outline: 'none' }} type="number" min={1} onClick={(event) => updateQty(index, product["products.id"], event.target.value)} defaultValue={product["products.cartItem.quantity"]}/>
                                     </h5>
                                 </center>
                             </div>
@@ -103,8 +106,8 @@ export default () => {
                     )}
                 </div>
                 <div className="col-md-3 p-0 m-0">
-                    <div className="container border d-flex flex-column p-4" >
-                        <div className="container border p-3" style={{ borderRadius: "10px",boxShadow:"0px 0px 1px 1px gainsboro" }}>
+                    <div className="container  d-flex flex-column p-4" >
+                        <div className="container  p-3" style={{ borderRadius: "10px",boxShadow:"0px 0px 1px 1px gainsboro" }}>
 
                             <h5 className="text-center fw-bold mb-2">Order summary</h5>
                             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-evenly" }}>
@@ -120,13 +123,16 @@ export default () => {
                                     <label className="" style={{ fontSize: "14px" }}>Discount : </label>
                                     <span className=" text-success">{discountPrice.toFixed(2)}</span>
                                 </div>
+                                <div className="p-0 container  mt-2 d-flex w-100 justify-content-between align-items-center">
+                                    <span className="text-primary" style={{fontSize:"10px"}}>----------------------------------------------------</span>
+                                </div>
                             </div>
                             <h4 className="fw-bold mt-2">Total Bill : <BsCurrencyRupee />{(totalamount - discountPrice).toFixed(2)}</h4>
                             <button onClick={() => navigate("/checkout", { state: cartItems })} className="btn btn-primary mt-3 w-100 fw-bold" >Checkout</button>
                         </div>
                     </div>
                 </div>
-                <div className="d-flex justify-content-between p-4 border me-3 mt-3 bg-whit w-75">
+                <div className="d-flex justify-content-between p-4 bg-whit w-75">
                     <Link to="/">
                         <button className="btn m-2 btn-primary"><AiOutlineArrowLeft className="fs-5 me-2" />Back To Shop</button>
                     </Link>
@@ -147,8 +153,8 @@ export default () => {
         )
 
         }
-        <div className="p-2 ms-2 row d-flex m-2 justify-content-around row container-fluid ">
-            <div className="d-flex col-md-4" style={{ width: '30%' }}>
+        <div className="p-2 ms-2 row  mb-2 d-flex m-2 justify-content-evenly row container-fluid ">
+            <div className="d-flex col-md-4 justify-content-center align-items-center">
                 <div className="icon" >
                     <div>
                         <AiFillLock style={{ width: '30px', height: '30px', color: 'grey' }} />
@@ -159,7 +165,7 @@ export default () => {
                     <p className="text-secondary">Have you ever finally just </p>
                 </div>
             </div>
-            <div className="d-flex col-md-4" style={{ width: '30%' }}>
+            <div className="d-flex col-md-4 justify-content-center align-items-center" >
                 <div className="icon" >
                     <div>
                         <TbMessage style={{ width: '30px', height: '30px', color: 'grey' }} />
@@ -170,7 +176,7 @@ export default () => {
                     <p className="text-secondary">Have you ever finally just </p>
                 </div>
             </div>
-            <div className="d-flex col-md-4" style={{ width: '30%' }}>
+            <div className="d-flex col-md-4 justify-content-center align-items-center" >
                 <div className="icon">
                     <div>
                         <CiDeliveryTruck style={{ width: '30px', height: '30px', color: 'grey' }} />
@@ -182,5 +188,6 @@ export default () => {
                 </div>
             </div>
         </div>
+        <Footer/>
     </>
 }
