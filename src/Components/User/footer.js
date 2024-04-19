@@ -7,10 +7,10 @@ import { FaYoutube } from "react-icons/fa6";
 import './footer.css'
 export const Footer = () => {
       return <>
-            <footer class="footer">
-                  <div class="container">
-                        <div class="row">
-                              <div class="footer-col ml-3">
+            <footer className="footer">
+                  <div className="container">
+                        <div className="row">
+                              <div className="footer-col ml-3">
                                     <div className='col-md-6 ms-1 title' style={{ width: "250px" }}>
                                           <div className='mt-1 mb-2 icon  d-flex justify-content-center align-items-center'>
                                                 <IoIosGift className='fs-3 text-light' />
@@ -25,14 +25,14 @@ export const Footer = () => {
                                           </p>
 
                                     </div>
-                                    <div class="social-links mt-0">
+                                    <div className="social-links mt-0">
                                           <a href="https://www.facebook.com/" target="_blank"> <FaFacebook className="fs-4" />   </a>
                                           <a href="https://www.twitter.com/" target="_blank"><AiFillTwitterCircle className="fs-4" /></a>
                                           <a href="https://www.instagram.com/" target="_blank"><RiInstagramFill className="fs-4" /></a>
                                           <a href="https://www.youtube.com/" target="_blank"><FaYoutube className="fs-4" /></a>
                                     </div>
                               </div>
-                              <div class="footer-col">
+                              <div className="footer-col">
                                     <h4 className="mt-3">company</h4>
                                     <ul>
                                           <li><a href="#">about us</a></li>
@@ -41,7 +41,7 @@ export const Footer = () => {
                                           <li><a href="#">affiliate program</a></li>
                                     </ul>
                               </div>
-                              <div class="footer-col">
+                              <div className="footer-col">
                                     <h4 className="mt-3">get help</h4>
                                     <ul>
                                           <li><a href="#">FAQ</a></li>
@@ -51,7 +51,7 @@ export const Footer = () => {
                                           <li><a href="#">payment options</a></li>
                                     </ul>
                               </div>
-                              <div class="footer-col">
+                              <div className="footer-col">
                                     <h4 className="mt-3">Gift Gallery</h4>
                                     <ul>
                                           <li><a href="#">watch</a></li>
