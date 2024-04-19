@@ -2,21 +2,24 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import URL from "../Components/ApiUrl";
 
-// import dotenv from 'dotenv';
-// dotenv.config();
 
-export const fetchProduct = createAsyncThunk("products/fetchProducts", async () => {
-    try {
-        const response = await axios.get(URL.getProducts);
-        // process.env.GET_PRODUCT
-        return response.data.products;
-    } catch (error) {
-        // Handle error
-        console.error("Error fetching products:", error);
-        throw error; // Rethrow the error for the caller to handle
+
+export const fetchProduct = createAsyncThunk(
+    "products/fetchProducts",
+    async (_, { getState }) => {
+        try {
+            const { Product } = getState();
+            const page = Math.ceil(Product.productList.length / 10) + 1;
+            const response = await axios.get(URL.getProducts, {
+                params: { page, limit: 9 },
+            });
+            return response.data.products;
+        } catch (error) {
+            console.error("Error fetching products:", error);
+            throw error;
+        }
     }
-});
-
+);
 
 export const fetchProductByCategory = createAsyncThunk("products/fetchProductByCategory", async (category) => {
     let res = await axios.post(`http://localhost:3000/product/viewProductByCategory/${category}/`)
@@ -122,6 +125,7 @@ const slice = createSlice({
         wishList: [],
         isLoading: false,
         error: false,
+        page: 1
     },
     reducers: {
         deleteProduct: (state, action) => {
@@ -152,30 +156,41 @@ const slice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchProduct.pending, (state, action) => {
             state.isLoading = true;
-        }).addCase(fetchProduct.fulfilled, (state, action) => {
-            state.productList = action.payload;
-        }).addCase(fetchProduct.rejected, (state, action) => {
-            state.error = true;
-        }).addCase(fetchProductByCategory.pending, (state, action) => {
-            state.isLoading = true;
-        }).addCase(fetchProductByCategory.fulfilled, (state, action) => {
-            state.categoryProduct = action.payload;
-            state.productList = action.payload;
-        }).addCase(fetchProductByCategory.rejected, (state, action) => {
-            state.error = true;
-        }).addCase(fetchCartItems.pending, (state, action) => {
-            state.isLoading = true;
-        }).addCase(fetchCartItems.fulfilled, (state, action) => {
-            state.cartItems = action.payload;
-        }).addCase(fetchCartItems.rejected, (state, action) => {
-            state.error = true;
-        }).addCase(fetchWishList.pending, (state, action) => {
-            state.isLoading = true;
-        }).addCase(fetchWishList.fulfilled, (state, action) => {
-            state.wishList = action.payload;
-        }).addCase(fetchWishList.rejected, (state, action) => {
-            state.error = true;
         })
+            .addCase(fetchProduct.fulfilled, (state, action) => {
+                state.isLoading = false;
+                // If it's the first page, replace the existing productList
+                // Otherwise, append the new products to the existing productList
+                if (state.page === 1) {
+                    state.productList = action.payload;
+                } else {
+                    state.productList = [...state.productList, ...action.payload];
+                }
+                state.page++; // Increment page for next pagination
+            })
+            .addCase(fetchProduct.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = true;
+            }).addCase(fetchProductByCategory.pending, (state, action) => {
+                state.isLoading = true;
+            }).addCase(fetchProductByCategory.fulfilled, (state, action) => {
+                state.categoryProduct = action.payload;
+                state.productList = action.payload;
+            }).addCase(fetchProductByCategory.rejected, (state, action) => {
+                state.error = true;
+            }).addCase(fetchCartItems.pending, (state, action) => {
+                state.isLoading = true;
+            }).addCase(fetchCartItems.fulfilled, (state, action) => {
+                state.cartItems = action.payload;
+            }).addCase(fetchCartItems.rejected, (state, action) => {
+                state.error = true;
+            }).addCase(fetchWishList.pending, (state, action) => {
+                state.isLoading = true;
+            }).addCase(fetchWishList.fulfilled, (state, action) => {
+                state.wishList = action.payload;
+            }).addCase(fetchWishList.rejected, (state, action) => {
+                state.error = true;
+            })
     },
 })
 

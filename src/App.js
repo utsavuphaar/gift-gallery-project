@@ -28,6 +28,7 @@ import AdminHomePage from './Components/Admin/AdminHomePage.js';
 import Userlist from './Components/Admin/Userlist.js';
 import OrderList from './Components/Admin/OrderList.js';
 import ChatBot from './Components/User/ChatBot.js';
+import UserProfile from './Components/User/UserProfile.js';
 
 
 
@@ -43,6 +44,7 @@ function App() {
         <Route path='/user' element={<User />} />
         <Route path="/product" element={<Product />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/ChatBot' element={<ChatBot/>}/>
         <Route path='/signin' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/header' element={<Header />} />
@@ -51,7 +53,7 @@ function App() {
         <Route path='/order' element={<Order />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/paymentsuccess" element={<PaymentSuccess />} /> 
-        <Route path='/ChatBot' element={<ChatBot/>}/>
+        <Route path="/user" element={<UserProfile/>}/>
         <Route path='admin' element={<AdminProfile />} >
         <Route index element={<AdminHomePage/>}/>
         <Route path="productList" element={<ProductList/>}/>

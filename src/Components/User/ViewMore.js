@@ -76,18 +76,10 @@ export default function ViewMore() {
                 </span><hr />
                 </div>
                 <p>{state.description}</p>
-                <Box sx={{ '& > :not(style)': { m: 1 } }}>
-                    <span className="border p-3">
-                        <Fab size="small" color="secondary" aria-label="remove">
-                            <RemoveIcon onClick={decrement} />
-                        </Fab>
-                        <input min={1} readOnly type="number" value={inputValue} className="p-1 m-1" id="qty" width="20px" />
-                        <Fab size="small" color="secondary" aria-label="add">
-                            <AddIcon onClick={() => setInputValue(inputValue + 1)} />
-                        </Fab>
-                    </span>
-                    <button onClick={() => addToCart(state.id)} style={{ width: '250px', height: '50px' }} className="btn btn-outline-primary fw-bold">ADD TO CART</button> &nbsp;
-                </Box>
+                            <button className="btn btn-primary" onClick={decrement}>-</button>
+                        <input min={1} readOnly type="number" value={inputValue} className="border ps-3 p-1 m-1" id="qty" width="20px" />
+                            <button className="btn btn-primary" onClick={() => setInputValue(inputValue + 1)} >+</button>
+                    <button onClick={() => addToCart(state.id)} style={{ width: '300px', height: '50px' }} className="ms-5 btn btn-outline-primary fw-bold">ADD TO CART</button> &nbsp;
                 <br /><button style={{ width: '90%', height: '50px' }} className="mt-2 btn btn-primary fw-bold">BUY NOW</button>
 
                 {/* --------------Rating----------- */}

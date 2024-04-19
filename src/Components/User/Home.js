@@ -84,8 +84,10 @@ export default function Home() {
                 </div>
             </div>
         </div>
+        <div>
+        <button onClick={()=>navigate("/chatbot")} className='position-fixed btn btn-danger float-end h-10'>Chat Bot</button>
+        </div>
         <Product />
-        <Outlet />
         <Footer />
     </>
 }
