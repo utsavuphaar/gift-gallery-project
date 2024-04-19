@@ -49,7 +49,7 @@ function Checkout() {
             address = address.current.value;
             city = city.current.value;
             pinCode = pinCode.current.value;
-            window.alert(firstName + " " + lastName + " " + contact + " " + address + " " + city + " " + pinCode + " " + status)
+            // window.alert(firstName + " " + lastName + " " + contact + " " + address + " " + city + " " + pinCode + " " + status)
             console.log(window)
             try {
                 // Fetching payment key

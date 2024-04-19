@@ -13,12 +13,12 @@ import { FaUsers } from "react-icons/fa";
 import "./adminstyle.css";
 const AdminProfile = () => {
     return <>
-        <div className="container-fluid run">
+        <div className="container-fluid run position-relative">
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-2 position-sticky" style={{top:'1px'}}>
                     <br></br>
                     <Link to="">
-                    <button type="button" className="btn btn-primary btn-lg d-flex"><MdOutlineWatchLater className="mt-1" />&nbsp; Dashbord</button>
+                        <button type="button" className="btn btn-primary btn-lg d-flex"><MdOutlineWatchLater className="mt-1" />&nbsp; Dashbord</button>
                     </Link>
 
                     <span className="d-flex mt-3"> <FaTableCellsLarge className="mt-1" />&nbsp; &nbsp;Product</span>
@@ -26,10 +26,10 @@ const AdminProfile = () => {
                     <span className="d-flex mt-3">     <FaRegHeart className="mt-1" />&nbsp; &nbsp;Favorites</span>
                     <span className="d-flex mt-3">     <TiMessages className="mt-1" />&nbsp;&nbsp;Inbox</span>
                     <Link to="orderList">
-                    <span className="d-flex mt-3">    <PiListChecks className="mt-1" />&nbsp;&nbsp;Order List</span>
+                        <span className="d-flex mt-3">    <PiListChecks className="mt-1" />&nbsp;&nbsp;Order List</span>
                     </Link>
                     <Link to="userList">
-                    <span className="d-flex mt-3">    <FaUsers className="mt-1" />&nbsp;&nbsp;User List</span>
+                        <span className="d-flex mt-3">    <FaUsers className="mt-1" />&nbsp;&nbsp;User List</span>
                     </Link>
                     <Link to="productList"><span className="d-flex mt-3">
                         <BiBox className="mt-1" />&nbsp;&nbsp;Product Stock</span>
@@ -43,12 +43,9 @@ const AdminProfile = () => {
                     <p className="mt-2 d-flex"><IoSettingsOutline className="mt-1 seting" />&nbsp;&nbsp; Setting</p>
                     <p className="mt-2 d-flex"> <IoPowerSharp className="mt-1" />&nbsp;&nbsp; Logout</p>
                 </div>
-                {/* block box start    width: 190px;
-      height: 254px;
-     */}
-            <Outlet/>
+                <Outlet />
 
-               
+
 
 
 
