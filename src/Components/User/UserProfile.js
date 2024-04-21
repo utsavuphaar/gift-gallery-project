@@ -35,14 +35,14 @@ export const UserProfile = () => {
             oldPassword = oldPassword.current.value;
             newPassword = newPassword.current.value;
             confirmPassword = confirmPassword.current.value;
-            alert(oldPassword + " " + newPassword + " " + confirmPassword)
-
-            axios.post("http://localhost:3000/user/updatePassword", { email, password: oldPassword, newPassword }).then(res => {
+            alert(oldPassword+" "+newPassword+" "+confirmPassword)
+            axios.post("http://localhost:3000/user/updatePassword", { email, password: oldPassword, newPassword:newPassword }).then(res => {
                   console.log(res)
                   alert("successfully")
+                  setDisabled(true)
             }).catch(err => {
-                  alert("error")
-                  console.log(err);
+                  alert(err.response.data.message)
+                  setDisabled(true)
             });
       }
 
@@ -122,8 +122,6 @@ export const UserProfile = () => {
                                                       <input disabled={disabled} type='text' className='form-control' ref={newPassword} placeholder='New Password' style={{ backgroundColor: "#f5f5f5" }} />
                                                       <br />
                                                 </div>
-
-
                                                 <div className='col-md-12 mt-2'>
 
                                                       <input disabled={disabled} type='text' className='form-control' ref={confirmPassword} placeholder='Confirm New Password' style={{ backgroundColor: "#f5f5f5" }} />
