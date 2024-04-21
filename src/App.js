@@ -28,7 +28,9 @@ import Userlist from './Components/Admin/Userlist.js';
 import OrderList from './Components/Admin/OrderList.js';
 import ChatBot from './Components/User/ChatBot.js';
 import UserProfile from './Components/User/UserProfile.js';
+import ForgetPassword from './Components/User/forgetpassword.js';
 import Auth from './Components/User/Auth.js';
+
 
 
 
@@ -45,6 +47,7 @@ function App() {
         <Route path="/product" element={<Product />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/signin' element={<Signin />} />
+        <Route path="/forget" element={<ForgetPassword/>}/>
         <Route path='/signup' element={<Signup />} />
         <Route path='/header' element={<Header />} />
         <Route path='/viewmore' element={<ViewMore />} />

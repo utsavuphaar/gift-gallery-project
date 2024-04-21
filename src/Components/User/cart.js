@@ -74,18 +74,21 @@ export default () => {
     return <>
         <ToastContainer />
         <Header />
-        <h5 className="container p-4 fs-4">My Cart ({cartItems.length})</h5>
+        <div className="container mt-3 mb-3 d-flex align-items-center">
+            <div style={{ backgroundColor: "#0D6EFD", height: "40px",borderRadius:"5px", width: "25px" }}></div>
+            <span className="ms-2 fs-5">My Cart ({cartItems.length})</span>
+        </div>
         {cartItems.length != 0 ? (
             <section className="row  m-0 p-0">
-                <div className="col-md-9  d-flex justify-content-center align-content-center flex-column">
+                <div className="col-md-9 d-flex justify-content-center align-items-center flex-column">
                     {cartItems.map((product, index) =>
-                        <div className="row container  mt-2 mb-2 m-0 p-0" style={{boxShadow:"0px 1px 1px 2px #0D6EFD"}}>
-                            <div className="col-md-3 float-end center-div justify-content-end align-items-end d-flex">
+                        <div className="row w-75 container  mt-2 mb-2 m-0 p-0" style={{ boxShadow: "0px 1px 1px 2px #0D6EFD" }}>
+                            <div className="col-md-3  float-end center-div justify-content-center align-items-center d-flex">
 
-                                <img className="mt-2 mb-2" style={{borderRadius:"5px"}}  id="cart-img" src={product["products.thumbnail"]} width="130px" height="130px" alt="abc" />
+                                <img className="mt-2 mb-2" style={{ borderRadius: "5px" }} id="cart-img" src={product["products.thumbnail"]} width="130px" height="130px" alt="abc" />
 
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6  d-flex flex-column justify-content-center">
                                 <h6 className="mt-2 text-uppercase">{product["products.title"]}</h6>
                                 <p style={{ fontSize: '14px' }}>{(product['products.description']).slice(0, 100)}</p>
                                 <div>
@@ -93,7 +96,7 @@ export default () => {
                                     &nbsp;<button onClick={() => addToWishlist(product['products.id'])} className="btn btn-outline-primary m-2">Save For Later</button>
                                 </div>
                             </div>
-                            <div className="col-md-3 flex-column d-flex justify-content-center align-content-center">
+                            <div className="col-md-3 flex-column d-flex justify-content-center align-items-start">
                                 <center>
                                     <div >
                                         <span className="mt-2 " style={{ fontSize: '15px' }}><BsCurrencyRupee className="d-inline" />{product["products.price"]} </span>&nbsp;
@@ -101,7 +104,7 @@ export default () => {
                                     </div>
                                     <h5 className="mt-2" style={{ fontSize: '15px' }}>
 
-                                        Qty :  <input className="p-1 rounded" style={{ width: '50px', height: '30px',border:"1px solid blue", outline: 'none' }} type="number" min={1} onClick={(event) => updateQty(index, product["products.id"], event.target.value)} defaultValue={product["products.cartItem.quantity"]}/>
+                                        Qty :  <input className="p-1 rounded" style={{ width: '50px', height: '30px', border: "1px solid blue", outline: 'none' }} type="number" min={1} onClick={(event) => updateQty(index, product["products.id"], event.target.value)} defaultValue={product["products.cartItem.quantity"]} />
 
                                     </h5>
                                 </center>
@@ -112,7 +115,7 @@ export default () => {
                 <div className="col-md-3 p-0 m-0">
 
                     <div className="container  d-flex flex-column p-4" >
-                        <div className="container  p-3" style={{ borderRadius: "10px",boxShadow:"0px 0px 1px 1px gainsboro" }}>
+                        <div className="container  p-3" style={{ borderRadius: "10px", boxShadow: "0px 0px 1px 1px gainsboro" }}>
 
 
 
@@ -131,15 +134,16 @@ export default () => {
                                     <span className=" text-success">{discountPrice.toFixed(2)}</span>
                                 </div>
                                 <div className="p-0 container  mt-2 d-flex w-100 justify-content-between align-items-center">
-                                    <span className="text-primary" style={{fontSize:"10px"}}>----------------------------------------------------</span>
+                                    {/* <span className="text-primary" style={{ fontSize: "10px" }}>----------------------------------------------------</span> */}
+                                    <hr className="w-100"/>
                                 </div>
                             </div>
-                            <h4 className="fw-bold mt-2">Total Bill : <BsCurrencyRupee className="d-inline"/>{(totalamount - discountPrice).toFixed(2)}</h4>
+                            <h4 className="fw-bold mt-2">Total Bill : <BsCurrencyRupee className="d-inline" />{(totalamount - discountPrice).toFixed(2)}</h4>
                             <button onClick={() => navigate("/checkout", { state: cartItems })} className="btn btn-primary mt-3 w-100 fw-bold" >Checkout</button>
                         </div>
                     </div>
                 </div>
-                <div className="d-flex justify-content-between p-4 bg-whit w-75">
+                <div className="d-flex  justify-content-around p-4 bg-whit w-75">
                     <Link to="/">
                         <button className="btn m-2 btn-primary"><AiOutlineArrowLeft className="fs-5 d-inline me-2" />Back To Shop</button>
                     </Link>
@@ -156,7 +160,7 @@ export default () => {
                     <center> <Link to="/"><button className='btn btn-primary' style={{ width: '200px' }}>Shop Now</button> </Link></center>
                 </div>
             </div>
-           
+
         )
         }
         <div className="p-2 ms-2 row  mb-2 d-flex m-2 justify-content-evenly row container-fluid ">
@@ -194,7 +198,7 @@ export default () => {
                 </div>
             </div>
         </div>
-        <Footer/>
+        <Footer />
 
     </>
 }
