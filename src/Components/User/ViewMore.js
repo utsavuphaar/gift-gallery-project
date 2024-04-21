@@ -28,6 +28,7 @@ import Footer from "./footer";
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function ViewMore() {
+    const userId = localStorage.getItem("userId");
     const [inputValue, setInputValue] = useState(1)
     const navigate = useNavigate("")
     const { categoryProduct } = useSelector(store => store.Product);
@@ -47,7 +48,7 @@ export default function ViewMore() {
         }
     };
     const addToCart = (productId) => {
-        dispatch(addProductIntoCart({ userId: 1, productId: productId,quantity:inputValue }))
+        dispatch(addProductIntoCart({ userId: userId, productId: productId,quantity:inputValue }))
     }
     
     const buyNow = (productId,price)=>{
