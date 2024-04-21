@@ -1,5 +1,5 @@
 .react-icon {
-  display: inline-block !important; /* or display: inline; */
+  display: inline-block !important; 
 }
 
 /* ----------------------------------------------Product.js CSS-------------------------------------------------- */
@@ -8,7 +8,6 @@
   height: 40px;
   top: 70%;
   left: 5%;
-  /* margin-top: 220px; */
   justify-content: space-around;
   align-items: center;
   display: none !important;
@@ -75,6 +74,16 @@
   width: 50px;
 }
 
+#related-products {
+  white-space: nowrap;
+  display: flex;
+  overflow-y: scroll;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+
 /* --------------------------------------------------END------------------------------------------------- */
 /* ------------------------------------------------Cart CSS--------------------------------------------- */
 
@@ -109,27 +118,14 @@
   background-color: white;
 }
 
-.icon {
-  /* width: 0%; */
-}
-#related-products {
-  white-space: nowrap;
-  display: flex;
-  overflow-y: scroll;
-  flex-wrap: nowrap;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
 
 #product-box {
-  /* height: 100px; */
   width: 300px;
   box-shadow: 1px 1px 1px 0px gray;
   height: auto;
   border-radius: 15px !important;
   margin: 12px;
   padding: 0 !important;
-  /* border: 1px solid red !important; */
 }
 
 .productlist{
@@ -137,7 +133,6 @@
   align-items: center;
   justify-content: space-evenly;
   margin: 16px;
-  /* padding: 0; */
 }
 
 #gift{
@@ -194,15 +189,12 @@
 
 /* -------------------------------user profile ---------- */
 
-
-/* @media(max-width: 300px)  */
 @media only screen and (max-width: 600px){
   #checkout-left{
         margin-top: 40px;
   }
   #checkout-left{
       height:3000px;
-      /* color: blueviolet; */
 
   }
   .checkout-right{
@@ -215,5 +207,3 @@
   }
   
 }
-
-/* ------------------------------------ */
