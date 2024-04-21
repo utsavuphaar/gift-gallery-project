@@ -30,13 +30,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 // -------------price range----------------
 
+
 function valuetext(value) {
     return `${value}°C`;
 }
 
 // -----------------------------------
-
-export default function Product() {
+ function Product() {
     let userId = localStorage.getItem("userId")
 
     const dispatch = useDispatch();
@@ -69,7 +69,7 @@ export default function Product() {
     };
 
     const addToCart = (productId) => {
-        dispatch(addProductIntoCart({ userId, productId }));
+        dispatch(addProductIntoCart({ userId, productId,quantity:1 }));
     };
 
 
