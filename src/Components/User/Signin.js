@@ -165,7 +165,7 @@ export default function Signin() {
                                 <small className='ms-4 p-1'>Login with Phone</small>
                             </div>
                             <div className='col-md-5 d-flex justify-content-center align-items-center'>
-                                <small>Forget Password ?</small>
+                                <small onClick={()=>navigate("/forget")}>Forget Password ?</small>
                             </div>
                         </div>
                     </div>

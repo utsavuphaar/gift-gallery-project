@@ -36,7 +36,7 @@ function valuetext(value) {
 
 // -----------------------------------
 
-export default function Product() {
+ function Product() {
     let userId = localStorage.getItem("userId")
 
     const dispatch = useDispatch();
@@ -93,8 +93,8 @@ export default function Product() {
 
     return <>
         <div className="container-fluid " style={{backgroundColor:"#F7FAFC"}}>
-            <div className="row p-0 border mb-3 ">
-                <div className="col-lg-3 p-0">
+            <div className="row p-0  mb-3 ">
+                <div className="col-lg-3 p-0" >
                     <div>
                         <Accordion style={{backgroundColor:"#F7FAFC",boxShadow:"none",border:"none"}}
                             expanded={expanded}
@@ -236,7 +236,7 @@ export default function Product() {
                         </Accordion>
                     </div>
                 </div>
-                <div className="col-lg-9 p-0 border d-flex flex-wrap justify-content-around align-items-center">
+                <div className="col-lg-9 p-0  d-flex flex-wrap justify-content-around align-items-center">
                     {productList?.map((product, index) => <div className=" mt-2 col-lg-4 d-flex justify-content-center align-items-center">
                         <div style={{ width: "280px" }} className="bg-white  p-2 m-2 gift-card">
 

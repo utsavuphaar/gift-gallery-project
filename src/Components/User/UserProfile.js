@@ -20,7 +20,7 @@ export const UserProfile = () => {
       return (
             <>
                   <Header />
-                  <section className='container-fluid p-4 ' style={{ backgroundColor: "#F7FAFC" }}>
+                  <section className='container-fluid p-4 border' style={{ backgroundColor: "#F7FAFC" }}>
                         <section className='container p-2  row align-content-around m-auto d-flex' id='checkout-page'>
                               {/* justify-content-center */}
                               <div className='checkout-right border col-md-3 p-5 card mt-2' style={{ backgroundColor: "white", height: 'auto', width: '300px' }}>

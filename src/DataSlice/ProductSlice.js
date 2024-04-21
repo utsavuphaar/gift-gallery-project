@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import URL from "../Components/ApiUrl";
+import Swal from 'sweetalert2';
 
 
 
@@ -45,7 +46,14 @@ export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct",
 export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ userId, productId }) => {
     try {
         let res = await axios.post(URL.addToCart, { userId, productId })
-        alert(res.data.message)
+        // alert(res.data.message)
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Product added into the cart",
+            showConfirmButton: false,
+            timer: 3000
+        });
         return res.data;
     } catch (err) {
         console.log(err)
