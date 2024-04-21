@@ -30,11 +30,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 // -------------price range----------------
 
+
 function valuetext(value) {
     return `${value}°C`;
 }
-
-// -----------------------------------
 
  function Product() {
     let userId = localStorage.getItem("userId")
@@ -69,7 +68,7 @@ function valuetext(value) {
     };
 
     const addToCart = (productId) => {
-        dispatch(addProductIntoCart({ userId, productId }));
+        dispatch(addProductIntoCart({ userId, productId,quantity:1 }));
     };
 
 
