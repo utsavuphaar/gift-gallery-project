@@ -43,8 +43,9 @@ export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct",
     }
 })
 
-export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ userId, productId }) => {
+export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ userId, productId,quantity }) => {
     try {
+
         let res = await axios.post(URL.addToCart, { userId, productId })
         // alert(res.data.message)
         Swal.fire({
@@ -54,6 +55,8 @@ export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ us
             showConfirmButton: false,
             timer: 3000
         });
+        let res = await axios.post(URL.addToCart, { userId, productId,quantity })
+        alert(res.data.message)
         return res.data;
     } catch (err) {
         console.log(err)

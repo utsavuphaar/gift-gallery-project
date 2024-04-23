@@ -28,6 +28,7 @@ import Footer from "./footer";
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function ViewMore() {
+    const userId = localStorage.getItem("userId");
     const [inputValue, setInputValue] = useState(1)
     const navigate = useNavigate("")
     const { categoryProduct } = useSelector(store => store.Product);
@@ -47,7 +48,12 @@ export default function ViewMore() {
         }
     };
     const addToCart = (productId) => {
-        dispatch(addProductIntoCart({ userId: 1, productId: productId }))
+        dispatch(addProductIntoCart({ userId: userId, productId: productId,quantity:inputValue }))
+    }
+    
+    const buyNow = (productId,price)=>{
+        const finalPrice = (price*inputValue)
+        alert(productId+" "+finalPrice)
     }
     // alert(inputValue)
     return <>
@@ -80,7 +86,7 @@ export default function ViewMore() {
                         <input min={1} readOnly type="number" value={inputValue} className="border ps-3 p-1 m-1" id="qty" width="20px" />
                             <button className="btn btn-primary" onClick={() => setInputValue(inputValue + 1)} >+</button>
                     <button onClick={() => addToCart(state.id)} style={{ width: '300px', height: '50px' }} className="ms-5 btn btn-outline-primary fw-bold">ADD TO CART</button> &nbsp;
-                <br /><button style={{ width: '90%', height: '50px' }} className="mt-2 btn btn-primary fw-bold">BUY NOW</button>
+                <br /><button onClick={()=>buyNow(state.id,state.price)} style={{ width: '90%', height: '50px' }} className="mt-2 btn btn-primary fw-bold">BUY NOW</button>
 
                 {/* --------------Rating----------- */}
                 <Box
@@ -106,7 +112,7 @@ export default function ViewMore() {
 
         <div>
             <div className="container border p-2 mb-4 " id="related-products">
-                {categoryProduct?.map((product, index) => <div key={index} className="m-2 p-2 h-auto border d-flex flex-column rounded position-relative">
+                {categoryProduct?.map((product, index) => <div key={index} id="related-products-child" className="m-2 p-2 h-auto border d-flex flex-column rounded position-relative">
                     <img width="100%" onClick={()=>viewMore(product)} height="250px" id="view-image" src={product.thumbnail} />
                     <div className="d-flex position-absolute" id="buttons">
                         <div><CiHeart style={{ width: '25px', height: '25px' }} /></div>

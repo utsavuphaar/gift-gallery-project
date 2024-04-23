@@ -30,6 +30,7 @@ import ChatBot from './Components/User/ChatBot.js';
 import UserProfile from './Components/User/UserProfile.js';
 import ForgetPassword from './Components/User/forgetpassword.js';
 import ResetPassword from './Components/User/Resetpassword.js';
+import Auth from './Components/User/Auth.js';
 
 
 
@@ -39,12 +40,12 @@ function App() {
 
   return <>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home />}/ >
+        <Route path='ChatBot' element={<ChatBot/>}/>
         <Route path='/aboutus' element={<AboutUs />} />
         <Route path='/contactus' element={<ContactUs />} />
         <Route path="/product" element={<Product />} />
         <Route path='/cart' element={<Cart />} />
-        <Route path='/ChatBot' element={<ChatBot/>}/>
         <Route path='/signin' element={<Signin />} />
         <Route path="/forget" element={<ForgetPassword/>}/>
         <Route path="/resetpassword" element={<ResetPassword/>}/>
@@ -55,7 +56,7 @@ function App() {
         <Route path='/order' element={<Order />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/paymentsuccess" element={<PaymentSuccess />} /> 
-        <Route path="/user" element={<UserProfile/>}/>
+        <Route path="/user" element={<Auth><UserProfile/></Auth>}/>
         <Route path='admin' element={<AdminProfile />} >
         <Route index element={<AdminHomePage/>}/>
         <Route path="productList" element={<ProductList/>}/>

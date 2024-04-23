@@ -11,6 +11,7 @@ import { BiBox } from "react-icons/bi";
 import { Link, Outlet } from "react-router-dom";
 import { FaUsers } from "react-icons/fa";
 import "./adminstyle.css";
+import { color } from "@chakra-ui/react";
 const AdminProfile = () => {
     return <>
         <div className="container-fluid run position-relative">
@@ -25,7 +26,7 @@ const AdminProfile = () => {
 
                     <span className="d-flex mt-3">     <FaRegHeart className="mt-1" />&nbsp; &nbsp;Favorites</span>
                     <span className="d-flex mt-3">     <TiMessages className="mt-1" />&nbsp;&nbsp;Inbox</span>
-                    <Link to="orderList">
+                    <Link to="orderList" state={{color:'black'}}>
                         <span className="d-flex mt-3">    <PiListChecks className="mt-1" />&nbsp;&nbsp;Order List</span>
                     </Link>
                     <Link to="userList">
