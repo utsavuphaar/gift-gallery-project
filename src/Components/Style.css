@@ -401,3 +401,12 @@
 .gift-card:hover{
     box-shadow: 0px 0px 1px 1px gainsboro;
 }
+
+/* ----------------Forget Password------------------ */
+
+.forget-page{
+    background: url("./User/Images/mail-white-envelope-and-keyboard-58ravrq3vxjefwht.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
