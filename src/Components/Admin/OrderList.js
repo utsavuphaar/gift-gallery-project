@@ -29,23 +29,23 @@ function OrderList() {
 
     return (
         <>
-            <div className='container-fluid w-75' style={{backgroundColor:"#f7fafc"}}>
-            <div className='mb-4 ms-2 form-group row'>
-            <label className='fs-4'>Order : 
-            <input className='col-md-3 ms-2 fs-6 p-2 rounded border' type='search' placeholder='type order id..'/>
-            <select className='col-md-3 fs-5 cursor-pointer border float-end rounded p-1'>
-                <option>All Orers</option>
-                <option>Confirmed</option>
-                <option>On the way</option>
-                <option>Shipped</option>
-                <option>Cancelled</option>
-            </select>
-            </label>
-        </div>
-                <div className='container p-2 mt-2 row'>
-                    <table className='table border col-md-10'>
-                        <thead>
-                            <tr className='bg-primary text-center text-white'>
+            <div className='container-fluid w-75 p-2' style={{ backgroundColor: "#f7fafc" }}>
+                <div className='mb-4 ms-2 form-group row'>
+                    <label className='fs-4'>Order :
+                        <input className='col-md-3 ms-2 fs-6 p-2 rounded border' type='search' placeholder='type order id..' />
+                        <select className='col-md-3 fs-5 cursor-pointer border float-end rounded p-1'>
+                            <option>All Orers</option>
+                            <option>Confirmed</option>
+                            <option>On the way</option>
+                            <option>Shipped</option>
+                            <option>Cancelled</option>
+                        </select>
+                    </label>
+                </div>
+                <div className='container p-2 mt-4 row' style={{ overflowY: "auto", height: '450px' }}>
+                    <table className='table border col-md-10 position-relative' style={{ maxHeight: '70vh', overflow: "scroll" }}>
+                        <thead className='position-sticky' style={{top:'-10px'}}>
+                            <tr className='bg-primary text-center text-white p-2'>
                                 <th>Sr.No.</th>
                                 <th>Item</th>
                                 <th>Name</th>
