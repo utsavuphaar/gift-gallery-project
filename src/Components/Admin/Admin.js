@@ -16,7 +16,7 @@ const AdminProfile = () => {
     return <>
         <div className="container-fluid run position-relative">
             <div className="row">
-                <div className="col-md-2 position-sticky" style={{top:'1px'}}>
+                <div className="col-md-2 " style={{top:'1px'}}>
                     <br></br>
                     <Link to="">
                         <button type="button" className="btn btn-primary btn-lg d-flex"><MdOutlineWatchLater className="mt-1" />&nbsp; Dashbord</button>
@@ -40,7 +40,6 @@ const AdminProfile = () => {
                     <br></br>
                     <p>PAGES</p>
                     <span className="d-flex mt-3"> <LiaTableSolid className="mt-1 ml-4" />&nbsp;&nbsp;Table</span>
-                    <hr className="linemar seting1"></hr>
                     <p className="mt-2 d-flex"><IoSettingsOutline className="mt-1 seting" />&nbsp;&nbsp; Setting</p>
                     <p className="mt-2 d-flex"> <IoPowerSharp className="mt-1" />&nbsp;&nbsp; Logout</p>
                 </div>

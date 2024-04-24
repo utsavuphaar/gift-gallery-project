@@ -1,18 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./adminstyle.css";
 import { FaUserGroup } from "react-icons/fa6";
 import { AiOutlineStock } from "react-icons/ai";
 import { IoCubeOutline } from "react-icons/io5";
 import { GoGraph } from "react-icons/go";
 import { LiaStopwatchSolid } from "react-icons/lia";
-import { IoReorderThreeOutline } from "react-icons/io5";
-import { IoChevronDownCircleSharp } from "react-icons/io5";
-import { IoNotificationsOutline } from "react-icons/io5";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoIosGift } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProduct } from '../../DataSlice/ProductSlice';
+import ApiUrl from '../ApiUrl';
+import axios from 'axios';
 function AdminHomePage() {
+    const [categoryList,setCategoryList] = useState(0);
+    const [userList, setUserList] = useState(0);
+    const {productList,category} = useSelector(store=>store.Product);
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(fetchProduct());
+        axios.get(ApiUrl.getCategories)
+            .then(response => {
+                setCategoryList(response.data.categories.length);
+            }).catch(err => {
+                console.log(err);
+            })
+        axios.get("http://localhost:3000/user/userList").then(response => {
+            setUserList(response.data.users.length);
+        }).catch(err => {
+            console.log(err);
+        })
+    },[])
+
     return (
-        <div className="col-md-10 bg-light d-flex mt-5">
+        <div className="col-md-10 bg-light d-flex">
             <div className="container ">
                 <div className="row">
                     <div className="col-md-3 mt-2">
@@ -22,10 +42,9 @@ function AdminHomePage() {
                                     <div className="col-md-9 ">Total User </div>
                                     <div className="col-md-3">
                                         <FaUserGroup className="fs-3 usericon" /></div>
-
                                 </div>
                                 <br></br>
-                                <p className="fs-4">40,689</p>
+                                <p className="fs-4">{userList}</p>
                                 <br></br>
                                 <div className="row d-flex">
                                     <div className="col-md-1">
@@ -49,13 +68,13 @@ function AdminHomePage() {
                         <p>10,293</p> */}
 
                                 <div className="row d-flex">
-                                    <div className="col-md-9 ">Total User </div>
+                                    <div className="col-md-9 ">Total Product </div>
                                     <div className="col-md-3">
                                         <IoCubeOutline className="fs-3 cobeicon " /></div>
 
                                 </div>
                                 <br></br>
-                                <p className="fs-4">40,689</p>
+                                <p className="fs-4">{productList.length}</p>
                                 <br></br>
                                 <div className="row d-flex">
                                     <div className="col-md-1">
@@ -77,13 +96,12 @@ function AdminHomePage() {
                                 {/* <span>Total Sales </span>
                         <p>$89,000</p> */}
                                 <div className="row d-flex">
-                                    <div className="col-md-9 ">Total User </div>
+                                    <div className="col-md-9 ">Total Category </div>
                                     <div className="col-md-3">
                                         <GoGraph className="fs-3 graphicon" /></div>
-
                                 </div>
                                 <br></br>
-                                <p className="fs-4">40,689</p>
+                                <p className="fs-4">{categoryList}</p>
                                 <br></br>
                                 <div className="row d-flex">
                                     <div className="col-md-1">
