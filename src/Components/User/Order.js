@@ -31,41 +31,54 @@ function Order() {
 
     return (
         <>
-            <Header />            
-                <div className='container'>
-                    <h3 className='p-4 fs-4'>Your Order ({state.orderList.length})</h3>
-                </div>
- {state.orderList.length != 0 ? (
-       <div className='container-fluid' style={{ backgroundColor: "#f7fafc" }}>
-                <div className='border p-2 mt-2'>
-                    <table className='table border'>
-                        <thead>
-                            <tr className='bg-primary text-center text-white'>
-                                <th>Sr.No.</th>
-                                <th>Item</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Order Date</th>
-                                <th>Order Id</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                state.orderList?.map((order, index) => <tr key={index} className='text-center'>
-                                    <td ><div className='container d-flex justify-content-center align-items-center'>{index + 1}</div></td>
-                                    <td className='d-grid place-items-center'>
-                                        {/* <img src={order.orderItems[0].product.thumbnail} width="100px" height="100px" /> */}
-                                    </td>
-                                    <td>{order.orderItems[0].product.title}</td>
-                                    <td>{order.orderItems[0].product.price}</td>
-                                    <td style={{ textAlign: 'center' }}>{order.status}</td>
-                                    <td>{order.orderDate}</td>
-                                    <td className='text-primary' style={{ cursor: "pointer" }}>{order.orderId}</td>
-                                </tr>)
-                            }
-                        </tbody>
-                    </table>
+            <Header />
+            <div className='container'>
+                <h3 className='p-4 fs-4'>Your Order ({state.orderList.length})</h3>
+            </div>
+            {state.orderList.length != 0 ? (
+                <div className='container-fluid p-0' style={{ backgroundColor: "#f7fafc" }}>
+                    <div className='border m-0 p-0'>
+                        <table className='table border'>
+                            <thead>
+                                <tr className='bg-primary text-center text-white'>
+                                    <th>Order no.</th>
+                                    <th>Item</th>
+                                    {/* <th>Name</th> */}
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Order Date</th>
+                                    <th>Order Id</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    state.orderList?.map((order, index) => <tr key={index} className='text-center'>
+                                        <td ><div className='container d-flex justify-content-center align-items-center'>{index + 1}</div></td>
+                                        {/* <td className='d-grid place-items-center'>
+                                        <img src={order.orderItems[0].product.thumbnail} width="100px" height="100px" />
+                                    </td> */}
+
+                                        <td>
+                                            <div className='row'>
+                                            <div className='col-md-6 d-flex align-items-center justify-content-center'>
+                                                <img src={order.orderItems[0].product.thumbnail} width="100px" height="100px" />
+                                            </div>
+                                            <div className='col-md-6 d-flex justify-content-start align-items-center'>
+                                                <span>{order.orderItems[0].product.title}</span>
+                                            </div>
+
+                                            </div>
+                                        </td>
+
+                                        {/* <td>{order.orderItems[0].product.title}</td> */}
+                                        <td>{order.orderItems[0].product.price}</td>
+                                        <td style={{ textAlign: 'center' }}>{order.status}</td>
+                                        <td>{order.orderDate}</td>
+                                        <td className='text-primary' style={{ cursor: "pointer" }}>{order.orderId}</td>
+                                    </tr>)
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             ) : (

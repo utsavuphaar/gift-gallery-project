@@ -55,7 +55,7 @@ export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ us
             showConfirmButton: false,
             timer: 3000
         });
-        let res = await axios.post(URL.addToCart, { userId, productId,quantity })
+         res = await axios.post(URL.addToCart, { userId, productId,quantity })
         alert(res.data.message)
         return res.data;
     } catch (err) {
