@@ -161,10 +161,10 @@ export default function Signin() {
 
                     <div className='container-fluid mt-3 d-flex justify-content-center align-items-center'>
                         <div className='row  w-100  text-primary' style={{ fontSize: "13px" }}>
-                            <div className=' col-md-7 d-flex justify-content-start align-items-center'>
+                            {/* <div className=' col-md-7 d-flex justify-content-start align-items-center'>
                                 <small className='ms-4 p-1'>Login with Phone</small>
-                            </div>
-                            <div className='col-md-5 d-flex justify-content-center align-items-center'>
+                            </div> */}
+                            <div className='col-md-5 d-flex justify-content-center align-items-center ' style={{cursor:"pointer"}}>
                                 <small onClick={()=>navigate("/forget")}>Forget Password ?</small>
                             </div>
                         </div>
@@ -178,8 +178,9 @@ export default function Signin() {
                     {/* <span className='mt-3 forget'>Forget Password ?</span> */}
                     <button className="w-75 mt-4  button" onClick={() => signin()}>Sign In</button>
                     {/* <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3' />Sign in with google</button> */}
+                    <div className='w-75 d-flex justify-content-center align-items-center mt-3 mb-2'>______________or_______________</div>
                     <GoogleSign />
-                    <FcGoogle className='fs-1 me-3 d-none google' />
+                    {/* <FcGoogle className='fs-1 me-3 d-none google' /> */}
                     <p className=' mt-3 mb-4' id='log-2'>Do not have an account,<span className=' text-primary ms-2 create' onClick={() => navigate('/signup')}><u>create a new one.</u></span></p>
                 </div>
                 <div className='col-md-6  p-0'>

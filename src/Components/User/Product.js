@@ -237,10 +237,10 @@ function valuetext(value) {
                 </div>
                 <div className="col-lg-9 p-0  d-flex flex-wrap justify-content-around align-items-center">
                     {productList?.map((product, index) => <div className=" mt-2 col-lg-4 d-flex justify-content-center align-items-center">
-                        <div style={{ width: "280px" }} className="bg-white  p-2 m-2 gift-card">
+                        <div style={{ width: "300px",borderRadius:"10px" }} className="bg-white  p-2 m-2 gift-card">
 
-                            <img src={product.thumbnail} onClick={() => viewMore(product)} style={{ cursor: 'pointer', width: "250px", height: "230px", borderRadius: "10px" }} />
-                            <div className="w-100">
+                            <img src={product.thumbnail} onClick={() => viewMore(product)} style={{ cursor: 'pointer', width: "270px", height: "230px", borderRadius: "10px" }} />
+                            <div className="w-100 d-flex justify-content">
                                 <h6 className=" ms-2 mt-2">{product.title.slice(0, 22)}</h6>
                             </div>
                             <div className="w-100  d-flex justify-content-center align-items-center">
@@ -258,10 +258,10 @@ function valuetext(value) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-100 mt-2 d-flex justify-content-around align-items-center mb-1" >
+                            {/* <div className="w-100 mt-2 d-flex justify-content-around align-items-center mb-1" >
                                 <button className="btn btn-outline-primary" onClick={() => addToCart(product.id)}>Move to cart</button>
                                 <button className="btn btn-primary">Buy now</button>
-                            </div>
+                            </div> */}
                         </div>
                     </div>)}
                 </div>
