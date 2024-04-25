@@ -3,6 +3,7 @@ import { LuPhoneCall } from "react-icons/lu";
 import './ContactUs.css';
 import Header from "./Header";
 import { useRef } from "react";
+import Footer from "./footer";
 
 export const ContactUs = () => {
       let name = useRef();
@@ -90,6 +91,7 @@ export const ContactUs = () => {
                               </div>
                         </div>
                   </div>
+                  <Footer/>
             </>
       );
 };
