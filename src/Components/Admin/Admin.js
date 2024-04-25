@@ -14,9 +14,11 @@ import "./adminstyle.css";
 import { color } from "@chakra-ui/react";
 const AdminProfile = () => {
     return <>
+
         <div className="container-fluid run position-relative">
             <div className="row">
                 <div className="col-md-2 " style={{top:'1px'}}>
+
                     <br></br>
                     <Link to="">
                         <button type="button" className="btn btn-primary btn-lg d-flex"><MdOutlineWatchLater className="mt-1" />&nbsp; Dashbord</button>

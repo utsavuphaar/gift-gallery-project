@@ -240,26 +240,32 @@ function Product() {
                 </div>
                 <div className="col-lg-9 p-0  d-flex flex-wrap justify-content-around align-items-center">
                     {productList?.map((product, index) => <div className=" mt-2 col-lg-4 d-flex justify-content-center align-items-center">
-                        <div style={{ width: "300px", borderRadius: "10px" }} className="bg-white  p-2 m-2 gift-card">
 
-                            <img src={product.thumbnail} onClick={() => viewMore(product)} style={{ cursor: 'pointer', width: "270px", height: "230px", borderRadius: "10px" }} />
-                            <div className="w-100 d-flex justify-content">
-                                <h6 className=" ms-2 mt-2">{product.title.slice(0, 22)}</h6>
+                        <div style={{ width: "300px", borderRadius: "10px" }} className="bg-white  p-2 m-2 d-flex flex-column align-items-center">
+
+                            <img src={product.thumbnail} className='gift-image' onClick={() => viewMore(product)} style={{ cursor: 'pointer', width: "270px", height: "230px", borderRadius: "10px" }} />
+                            <div className="w-100 mt-2 d-flex justify-content-between">
+                                <h6 className="mt-2 ms-2">{product.title.slice(0, 22)}</h6>
+                                <div className="d-flex align-items-center justify-content-center ms-2  rounded" style={{ width: "55px" }}>
+                                    <AiFillStar className="text-warning" />
+                                    <span style={{ fontSize: "14px" }} className=" text-dark rounded d-flex justify-content-center align-items-center fw-bold ">{product.rating}</span>
+                                </div>
+
                             </div>
-                            <div className="w-100  d-flex justify-content-center align-items-center">
-                                <div className="d-flex align-items-center">
+                            <div className="w-100 d-flex justify-content-around align-items-center">
+                                <div className="d-flex align-items-center justify-content-around ">
                                     <h5 className="" style={{ fontSize: "15px" }}>₹ {(product.price - (((parseInt(product.discountPercentage * product.price) / 100).toFixed(2)) * 1)).toFixed(2)}</h5>
                                     <del style={{ fontSize: '10px' }} className="ms-2 text-secondary">MRP{product.price}</del>
+                                </div>
                                     <div className="ms-2 d-flex align-items-center justify-content-center text-primary" style={{ borderRadius: "5px", width: "60px", height: "20px", fontSize: '10px', backgroundColor: "#C7E1FF" }}>
                                         {product.discountPercentage}% off
                                     </div>
-                                </div>
-                                <div className=" d-flex align-items-center justify-content-center " >
+                                {/* <div className=" d-flex align-items-center justify-content-center " >
                                     <div className="d-flex align-items-center justify-content-center ms-2  rounded" style={{ width: "55px" }}>
                                         <AiFillStar className="text-warning" />
                                         <span style={{ fontSize: "12px" }} className="p-1 text-dark rounded d-flex justify-content-center align-items-center fw-bold ">{product.rating}</span>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="w-100 mt-2 d-flex justify-content-around align-items-center mb-1" >
                                 <button className="btn btn-outline-primary" onClick={() => addToCart(product.id)}>Move to cart</button>
