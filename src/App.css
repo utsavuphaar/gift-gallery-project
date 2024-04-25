@@ -71,7 +71,7 @@
 }
 
 #qty {
-  width: 50px;
+  width: 80px;
 }
 
 #related-products {
@@ -84,7 +84,7 @@
 }
 
 #view-more-section{
-  height: 100vh !important;
+  height: 150vh !important;
 }
 
 /* --------------------------------------------------END------------------------------------------------- */
