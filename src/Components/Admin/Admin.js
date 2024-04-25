@@ -14,8 +14,8 @@ import "./adminstyle.css";
 import { color } from "@chakra-ui/react";
 const AdminProfile = () => {
     return <>
-        <div className="container-fluid run position-relative">
-            <div className="row">
+        <div className="container-fluid  run position-relative">
+            <div className="row border">
                 <div className="col-md-2 position-sticky" style={{top:'1px'}}>
                     <br></br>
                     <Link to="">

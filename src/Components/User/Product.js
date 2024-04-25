@@ -35,7 +35,7 @@ function valuetext(value) {
     return `${value}°C`;
 }
 
- function Product() {
+function Product() {
     let userId = localStorage.getItem("userId")
 
     const dispatch = useDispatch();
@@ -68,7 +68,7 @@ function valuetext(value) {
     };
 
     const addToCart = (productId) => {
-        dispatch(addProductIntoCart({ userId, productId,quantity:1 }));
+        dispatch(addProductIntoCart({ userId, productId, quantity: 1 }));
     };
 
 
@@ -91,11 +91,11 @@ function valuetext(value) {
     };
 
     return <>
-        <div className="container-fluid " style={{backgroundColor:"#F7FAFC"}}>
+        <div className="container-fluid " style={{ backgroundColor: "#F7FAFC" }}>
             <div className="row p-0  mb-3 ">
                 <div className="col-lg-3 p-0" >
                     <div>
-                        <Accordion style={{backgroundColor:"#F7FAFC",boxShadow:"none",border:"none"}}
+                        <Accordion style={{ backgroundColor: "#F7FAFC", boxShadow: "none", border: "none" }}
                             expanded={expanded}
                             onChange={handleExpansion}
                             slots={{ transition: Fade }}
@@ -123,7 +123,7 @@ function valuetext(value) {
                                 </Typography>
                             </AccordionDetails>
                         </Accordion>
-                        <Accordion style={{backgroundColor:"#F7FAFC",boxShadow:"none",border:"none"}}>
+                        <Accordion style={{ backgroundColor: "#F7FAFC", boxShadow: "none", border: "none" }}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel2-content"
@@ -143,7 +143,7 @@ function valuetext(value) {
                                 <span>Rahul Vishwakarma</span>
                             </AccordionDetails>
                         </Accordion>
-                        <Accordion style={{backgroundColor:"#F7FAFC",boxShadow:"none",border:"none"}}>
+                        <Accordion style={{ backgroundColor: "#F7FAFC", boxShadow: "none", border: "none" }}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel2-content"
@@ -167,11 +167,11 @@ function valuetext(value) {
                                     <div className='row d-flex'>
                                         <div className='col-sm-6 d-flex flex-column justify-content-center align-items-center'>
                                             <label>Min</label>
-                                            <input className='w-50' style={{height:"30px",border:'1px solid blue',outline:'none',borderRadius:"5px"}}  type='number' min={0} />
+                                            <input className='w-50' style={{ height: "30px", border: '1px solid blue', outline: 'none', borderRadius: "5px" }} type='number' min={0} />
                                         </div>
                                         <div className='col-sm-6 d-flex flex-column align-items-center'>
                                             <label>Max</label>
-                                            <input className='w-50' style={{height:"30px",paddingLeft:"5px",border:'1px solid blue',outline:'none',borderRadius:"5px"}} type='number' min={9999} />
+                                            <input className='w-50' style={{ height: "30px", paddingLeft: "5px", border: '1px solid blue', outline: 'none', borderRadius: "5px" }} type='number' min={9999} />
                                         </div>
                                     </div>
                                     <button className='w-75 mt-3 btn btn-outline-info'>Apply</button>
@@ -179,7 +179,7 @@ function valuetext(value) {
 
                             </AccordionDetails>
                         </Accordion>
-                        <Accordion style={{backgroundColor:"#F7FAFC",boxShadow:"none",border:"none"}}>
+                        <Accordion style={{ backgroundColor: "#F7FAFC", boxShadow: "none", border: "none" }}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel2-content"
@@ -237,26 +237,30 @@ function valuetext(value) {
                 </div>
                 <div className="col-lg-9 p-0  d-flex flex-wrap justify-content-around align-items-center">
                     {productList?.map((product, index) => <div className=" mt-2 col-lg-4 d-flex justify-content-center align-items-center">
-                        <div style={{ width: "300px",borderRadius:"10px" }} className="bg-white  p-2 m-2 gift-card">
+                        <div style={{ width: "300px", borderRadius: "10px" }} className="bg-white  p-2 m-2 d-flex flex-column align-items-center">
 
-                            <img src={product.thumbnail} onClick={() => viewMore(product)} style={{ cursor: 'pointer', width: "270px", height: "230px", borderRadius: "10px" }} />
-                            <div className="w-100 d-flex justify-content">
-                                <h6 className=" ms-2 mt-2">{product.title.slice(0, 22)}</h6>
+                            <img src={product.thumbnail} className='gift-image' onClick={() => viewMore(product)} style={{ cursor: 'pointer', width: "270px", height: "230px", borderRadius: "10px" }} />
+                            <div className="w-100 mt-2 d-flex justify-content-between">
+                                <h6 className="mt-2 ms-2">{product.title.slice(0, 22)}</h6>
+                                <div className="d-flex align-items-center justify-content-center ms-2  rounded" style={{ width: "55px" }}>
+                                    <AiFillStar className="text-warning" />
+                                    <span style={{ fontSize: "14px" }} className=" text-dark rounded d-flex justify-content-center align-items-center fw-bold ">{product.rating}</span>
+                                </div>
                             </div>
-                            <div className="w-100  d-flex justify-content-center align-items-center">
-                                <div className="d-flex align-items-center">
+                            <div className="w-100 d-flex justify-content-around align-items-center">
+                                <div className="d-flex align-items-center justify-content-around ">
                                     <h5 className="" style={{ fontSize: "15px" }}>₹ {(product.price - (((parseInt(product.discountPercentage * product.price) / 100).toFixed(2)) * 1)).toFixed(2)}</h5>
                                     <del style={{ fontSize: '10px' }} className="ms-2 text-secondary">MRP{product.price}</del>
+                                </div>
                                     <div className="ms-2 d-flex align-items-center justify-content-center text-primary" style={{ borderRadius: "5px", width: "60px", height: "20px", fontSize: '10px', backgroundColor: "#C7E1FF" }}>
                                         {product.discountPercentage}% off
                                     </div>
-                                </div>
-                                <div className=" d-flex align-items-center justify-content-center " >
+                                {/* <div className=" d-flex align-items-center justify-content-center " >
                                     <div className="d-flex align-items-center justify-content-center ms-2  rounded" style={{ width: "55px" }}>
-                                            <AiFillStar className="text-warning" />
+                                        <AiFillStar className="text-warning" />
                                         <span style={{ fontSize: "12px" }} className="p-1 text-dark rounded d-flex justify-content-center align-items-center fw-bold ">{product.rating}</span>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                             {/* <div className="w-100 mt-2 d-flex justify-content-around align-items-center mb-1" >
                                 <button className="btn btn-outline-primary" onClick={() => addToCart(product.id)}>Move to cart</button>
