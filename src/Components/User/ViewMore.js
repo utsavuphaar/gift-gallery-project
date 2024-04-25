@@ -28,6 +28,7 @@ import Footer from "./footer";
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function ViewMore() {
+    const location = useLocation();
     const userId = localStorage.getItem("userId");
     const [inputValue, setInputValue] = useState(1)
     const navigate = useNavigate("")
@@ -48,17 +49,17 @@ export default function ViewMore() {
         }
     };
     const addToCart = (productId) => {
-        dispatch(addProductIntoCart({ userId: userId, productId: productId,quantity:inputValue }))
+        dispatch(addProductIntoCart({ userId: userId, productId: productId, quantity: inputValue }))
     }
-    
-    const buyNow = (productId,price)=>{
-        const finalPrice = (price*inputValue)
-        alert(productId+" "+finalPrice)
+
+    const buyNow = (productId, price) => {
+        const finalPrice = (price * inputValue)
+        alert(productId + " " + finalPrice)
     }
     // alert(inputValue)
     return <>
-    <Header/>
-        <section className="p3 mt-4 d-flex h-auto border justify-content-center align-content-center" id="view-more-section" style={{ width: '100%',height:'auto' }}>
+        <Header />
+        <section className="p3 mt-4 d-flex h-auto border justify-content-center align-content-center" id="view-more-section" style={{ width: '100%', height: 'auto' }}>
             <div id="view-left">
                 <div></div>
                 <div></div>
@@ -69,6 +70,30 @@ export default function ViewMore() {
 
             <div id="view-mid" className="p-2">
                 <img style={{ width: '100%', height: '100%' }} src={state.thumbnail} />
+                <div className="flex-column mt-2 d-flex justify-content-around">
+                    {/* <div className="w-100 text-center">
+                        <button className="btn btn-primary" onClick={decrement}>-</button>
+                        <input min={1} readOnly type="number" value={inputValue} className="border ps-4 p-1 m-1" id="qty" />
+                        <button className="btn btn-primary" onClick={() => setInputValue(inputValue + 1)} >+</button>
+                    </div> */}
+                    <div>
+                        <button onClick={() => addToCart(state.id)} style={{ width: '200px', height: '50px' }} className="btn btn-outline-primary fw-bold">ADD TO CART</button> &nbsp;
+                        <button onClick={() => buyNow(state.id, state.price)} style={{ width: '200px', height: '50px' }} className="btn btn-primary fw-bold">BUY NOW</button>
+                    </div>
+                    <div className="row mt-2 border" >
+                        <h4 className="container m-2">Warranty</h4>
+                        <div className="col-md-6 text-muted">
+                            <p>Domestic Warranty</p>
+                            <p>Warranty Summary</p><br/>
+                            <p>Replacement Policy</p>
+                        </div>
+                        <div className="col-md-6">
+                            <p>1 Year</p>
+                            <p>1 Year Warranty from the Date of Purchase.</p>
+                            <p>Seven days</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div id="view-right" className="m-4 mt-0">
@@ -78,36 +103,35 @@ export default function ViewMore() {
                     <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
                 </span>
                 <br />
-                <div categoryName="d-flex"> 
-                <span className="fs-3 d-inline me-3">
-                    Rs. {state.price} |
-                </span><hr />
+                <div categoryName="d-flex">
+                    <span className="fs-3 d-inline me-3">
+                        Rs. {state.price} | <span className="text-warning">({state.discountPercentage}% off )</span>
+                    </span><hr />
                 </div>
                 <p>{state.description}</p>
-                            <button className="btn btn-primary" onClick={decrement}>-</button>
-                        <input min={1} readOnly type="number" value={inputValue} className="border ps-3 p-1 m-1" id="qty" width="20px" />
-                            <button className="btn btn-primary" onClick={() => setInputValue(inputValue + 1)} >+</button>
-                    <button onClick={() => addToCart(state.id)} style={{ width: '300px', height: '50px' }} className="ms-5 btn btn-outline-primary fw-bold">ADD TO CART</button> &nbsp;
-                <br /><button onClick={()=>buyNow(state.id,state.price)} style={{ width: '90%', height: '50px' }} className="mt-2 btn btn-primary fw-bold">BUY NOW</button>
 
                 {/* --------------Rating----------- */}
                 <div>
-                    <Link to="">
+                    <Link to={{ ...location, state: { data: state.title } }}>
 
                     </Link>
-                    <Outlet/>
+                    <Outlet />
                 </div>
+                {/* <div className="d-flex border justify-content-between">
+                    <p className="mt-2">view reviews</p>
+                    <button className="btn text-primary">view</button>
+                </div> */}
                 {/* ---------------end------------------ */}
             </div>
         </section>
         {/* -------------------------------------------Related Products-------------------------------- */}
-        
+
         <h4 className="container p-4">Related Products</h4>
 
         <div>
             <div className="container border p-2 mb-4 " id="related-products">
                 {categoryProduct?.map((product, index) => <div key={index} id="related-products-child" className="m-2 p-2 h-auto border d-flex flex-column rounded position-relative">
-                    <img width="100%" onClick={()=>viewMore(product)} height="250px" id="view-image" src={product.thumbnail} />
+                    <img width="100%" onClick={() => viewMore(product)} height="250px" id="view-image" src={product.thumbnail} />
                     <div className="d-flex position-absolute" id="buttons">
                         <div><CiHeart style={{ width: '25px', height: '25px' }} /></div>
                         <div><PiShoppingCartSimpleThin style={{ width: '20px', height: '20px' }} /></div>
@@ -122,7 +146,7 @@ export default function ViewMore() {
                 </div>)}
             </div>
         </div>
-    <Footer/>
+        <Footer />
     </>
 }
 

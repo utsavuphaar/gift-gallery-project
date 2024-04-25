@@ -7,5 +7,6 @@ export default {
     addToCart:"http://localhost:3000/cart/addToCart",
     addToWishlist:"http://localhost:3000/wishlist/addWishlist",
     userList:"http://localhost:3000/user/userList",
-    orderForParticularUser:"http://localhost:3000/order/viewParticularUserOrder"
+    orderForParticularUser:"http://localhost:3000/order/viewParticularUserOrder",
+    addReview:"http://localhost:3000/review/addreview"
 }
