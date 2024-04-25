@@ -1,0 +1,26 @@
+.star-value {
+
+    .fa-star {
+        font-size: 14px;
+    }
+}
+
+.progress {
+    flex: 1 1 315px;
+    max-width: 200px;
+    height: 6px;
+    margin-right: 20px;
+    margin-bottom: 0;
+    background-color: #ddd;
+}
+
+.rating-hit {
+    color: #B2B2B2;
+    font-size: 16px;
+}
+
+.rate-product-btn:hover {
+    border: 2px solid black;
+    box-shadow: 5px 5px 2px 2px black;
+    transition: 3s ease-out;
+}

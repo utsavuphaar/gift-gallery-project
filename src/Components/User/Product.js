@@ -76,6 +76,9 @@ function Product() {
         dispatch(addProductIntoWishlist({ userId, productId }));
     };
 
+    const buyNow = (product) => {
+        navigate("/buynow", { state: product });
+    }
 
     const [expanded, setExpanded] = React.useState(false);
 
@@ -237,6 +240,7 @@ function Product() {
                 </div>
                 <div className="col-lg-9 p-0  d-flex flex-wrap justify-content-around align-items-center">
                     {productList?.map((product, index) => <div className=" mt-2 col-lg-4 d-flex justify-content-center align-items-center">
+
                         <div style={{ width: "300px", borderRadius: "10px" }} className="bg-white  p-2 m-2 d-flex flex-column align-items-center">
 
                             <img src={product.thumbnail} className='gift-image' onClick={() => viewMore(product)} style={{ cursor: 'pointer', width: "270px", height: "230px", borderRadius: "10px" }} />
@@ -246,6 +250,7 @@ function Product() {
                                     <AiFillStar className="text-warning" />
                                     <span style={{ fontSize: "14px" }} className=" text-dark rounded d-flex justify-content-center align-items-center fw-bold ">{product.rating}</span>
                                 </div>
+
                             </div>
                             <div className="w-100 d-flex justify-content-around align-items-center">
                                 <div className="d-flex align-items-center justify-content-around ">
@@ -262,10 +267,10 @@ function Product() {
                                     </div>
                                 </div> */}
                             </div>
-                            {/* <div className="w-100 mt-2 d-flex justify-content-around align-items-center mb-1" >
+                            <div className="w-100 mt-2 d-flex justify-content-around align-items-center mb-1" >
                                 <button className="btn btn-outline-primary" onClick={() => addToCart(product.id)}>Move to cart</button>
-                                <button className="btn btn-primary">Buy now</button>
-                            </div> */}
+                                <button onClick={() => buyNow(product)} className="btn btn-primary">Buy now</button>
+                            </div>
                         </div>
                     </div>)}
                 </div>

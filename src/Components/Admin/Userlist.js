@@ -36,14 +36,15 @@ function Userlist() {
                         </select>
                     </label>
                 </div>
-                <div className='col-md-12'>
-                    <table className='table p-2 text-center border'>
-                        <thead>
+                <div className='col-md-12' style={{overflowY:"auto",height:'450px'}}>
+                    <table className='table p-2 text-center border position-relative' style={{ maxHeight: '70vh', overflow: "scroll" }}>
+                        <thead className='position-sticky ' style={{top:'-5px'}}>
                             <tr className='bg-primary text-white text-center'>
                                 <th>Sr. No.</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Contact</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody className='text-center'>

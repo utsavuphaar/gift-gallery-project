@@ -47,14 +47,14 @@
 #view-left {
   display: grid;
   place-items: center;
-  width: 20%;
+  width: 100px;
   height: 80vh;
   border: 1px solid blue;
 }
 
 #view-left div {
-  width: 180px;
-  height: 140px;
+  width: 80px;
+  height: 80px;
   border: 1px solid blue;
   padding: 10px;
   margin: 10px;
@@ -83,6 +83,9 @@
   -ms-overflow-style: none;
 }
 
+#view-more-section{
+  height: 100vh !important;
+}
 
 /* --------------------------------------------------END------------------------------------------------- */
 /* ------------------------------------------------Cart CSS--------------------------------------------- */
@@ -207,3 +210,6 @@
   }
   
 }
+
+
+/* ----------------------------- */

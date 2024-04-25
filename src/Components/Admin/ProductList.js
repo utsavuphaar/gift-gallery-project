@@ -75,9 +75,9 @@ function ProductList() {
                     </label>
                 </div>
 
-                <div className='col-md-12'>
-                    <table className='table p-2 border text-center' style={{ maxHeight: '70vh', overflow: "scroll" }}>
-                        <thead>
+                <div className='col-md-12' style={{overflowY:"auto",height:'450px'}}>
+                    <table className='table p-2 border text-center position-relative' style={{ maxHeight: '70vh', overflow: "scroll" }}>
+                        <thead className='position-sticky' style={{top:'-5px'}}>
                             <tr className='bg-primary text-white text-center'>
                                 <th>Sr. No.</th>
                                 <th>Image</th>
