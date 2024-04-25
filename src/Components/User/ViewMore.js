@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom"
+import { Link, Outlet, useLocation } from "react-router-dom"
 import { FiHeart } from "react-icons/fi";
 import store from "../../Store/store"
 import { CiHeart } from "react-icons/ci";
@@ -58,8 +58,10 @@ export default function ViewMore() {
     // alert(inputValue)
     return <>
     <Header/>
-        <section className="p3 mt-4 d-flex" style={{ width: '100%',height:'auto' }}>
+        <section className="p3 mt-4 d-flex h-auto border justify-content-center align-content-center" id="view-more-section" style={{ width: '100%',height:'auto' }}>
             <div id="view-left">
+                <div></div>
+                <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
@@ -70,7 +72,7 @@ export default function ViewMore() {
             </div>
 
             <div id="view-right" className="m-4 mt-0">
-                <span className="mt-4 fw-bold fs-2">{state.title}</span>
+                <span className="mt-4 fw-bold fs-4">{state.title}</span>
                 {/* <span className="fs-2 text-secondary float-end me-2"><FiHeart/></span> */}
                 <span className="float-end me-3 fs-2">
                     <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
@@ -89,20 +91,12 @@ export default function ViewMore() {
                 <br /><button onClick={()=>buyNow(state.id,state.price)} style={{ width: '90%', height: '50px' }} className="mt-2 btn btn-primary fw-bold">BUY NOW</button>
 
                 {/* --------------Rating----------- */}
-                <Box
-                    sx={{
-                        '& > legend': { mt: 2 },
-                    }}
-                >
-                    <Typography component="legend">Controlled</Typography>
-                    <Rating
-                        name="simple-controlled"
-                        value={value}
-                        onChange={(event, newValue) => {
-                            setValue(newValue);
-                        }}
-                    />
-                </Box>
+                <div>
+                    <Link to="">
+
+                    </Link>
+                    <Outlet/>
+                </div>
                 {/* ---------------end------------------ */}
             </div>
         </section>

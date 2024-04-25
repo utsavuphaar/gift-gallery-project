@@ -34,6 +34,7 @@ import Auth from './Components/User/Auth.js';
 import AddProduct from './Components/Admin/AddProduct.js';
 import ViewReviewRating from './Components/User/View-Review-Rating.js';
 import RateProduct from './Components/User/rating.js';
+import BuyNow from './Components/User/BuyNow.js';
 
 
 
@@ -54,16 +55,17 @@ function App() {
         <Route path="/resetpassword" element={<ResetPassword/>}/>
         <Route path='/signup' element={<Signup />} />
         <Route path='/header' element={<Header />} />
-        <Route path='/viewmore' element={<ViewMore />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path='/order' element={<Order />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/paymentsuccess" element={<PaymentSuccess />} /> 
-        <Route path = "/review" element={<ViewReviewRating/>}/>
-        <Route path='/rate-product' element={<RateProduct/>}/>
+        <Route path="/paymentsuccess" element={<PaymentSuccess />} />
 
+        <Route path='viewmore' element={<ViewMore />} >
+        <Route index element={<ViewReviewRating/>}/>
+        </Route>
+        <Route path='/viewmore/rate-product' element={<RateProduct/>}/>
 
-
+        <Route path='/buynow' element={<BuyNow/>}/>
         <Route path="/user" element={<Auth><UserProfile/></Auth>}/>
         <Route path='admin' element={<AdminProfile />} >
         <Route index element={<AdminHomePage/>}/>

@@ -8,8 +8,8 @@ import './footer.css'
 export const Footer = () => {
       return <>
             <footer className="footer">
-                  <div className="container ">
-                        <div className="row ">
+                  <div className="container">
+                        <div className="row">
                               <div className="footer-col ml-3">
                                     <div className='col-md-6 ms-1 title' style={{ width: "250px" }}>
                                           <div className='mt-1 mb-2 icon  d-flex justify-content-center align-items-center'>

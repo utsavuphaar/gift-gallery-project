@@ -7,20 +7,16 @@ export const ViewReviewRating = () => {
       const navigate = useNavigate();
 
       return <>
-         
             <div className="container mt-3 border">
-
                   <div className="row">
-                        <p className="fw-semibold fs-5 ml-2 mt-3 d-flex  ">Ratings & Reviews
-                              <button className=" btn-sm btn-white shadow p-3 mt-2 bg-white rounded rate-product-btn" style={{ width: "150px", height: "40px", marginLeft: "200px" }} onClick={()=>navigate("/rate-product")}>Rate Product</button>
+                        <p className="fw-semibold fs-5 ml-2 mt-3 d-flex">Ratings & Reviews  &nbsp;&nbsp;
+                              <button className='btn btn-light border float-end' onClick={()=>navigate("/viewmore/rate-product")}> Rate Product</button>
                         </p>
                         <div className='col-md-4 mt-1 '>
                               <p className='fs-2 d-flex'>4.3 &nbsp; <FaStar className='text-success mt-2 fs-3' /></p>
-
                               <p>1,572 Ratings &<br />
                                     245 Reviews
                               </p>
-
                         </div>
                         <div className='col-md-8'>
                               <div class="star-value">
@@ -66,6 +62,7 @@ export const ViewReviewRating = () => {
                         </div>
 
                   </div>
+{/*                   
                   <div className='row'>
                         <div className='container '>
                               <div className="ms-1" style={{ width: "40px" }}>
@@ -90,7 +87,7 @@ export const ViewReviewRating = () => {
                               <p>Best Product in this range</p>
                               <p style={{ fontSize: "10px", color: "gray" }}>Priya Sharma, Jan 2022</p>
                         </div>
-                  </div>
+                  </div> */}
                  
             </div>
 
