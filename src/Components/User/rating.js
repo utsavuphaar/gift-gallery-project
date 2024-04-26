@@ -3,10 +3,11 @@ import './RateProduct.css';
 import $, { event } from 'jquery';
 import ApiUrl from '../ApiUrl';
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const RateProduct = () => {
       const {state} =useLocation();
+      const navigate = useNavigate();
       const productId = state;
       const userId = localStorage.getItem("userId")
       const [rating, setRating] = useState(0);
@@ -93,11 +94,11 @@ const RateProduct = () => {
       };
 
       const handleSubmitClick = () => {
-            // alert("userId"+userId+" rating "+rating+" comment "+comment+" productId "+productId)
             setSubmitClicked(true);
             axios.post(ApiUrl.addReview,{userId,productId,rating,comment}).then(res=>{
                   // console.log("")
                   alert("success")
+                  navigate("/")
             }).catch(err=>{
                   console.log(err)
                   alert("error")
@@ -146,7 +147,7 @@ const RateProduct = () => {
                               </div>
 
                               <div className="tags-box">
-                                    <input type="text" onChange={(event)=>setComment(event.target.value)}  className="form-control p-2" name="comment"   placeholder="please enter your review" />
+                                    <input type="text" onChange={(event)=>setComment(event.target.value)} id='rating-box' className="form-control p-2" name="comment"   placeholder="please enter your review" />
                                     <input type="hidden" name="product_id" value="{$products->id}" />
                               </div>
                         </div>
