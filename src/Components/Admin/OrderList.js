@@ -44,7 +44,7 @@ function OrderList() {
                 </div>
                 <div className='container p-2 mt-4 row' style={{ overflowY: "auto", height: '450px' }}>
                     <table className='table border col-md-10 position-relative' style={{ maxHeight: '70vh', overflow: "scroll" }}>
-                        <thead className='position-sticky' style={{top:'-10px'}}>
+                        <thead className='position-sticky' style={{ top: '-10px' }}>
                             <tr className='bg-primary text-center text-white p-2'>
                                 <th>Sr.No.</th>
                                 <th>Item</th>

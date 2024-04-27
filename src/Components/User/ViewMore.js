@@ -105,7 +105,7 @@ export default function ViewMore() {
                 <br />
                 <div categoryName="d-flex">
                     <span className="fs-3 d-inline me-3">
-                        Rs. {state.price} | <span className="text-warning">({state.discountPercentage}% off )</span>
+                        Rs.{(state.price - (((parseInt(state.discountPercentage * state.price) / 100).toFixed(2)) * 1)).toFixed(2)} | <span className="text-warning">({state.discountPercentage}% off )</span>
                     </span><hr />
                 </div>
                 <p>{state.description}</p>
