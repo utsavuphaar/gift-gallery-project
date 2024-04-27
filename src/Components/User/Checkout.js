@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom"
 import React, { useEffect, useRef, useState } from 'react'
 import axios from "axios";
 import { BsCurrencyRupee } from "react-icons/bs";
-import {toast,ToastContainer} from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import Header from "./Header";
 import Footer from "./footer";
 function Checkout() {
@@ -41,16 +41,14 @@ function Checkout() {
 
     //Payment API called
     const checkoutHandler = async (amount) => {
-        if(validation()){
-
-            firstName = firstName.current.value;
-            lastName = lastName.current.value;
-            contact = contact.current.value;
-            address = address.current.value;
-            city = city.current.value;
-            pinCode = pinCode.current.value;
-            // window.alert(firstName + " " + lastName + " " + contact + " " + address + " " + city + " " + pinCode + " " + status)
-            console.log(window)
+        if (validation()) {
+            const firstNameValue = firstName.current.value;
+            const lastNameValue = lastName.current.value;
+            const contactValue = contact.current.value;
+            const addressValue = address.current.value;
+            const cityValue = city.current.value;
+            const pinCodeValue = pinCode.current.value;
+    
             try {
                 // Fetching payment key
                 const { data: { key } } = await axios.get("http://localhost:3000/payment/getkey");
@@ -59,9 +57,7 @@ function Checkout() {
                 const { data: { order } } = await axios.post("http://localhost:3000/payment/checkout", {
                     amount
                 });
-                // console.log("Order Data ..")
-                // console.log(order.id)
-                const myOrder = await axios.post("http://localhost:3000/order/placeOrder", { orderID: order.id, firstName, lastName, contact, address, city, pinCode, status:"Order Confirmed", quantity: 1, userId })//price,quantity
+    
                 // Configuring Razorpay options
                 const options = {
                     key,
@@ -73,29 +69,64 @@ function Checkout() {
                     order_id: order.id,
                     callback_url: "http://localhost:3000/payment/paymentverification",
                     prefill: {
-                        name: user.name,
-                        email: user.email,
-                        contact: user.contact
+                        name: `${firstNameValue} ${lastNameValue}`,
+                        contact: contactValue,
+                        email: "example@example.com" // Assuming you have user's email
                     },
                     notes: {
-                        "address": "Razorpay Corporate Office"
+                        "address": addressValue
                     },
                     theme: {
                         "color": "blue"
-                    }
-                };
+                    },
+                    // Handler function to be executed after payment is completed
+                    handler: async function (response) {
+                        try {
+                            // Verify payment status
+                            console.log(response);
+                            const paymentVerificationResponse = await axios.post("http://localhost:3000/payment/paymentverification", {
+                                razorpay_order_id: order.id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature,
+                                amount:amount
+                            });
     
-                // Creating and opening Razorpay instance
+                            if (paymentVerificationResponse.data.success) {
+                                // Payment verified, now call placeOrder API
+                                const myOrder = await axios.post("http://localhost:3000/order/placeOrder", {
+                                    orderID: order.id,
+                                    firstName: firstNameValue,
+                                    lastName: lastNameValue,
+                                    contact: contactValue,
+                                    address: addressValue,
+                                    city: cityValue,
+                                    pinCode: pinCodeValue,
+                                    status: "Order Confirmed",
+                                    quantity: 1,
+                                    userId,
+                                    productId: state.id,
+                                });
+                                console.log("PlaceOrder API response:", myOrder.data);
+                            } else {
+                                // Payment verification failed
+                                console.error("Payment verification failed:", paymentVerificationResponse.data.error);
+                            }
+                        } catch (error) {
+                            console.error("Error during payment verification:", error);
+                        }
+                    }
+
+                };
                 const razor = new window.Razorpay(options);
                 razor.open();
+    
             } catch (error) {
                 console.error("Error during payment checkout:", error);
-                // Handle errors gracefully (e.g., display error message to the user)
             }
-        }else{
-            toast.error("Please fill all the fields")
+        } else {
+            toast.error("Please fill all the fields");
         }
-    }
+    };
 
     // -------------------Validation------------------------
 
@@ -153,49 +184,49 @@ function Checkout() {
         return status;
     }
 
-    const validationaddress=()=>{
+    const validationaddress = () => {
         let addressinput = address.current.value;
         var streeterror = document.getElementById("streeterror");
         var status = true;
-        if(addressinput.length==0){
+        if (addressinput.length == 0) {
             streeterror.innerHTML = 'Address is required'
             status = false;
-        }else{
+        } else {
             streeterror.innerHTML = ""
             status = true;
         }
         return status;
     }
 
-    const validationcity=()=>{
+    const validationcity = () => {
         let cityinput = city.current.value;
         var status = true;
-        var cityerror =  document.getElementById("cityerror");
-        if(cityinput.length==0){
+        var cityerror = document.getElementById("cityerror");
+        if (cityinput.length == 0) {
             cityerror.innerHTML = "City is required"
             status = false;
-        }else{
+        } else {
             cityerror.innerHTML = ""
             status = true;
         }
         return status;
     }
 
-    const validationpincode=()=>{
+    const validationpincode = () => {
         let pincode = pinCode.current.value;
         status = true;
         var pinerror = document.getElementById("pinerror")
-        if(pincode.length==0){
+        if (pincode.length == 0) {
             pinerror.innerHTML = "pincode is required"
             status = false;
-        }else if(isNaN(pincode)){
+        } else if (isNaN(pincode)) {
             pinerror.innerHTML = "only number allow"
             status = false;
         }
-        else if(pincode.length!=6){
+        else if (pincode.length != 6) {
             pinerror.innerHTML = "pincode must be 6 digit"
             status = false;
-        }else{
+        } else {
             pinerror.innerHTML = ""
             status = true;
         }
@@ -203,7 +234,7 @@ function Checkout() {
 
     }
 
-    const validation = () =>{
+    const validation = () => {
         var status = true;
         const firstname = validationfname();
         const lastname = validationlname();
@@ -211,19 +242,19 @@ function Checkout() {
         const street = validationaddress();
         const city = validationcity();
         const pincode = validationpincode();
-        if(firstname&&lastname&&phone&&street&&city&&pincode){
+        if (firstname && lastname && phone && street && city && pincode) {
             status = true;
-        } 
-        else{
+        }
+        else {
             status = false;
         }
         return status;
-    } 
+    }
 
     return (
 
         <>
-            <ToastContainer/>
+            <ToastContainer />
             <Header />
             <section className='container-fluid  p-4'>
                 <section className='container p-2 justify-content-evenly row align-content-around m-auto d-flex ' id='checkout-page'>
@@ -234,43 +265,43 @@ function Checkout() {
                             <h6>Confirmation</h6>
                         </div>
                         <div className="container mb-2">
-
-                            <div className='row form-group p-2'>
+                            <div className='row form-group p-2' >
                                 <div className='col-md-6 mt-3'>
                                     <label>First Name<span className="text-danger">*</span></label><br />
-                                    <input type='text' required ref={firstName} onKeyUp={()=>validationfname()}  className='form-control' />
+                                    <input type='text' required ref={firstName} onKeyUp={validationfname} className='form-control' />
                                     <small className='text-danger' id='firstname'></small>
                                 </div>
                                 <div className='col-md-6 mt-3'>
                                     <label>Last Name<span className="text-danger">*</span></label><br />
-                                    <input type='text' required ref={lastName} onKeyUp={()=>validationlname()} className='form-control' />
+                                    <input type='text' required ref={lastName} onKeyUp={validationlname} className='form-control' />
                                     <small className='text-danger' id='lastname'></small>
                                 </div>
                                 <div className='col-md-12 mt-3'>
                                     <label>Phone Number<span className="text-danger">*</span></label><br />
-                                    <input type='number' ref={contact} onKeyUp={()=>validationphone()} className='form-control' />
+                                    <input type='number' ref={contact} onKeyUp={validationphone} className='form-control' />
                                     <small className='text-danger' id='phoneerror'></small>
                                 </div>
                                 <div className='col-md-12 mt-3'>
                                     <label>Street Address<span className="text-danger">*</span></label><br />
-                                    <input type='text' ref={address} onKeyUp={()=>validationaddress()} className='form-control' />
+                                    <input type='text' ref={address} onKeyUp={validationaddress} className='form-control' />
                                     <small className='text-danger' id='streeterror'></small>
                                 </div>
                                 <div className='col-md-12 mt-3'>
                                     <label>Town/City<span className="text-danger">*</span></label><br />
-                                    <input type='text' ref={city} onKeyUp={()=>validationcity()} className='form-control' />
+                                    <input type='text' ref={city} onKeyUp={validationcity} className='form-control' />
                                     <small className='text-danger' id='cityerror'></small>
                                 </div>
                                 <div className='col-md-12 mt-3'>
                                     <label>Pincode<span className="text-danger">*</span></label><br />
-                                    <input type='number' ref={pinCode} onKeyUp={()=>validationpincode()} className='form-control' />
+                                    <input type='number' ref={pinCode} onKeyUp={validationpincode} className='form-control' />
                                     <small className='text-danger' id='pinerror'></small>
                                 </div>
                                 <div className='col-md-6 mt-3'>
-                                    <button onClick={() => checkoutHandler(totalAmt - discountPrice)} className='btn btn-primary mt-2'>Proceed to Pay</button>
+                                    <button onClick={()=>checkoutHandler(totalAmt-discountPrice)} type="submit" className='btn btn-primary mt-2'>Proceed to Pay</button>
                                 </div>
                             </div>
                         </div>
+
 
                     </div>
                     <div id='checkout-right' className='border p-0 mt-2 col-md-4 rounded-top'>

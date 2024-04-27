@@ -68,7 +68,11 @@ function Product() {
     };
 
     const addToCart = (productId) => {
-        dispatch(addProductIntoCart({ userId, productId, quantity: 1 }));
+        if(localStorage.getItem("userId")){
+            dispatch(addProductIntoCart({ userId, productId, quantity: 1 }));
+        }else{
+            alert("sign-in first")
+        }
     };
 
 
