@@ -64,7 +64,7 @@ function Product() {
     };
 
     const viewMore = (product) => {
-        navigate("/viewmore", { state: product });
+        navigate( `viewmore/${product.id}`, { state: product });
     };
 
     const addToCart = (productId) => {

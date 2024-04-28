@@ -60,10 +60,12 @@ function App() {
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/paymentsuccess" element={<PaymentSuccess />} />
 
-      <Route path='viewmore' element={<ViewMore />} >
-        <Route index element={<ViewReviewRating />} />
-      </Route>
-      <Route path='/viewmore/rate-product' element={<RateProduct />} />
+
+        <Route path='viewmore/:productId' element={<ViewMore />} >
+        <Route index element={<ViewReviewRating/>}/>
+        </Route>
+        <Route path='/viewmore/rate-product' element={<RateProduct/>}/>
+
 
       <Route path='/buynow' element={<BuyNow />} />
       <Route path="/user" element={<Auth><UserProfile /></Auth>} />

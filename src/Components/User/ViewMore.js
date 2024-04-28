@@ -68,7 +68,7 @@ export default function ViewMore() {
                 <div></div>
             </div>
 
-            <div id="view-mid" className="p-2">
+            <div id="view-mid" className="p-2 border">
                 <img style={{ width: '100%', height: '100%' }} src={state.thumbnail} />
                 <div className="flex-column mt-2 d-flex justify-content-around">
                     {/* <div className="w-100 text-center">
@@ -76,11 +76,11 @@ export default function ViewMore() {
                         <input min={1} readOnly type="number" value={inputValue} className="border ps-4 p-1 m-1" id="qty" />
                         <button className="btn btn-primary" onClick={() => setInputValue(inputValue + 1)} >+</button>
                     </div> */}
-                    <div>
+                    <div className="d-flex justify-content-around mt-2">
                         <button onClick={() => addToCart(state.id)} style={{ width: '200px', height: '50px' }} className="btn btn-outline-primary fw-bold">ADD TO CART</button> &nbsp;
                         <button onClick={() => buyNow(state.id, state.price)} style={{ width: '200px', height: '50px' }} className="btn btn-primary fw-bold">BUY NOW</button>
                     </div>
-                    <div className="row mt-2 border" >
+                    {/* <div className="row mt-2 border" >
                         <h4 className="container m-2">Warranty</h4>
                         <div className="col-md-6 text-muted">
                             <p>Domestic Warranty</p>
@@ -92,7 +92,7 @@ export default function ViewMore() {
                             <p>1 Year Warranty from the Date of Purchase.</p>
                             <p>Seven days</p>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
