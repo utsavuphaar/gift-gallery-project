@@ -32,7 +32,7 @@ function AdminHomePage() {
     },[])
 
     return (
-        <div className="col-md-10 bg-light d-flex">
+        <div className="col-md-9 d-flex" style={{backgroundColor:"#FAF7FC"}}> 
             <div className="container ">
                 <div className="row">
                     <div className="col-md-3 mt-2">
