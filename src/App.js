@@ -43,39 +43,39 @@ function App() {
   let { isLoading, productList } = useSelector(store => store.Product);
 
   return <>
-      <Routes>
-        <Route path='/' element={<Home />}/ >
-        <Route path='ChatBot' element={<ChatBot/>}/>
-        <Route path='/aboutus' element={<AboutUs />} />
-        <Route path='/contactus' element={<ContactUs />} />
-        <Route path="/product" element={<Product />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/signin' element={<Signin />} />
-        <Route path="/forget" element={<ForgetPassword/>}/>
-        <Route path="/resetpassword" element={<ResetPassword/>}/>
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/header' element={<Header />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path='/order' element={<Order />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='ChatBot' element={<ChatBot />} />
+      <Route path='/aboutus' element={<AboutUs />} />
+      <Route path='/contactus' element={<ContactUs />} />
+      <Route path="/product" element={<Product />} />
+      <Route path='/cart' element={<Cart />} />
+      <Route path='/signin' element={<Signin />} />
+      <Route path="/forget" element={<ForgetPassword />} />
+      <Route path="/resetpassword" element={<ResetPassword />} />
+      <Route path='/signup' element={<Signup />} />
+      <Route path='/header' element={<Header />} />
+      <Route path="/wishlist" element={<Wishlist />} />
+      <Route path='/order' element={<Order />} />
+      <Route path="/checkout" element={<Checkout />} />
+      <Route path="/paymentsuccess" element={<PaymentSuccess />} />
 
-        <Route path='viewmore' element={<ViewMore />} >
-        <Route index element={<ViewReviewRating/>}/>
-        </Route>
-        <Route path='/viewmore/rate-product' element={<RateProduct/>}/>
+      <Route path='viewmore' element={<ViewMore />} >
+        <Route index element={<ViewReviewRating />} />
+      </Route>
+      <Route path='/viewmore/rate-product' element={<RateProduct />} />
 
-        <Route path='/buynow' element={<BuyNow/>}/>
-        <Route path="/user" element={<Auth><UserProfile/></Auth>}/>
-        <Route path='admin' element={<AdminProfile />} >
-        <Route index element={<AdminHomePage/>}/>
-        <Route path="addProduct" element={<AddProduct/>}/>
-        <Route path="productList" element={<ProductList/>}/>
-        <Route path='userList' element={<Userlist/>}/>
-        <Route path="orderList" element={<OrderList/>}/>
-       
-        </Route>
-      </Routes>
+      <Route path='/buynow' element={<BuyNow />} />
+      <Route path="/user" element={<Auth><UserProfile /></Auth>} />
+      <Route path='admin' element={<AdminProfile />} >
+        <Route index element={<AdminHomePage />} />
+        <Route path="addProduct" element={<AddProduct />} />
+        <Route path="productList" element={<ProductList />} />
+        <Route path='userList' element={<Userlist />} />
+        <Route path="orderList" element={<OrderList />} />
+
+      </Route>
+    </Routes>
   </>
 }
 
