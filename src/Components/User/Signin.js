@@ -178,7 +178,7 @@ export default function Signin() {
                     {/* <span className='mt-3 forget'>Forget Password ?</span> */}
                     <button className="w-75 mt-4  button" onClick={() => signin()}>Sign In</button>
                     {/* <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3' />Sign in with google</button> */}
-                    <div className='w-75 d-flex justify-content-center align-items-center mt-3 mb-2'>______________or_______________</div>
+                    
                     <GoogleSign />
                     {/* <FcGoogle className='fs-1 me-3 d-none google' /> */}
                     <p className=' mt-3 mb-4' id='log-2'>Do not have an account,<span className=' text-primary ms-2 create' onClick={() => navigate('/signup')}><u>create a new one.</u></span></p>
