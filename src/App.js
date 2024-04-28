@@ -60,7 +60,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/paymentsuccess" element={<PaymentSuccess />} />
 
-        <Route path='viewmore' element={<ViewMore />} >
+        <Route path='viewmore/:productId' element={<ViewMore />} >
         <Route index element={<ViewReviewRating/>}/>
         </Route>
         <Route path='/viewmore/rate-product' element={<RateProduct/>}/>

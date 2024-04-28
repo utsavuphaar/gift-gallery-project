@@ -96,7 +96,6 @@ const RateProduct = () => {
       const handleSubmitClick = () => {
             setSubmitClicked(true);
             axios.post(ApiUrl.addReview,{userId,productId,rating,comment}).then(res=>{
-                  // console.log("")
                   alert("success")
                   navigate("/")
             }).catch(err=>{
