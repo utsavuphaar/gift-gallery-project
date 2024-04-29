@@ -8,10 +8,9 @@ import URL from '../ApiUrl'
 import { useNavigate } from 'react-router-dom'
 import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
 import Swal from 'sweetalert2';
-import { ToastContainer, toast } from 'react-toastify'
+import {ToastContainer,toast} from 'react-toastify'
+import Header from './Header';
 import GoogleSignup from './GoogleSignup';
-
-// export const emailContext = createContext();
 
 export default function Signup() {
     const [name, setName] = useState("")
@@ -169,6 +168,7 @@ export default function Signup() {
             pauseOnHover
             theme="colored"
         />
+        <Header/>
         <div className="container-fluid d-flex justify-content-center align-items-center p-0  main ">
             <div className='row signup'>
                 <div className='col-md-6  p-0'>

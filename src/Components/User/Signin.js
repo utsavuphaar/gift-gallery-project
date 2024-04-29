@@ -12,16 +12,13 @@ import Home from './Home';
 import { ToastContainer, toast } from 'react-toastify'
 import GoogleSign from './GoogleSign';
 
+import Header from './Header';
+
+
 // -------------------New sign in page----------------
 
 import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
 import google from './google.png'
-
-
-
-
-
-
 
 
 export default function Signin() {
@@ -149,6 +146,9 @@ export default function Signin() {
             pauseOnHover
             theme="light"
         />
+
+        <Header/>
+
         <div className='container-fluid'  style={{width:"100vw",height:"100vh",backgroundColor:"#ececec"}}>
 
         

@@ -4,7 +4,7 @@ import { IoCloudUploadOutline } from "react-icons/io5";
 
 
 const AddProduct = () => {
-
+    const [file, setFile] = useState(null);
     const [productdata, setproductdata] = useState({})
     // const [image1,setimage1] = useState("");
     // const [image2,setimage2] = useState("");
@@ -25,21 +25,40 @@ const AddProduct = () => {
 
     }
 
-    const handleExcelUpload = (e) => {
-        const file = e.target.files[0];
-        const formData = new FormData();
-        formData.append("excelFile", file);
-        
-        // You can send the file to the server for processing
-        axios.post("http://localhost:3000/product/addProduct", formData)
-            .then(() => {
-                alert("Products added successfully");
-            })
-            .catch((err) => {
-                console.log(err);
-                alert("Something went wrong");
-            });
-    };
+    const handleUpload = async () => {
+        if (!file) {
+          alert('Please select a file.');
+          return;
+        }
+    
+        try {
+          const formData = new FormData();
+          formData.append('excelFile', file);
+    
+          // Replace 'http://example.com/upload' with your backend server endpoint
+          await axios.post('http://localhost:3000/product/uploadExcelSheet', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+    
+          // File uploaded successfully
+          alert('File uploaded successfully!');
+        } catch (error) {
+            alert("error")
+          console.error('Error uploading file:', error);
+        }
+      };
+
+    const handleFileChange = (e) => {
+    // Check if the selected file is of type Excel
+    if (e.target.files[0].type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+      setFile(e.target.files[0]);
+    } else {
+      // File is not of type Excel, show an error message or take appropriate action
+      alert('Please select an Excel file.');
+    }
+  };
 
 
     const additem = () => {
@@ -55,7 +74,7 @@ const AddProduct = () => {
     }
 
     return <>
-            <div className="container-fluid " style={{backgroundColor:"#FAF7FC", width: "75%"}}>
+        <div className="container-fluid " style={{ backgroundColor: "#FAF7FC", width: "75%" }}>
             <div className="row ">
                 <div className="col-md-6  d-flex flex-column align-items-center justify-content-start form">
                     <h3 className="mt-4 fs-3 ">Product Details</h3>
@@ -100,40 +119,32 @@ const AddProduct = () => {
                         <input type="text" onChange={(e) => handleData(e)} name="thumbnail" className="mt-2 border-dark form-control" />
                     </div>
                     <div className="w-100 d-flex align-items-center justify-content-center" style={{ marginBottom: "50px", marginTop: "50px" }}>
-                            {/* File upload input for Excel */}
-                            <label htmlFor="excelUpload" style={{ fontSize: "13px" }} className="p-2 btn btn-outline-dark w-50">
-                                UPLOAD EXCEL
-                                <IoCloudUploadOutline className="ms-3 fs-5" />
-                            </label>
-                            <input
-                                id="excelUpload"
-                                type="file"
-                                style={{ display: "none" }}
-                                onChange={handleExcelUpload} // Attach the event listener
-                            />
-                        </div>
+                        {/* File upload input for Excel */}
+                        <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
+                        <button className="btn btn-primary" onClick={handleUpload}>Upload Excel File</button>
+                    </div>
                 </div>
                 <div className="col-md-6 d-flex flex-column align-items-center">
-                    <img className="w-75 mt-5 text-danger" src={productdata.thumbnail} style={{ height:"350px" ,backgroundColor: "#C8C8C8", borderRadius: "10px", boxShadow: "0px 0px 2px 2px #C8C8C8" }} />
-                    
+                    <img className="w-75 mt-5 text-danger" src={productdata.thumbnail} style={{ height: "350px", backgroundColor: "#C8C8C8", borderRadius: "10px", boxShadow: "0px 0px 2px 2px #C8C8C8" }} />
+
                     <div className="w-75 p-3 mt-4 d-flex align-items-center justify-content-around" style={{ backgroundColor: "#FAFAFA", boxShadow: "0px 0px 2px 2px gainsboro", borderRadius: "5px" }}>
                         <img className="" style={{ width: "70px", height: "70px", borderRadius: "5px", backgroundColor: "#C8C8C8" }} />
                         <div className="w-75 h-100 ms-3 d-flex flex-column justify-content-between">
-                            <label className="" style={{fontSize:"13px"}}>Image-1 URL</label>
+                            <label className="" style={{ fontSize: "13px" }}>Image-1 URL</label>
                             <input type="text" onChange={(e) => handleImageArray(e)} name="image1" className="border-dark form-control" />
                         </div>
                     </div>
                     <div className="w-75 p-3 mt-4 d-flex align-items-center justify-content-around" style={{ backgroundColor: "#FAFAFA", boxShadow: "0px 0px 2px 2px gainsboro", borderRadius: "5px" }}>
                         <img className="" style={{ width: "70px", height: "70px", borderRadius: "5px", backgroundColor: "#C8C8C8" }} />
                         <div className="w-75 h-100 ms-3  d-flex flex-column justify-content-between">
-                            <label className="" style={{fontSize:"13px"}}>Image-2 URL</label>
+                            <label className="" style={{ fontSize: "13px" }}>Image-2 URL</label>
                             <input type="text" onChange={(e) => handleImageArray(e)} name="image2" className="border-dark form-control" />
                         </div>
                     </div>
-                    <div className="w-75 p-3 mt-4 d-flex align-items-center justify-content-around" style={{ backgroundColor: "#FAFAFA" , boxShadow: "0px 0px 2px 2px gainsboro", borderRadius: "5px" }}>
+                    <div className="w-75 p-3 mt-4 d-flex align-items-center justify-content-around" style={{ backgroundColor: "#FAFAFA", boxShadow: "0px 0px 2px 2px gainsboro", borderRadius: "5px" }}>
                         <img className="" style={{ width: "70px", height: "70px", borderRadius: "5px", backgroundColor: "#C8C8C8" }} />
                         <div className="w-75 h-100 ms-3  d-flex flex-column justify-content-between">
-                            <label className="" style={{fontSize:"13px"}}>Image-3 URL</label>
+                            <label className="" style={{ fontSize: "13px" }}>Image-3 URL</label>
                             <input type="text" onChange={(e) => handleImageArray(e)} name="image3" className="border-dark form-control" />
                         </div>
                     </div>
