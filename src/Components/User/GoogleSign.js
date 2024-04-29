@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 import URL from '../ApiUrl'
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import google from './google.png'
 
 
 function GoogleSign() {
@@ -23,22 +24,22 @@ function GoogleSign() {
         onError: (error) => console.log('Login Failed:', error),
     });
 
-    const signin = () =>{
+    const signin = () => {
         // console.log("Hello"+email);  
-        axios.post("http://localhost:3000/user/findbyemail",{email})
-        .then(()=>{
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Login Successfully",
-                showConfirmButton: false,
-                timer: 3000
-            });
-            navigate("/")
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+        axios.post("http://localhost:3000/user/findbyemail", { email })
+            .then(() => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Login Successfully",
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                navigate("/")
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     const Userdata = (userData) => {
@@ -55,17 +56,21 @@ function GoogleSign() {
                     console.log(res.data);
                     setemail(res.data.email)
                     signin()
-                    
+
                 })
                 .catch((err) => console.log(err));
         }
     };
 
     return <>
-        <button id='' className='w-75  mt-3 button-2' onClick={login}>
+        {/* <button id='' className='w-75  mt-3 button-2' onClick={login}>
             <FcGoogle className='fs-3 me-3' />Sign in with google
         </button>
-        <FcGoogle className='fs-3 me-3 d-none ' id='google' onClick={login} />
+        <FcGoogle className='fs-3 me-3 d-none ' id='google' onClick={login} /> */}
+        <div className="input-group mb-3">
+            <button className="btn btn-lg btn-light w-100 fs-6" onClick={login}><img src={google} style={{ width: "20px" }} className="me-2" /><small>Sign In with Google</small></button>
+        </div>
+
     </>
 }
 
