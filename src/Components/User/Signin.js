@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import Home from './Home';
 import { ToastContainer, toast } from 'react-toastify'
 import GoogleSign from './GoogleSign';
+import Header from './Header';
 export default function Signin() {
     let userDetail=[];
     const navigate = useNavigate();
@@ -136,6 +137,7 @@ export default function Signin() {
             pauseOnHover
             theme="colored"  
         />
+        <Header/>
         <div className='container-fluid d-flex justify-content-center align-items-center p-0 main'>
             <div className='row signin'>
                 <div className='col-md-6  form'>
