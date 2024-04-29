@@ -1,6 +1,6 @@
 import '../Style.css'
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
 // import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
@@ -8,7 +8,10 @@ import URL from '../ApiUrl'
 import { useNavigate } from 'react-router-dom'
 import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
 import Swal from 'sweetalert2';
-import {ToastContainer,toast} from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
+import GoogleSignup from './GoogleSignup';
+
+// export const emailContext = createContext();
 
 export default function Signup() {
     const [name, setName] = useState("")
@@ -17,6 +20,8 @@ export default function Signup() {
     const [contact, setcontact] = useState("")
 
     const navigate = useNavigate();
+
+    // console.log('email,name', email + name);
 
     const validationname = () => {
         console.log(name);
@@ -127,9 +132,8 @@ export default function Signup() {
     const createAccount = () => {
 
         if (validation()) {
-            axios.post(URL.signup, { name, email, password,contact })
+            axios.post(URL.signup, { name, email, password, contact })
                 .then(res => {
-                    navigate("/")
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -137,6 +141,7 @@ export default function Signup() {
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    navigate("/")
                 })
                 .catch(err => {
                     console.log(err);
@@ -147,12 +152,12 @@ export default function Signup() {
                     });
                 })
         }
-        else{
+        else {
             toast.error("Please fill all the fields")
         }
     }
     return <>
-    <ToastContainer
+        <ToastContainer
             position="top-center"
             autoClose={5000}
             hideProgressBar={false}
@@ -162,7 +167,7 @@ export default function Signup() {
             pauseOnFocusLoss
             draggable
             pauseOnHover
-            theme="colored"  
+            theme="colored"
         />
         <div className="container-fluid d-flex justify-content-center align-items-center p-0  main ">
             <div className='row signup'>
@@ -172,7 +177,7 @@ export default function Signup() {
                 <form className='col-md-6 form right p-0 '>
                     <h2 className='mt-4 text-primary fw-bold'>Create an account</h2>
                     <span className='text-secondary'>Enter your details</span>
-                    <TextField onChange={event => setName(event.target.value)} onKeyUp={() => validationname()} className='mt-3  w-75' label="Name" type='name' variant="standard" />
+                    <TextField  onChange={event => setName(event.target.value)} onKeyUp={() => validationname()} className='mt-3  w-75' label="Name" type='name' variant="standard" />
                     <div className='container-fluid w-75'>
                         <div className='row '>
                             <div className='mt-1 p-0 col-md-12 d-flex '>
@@ -180,7 +185,7 @@ export default function Signup() {
                             </div>
                         </div>
                     </div>
-                    <TextField onChange={event => setemail(event.target.value)} onKeyUp={() => validationemail()} className='mt-2  w-75' label="Email Address" type='email' variant="standard" />
+                    <TextField  onChange={event => setemail(event.target.value)} onKeyUp={() => validationemail()} className='mt-2  w-75' label="Email Address" type='email' variant="standard" />
                     <div className='container-fluid w-75'>
                         <div className='row '>
                             <div className='mt-1 p-0 col-md-12 d-flex '>
@@ -208,8 +213,10 @@ export default function Signup() {
                     </div>
 
                     <button onClick={() => createAccount()} className="w-75 mt-4  button" type='button'>Create Account</button>
-                    <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3' />Sign up with google</button>
-                    <FcGoogle className='fs-3 me-3 d-none google' />
+                    {/* <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3' />Sign up with google</button>
+                    <FcGoogle className='fs-3 me-3 d-none google' /> */}
+                    <GoogleSignup/>
+                    
                     <p className=' mt-3 mb-4' id='log'>Already have account?<span className=' text-primary ms-2 log-in' onClick={() => navigate("/signin")}><u>Log in</u></span></p>
                 </form>
             </div>
