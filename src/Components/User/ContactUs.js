@@ -4,8 +4,10 @@ import './ContactUs.css';
 import Header from "./Header";
 import { useRef } from "react";
 import Footer from "./footer";
+import axios from "axios";
 
 export const ContactUs = () => {
+      const userId  = localStorage.getItem("userId")
       let name = useRef();
       let email = useRef();
       let contact = useRef();
@@ -15,6 +17,12 @@ export const ContactUs = () => {
             email = email.current.value;
             contact = contact.current.value;
             message = message.current.value;
+            axios.post("http://localhost:3000/contact/addContact",{name,email,contact,message,userId}).then(res=>{
+                  alert("Thanks to contact")
+            }).catch(err=>{
+                  console.log(err)
+                  alert("err")
+            });
       }
       return (
             <>
@@ -50,7 +58,7 @@ export const ContactUs = () => {
                                     </section>
                               </div>
                               <div class="col-lg-8">
-                                    <section class="box-2 ml-5 mt-sm-4">
+                                    <form class="box-2 ml-5 mt-sm-4">
                                           <div class="row fill-margin">
                                                 <div class="col-lg-4 form-floating">
                                                       <form action="" className="form-class">
@@ -85,9 +93,9 @@ export const ContactUs = () => {
                                                 </div>
                                           </div>
                                           <div  >
-                                                <button onClick={sendRequest} className="btn btn-primary send-button" > Send Message</button>
+                                                <button onClick={sendRequest} type="submit" className="btn btn-primary send-button" > Send Message</button>
                                           </div>
-                                    </section>
+                                    </form>
                               </div>
                         </div>
                   </div>
