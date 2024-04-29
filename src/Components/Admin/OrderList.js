@@ -42,10 +42,12 @@ function OrderList() {
                         </select>
                     </label>
                 </div>
+
                 <div className='container p-2 mt-4 row ' style={{ overflow: "auto", height: '450px' }}>
                     <table className='table border  col-md-10 position-relative' style={{ maxHeight: '70vh', overflow: "scroll" }}>
                         <thead className='position-sticky' style={{top:'-10px'}} >
                             <tr className='bg-primary text-center text-white'>
+
                                 <th>Sr.No.</th>
                                 <th>Item</th>
                                 <th>Name</th>

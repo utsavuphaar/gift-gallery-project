@@ -23,12 +23,12 @@ function BuyNow() {
 
     const checkoutHandler = async (amount) => {
         if (validation()) {
-            firstName = firstName.current.value;
-            lastName = lastName.current.value;
-            contact = contact.current.value;
-            address = address.current.value;
-            city = city.current.value;
-            pinCode = pinCode.current.value;
+            const firstNameValue = firstName.current.value;
+            const lastNameValue = lastName.current.value;
+            const contactValue = contact.current.value;
+            const addressValue = address.current.value;
+            const cityValue = city.current.value;
+            const pinCodeValue = pinCode.current.value;
     
             try {
                 // Fetching payment key
@@ -50,12 +50,12 @@ function BuyNow() {
                     order_id: order.id,
                     callback_url: "http://localhost:3000/payment/paymentverification",
                     prefill: {
-                        name: user.name,
-                        email: user.email,
-                        contact: user.contact
+                        name: `${firstNameValue} ${lastNameValue}`,
+                        contact: contactValue,
+                        email: "example@example.com" // Assuming you have user's email
                     },
                     notes: {
-                        "address": "Razorpay Corporate Office"
+                        "address": addressValue
                     },
                     theme: {
                         "color": "blue"
@@ -68,19 +68,20 @@ function BuyNow() {
                             const paymentVerificationResponse = await axios.post("http://localhost:3000/payment/paymentverification", {
                                 razorpay_order_id: order.id,
                                 razorpay_payment_id: response.razorpay_payment_id,
-                                razorpay_signature: response.razorpay_signature
+                                razorpay_signature: response.razorpay_signature,
+                                amount:amount
                             });
     
                             if (paymentVerificationResponse.data.success) {
                                 // Payment verified, now call placeOrder API
                                 const myOrder = await axios.post("http://localhost:3000/order/buynow", {
                                     orderID: order.id,
-                                    firstName,
-                                    lastName,
-                                    contact,
-                                    address,
-                                    city,
-                                    pinCode,
+                                    firstName: firstNameValue,
+                                    lastName: lastNameValue,
+                                    contact: contactValue,
+                                    address: addressValue,
+                                    city: cityValue,
+                                    pinCode: pinCodeValue,
                                     status: "Order Confirmed",
                                     quantity: 1,
                                     userId,
@@ -93,23 +94,20 @@ function BuyNow() {
                             }
                         } catch (error) {
                             console.error("Error during payment verification:", error);
-                            // Handle errors during payment verification
                         }
                     }
                 };
-    
-                // Creating and opening Razorpay instance with the configured options
                 const razor = new window.Razorpay(options);
                 razor.open();
     
             } catch (error) {
                 console.error("Error during payment checkout:", error);
-                // Handle errors gracefully
             }
         } else {
             toast.error("Please fill all the fields");
         }
-    }
+    };
+    
     
     
     

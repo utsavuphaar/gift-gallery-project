@@ -1,14 +1,21 @@
+import axios from 'axios';
 import './RateProduct.css';
-import $ from 'jquery';
-
+import $, { event } from 'jquery';
+import ApiUrl from '../ApiUrl';
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const RateProduct = () => {
+      const {state} =useLocation();
+      const navigate = useNavigate();
+      const productId = state;
+      const userId = localStorage.getItem("userId")
       const [rating, setRating] = useState(0);
       const [ratingMessage, setRatingMessage] = useState('');
       const [selectedTags, setSelectedTags] = useState([]);
       const [complimentVisible, setComplimentVisible] = useState(false);
       const [submitClicked, setSubmitClicked] = useState(false);
+      const [comment,setComment] = useState("")
       const handleStarMouseover = (event) => {
             const onStar = parseInt(event.target.getAttribute('data-value'), 10);
             const stars = Array.from(event.target.parentNode.children);
@@ -47,12 +54,13 @@ const RateProduct = () => {
 
             $('.fa-smile-wink').show();
             $('.button-box .done').show();
-
-            if (onStar === 5) {
-                  $('.button-box .done').removeAttr('disabled');
-            } else {
-                  $('.button-box .done').attr('disabled', 'true');
-            }
+            
+            
+            // if (onStar === 5) {
+            //       $('.button-box .done').removeAttr('disabled');
+            // } else {
+            //       $('.button-box .done').attr('disabled', 'false');
+            // }
 
             stars.forEach((star, index) => {
                   if (index < onStar) {
@@ -87,10 +95,13 @@ const RateProduct = () => {
 
       const handleSubmitClick = () => {
             setSubmitClicked(true);
-            setTimeout(() => {
-                  $('.submited-box .loader').hide();
-                  $('.submited-box .success-message').show();
-            }, 1500);
+            axios.post(ApiUrl.addReview,{userId,productId,rating,comment}).then(res=>{
+                  alert("success")
+                  navigate("/")
+            }).catch(err=>{
+                  console.log(err)
+                  alert("error")
+            });
       };
 
       return <>
@@ -105,12 +116,12 @@ const RateProduct = () => {
                                           <input className="rating_msg" type="hidden" name="rating_msg" value="" />
                                     </label>
                               </div>
-                              <div className="stars-box">
-                                    <i className={`star fa fa-star ${rating >= 1 ? 'selected' : ''}`} title="1 star" data-message="Poor" data-value="1" onMouseOver={handleStarMouseover} onMouseOut={handleStarMouseout} onClick={handleStarClick}></i>
-                                    <i className={`star fa fa-star ${rating >= 2 ? 'selected' : ''}`} title="2 stars" data-message="Too bad" data-value="2" onMouseOver={handleStarMouseover} onMouseOut={handleStarMouseout} onClick={handleStarClick}></i>
-                                    <i className={`star fa fa-star ${rating >= 3 ? 'selected' : ''}`} title="3 stars" data-message="Average quality" data-value="3" onMouseOver={handleStarMouseover} onMouseOut={handleStarMouseout} onClick={handleStarClick}></i>
-                                    <i className={`star fa fa-star ${rating >= 4 ? 'selected' : ''}`} title="4 stars" data-message="Nice" data-value="4" onMouseOver={handleStarMouseover} onMouseOut={handleStarMouseout} onClick={handleStarClick}></i>
-                                    <i className={`star fa fa-star ${rating >= 5 ? 'selected' : ''}`} title="5 stars" data-message="Very good quality" data-value="5" onMouseOver={handleStarMouseover} onMouseOut={handleStarMouseout} onClick={handleStarClick}></i>
+                              <div className="stars-box fs-1 m-1">
+                                    <i className={`star fa fa-star m-2 ${rating >= 1 ? 'selected' : ''}`} title="1 star" data-message="Poor" data-value="1" onMouseOver={handleStarMouseover} onMouseOut={handleStarMouseout} onClick={handleStarClick}></i>
+                                    <i className={`star fa fa-star m-2 ${rating >= 2 ? 'selected' : ''}`} title="2 stars" data-message="Too bad" data-value="2" onMouseOver={handleStarMouseover} onMouseOut={handleStarMouseout} onClick={handleStarClick}></i>
+                                    <i className={`star fa fa-star m-2 ${rating >= 3 ? 'selected' : ''}`} title="3 stars" data-message="Average quality" data-value="3" onMouseOver={handleStarMouseover} onMouseOut={handleStarMouseout} onClick={handleStarClick}></i>
+                                    <i className={`star fa fa-star m-2 ${rating >= 4 ? 'selected' : ''}`} title="4 stars" data-message="Nice" data-value="4" onMouseOver={handleStarMouseover} onMouseOut={handleStarMouseout} onClick={handleStarClick}></i>
+                                    <i className={`star fa fa-star m-2 ${rating >= 5 ? 'selected' : ''}`} title="5 stars" data-message="Very good quality" data-value="5" onMouseOver={handleStarMouseover} onMouseOut={handleStarMouseout} onClick={handleStarClick}></i>
                               </div>
                               <div className="starrate">
                                     <label>
@@ -135,13 +146,13 @@ const RateProduct = () => {
                               </div>
 
                               <div className="tags-box">
-                                    <input type="text" className="tag form-control" name="comment" id="inlineFormInputName" placeholder="please enter your review" />
+                                    <input type="text" onChange={(event)=>setComment(event.target.value)} id='rating-box' className="form-control p-2" name="comment"   placeholder="please enter your review" />
                                     <input type="hidden" name="product_id" value="{$products->id}" />
                               </div>
                         </div>
 
                         <div className="button-box">
-                              <input type="submit" className="done btn btn-success" disabled={!selectedTags.length} value="Add review" onClick={handleSubmitClick} />
+                              <input type="submit" className="done mt-2 btn btn-success"  value="Add review" onClick={handleSubmitClick} />
                         </div>
 
                         <div className="submited-box">

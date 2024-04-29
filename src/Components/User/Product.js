@@ -64,11 +64,15 @@ function Product() {
     };
 
     const viewMore = (product) => {
-        navigate("/viewmore", { state: product });
+        navigate( `viewmore/${product.id}`, { state: product });
     };
 
     const addToCart = (productId) => {
-        dispatch(addProductIntoCart({ userId, productId, quantity: 1 }));
+        if(localStorage.getItem("userId")){
+            dispatch(addProductIntoCart({ userId, productId, quantity: 1 }));
+        }else{
+            alert("sign-in first")
+        }
     };
 
 
@@ -94,9 +98,9 @@ function Product() {
     };
 
     return <>
-        <div className="container-fluid " style={{ backgroundColor: "#F7FAFC" }}>
+        <div className="container-fluid position-relative" style={{ backgroundColor: "#F7FAFC" }}>
             <div className="row p-0  mb-3 ">
-                <div className="col-lg-3 p-0" >
+                <div className="col-lg-3 p-0 position-sticky top-0 border" style={{position:'sticky',top:0,height:'400px'}}>
                     <div>
                         <Accordion style={{ backgroundColor: "#F7FAFC", boxShadow: "none", border: "none" }}
                             expanded={expanded}
