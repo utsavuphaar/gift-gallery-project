@@ -24,8 +24,8 @@ import GoogleSign from "./Components/User/GoogleSign.js"
 import Order from './Components/User/Order.js';
 import ProductList from './Components/Admin/ProductList.js';
 import AdminHomePage from './Components/Admin/AdminHomePage.js';
-import Userlist from './Components/Admin/Userlist.js';
-import OrderList from './Components/Admin/OrderList.js';
+import OrderList from './Components/Admin/OrderList.js'
+// import Userlist from './Components/Admin/Userlist.js';
 import ChatBot from './Components/User/ChatBot.js';
 import UserProfile from './Components/User/UserProfile.js';
 import ForgetPassword from './Components/User/forgetpassword.js';
@@ -73,7 +73,7 @@ function App() {
         <Route index element={<AdminHomePage />} />
         <Route path="addProduct" element={<AddProduct />} />
         <Route path="productList" element={<ProductList />} />
-        <Route path='userList' element={<Userlist />} />
+        {/* <Route path='userList' element={<Userlist />} /> */}
         <Route path="orderList" element={<OrderList />} />
 
       </Route>

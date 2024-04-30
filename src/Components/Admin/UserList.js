@@ -24,8 +24,7 @@ function Userlist() {
             })
     }, []);
 
-    return (
-        <>
+    return (<>
             <section className='row mt-5' style={{ width: '80%' }}>
                 <div className='mb-4 ms-2 form-group row'>
                     <label className='fs-4'>User :
@@ -65,4 +64,4 @@ function Userlist() {
     )
 }
 
-export default Userlist
+export default Userlist;
