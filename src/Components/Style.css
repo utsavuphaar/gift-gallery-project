@@ -668,7 +668,9 @@
   }
   
   .movetocart1:hover {
+
     background: gray;
+
     cursor: pointer;
     
   }
