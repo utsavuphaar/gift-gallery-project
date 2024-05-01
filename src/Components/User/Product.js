@@ -81,7 +81,11 @@ function Product() {
     };
 
     const buyNow = (product) => {
-        navigate("/buynow", { state: product });
+        if(localStorage.getItem("userId")){
+            navigate("/buynow", { state: product });
+        }else{
+            alert("sign-in first")
+        }
     }
 
     const [expanded, setExpanded] = React.useState(false);

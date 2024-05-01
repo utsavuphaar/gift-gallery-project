@@ -27,6 +27,7 @@ export const UserProfile = () => {
       const logout = () => {
             if (user)
                   localStorage.clear();
+
             // alert("logout successfully..")
             Swal.fire({
                   position: "top-end",
@@ -36,6 +37,7 @@ export const UserProfile = () => {
                   timer: 1500
                 });
             navigate("/signup")
+
       }
 
 

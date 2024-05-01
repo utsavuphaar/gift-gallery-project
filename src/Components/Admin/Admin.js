@@ -14,7 +14,6 @@ import "./adminstyle.css";
 import { color } from "@chakra-ui/react";
 const AdminProfile = () => {
     return <>
-
         <div className="container-fluid run position-relative">
             <div className="row ">
                 <div className="col-md-3  d-flex flex-column align-items-center " style={{boxShadow:"0px 0px 1px 1px gainsboro",height:"95vh", top: '1px' }}>
