@@ -24,17 +24,16 @@ export default () => {
 
     useEffect(() => {
         dispatch(fetchCartItems(userId));
-        setCart();
         console.log(cartItems);
-    }, []);
-    const setCart = () => {
         for (let product of cartItems) {
             totalamount = totalamount + product["products.price"] * product["products.cartItem.quantity"];
             discountPrice = discountPrice + (((parseInt(product["products.discountPercentage"] * product["products.price"] * product["products.cartItem.quantity"]) / 100).toFixed(2)) * 1);
         }
         setDiscountPrice(discountPrice)
         settotalamount(totalamount);
-    }
+    }, []);
+  
+   
 
     const updateQty = (index, productId, quantity) => {
         dispatch(updateQtyOfProductInCart({ userId, productId, quantity }));
