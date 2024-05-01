@@ -1,33 +1,60 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { FcGoogle } from 'react-icons/fc';
-import URL from '../ApiUrl'
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import google from './google.png'
+import google from './google.png';
 
 
 function GoogleSign() {
-    const [user, setUser] = useState(null);
-    const [profile, setProfile] = useState(null);
-    // const [username, setusername] = useState("");
-    const [email, setemail] = useState("")
-    const navigate = useNavigate()
+    const nameRef = useRef(null);
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+    const navigate = useNavigate();
 
+    // Google login hook
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => {
-            setUser(codeResponse);
-            console.log(codeResponse);
             Userdata(codeResponse);
         },
         onError: (error) => console.log('Login Failed:', error),
     });
 
-    const signin = () => {
-        // console.log("Hello"+email);  
-        axios.post("http://localhost:3000/user/findbyemail", { email })
-            .then(() => {
+    // Function to handle sign in
+    const signin = async () => {
+        try {
+            let result = await axios.post(`http://localhost:3000/user/findbyemail`, { email: emailRef.current });
+            // console.log(emailRef.current);
+            console.log(result.data);
+            if (result.data.user==null) {
+                let res = await axios.post(`http://localhost:3000/user/signup`, { 
+                    name: nameRef.current, 
+                    email: emailRef.current, 
+                    password: passwordRef.current 
+                });
+                if (res.data) {
+                    let user = JSON.stringify(res.data.user);
+                    localStorage.setItem("user", user);
+                    localStorage.setItem("userId", res.data.user.id)
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Account Created Successfully",
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    navigate("/");
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Unauthorized User",
+                        text: "Something went wrong",
+                        footer: '<a href="/">create a new one?</a>'
+                    });
+                }
+
+                // navigate("/");
+            } else {
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -35,15 +62,19 @@ function GoogleSign() {
                     showConfirmButton: false,
                     timer: 3000
                 });
+                let user = JSON.stringify(result.data.user);
+                localStorage.setItem("user", user);
+                localStorage.setItem("userId", result.data.user.id)
                 navigate("/")
-            })
-            .catch(err => {
-                console.log(err);
-            })
+            }
+        } catch (error) {
+            console.log(error.response.data.message); // Properly handle error response
+        }
     }
 
+    // Function to fetch user data from Google
     const Userdata = (userData) => {
-        if (userData) {
+        if (userData && userData.access_token) { // Check if access token exists
             axios
                 .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userData.access_token}`, {
                     headers: {
@@ -52,26 +83,25 @@ function GoogleSign() {
                     }
                 })
                 .then((res) => {
-                    setProfile(res.data);
                     console.log(res.data);
-                    setemail(res.data.email)
-                    signin()
-
+                    nameRef.current = res.data.name;
+                    emailRef.current = res.data.email;
+                    passwordRef.current = res.data.id;
+                    console.log(nameRef.current);
+                    signin();
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => console.log(err.response.data.error.message));
         }
     };
 
-    return <>
-        {/* <button id='' className='w-75  mt-3 button-2' onClick={login}>
-            <FcGoogle className='fs-3 me-3' />Sign in with google
-        </button>
-        <FcGoogle className='fs-3 me-3 d-none ' id='google' onClick={login} /> */}
+    return (
         <div className="input-group mb-3">
-            <button className="btn btn-lg btn-light w-100 fs-6" onClick={login}><img src={google} style={{ width: "20px" }} className="me-2" /><small>Sign In with Google</small></button>
+            <button className="btn btn-lg btn-light w-100 fs-6" onClick={login}>
+                <img src={google} style={{ width: "20px" }} className="me-2" alt="Google Logo" />
+                <small>Continue with Google</small>
+            </button>
         </div>
-
-    </>
+    );
 }
 
 export default GoogleSign;

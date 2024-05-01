@@ -556,6 +556,7 @@
   .movetocart:hover {
     background: #222;
     border: none;
+    cursor: pointer;
   }
   
   .movetocart:hover .text-1{
@@ -668,6 +669,7 @@
   
   .movetocart1:hover {
     background: #222;
+    cursor: pointer;
     
   }
   
