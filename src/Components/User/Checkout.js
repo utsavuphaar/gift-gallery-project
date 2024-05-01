@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import React, { useEffect, useRef, useState } from 'react'
 import axios from "axios";
 import { BsCurrencyRupee } from "react-icons/bs";
@@ -6,14 +6,13 @@ import { toast, ToastContainer } from 'react-toastify'
 import Header from "./Header";
 import Footer from "./footer";
 function Checkout() {
-
+    const navigate = useNavigate();
     let firstName = useRef(null);
     let lastName = useRef(null);
     let contact = useRef(null);
     let address = useRef(null);
     let city = useRef(null);
     let pinCode = useRef(null);
-
     let status = "Order Confirmed";
     const userId = localStorage.getItem("userId");
     const { state } = useLocation();
@@ -106,6 +105,8 @@ function Checkout() {
                                     userId,
                                     productId: state.id,
                                 });
+                                alert("Order placed successfully..")
+                                navigate("/cart")
                                 console.log("PlaceOrder API response:", myOrder.data);
                             } else {
                                 // Payment verification failed

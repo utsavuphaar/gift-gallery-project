@@ -276,9 +276,12 @@ function Product() {
                                 </div> */}
                             </div>
                             <div className="w-100 mt-2 d-flex justify-content-around align-items-center mb-1" >
+
                                 {/* <button className="btn btn-outline-primary" onClick={() => addToCart(product.id)}>Move to cart</button> */}
+
                                 <div class="movetocart" onClick={() => addToCart(product.id)}>
                                     <div class="movetocart-wrapper">
+                                {/* <button className="btn btn-outline-primary" onClick={() => addToCart(product.id)}>Move to cart</button> */}
                                         <div class="text-1">Move to cart</div>
                                         <span class="iconbutton">
                                             <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">

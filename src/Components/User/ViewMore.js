@@ -70,30 +70,6 @@ export default function ViewMore() {
 
             <div id="view-mid" className="p-2 border">
                 <img style={{ width: '100%', height: '100%' }} src={state.thumbnail} />
-                <div className="flex-column mt-2 d-flex justify-content-around">
-                    {/* <div className="w-100 text-center">
-                        <button className="btn btn-primary" onClick={decrement}>-</button>
-                        <input min={1} readOnly type="number" value={inputValue} className="border ps-4 p-1 m-1" id="qty" />
-                        <button className="btn btn-primary" onClick={() => setInputValue(inputValue + 1)} >+</button>
-                    </div> */}
-                    <div className="d-flex justify-content-around mt-2">
-                        <button onClick={() => addToCart(state.id)} style={{ width: '200px', height: '50px' }} className="btn btn-outline-primary fw-bold">ADD TO CART</button> &nbsp;
-                        <button onClick={() => buyNow(state.id, state.price)} style={{ width: '200px', height: '50px' }} className="btn btn-primary fw-bold">BUY NOW</button>
-                    </div>
-                    {/* <div className="row mt-2 border" >
-                        <h4 className="container m-2">Warranty</h4>
-                        <div className="col-md-6 text-muted">
-                            <p>Domestic Warranty</p>
-                            <p>Warranty Summary</p><br/>
-                            <p>Replacement Policy</p>
-                        </div>
-                        <div className="col-md-6">
-                            <p>1 Year</p>
-                            <p>1 Year Warranty from the Date of Purchase.</p>
-                            <p>Seven days</p>
-                        </div>
-                    </div> */}
-                </div>
             </div>
 
             <div id="view-right" className="m-4 mt-0">
@@ -109,13 +85,24 @@ export default function ViewMore() {
                     </span><hr />
                 </div>
                 <p>{state.description}</p>
+                <div className="flex-column mt-2 d-flex justify-content-around">
+                    <div className="w-100 text-center">
+                        <button className="btn btn-primary" onClick={decrement}>-</button>
+                        <input min={1} readOnly type="number" value={inputValue} className="border ps-4 p-1 m-1" id="qty" />
+                        <button className="btn btn-primary" onClick={() => setInputValue(inputValue + 1)} >+</button>
+                       &nbsp;&nbsp; <button onClick={() => addToCart(state.id)} style={{ width: '200px', height: '50px' }} className="btn btn-outline-primary fw-bold">ADD TO CART</button> <br/>
+                    </div>
+                    <div className="d-flex justify-content-around mt-2">
+                        <button onClick={() => buyNow(state.id, state.price)} style={{ width: '400px', height: '50px' }} className="btn btn-primary fw-bold">BUY NOW</button>
+                    </div>  
+                </div>
 
                 {/* --------------Rating----------- */}
                 <div>
                     <Link to={{ ...location, state: { data: state.title } }}>
 
                     </Link>
-                    <Outlet />
+                    
                 </div>
                 {/* <div className="d-flex border justify-content-between">
                     <p className="mt-2">view reviews</p>
@@ -124,11 +111,12 @@ export default function ViewMore() {
                 {/* ---------------end------------------ */}
             </div>
         </section>
+            <Outlet />
         {/* -------------------------------------------Related Products-------------------------------- */}
 
-        <h4 className="container p-4">Related Products</h4>
 
         <div>
+        <h4 className="container border p-4">Related Products</h4>
             <div className="container border p-2 mb-4 " id="related-products">
                 {categoryProduct?.map((product, index) => <div key={index} id="related-products-child" className="m-2 p-2 h-auto border d-flex flex-column rounded position-relative">
                     <img width="100%" onClick={() => viewMore(product)} height="250px" id="view-image" src={product.thumbnail} />

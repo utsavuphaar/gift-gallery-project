@@ -15,7 +15,6 @@ const AddProduct = () => {
         let { name, value } = e.target;
         console.log(name);
         setproductdata({ ...productdata, [name]: value });
-        console.log(productdata);
     }
 
     let handleImageArray = (e) => {
@@ -34,9 +33,9 @@ const AddProduct = () => {
         try {
           const formData = new FormData();
           formData.append('excelFile', file);
-    
+            alert("hi")
           // Replace 'http://example.com/upload' with your backend server endpoint
-          await axios.post('http://localhost:3000/product/uploadExcelSheet', formData, {
+          await axios.post('http://localhost:3000/product/uploadExcelSheet', {formData}, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -121,7 +120,7 @@ const AddProduct = () => {
                     <div className="w-100 d-flex align-items-center justify-content-center" style={{ marginBottom: "50px", marginTop: "50px" }}>
                         {/* File upload input for Excel */}
                         <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
-                        <button className="btn btn-primary" onClick={handleUpload}>Upload Excel File</button>
+                        <button className="btn btn-primary" onClick={handleUpload} width="200px">Upload File</button>
                     </div>
                 </div>
                 <div className="col-md-6 d-flex flex-column align-items-center">
