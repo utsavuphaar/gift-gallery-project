@@ -8,5 +8,8 @@ export default {
     addToWishlist:"http://localhost:3000/wishlist/addWishlist",
     userList:"http://localhost:3000/user/userList",
     orderForParticularUser:"http://localhost:3000/order/viewParticularUserOrder",
-    addReview:"http://localhost:3000/review/addreview"
+    addReview:"http://localhost:3000/review/addreview",
+    branlist: "http://localhost:3000/product/brand",
+    getproductbybrand: "http://localhost:3000/product/getproductbybrand",
+    fewcategory: "http://localhost:3000/category/fewcategory"
 }
