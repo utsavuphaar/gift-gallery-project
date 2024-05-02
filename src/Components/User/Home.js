@@ -4,14 +4,35 @@ import Product from './Product';
 import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
 import { SlUser } from "react-icons/sl";
 import { Link, useNavigate } from "react-router-dom"
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Footer from './footer';
+import axios from 'axios';
+import URL from '../ApiUrl'
+import {  fetchProductByCategory } from '../../DataSlice/ProductSlice';
+import { useDispatch } from 'react-redux';
 export default function Home() {
     // const [buttonDisabled, setButtonDisabled] = useState(false);
     const navigate = useNavigate();
+    const categoryRef = useRef([]);
+    const call = useDispatch();
     let buttonDisabled = false;
     if (localStorage.getItem("userId"))
         buttonDisabled = true;
+
+        useEffect(() => {
+            axios.get(URL.fewcategory)
+            .then((result)=>{
+                categoryRef.current = result.data.data.map(item => item.categoryName); // Extract categoryName values
+                console.log(categoryRef.current);
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        }, [])
+
+        const displayCategoryItem = (category) => {
+            call(fetchProductByCategory(category));
+        }
 
     return <>
         <Header />
@@ -20,17 +41,9 @@ export default function Home() {
                 <div className="col-md-3  mt-3 first p-0">
                     <div className='row category p-0'>
                         <div className='col-md-10'>
-                            <div className='mt-1 category1'>Annivery</div>
-                            <div className='category1'>Birthday</div>
-                            <div className='category1'>Valetine Day</div>
-                            <div className='category1'>Festival</div>
-                            <div className='category1'>Men</div>
-                            <div className='category1'>Women</div>
-                            <div className='category1'>Home Decorate</div>
-                            <div className='category1'>Flower</div>
-                            <div className='category1'>Mother's day</div>
-                            <div className='category1'>Father's day</div>
-
+                        {categoryRef.current.map((category,index) => <div onClick={()=>displayCategoryItem(category)} className='category1 mt-1' key={index}>
+                            {category}</div>
+                                )}
                         </div>
 
                     </div>

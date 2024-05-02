@@ -10,6 +10,8 @@ import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8
 import Swal from 'sweetalert2';
 import { ToastContainer, toast } from 'react-toastify'
 import GoogleSign from './GoogleSign';
+import Header from './Header';
+import Footer from './footer';
 
 // export const emailContext = createContext();
 
@@ -172,11 +174,12 @@ export default function Signup() {
             pauseOnHover
             theme="colored"
         />
-        <div className='container-fluid'  style={{width:"100vw",height:"100vh",backgroundColor:"#ececec"}}>
+        <Header/>
+        <div className='container-fluid '  style={{width:"100vw",height:"100vh",backgroundColor:"#ececec"}}>
 
         
-<div className="container d-flex justify-content-center align-items-center min-vh-100" style={{backgroundColor:"#ececec"}}>
-    <div className="row border rounded-5 p-3 bg-white shadow box-area">
+<div className="container d-flex justify-content-center align-items-start min-vh-100" style={{backgroundColor:"#ececec"}}>
+    <div className="row border rounded-5 p-3 bg-white shadow box-area mt-4">
         <div className="col-md-6 p-0 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style={{ background: "#103cbe" }}>
             <div className="featured-image">
                 <img src={image} className="rounded-4" style={{ width: "300px" }} />
@@ -219,5 +222,6 @@ export default function Signup() {
     </div>
 </div>
 </div>
+<Footer />
     </>
 }
