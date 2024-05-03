@@ -10,6 +10,8 @@ import Fade from '@mui/material/Fade';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Zoom } from 'react-toastify';
+import { FaHeart } from "react-icons/fa6";
+import { IoEye } from "react-icons/io5";
 // -------------------Price filter---------------------------
 
 import Box from '@mui/material/Box';
@@ -43,11 +45,11 @@ function valuetext(value) {
 
 function Product() {
     let userId = localStorage.getItem("userId")
-    const [brand,setbrand] = useState([])
+    const [brand, setbrand] = useState([])
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { productList, isLoading, error, page } = useSelector(store => store.Product);
-    
+
     useEffect(() => {
         fetchData();
         brandlist();
@@ -55,32 +57,32 @@ function Product() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    
-    
+
+
 
     const fetchData = () => {
         dispatch(fetchProduct(page));
     };
 
-    const brandlist = () =>{
+    const brandlist = () => {
         axios.get(URL.branlist)
-        .then((result)=>{
-            console.log(result.data.data);
-            setbrand(result.data.data)
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+            .then((result) => {
+                console.log(result.data.data);
+                setbrand(result.data.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
-    const getproductbybrand = (brand) =>{
-        axios.post(URL.getproductbybrand,{brand})
-        .then((result)=>{
-            productList = result.data.product;
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+    const getproductbybrand = (brand) => {
+        axios.post(URL.getproductbybrand, { brand })
+            .then((result) => {
+                productList = result.data.product;
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     const handleScroll = () => {
@@ -120,6 +122,8 @@ function Product() {
 
     const addToWishlist = (productId) => {
         dispatch(addProductIntoWishlist({ userId, productId }));
+        let save = document.getElementById("save");
+        save.style.color = 'red'
     };
 
     const buyNow = (product) => {
@@ -146,7 +150,6 @@ function Product() {
         setExpanded((prevExpanded) => !prevExpanded);
     };
 
-
     const [value, setValue] = React.useState([20, 37]);
 
     const handleChange = (event, newValue) => {
@@ -159,37 +162,37 @@ function Product() {
             <div className="row p-0  mb-3 ">
                 <div className="col-lg-3 p-0 " >
                     <div>
-                        <Accordion  style={{backgroundColor: "", boxShadow: "none", border: "none"}} defaultExpanded  >
+                        <Accordion style={{ backgroundColor: "", boxShadow: "none", border: "none" }} defaultExpanded  >
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1-content"
                                 id="panel1-header"
                             >
-                                <Typography className='ms-5 text-primary ' style={{fontSize:"17px",fontWeight:"600"}}>Brand</Typography>
+                                <Typography className='ms-5 text-primary ' style={{ fontSize: "17px", fontWeight: "600" }}>Brand</Typography>
                             </AccordionSummary >
-                                {brand.map((item,index)=>
-                            <AccordionDetails className='ms-5'>
-                                <Typography key={index} >
-                                <input className="form-check-input ms-3" type="checkbox" onClick={()=>getproductbybrand(item)} value="" id="flexCheckDefault" />
-                                    <label className="form-check-label ms-3" for="flexCheckDefault">
-                                    {item}
-                                    </label>
-                                </Typography>
-                            </AccordionDetails>
-                                )}
+                            {brand.map((item, index) =>
+                                <AccordionDetails className='ms-5'>
+                                    <Typography key={index} >
+                                        <input className="form-check-input ms-3" type="checkbox" onClick={() => getproductbybrand(item)} value="" id="flexCheckDefault" />
+                                        <label className="form-check-label ms-3" for="flexCheckDefault">
+                                            {item}
+                                        </label>
+                                    </Typography>
+                                </AccordionDetails>
+                            )}
                         </Accordion>
 
-                        <Accordion  style={{backgroundColor: "", boxShadow: "none", border: "none"}} defaultExpanded  >
+                        <Accordion style={{ backgroundColor: "", boxShadow: "none", border: "none" }} defaultExpanded  >
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1-content"
                                 id="panel1-header"
                             >
-                                <Typography className='ms-5 text-primary ' style={{fontSize:"17px",fontWeight:"600"}}>Price range</Typography>
+                                <Typography className='ms-5 text-primary ' style={{ fontSize: "17px", fontWeight: "600" }}>Price range</Typography>
                             </AccordionSummary >
-                                
+
                             <AccordionDetails className='ms-2'>
-                            <Box sx={{ width: 300 }}>
+                                <Box sx={{ width: 300 }}>
                                     <Slider
                                         getAriaLabel={() => 'Temperature range'}
                                         value={value}
@@ -215,17 +218,17 @@ function Product() {
                             </AccordionDetails>
                         </Accordion>
 
-                        <Accordion  style={{backgroundColor: "", boxShadow: "none", border: "none"}} defaultExpanded  >
+                        <Accordion style={{ backgroundColor: "", boxShadow: "none", border: "none" }} defaultExpanded  >
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1-content"
                                 id="panel1-header"
                             >
-                                <Typography className='ms-5 text-primary ' style={{fontSize:"17px",fontWeight:"600"}}>Rating</Typography>
+                                <Typography className='ms-5 text-primary ' style={{ fontSize: "17px", fontWeight: "600" }}>Rating</Typography>
                             </AccordionSummary >
-                                
+
                             <AccordionDetails className='ms-5'>
-                            <div className="form-check">
+                                <div className="form-check">
                                     <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                     <label className="form-check-label" for="flexCheckDefault">
                                         <ImStarFull className='text-warning' />
@@ -267,7 +270,7 @@ function Product() {
                                 </div>
                             </AccordionDetails>
                         </Accordion>
-                        
+
 
                     </div>
                 </div>
@@ -277,7 +280,11 @@ function Product() {
 
                         <div style={{ width: "300px", borderRadius: "10px" }} className="bg-white  p-2 m-2 d-flex flex-column align-items-center">
 
-                            <img src={product.thumbnail} className='gift-image' onClick={() => viewMore(product)} style={{ cursor: 'pointer', width: "270px", height: "230px", borderRadius: "10px" }} />
+                            <img src={product.thumbnail} className='gift-image'  style={{  width: "270px", height: "230px", borderRadius: "10px" }} />
+                            <div className='icon-div'>
+                                <div className='heart-icon'><FaHeart id='save' onClick={()=>addToWishlist(product.id)} className='' /></div>
+                                <div onClick={() => viewMore(product)} className='heart-icon'><IoEye className=' ' /></div>
+                            </div>
                             <div className="w-100 mt-2 d-flex justify-content-between">
                                 <h6 className="mt-2 ms-2">{product.title.slice(0, 22)}</h6>
                                 <div className="d-flex align-items-center justify-content-center ms-2  rounded" style={{ width: "55px" }}>

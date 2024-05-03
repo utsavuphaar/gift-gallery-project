@@ -12,6 +12,7 @@ import {  fetchProductByCategory } from '../../DataSlice/ProductSlice';
 import { useDispatch } from 'react-redux';
 export default function Home() {
     // const [buttonDisabled, setButtonDisabled] = useState(false);
+    let userId = localStorage.getItem('userId')
     const navigate = useNavigate();
     const categoryRef = useRef([]);
     const call = useDispatch();
@@ -41,14 +42,14 @@ export default function Home() {
                 <div className="col-md-3  mt-3 first p-0">
                     <div className='row category p-0'>
                         <div className='col-md-10'>
-                        {categoryRef.current.map((category,index) => <div onClick={()=>displayCategoryItem(category)} className='category1 mt-1' key={index}>
+                        {categoryRef.current?.map((category,index) => <div onClick={()=>displayCategoryItem(category)} className='category1 mt-1' key={index}>
                             {category}</div>
                                 )}
                         </div>
 
                     </div>
                 </div>
-                <div className="col-md-6 mt-3 middle p-0">
+                <div className={!userId ? "col-md-6 mt-3 middle p-0" : "col-md-9 mt-3 middle p-0"}>
                     <div id="carouselExampleIndicators" className="middle carousel slide" data-bs-ride="carousel">
                         <div className="carousel-indicators">
                             <div type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="dot active" aria-current="true" aria-label="Slide 1"></div>
@@ -77,7 +78,7 @@ export default function Home() {
                     </div>
 
                 </div>
-                <div className="col-md-3 mt-3 ">
+                <div className={!userId ? "c!ol-md-3 mt-3 " : "d-none "}>
                     <div className='container p-3' style={{ backgroundColor: "#E3F0FF", borderRadius: "10px" }}>
                         <div className='d-flex'>
                             <div className='user '>
