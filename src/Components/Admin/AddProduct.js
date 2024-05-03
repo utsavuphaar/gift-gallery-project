@@ -26,51 +26,53 @@ const AddProduct = () => {
 
     const handleUpload = async () => {
         if (!file) {
-          alert('Please select a file.');
-          return;
+            alert('Please select a file.');
+            return;
         }
-    
+
         try {
-          const formData = new FormData();
-          formData.append('excelFile', file);
-            alert("hi")
-          // Replace 'http://example.com/upload' with your backend server endpoint
-          await axios.post('http://localhost:3000/product/uploadExcelSheet', {formData}, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
-    
-          // File uploaded successfully
-          alert('File uploaded successfully!');
+            const formData = new FormData();
+            formData.append('excelFile', file);
+
+            await axios.post('http://localhost:3000/product/uploadExcelSheet', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            alert('File uploaded successfully!');
         } catch (error) {
-            alert("error")
-          console.error('Error uploading file:', error);
+            console.error('Error uploading file:', error);
+            alert('Error uploading file.');
         }
-      };
-
+    };
     const handleFileChange = (e) => {
-    // Check if the selected file is of type Excel
-    if (e.target.files[0].type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-      setFile(e.target.files[0]);
-    } else {
-      // File is not of type Excel, show an error message or take appropriate action
-      alert('Please select an Excel file.');
+        const selectedFile = e.target.files[0];
+        if (selectedFile && selectedFile.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+            setFile(selectedFile);
+        } else {
+            alert('Please select an Excel file.');
+        }
+    };
+
+
+  const additem = () => {
+    // Validate each field
+    if (!productdata.title || !productdata.description || !productdata.categoryName || !productdata.brand || !productdata.price || !productdata.stock || !productdata.rating || !productdata.discountPercentage || !productdata.thumbnail || !productdata.image1 || !productdata.image2 || !productdata.image3) {
+        alert('Please fill in all fields.');
+        return;
     }
-  };
 
-
-    const additem = () => {
-        axios.post("http://localhost:3000/product/addSingleProduct", { productdata })
-            .then(() => {
-                alert("Item added successfully")
-            })
-            .catch(err => {
-                console.log(err);
-                alert("Something went wrong")
-            })
-
-    }
+    // If all fields are filled, proceed to send data to the server
+    axios.post("http://localhost:3000/product/addSingleProduct", { productdata })
+        .then(() => {
+            alert("Item added successfully");
+        })
+        .catch(err => {
+            console.log(err);
+            alert("Something went wrong");
+        });
+};
 
     return <>
         <div className="container-fluid " style={{ backgroundColor: "#FAF7FC", width: "75%" }}>
@@ -122,6 +124,7 @@ const AddProduct = () => {
                         <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
                         <button className="btn btn-primary" onClick={handleUpload} width="200px">Upload File</button>
                     </div>
+                    
                 </div>
                 <div className="col-md-6 d-flex flex-column align-items-center">
                     <img className="w-75 mt-5 text-danger" src={productdata.thumbnail} style={{ height: "350px", backgroundColor: "#C8C8C8", borderRadius: "10px", boxShadow: "0px 0px 2px 2px #C8C8C8" }} />
