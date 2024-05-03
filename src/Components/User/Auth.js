@@ -4,5 +4,5 @@ export default ({children})=>{
     if(localStorage.getItem("user"))
      return children;
     else
-     return <Navigate to="/signup"/> 
+     return <Navigate to="/signIn"/> 
 }

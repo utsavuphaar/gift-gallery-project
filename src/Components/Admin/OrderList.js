@@ -32,7 +32,7 @@ function OrderList() {
             <div className='container-fluid w-75 p-2' style={{ backgroundColor: "#f7fafc" }}>
                 <div className='mb-4 ms-2 form-group row'>
                     <label className='fs-4'>Order :
-                        <input className='col-md-3 ms-2 fs-6 p-2 rounded border' type='search' placeholder='type order id..' />
+                        <input className='col-md-3 ms-2 fs-6 p-2 rounded border' style={{borderRadius:"20px"}} type='search' placeholder='type order id..' />
                         <select className='col-md-3 fs-5 cursor-pointer border float-end rounded p-1'>
                             <option>All Orers</option>
                             <option>Confirmed</option>
@@ -42,10 +42,12 @@ function OrderList() {
                         </select>
                     </label>
                 </div>
-                <div className='container p-2 mt-4 row' style={{ overflowY: "auto", height: '450px' }}>
-                    <table className='table border col-md-10 position-relative' style={{ maxHeight: '70vh', overflow: "scroll" }}>
-                        <thead className='position-sticky' style={{ top: '-10px' }}>
-                            <tr className='bg-primary text-center text-white p-2'>
+
+                <div className='container p-2 mt-4 row ' style={{ overflow: "auto", height: '450px' }}>
+                    <table className='table border  col-md-10 position-relative' style={{ maxHeight: '70vh', overflow: "scroll" }}>
+                        <thead className='position-sticky' style={{top:'-10px'}} >
+                            <tr className='bg-primary text-center text-white'>
+
                                 <th>Sr.No.</th>
                                 <th>Item</th>
                                 <th>Name</th>
@@ -55,7 +57,7 @@ function OrderList() {
                                 <th>Order Id</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className='bg-light'>
                             {state.orderList?.map((order, index) => <tr key={index} className='text-center'>
                                 <td>{index + 1}</td>
                                 {order?.orderItems.map((data, ind) => <td key={ind}>
@@ -69,7 +71,7 @@ function OrderList() {
                                 </td>)}
                                 <td style={{ textAlign: 'center' }}>{order.status}</td>
                                 <td>{order.orderDate}</td>
-                                <td className='text-primary' style={{ cursor: "pointer" }}>{order.orderId}</td>
+                                <td className='text-secondary' style={{ cursor: "pointer" }}>{order.orderId}</td>
                             </tr>)}
                         </tbody>
                     </table>

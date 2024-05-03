@@ -7,36 +7,30 @@ import ApiUrl from '../ApiUrl';
 
 function ProductList() {
     const call = useDispatch();
+    const { categoryProduct } = useSelector(store => store.Product);
+
     const [category, setCategory] = useState("All Category")
-    const { productList, isLoading, error, page } = useSelector(store => store.Product);
-    useEffect(() => {
-        fetchData();
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    const fetchData = () => {
-        call(fetchProduct(page));
-    };
-
-    const handleScroll = () => {
-        if (
-            window.innerHeight + document.documentElement.scrollTop ===
-            document.documentElement.offsetHeight
-        ) {
-            if (!isLoading && !error) {
-                const nextPage = productList.length > 0 ? page + 1 : page - 1;
-                call(fetchProduct(nextPage));
-            }
-        }
-    };
-
     const [state, dispatch] = useReducer((state, action) => {
-        if (action.type === "set-category")
-            return { ...state, categoryList: action.payload };
-    }, { categoryList: [] });
+        if (action.type === "set-product") {
+            return { ...state, productList: action.payload };
+        }
+        else if (action.type === "delete-product") {
+            if (window.confirm("Are you sure ?")){
+                state.productList.splice(action.payload, 1
+                    );
+            }
+            return {...state};
+        } else if (action.type === "set-category")
+        return { ...state, categoryList: action.payload };
+    }, { productList: [], categoryList: []  });
 
     useEffect(() => {
+        axios.get("http://localhost:3000/product/displayAllProducts")
+        .then(response => {
+            dispatch({ type: "set-product", payload: response.data.result });
+        }).catch(err => {
+            console.log(err);
+        })
         axios.get(ApiUrl.getCategories)
             .then(response => {
                 dispatch({ type: "set-category", payload: response.data.categories });
@@ -50,9 +44,18 @@ function ProductList() {
         setCategory(categoryName);
     }
     const displayCategoryItem = () => {
-        if (category == "All Category")
-            call(fetchProduct())
-        call(fetchProductByCategory(category));
+        if (category == "All Category"){
+            axios.get("http://localhost:3000/product/displayAllProducts")
+        .then(response => {
+            dispatch({ type: "set-product", payload: response.data.result });
+        }).catch(err => {
+            console.log(err);
+        })
+        }else{
+            call(fetchProductByCategory(category));
+            dispatch({ type: "set-product", payload: categoryProduct });
+        }
+
     }
     return (
         <>
@@ -91,7 +94,7 @@ function ProductList() {
                             </tr>
                         </thead>
                         <tbody className='text-center'>
-                            {productList.map((product, index) => <tr key={index} >
+                            {state.productList.map((product, index) => <tr key={index} >
                                 <td className='text-center'>{index + 1}</td>
                                 <td><img src={product.thumbnail} id='p-image' width="120px" height="80px" /></td>
                                 <td>{product.title.slice(0, 30)}</td>
@@ -103,7 +106,7 @@ function ProductList() {
                                     <button className='btn text-primary'>Edit</button>
                                 </td>
                                 <td>
-                                    <button className='btn text-danger'>Delete</button>
+                                    <button className='btn text-danger' onClick={() => dispatch({ type: "delete-product", payload: index })}>Delete</button>
                                 </td>
                             </tr>)}
                         </tbody>

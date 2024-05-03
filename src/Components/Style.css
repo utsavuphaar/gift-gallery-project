@@ -406,3 +406,288 @@
     width: 100%;
     height: 100%;
 } */
+
+
+/* -----------------New signin page------------------ */
+
+.text{
+    font-family: 'Courier New', Courier, monospace !important;
+}
+
+
+.box-area{
+    width: 930px;
+}
+
+/*------------ Right box ------------*/
+
+.right-box{
+    padding: 40px 30px 40px 40px;
+}
+
+/*------------ Custom Placeholder ------------*/
+
+::placeholder{
+    font-size: 16px;
+}
+
+.rounded-4{
+    border-radius: 20px;
+}
+.rounded-5{
+    border-radius: 30px;
+}
+
+
+/*------------ For small screens------------*/
+
+@media only screen and (max-width: 768px){
+
+    .text{
+        display: none;
+    }
+
+     .box-area{
+        margin: 0 10px;
+
+     }
+     .left-box{
+        height: 300px;
+        overflow: hidden;
+     }
+     .right-box{
+        padding: 20px;
+     }
+
+}
+
+
+
+/* ------------------Add to cart button ----------------------- */
+
+.movetocart {
+    --width: 100px;
+    --height: 35px;
+    --tooltip-height: 35px;
+    --tooltip-width: 90px;
+    --gap-between-tooltip-to-button: 18px;
+    --button-color: #fff;
+    border: 1px solid #0D6EFD;
+    --tooltip-color: #fff;
+    width: var(--width);
+    height: var(--height);
+    background: var(--button-color);
+    position: relative;
+    text-align: center;
+    border-radius: 0.45em;
+    font-family: "Arial";
+    transition: background 0.3s;
+  }
+  
+  .movetocart::before {
+    position: absolute;
+    content: attr(data-tooltip);
+    width: var(--tooltip-width);
+    height: var(--tooltip-height);
+    background-color: #555;
+    font-size: 0.9rem;
+    color: #fff;
+    border-radius: .25em;
+    line-height: var(--tooltip-height);
+    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
+    left: calc(50% - var(--tooltip-width) / 2);
+  }
+  
+  .movetocart::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: #555;
+    left: calc(50% - 10px);
+    bottom: calc(100% + var(--gap-between-tooltip-to-button) - 10px);
+  }
+  
+  .movetocart::after,.movetocart::before {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+  }
+  
+  .text-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #0D6EFD !important;
+  }
+  
+  .movetocart-wrapper,.text-1,.iconbutton {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    color: #fff;
+  }
+  
+  .text-1 {
+    top: 0
+  }
+  
+  .text-1,.iconbutton {
+    transition: top 0.5s;
+  }
+  
+  .iconbutton {
+    color: #fff;
+    top: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .iconbutton svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .movetocart:hover {
+    background: #222;
+    border: none;
+  }
+  
+  .movetocart:hover .text-1{
+    top: -100%;
+  }
+  
+  .movetocart:hover .iconbutton {
+    top: 0;
+  }
+  
+  .movetocart:hover:before,.movetocart:hover:after {
+    opacity: 1;
+  }
+  
+  .movetocart:hover:after {
+    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
+  }
+  
+  .movetocart:hover:before {
+    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
+  }
+  
+  
+  /* ----------------------------- */
+  .movetocart1 {
+    --width: 100px;
+    --height: 35px;
+    --tooltip-height: 35px;
+    --tooltip-width: 90px;
+    --gap-between-tooltip-to-button: 18px;
+    --button-color: #0D6EFD;
+    --tooltip-color: #fff;
+    width: var(--width);
+    height: var(--height);
+    background: var(--button-color);
+    position: relative;
+    text-align: center;
+    border-radius: 0.45em;
+    font-family: "Arial";
+    transition: background 0.3s;
+  }
+  
+  .movetocart1::before {
+    position: absolute;
+    content: attr(data-tooltip);
+    width: var(--tooltip-width);
+    height: var(--tooltip-height);
+    background-color: #555;
+    font-size: 0.9rem;
+    color: #fff;
+    border-radius: .25em;
+    line-height: var(--tooltip-height);
+    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
+    left: calc(50% - var(--tooltip-width) / 2);
+  }
+  
+  .movetocart1::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: #555;
+    left: calc(50% - 10px);
+    bottom: calc(100% + var(--gap-between-tooltip-to-button) - 10px);
+  }
+  
+  .movetocart1::after,.movetocart1::before {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+  }
+  
+  .text-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+  
+  .movetocart-wrapper,.text-2,.iconbutton {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    color: #fff;
+  }
+  
+  .text-2 {
+    top: 0
+  }
+  
+  .text-2,.iconbutton {
+    transition: top 0.5s;
+  }
+  
+  .iconbutton {
+    color: #fff;
+    top: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .iconbutton svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .movetocart1:hover {
+    background: #222;
+    
+  }
+  
+  .movetocart1:hover .text-2{
+    top: -100%;
+  }
+  
+  .movetocart1:hover .iconbutton {
+    top: 0;
+  }
+  
+  .movetocart1:hover:before,.movetocart1:hover:after {
+    opacity: 1;
+  }
+  
+  .movetocart1:hover:after {
+    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
+  }
+  
+  .movetocart1:hover:before {
+    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
+  }
+  

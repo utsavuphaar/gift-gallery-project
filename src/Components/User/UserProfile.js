@@ -26,7 +26,7 @@ export const UserProfile = () => {
             if (user)
                   localStorage.clear();
             alert("logout successfully..")
-            navigate("/signup")
+            navigate("/")
       }
 
 

@@ -1,6 +1,6 @@
 import TextField from '@mui/material/TextField';
 import { FcGoogle } from "react-icons/fc";
-import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
+// import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,8 +11,18 @@ import Swal from 'sweetalert2';
 import Home from './Home';
 import { ToastContainer, toast } from 'react-toastify'
 import GoogleSign from './GoogleSign';
+
+import Header from './Header';
+
+
+// -------------------New sign in page----------------
+
+import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
+import google from './google.png'
+
+
 export default function Signin() {
-    let userDetail=[];
+    let userDetail = [];
     const navigate = useNavigate();
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
@@ -97,8 +107,8 @@ export default function Signin() {
                     console.log(res.data.user);
                     setuserId(userId);
                     let user = JSON.stringify(res.data.user);
-                    localStorage.setItem("user",user);
-                    localStorage.setItem("userId",res.data.user.id)
+                    localStorage.setItem("user", user);
+                    localStorage.setItem("userId", res.data.user.id)
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -134,59 +144,58 @@ export default function Signin() {
             pauseOnFocusLoss
             draggable
             pauseOnHover
-            theme="colored"  
+            theme="light"
         />
-        <div className='container-fluid d-flex justify-content-center align-items-center p-0 main'>
-            <div className='row signin'>
-                <div className='col-md-6  form'>
-                    <h2 className='mt-5 text-primary fw-bold'>Login</h2>
-                    <TextField onChange={event => setemail(event.target.value)} onKeyUp={() => validationemail()} className='mt-4  w-75 ' label="Email Address" type='email' variant="standard" />
-                    <div className='container-fluid w-75'>
-                        <div className='row '>
-                            <div className='mt-1 p-0 col-md-12 d-flex '>
-                                <small className='text-danger' id='emailerror'></small>
-                            </div>
-                        </div>
-                    </div>
 
-                    <TextField onChange={event => setpassword(event.target.value)} onKeyUp={() => validatepassword()} className='mt-3  w-75' label="Password" type='password' variant="standard" />
-                    <div className='container-fluid w-75'>
-                        <div className='row '>
-                            <div className='mt-1 p-0 col-md-12 d-flex '>
-                                <small className='text-danger' id='passworderror'></small>
-                            </div>
-                        </div>
-                    </div>
+        <Header/>
 
+        <div className='container-fluid'  style={{width:"100vw",height:"100vh",backgroundColor:"#ececec"}}>
 
-                    <div className='container-fluid mt-3 d-flex justify-content-center align-items-center'>
-                        <div className='row  w-100  text-primary' style={{ fontSize: "13px" }}>
-                            {/* <div className=' col-md-7 d-flex justify-content-start align-items-center'>
-                                <small className='ms-4 p-1'>Login with Phone</small>
-                            </div> */}
-                            <div className='col-md-5 d-flex justify-content-center align-items-center ' style={{cursor:"pointer"}}>
-                                <small onClick={()=>navigate("/forget")}>Forget Password ?</small>
-                            </div>
-                        </div>
+        
+        <div className="container d-flex justify-content-center align-items-center min-vh-100" style={{backgroundColor:"#ececec"}}>
+            <div className="row border rounded-5 p-3 bg-white shadow box-area">
+                <div className="col-md-6 p-0 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style={{ background: "#103cbe" }}>
+                    <div className="featured-image">
+                        <img src={image} className="rounded-4" style={{ width: "300px" }} />
                     </div>
-                    <div className='container-fluid mt-3 d-flex justify-content-center align-items-center p-0' style={{ fontSize: "12px" }}>
-                        By contuining, I agree to the
-                        <span className='fw-bold text-primary p-1' style={{ fontSize: "12px" }}>Terms of Use </span>
-                         & <span className='fw-bold text-primary p-1' style={{ fontSize: "12px" }}>Privacy Policy</span>
-                    </div>
-
-                    {/* <span className='mt-3 forget'>Forget Password ?</span> */}
-                    <button className="w-75 mt-4  button" onClick={() => signin()}>Sign In</button>
-                    {/* <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3' />Sign in with google</button> */}
-                    
-                    <GoogleSign />
-                    {/* <FcGoogle className='fs-1 me-3 d-none google' /> */}
-                    <p className=' mt-3 mb-4' id='log-2'>Do not have an account,<span className=' text-primary ms-2 create' onClick={() => navigate('/signup')}><u>create a new one.</u></span></p>
+                    <p className="text-white fs-2 mt-3 text" style={{ fontWeight: "600"}}>Be Verified</p>
+                    <small className="text-white text-wrap text-center text" style={{ width: "17rem"}}>Join experienced Designers on this platform.</small>
                 </div>
-                <div className='col-md-6  p-0'>
-                    <img src={image} className='image' />
+                <div className="col-md-6 right-box">
+                    <div className="row align-items-center">
+                        <div className="header-text mb-4">
+                            <h2>Hello,Again</h2>
+                            <p>We are happy to have you back.</p>
+                        </div>
+                        <div className="input-group">
+                            <input type="text" onKeyUp={()=>validationemail()} onChange={event => setemail(event.target.value)}  className="form-control form-control-lg bg-light fs-6" placeholder="Email address" />
+                        </div>
+                            <small className='text-danger' id='emailerror'></small>
+                        <div className="input-group mt-3">
+                            <input type="password" onKeyUp={()=>validatepassword()} onChange={event => setpassword(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Password" />
+                        </div>
+                            <small className='text-danger'  id='passworderror'></small>
+                        <div className="input-group mb-5 d-flex justify-content-between">
+                            <div className="form-check" style={{cursor:"pointer"}}>
+                                <input type="checkbox" className="form-check-input" id="formCheck" />
+                                <label for="formCheck" className="form-check-label text-secondary"><small>Remember Me</small></label>
+                            </div>
+                            <div className="forgot">
+                                <small className='text-primary ' style={{cursor:"pointer"}} onClick={()=>navigate('/forget')}>Forgot Password?</small>
+                            </div>
+                        </div>
+                        <div className="input-group mb-3">
+                            <button className="btn btn-lg btn-primary w-100 fs-6" onClick={()=>signin()}>Login</button>
+                        </div>
+                        <GoogleSign/>
+                        <div className="row">
+                            <small>Don't have account? <a className='text-primary' onClick={()=>navigate('/signup')} style={{cursor:"pointer"}}>Sign Up</a></small>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
+     </div>
     </>
 }
