@@ -28,7 +28,7 @@ import store from "../../Store/store"
 import { AiFillStar } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
 import { useEffect } from "react";
-import { addProductIntoCart, addProductIntoWishlist, fetchProduct } from "../../DataSlice/ProductSlice";
+import { addProductIntoCart, addProductIntoWishlist, fetchProduct, fetchWishList } from "../../DataSlice/ProductSlice";
 
 import { Link, useNavigate } from "react-router-dom";
 import { Stack } from '@mui/material';
@@ -57,8 +57,12 @@ function Product() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-
-
+    const fetchwishlist = () => {
+        axios.get(URL.getWishlist)
+            .then((result) => {
+                document.getElementById(`save${result.data.result.productId}`)
+            })
+    }
 
     const fetchData = () => {
         dispatch(fetchProduct(page));
@@ -122,7 +126,7 @@ function Product() {
 
     const addToWishlist = (productId) => {
         dispatch(addProductIntoWishlist({ userId, productId }));
-        let save = document.getElementById("save");
+        let save = document.getElementById(`save${productId}`);
         save.style.color = 'red'
     };
 
@@ -158,10 +162,10 @@ function Product() {
 
     return <>
         <ToastContainer />
-        <div className="container-fluid position-relative" style={{ backgroundColor: "#F7FAFC" }}>
+        <div className="container-fluid " style={{ backgroundColor: "#F7FAFC" }}>
             <div className="row p-0  mb-3 ">
                 <div className="col-lg-3 p-0 " >
-                    <div>
+                    <div style={{position:"sticky",top:"10"}}>
                         <Accordion style={{ backgroundColor: "", boxShadow: "none", border: "none" }} defaultExpanded  >
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
@@ -280,9 +284,9 @@ function Product() {
 
                         <div style={{ width: "300px", borderRadius: "10px" }} className="bg-white  p-2 m-2 d-flex flex-column align-items-center">
 
-                            <img src={product.thumbnail} className='gift-image'  style={{  width: "270px", height: "230px", borderRadius: "10px" }} />
+                            <img src={product.thumbnail} className='gift-image' style={{ width: "270px", height: "230px", borderRadius: "10px" }} />
                             <div className='icon-div'>
-                                <div className='heart-icon'><FaHeart id='save' onClick={()=>addToWishlist(product.id)} className='' /></div>
+                                <div className='heart-icon'><FaHeart id={`save${product.id}`} onClick={() => addToWishlist(product.id)} /></div>
                                 <div onClick={() => viewMore(product)} className='heart-icon'><IoEye className=' ' /></div>
                             </div>
                             <div className="w-100 mt-2 d-flex justify-content-between">
@@ -312,7 +316,7 @@ function Product() {
                                 {/* <button className="btn btn-outline-primary" onClick={() => addToCart(product.id)}>Move to cart</button> */}
                                 <div class="movetocart" onClick={() => addToCart(product.id)}>
                                     <div class="movetocart-wrapper">
-                                {/* <button className="btn btn-outline-primary" onClick={() => addToCart(product.id)}>Move to cart</button> */}
+                                        {/* <button className="btn btn-outline-primary" onClick={() => addToCart(product.id)}>Move to cart</button> */}
                                         <div class="text-1">Move to cart</div>
                                         <span class="iconbutton">
                                             <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">

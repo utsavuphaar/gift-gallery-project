@@ -14,7 +14,8 @@ export default function Home() {
     // const [buttonDisabled, setButtonDisabled] = useState(false);
     let userId = localStorage.getItem('userId')
     const navigate = useNavigate();
-    const categoryRef = useRef([]);
+    // const categoryRef = useRef([]);
+    let [categoryRef,setCategoryRef] = useState([]);
     const call = useDispatch();
     let buttonDisabled = false;
     if (localStorage.getItem("userId"))
@@ -23,7 +24,8 @@ export default function Home() {
         useEffect(() => {
             axios.get(URL.fewcategory)
             .then((result)=>{
-                categoryRef.current = result.data.data.map(item => item.categoryName); // Extract categoryName values
+                categoryRef = result.data.data.map(item => item.categoryName); // Extract categoryName values
+                setCategoryRef(categoryRef);
                 console.log(categoryRef.current);
             })
             .catch(err=>{
@@ -42,7 +44,7 @@ export default function Home() {
                 <div className="col-md-3  mt-3 first p-0">
                     <div className='row category p-0'>
                         <div className='col-md-10'>
-                        {categoryRef.current?.map((category,index) => <div onClick={()=>displayCategoryItem(category)} className='category1 mt-1' key={index}>
+                        {categoryRef?.map((category,index) => <div onClick={()=>displayCategoryItem(category)} className='category1 mt-1' key={index}>
                             {category}</div>
                                 )}
                         </div>
@@ -78,7 +80,7 @@ export default function Home() {
                     </div>
 
                 </div>
-                <div className={!userId ? "c!ol-md-3 mt-3 " : "d-none "}>
+                <div className={!userId ? "col-md-3 mt-3 " : "d-none "}>
                     <div className='container p-3' style={{ backgroundColor: "#E3F0FF", borderRadius: "10px" }}>
                         <div className='d-flex'>
                             <div className='user '>
