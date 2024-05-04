@@ -3,8 +3,9 @@ import Header from './Header'
 import Footer from './footer'
 import axios from 'axios';
 import ApiUrl from '../ApiUrl';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 function Order() {
+    const navigate = useNavigate();
     let userId = localStorage.getItem("userId");
     const [state, dispatch] = useReducer((state, action) => {
         if (action.type === "set-order") {
@@ -60,7 +61,7 @@ function Order() {
 
                                 <td><div className='row ' style={{ height: "100px" }}>
                                     <div className='col-md-12 d-flex align-items-center justify-content-center'>
-                                        <img src={order.orderItems[0].product.thumbnail} width="100px" height="100px" />
+                                        <img onClick={()=>navigate("/myorders",{state:order})} src={order.orderItems[0].product.thumbnail} width="100px" height="100px" />
                                     </div>
                                 </div></td>
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { BiRupee } from 'react-icons/bi';
 import { useLocation } from 'react-router-dom'
 import gift from './gift.png'
+import { IoIosGift } from 'react-icons/io';
 function OrderDetails() {
     const { state } = useLocation();
     console.log(state);
@@ -10,7 +11,7 @@ function OrderDetails() {
             <div className='container-fluid d-flex flex-column' style={{ backgroundColor: "#f1f3f6", height: '90vh' }}>
                 <div className='container border bg-white w-100'>
                     <div className='row'>
-                        <div className='m-2 col-md-4'>
+                        <div className='m-2 col-md-3'>
                             <h5>Delivery Address</h5>
                             <span>{state.firstName}</span>
                             <span> {state.lastName}</span>
@@ -18,8 +19,16 @@ function OrderDetails() {
                             <p>{state.pinCode}</p>
                             <p><span className='fw-bold'>Phone Number: </span> <span>{state.contact}</span></p>
                         </div>
-                        <div className='col-md-6'>
-                            <img src={gift} width="300px" height="200px"/>
+                        <div className='col-md-3'>
+                            <img src={gift} width="300px" height="200px" />
+                        </div>
+                        <div className='col-md-4 title'>
+                            <div className='mt-3 mb-2 icon bg-primary  d-flex justify-content-center align-items-center'>
+                                <IoIosGift className='fs-1 text-light' />
+                            </div>
+                            <span className='ms-2 fs-2 text-primary name'>
+                                UtsavUphaar
+                            </span>
                         </div>
                     </div>
                 </div>
