@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import React, { useEffect, useRef, useState } from 'react'
 import axios from "axios";
 import { BsCurrencyRupee } from "react-icons/bs";
@@ -14,6 +14,7 @@ function BuyNow() {
     let city = useRef(null);
     let pinCode = useRef(null);
 
+    const navigate = useNavigate();
     let status = "Order Confirmed";
     const userId = localStorage.getItem("userId");
     var { state } = useLocation();
@@ -87,6 +88,8 @@ function BuyNow() {
                                     userId,
                                     productId: state.id,
                                 });
+                                alert("Payment Done")
+                                navigate("/")
                                 console.log("PlaceOrder API response:", myOrder.data);
                             } else {
                                 // Payment verification failed

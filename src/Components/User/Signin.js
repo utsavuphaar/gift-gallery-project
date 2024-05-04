@@ -1,14 +1,9 @@
-import TextField from '@mui/material/TextField';
-import { FcGoogle } from "react-icons/fc";
-// import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchuser } from '../../DataSlice/ProductSlice';
 import URL from '../ApiUrl'
 import axios from 'axios'
 import Swal from 'sweetalert2';
-import Home from './Home';
 import { ToastContainer, toast } from 'react-toastify'
 import GoogleSign from './GoogleSign';
 
@@ -18,7 +13,8 @@ import Header from './Header';
 // -------------------New sign in page----------------
 
 import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
-import google from './google.png'
+import Footer from './footer';
+
 
 
 export default function Signin() {
@@ -152,8 +148,8 @@ export default function Signin() {
         <div className='container-fluid'  style={{width:"100vw",height:"100vh",backgroundColor:"#ececec"}}>
 
         
-        <div className="container d-flex justify-content-center align-items-center min-vh-100" style={{backgroundColor:"#ececec"}}>
-            <div className="row border rounded-5 p-3 bg-white shadow box-area">
+        <div className="container d-flex justify-content-center align-items-start min-vh-100" style={{backgroundColor:"#ececec"}}>
+            <div className="row border rounded-5 p-3 bg-white shadow box-area mt-5">
                 <div className="col-md-6 p-0 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style={{ background: "#103cbe" }}>
                     <div className="featured-image">
                         <img src={image} className="rounded-4" style={{ width: "300px" }} />
@@ -193,9 +189,10 @@ export default function Signin() {
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
      </div>
+     <Footer/>
+     
     </>
 }

@@ -12,6 +12,7 @@ import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 export const UserProfile = () => {
       const [disabled, setDisabled] = useState(true);
       const [disabledEntity, setDisabledEntity] = useState(true);
@@ -22,11 +23,21 @@ export const UserProfile = () => {
       let oldPassword = useRef(null);
       let newPassword = useRef(null);
       let confirmPassword = useRef(null);
+      
       const logout = () => {
             if (user)
                   localStorage.clear();
-            alert("logout successfully..")
-            navigate("/")
+
+            // alert("logout successfully..")
+            Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Login Out ",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+            navigate("/signup")
+
       }
 
 

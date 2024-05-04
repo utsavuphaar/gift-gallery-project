@@ -24,17 +24,16 @@ export default () => {
 
     useEffect(() => {
         dispatch(fetchCartItems(userId));
-        setCart();
         console.log(cartItems);
-    }, []);
-    const setCart = () => {
         for (let product of cartItems) {
             totalamount = totalamount + product["products.price"] * product["products.cartItem.quantity"];
             discountPrice = discountPrice + (((parseInt(product["products.discountPercentage"] * product["products.price"] * product["products.cartItem.quantity"]) / 100).toFixed(2)) * 1);
         }
         setDiscountPrice(discountPrice)
         settotalamount(totalamount);
-    }
+    }, []);
+  
+   
 
     const updateQty = (index, productId, quantity) => {
         dispatch(updateQtyOfProductInCart({ userId, productId, quantity }));
@@ -92,8 +91,8 @@ export default () => {
                                 <h6 className="mt-2 text-uppercase">{product["products.title"]}</h6>
                                 <p style={{ fontSize: '14px' }}>{(product['products.description']).slice(0, 100)}</p>
                                 <div>
-                                    <button onClick={() => removeItemFromCart((product["products.price"] * product["products.cartItem.quantity"]), index, product["products.id"])} className="m-2 btn btn-outline-danger">Remove</button>
-                                    &nbsp;<button onClick={() => addToWishlist(product['products.id'])} className="btn btn-outline-primary m-2">Save For Later</button>
+                                    <button style={{fontSize:"13px"}} onClick={() => removeItemFromCart((product["products.price"] * product["products.cartItem.quantity"]), index, product["products.id"])} className="m-2 btn btn-outline-primary">Remove</button>
+                                    <button style={{fontSize:"13px"}} onClick={() => addToWishlist(product['products.id'])} className="btn btn-primary m-2">Save For Later</button>
                                 </div>
                             </div>
                             <div className="col-md-3 flex-column d-flex justify-content-center align-items-start">
@@ -143,11 +142,11 @@ export default () => {
                         </div>
                     </div>
                 </div>
-                <div className="d-flex  justify-content-around p-4 bg-whit w-75">
-                    <Link to="/">
-                        <button className="btn m-2 btn-primary"><AiOutlineArrowLeft className="fs-5 d-inline me-2" />Back To Shop</button>
+                <div  className="cart-button d-flex justify-content-center p-2 bg-whit w-100">
+                    <Link   to="/">
+                        <button style={{fontSize:"13px"}}  className="btn m-2 btn-primary"><AiOutlineArrowLeft className="fs-5 d-inline me-2" />Back To Shop</button>
                     </Link>
-                    <button onClick={removeAllItems} className="btn m-2 btn-outline-danger">Remove all</button>
+                    <button style={{fontSize:"13px"}} onClick={removeAllItems} className="btn m-2 btn-outline-primary">Remove all</button>
                     {/* <button onClick={removeAllItems} className="btn btn-outline-danger" style={{ height: 'auto' }}>Remove all</button> */}
                 </div>
             </section>

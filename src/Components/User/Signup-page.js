@@ -8,9 +8,12 @@ import URL from '../ApiUrl'
 import { useNavigate } from 'react-router-dom'
 import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
 import Swal from 'sweetalert2';
-import {ToastContainer,toast} from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
+import GoogleSign from './GoogleSign';
 import Header from './Header';
-import GoogleSignup from './GoogleSignup';
+import Footer from './footer';
+
+// export const emailContext = createContext();
 
 export default function Signup() {
     const [name, setName] = useState("")
@@ -140,6 +143,9 @@ export default function Signup() {
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    let user = JSON.stringify(res.data.user);
+                    localStorage.setItem("user", user);
+                    localStorage.setItem("userId", res.data.user.id)
                     navigate("/")
                 })
                 .catch(err => {
@@ -169,57 +175,53 @@ export default function Signup() {
             theme="colored"
         />
         <Header/>
-        <div className="container-fluid d-flex justify-content-center align-items-center p-0  main ">
-            <div className='row signup'>
-                <div className='col-md-6  p-0'>
-                    <img className='left' src={image} />
+        <div className='container-fluid '  style={{width:"100vw",height:"100vh",backgroundColor:"#ececec"}}>
+
+        
+<div className="container d-flex justify-content-center align-items-start min-vh-100" style={{backgroundColor:"#ececec"}}>
+    <div className="row border rounded-5 p-3 bg-white shadow box-area mt-4">
+        <div className="col-md-6 p-0 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style={{ background: "#103cbe" }}>
+            <div className="featured-image">
+                <img src={image} className="rounded-4" style={{ width: "300px" }} />
+            </div>
+            <p className="text-white fs-2 mt-3 text" style={{ fontWeight: "600"}}>Be Verified</p>
+            <small className="text-white text-wrap text-center text" style={{ width: "17rem"}}>Join experienced Designers on this platform.</small>
+        </div>
+        <div className="col-md-6 right-box">
+            <div className="row align-items-center">
+                <div className="header-text">
+                    <h2>Welcome,</h2>
+                    <p className='ms-2'>We are happy to have you come here.</p>
                 </div>
-                <form className='col-md-6 form right p-0 '>
-                    <h2 className='mt-4 text-primary fw-bold'>Create an account</h2>
-                    <span className='text-secondary'>Enter your details</span>
-                    <TextField  onChange={event => setName(event.target.value)} onKeyUp={() => validationname()} className='mt-3  w-75' label="Name" type='name' variant="standard" />
-                    <div className='container-fluid w-75'>
-                        <div className='row '>
-                            <div className='mt-1 p-0 col-md-12 d-flex '>
-                                <small className='text-danger' id='firstname'></small>
-                            </div>
-                        </div>
-                    </div>
-                    <TextField  onChange={event => setemail(event.target.value)} onKeyUp={() => validationemail()} className='mt-2  w-75' label="Email Address" type='email' variant="standard" />
-                    <div className='container-fluid w-75'>
-                        <div className='row '>
-                            <div className='mt-1 p-0 col-md-12 d-flex '>
-                                <small className='text-danger' id='emailerror'></small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <TextField onChange={event => setpassword(event.target.value)} onKeyUp={() => validatepassword()} className='mt-2  w-75' id="standard-password-input" label="Password" type="password" autoComplete="current-password" variant="standard" />
-                    <div className='container-fluid w-75'>
-                        <div className='row '>
-                            <div className='mt-1 p-0 col-md-12 d-flex '>
-                                <small className='text-danger' id='passworderror'></small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <TextField onChange={event => setcontact(event.target.value)} onKeyUp={() => validationphone()} className='mt-2  w-75' id="standard-password-input" label="Phone" type="number" autoComplete="current-password" variant="standard" />
-                    <div className='container-fluid w-75'>
-                        <div className='row '>
-                            <div className='mt-1 p-0 col-md-12 d-flex '>
-                                <small className='text-danger' id='phoneerror'></small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button onClick={() => createAccount()} className="w-75 mt-4  button" type='button'>Create Account</button>
-                    {/* <button className='w-75  mt-3 button-2'><FcGoogle className='fs-3 me-3' />Sign up with google</button>
-                    <FcGoogle className='fs-3 me-3 d-none google' /> */}
-                    <GoogleSignup/>
-                    
-                    <p className=' mt-3 mb-4' id='log'>Already have account?<span className=' text-primary ms-2 log-in' onClick={() => navigate("/signin")}><u>Log in</u></span></p>
-                </form>
+                <div className="input-group">
+                    <input type="text" onKeyUp={()=>validationname()} onChange={event => setName(event.target.value)}  className="form-control form-control-lg bg-light fs-6" placeholder="Username" />
+                </div>
+                    <small className='text-danger' id='firstname'></small>
+                <div className="input-group mt-3">
+                    <input type="text" onKeyUp={()=>validationemail()} onChange={event => setemail(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Email address" />
+                </div>
+                <small className='text-danger' id='emailerror'></small>
+                <div className="input-group mt-3">
+                    <input type="number" onKeyUp={()=>validationphone()} onChange={event => setcontact(event.target.value)}  className="form-control form-control-lg bg-light fs-6" placeholder="Phone" />
+                </div>
+                    <small className='text-danger' id='phoneerror'></small>
+                <div className="input-group mt-3">
+                    <input type="password" onKeyUp={()=>validatepassword()} onChange={event => setpassword(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Password" />
+                </div>
+                    <small className='text-danger'  id='passworderror'></small>
+                
+                <div className="input-group mt-5 mb-3">
+                    <button className="btn btn-lg btn-primary w-100 fs-6" onClick={()=>createAccount()}>Sign up</button>
+                </div>
+                <GoogleSign/>
+                <div className="row">
+                    <small>Already have an account? <a className='text-primary' onClick={()=>navigate('/signin')} style={{cursor:"pointer"}}>Log in</a></small>
+                </div>
             </div>
         </div>
+    </div>
+</div>
+</div>
+<Footer />
     </>
 }
