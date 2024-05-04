@@ -14,8 +14,9 @@ export default function Home() {
     // const [buttonDisabled, setButtonDisabled] = useState(false);
     let userId = localStorage.getItem('userId')
     const navigate = useNavigate();
-    
-    let [categoryRef,setCategoryRef] = useState([])
+
+    // const categoryRef = useRef([]);
+    let [categoryRef,setCategoryRef] = useState([]);
     const call = useDispatch();
     let buttonDisabled = false;
     if (localStorage.getItem("userId"))
@@ -25,7 +26,10 @@ export default function Home() {
             axios.get(URL.fewcategory)
             .then((result)=>{
                 categoryRef = result.data.data.map(item => item.categoryName); // Extract categoryName values
-                setCategoryRef(categoryRef)
+
+                setCategoryRef(categoryRef);
+                console.log(categoryRef.current);
+
             })
             .catch(err=>{
                 console.log(err);
@@ -79,7 +83,7 @@ export default function Home() {
                     </div>
 
                 </div>
-                <div className={!userId ? "c!ol-md-3 mt-3 " : "d-none "}>
+                <div className={!userId ? "col-md-3 mt-3 " : "d-none "}>
                     <div className='container p-3' style={{ backgroundColor: "#E3F0FF", borderRadius: "10px" }}>
                         <div className='d-flex'>
                             <div className='user '>

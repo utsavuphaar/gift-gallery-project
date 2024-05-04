@@ -27,12 +27,11 @@ function Checkout() {
         // alert(discountPrice)
         return totalAmt;
     }
+
     const sendData = () => {
         // axios.post("http://localhost:3000/order/placeOrder",{firstName,lastName,contact,address,city,pin,status,userId,price,quantity})
         alert(firstName + " " + lastName + " " + contact + " " + address + " " + city + " " + pinCode + " " + userId + " " + status)
     }
-
-
 
 
     const userArr = localStorage.getItem("user");
