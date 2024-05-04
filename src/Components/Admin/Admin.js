@@ -36,6 +36,9 @@ const AdminProfile = () => {
                         <Link to="userList" className="text-dark" style={{ textDecoration: "none", }}>
                             <span className="d-flex mt-3">    <FaUsers className="mt-1" />&nbsp;&nbsp;User List</span>
                         </Link>
+                        <Link to="deliveryBoyList" className="text-dark" style={{ textDecoration: "none", }}>
+                            <span className="d-flex mt-3">    <FaUsers className="mt-1" />&nbsp;&nbsp;Delivery Boy List</span>
+                        </Link>
                         <Link to="productList" className="text-dark" style={{ textDecoration: "none", }}><span className="d-flex mt-3">
                             <BiBox className="mt-1" />&nbsp;&nbsp;Product Stock</span>
                         </Link>
