@@ -733,3 +733,12 @@
     bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
   }
   
+  /* ---------------view add to cart button-------------------- */
+
+  .addtocartbutton:hover{
+    background-color: #0D6EFD !important;
+    color: white !important;
+    cursor: pointer !important;
+    transition: 0.5s;
+  }
+

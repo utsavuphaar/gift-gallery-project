@@ -2,7 +2,7 @@ import { Link, Outlet, useLocation } from "react-router-dom"
 import { FiHeart } from "react-icons/fi";
 import store from "../../Store/store"
 import { CiHeart } from "react-icons/ci";
-import { addProductIntoCart, fetchProduct } from "../../DataSlice/ProductSlice";
+import { addProductIntoCart, addProductIntoWishlist, fetchProduct } from "../../DataSlice/ProductSlice";
 import { PiShoppingCartSimpleThin } from "react-icons/pi";
 import { AiOutlineEye } from "react-icons/ai";
 import { BiRupee } from "react-icons/bi";
@@ -24,8 +24,14 @@ import { useEffect } from "react";
 import { fetchProductByCategory } from "../../DataSlice/ProductSlice";
 import Header from "./Header";
 import Footer from "./footer";
+import { FaHeart } from "react-icons/fa6";
+import { IoEye } from "react-icons/io5";
+import { CiDeliveryTruck } from "react-icons/ci";
+import { GiReturnArrow } from "react-icons/gi";
+import ReactImageMagnify from 'react-image-magnify';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 
 export default function ViewMore() {
     const location = useLocation();
@@ -39,6 +45,12 @@ export default function ViewMore() {
     }, [])
     const [value, setValue] = useState("")
     const { state } = useLocation();
+    let [currentimage, setcurrentimage] = useState(state.thumbnail);
+
+    const changeimage = (image) => {
+        setcurrentimage(image);
+    };
+
 
     const viewMore = (product) => {
         navigate("/viewmore", { state: product })
@@ -52,6 +64,12 @@ export default function ViewMore() {
         dispatch(addProductIntoCart({ userId: userId, productId: productId, quantity: inputValue }))
     }
 
+    const addToWishlist = (productId) => {
+        dispatch(addProductIntoWishlist({ userId, productId }));
+        let save = document.getElementById(`save${productId}`);
+        save.style.color = 'red'
+    };
+
     const buyNow = (productId, price) => {
         const finalPrice = (price * inputValue)
         alert(productId + " " + finalPrice)
@@ -59,77 +77,124 @@ export default function ViewMore() {
     // alert(inputValue)
     return <>
         <Header />
-        <section className="p3 mt-4 d-flex h-auto border justify-content-center align-content-center" id="view-more-section" style={{ width: '100%', height: 'auto' }}>
-            <div id="view-left">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
 
-            <div id="view-mid" className="p-2 border">
-                <img style={{ width: '100%', height: '100%' }} src={state.thumbnail} />
-            </div>
-
-            <div id="view-right" className="m-4 mt-0">
-                <span className="mt-4 fw-bold fs-4">{state.title}</span>
-                {/* <span className="fs-2 text-secondary float-end me-2"><FiHeart/></span> */}
-                <span className="float-end me-3 fs-2">
-                    <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-                </span>
-                <br />
-                <div categoryName="d-flex">
-                    <span className="fs-3 d-inline me-3">
-                        Rs.{(state.price - (((parseInt(state.discountPercentage * state.price) / 100).toFixed(2)) * 1)).toFixed(2)} | <span className="text-warning">({state.discountPercentage}% off )</span>
-                    </span><hr />
-                </div>
-                <p>{state.description}</p>
-                <div className="flex-column mt-2 d-flex justify-content-around">
-                    <div className="w-100 text-center">
-                        <button className="btn btn-primary" onClick={decrement}>-</button>
-                        <input min={1} readOnly type="number" value={inputValue} className="border ps-4 p-1 m-1" id="qty" />
-                        <button className="btn btn-primary" onClick={() => setInputValue(inputValue + 1)} >+</button>
-                       &nbsp;&nbsp; <button onClick={() => addToCart(state.id)} style={{ width: '200px', height: '50px' }} className="btn btn-outline-primary fw-bold">ADD TO CART</button> <br/>
+        <div className="container p-0 mt-5" style={{ maxWidth: "90%", boxShadow: '0px 0px 1px 1px gainsboro' }}>
+            <div className="row m-0 p-3">
+                <div className="col-md-6">
+                    <div className="border" style={{ width: "100%" }}>
+                        <ReactImageMagnify {...{
+                            smallImage: {
+                                alt: 'Wristwatch by Ted Baker London',
+                                isFluidWidth: true,
+                                src: currentimage,
+                                width: '100%',
+                                height: '100%'
+                            },
+                            largeImage: {
+                                src: currentimage,
+                                width: 1200,
+                                height: 1800
+                            },
+                            enlargedImagePosition: 'over'
+                        }} />
                     </div>
-                    <div className="d-flex justify-content-around mt-2">
-                        <button onClick={() => buyNow(state.id, state.price)} style={{ width: '400px', height: '50px' }} className="btn btn-primary fw-bold">BUY NOW</button>
-                    </div>  
-                </div>
 
-                {/* --------------Rating----------- */}
-                <div>
-                    <Link to={{ ...location, state: { data: state.title } }}>
-
-                    </Link>
-                    
+                    <div className="mt-3 d-flex justify-content-between align-items-center" style={{ overflowX: 'auto' }}>
+                        {state.images?.split(',').map((image, index) => {
+                            if (index < 3) {
+                                const imageUrl = image.trim();
+                                return (
+                                    <img
+                                        key={index}
+                                        className="w-25 h-100"
+                                        onClick={() => changeimage(imageUrl)}
+                                        src={imageUrl}
+                                        alt={`Image ${index + 1}`}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                );
+                            }
+                            return null;
+                        })}
+                    </div>
                 </div>
-                {/* <div className="d-flex border justify-content-between">
-                    <p className="mt-2">view reviews</p>
-                    <button className="btn text-primary">view</button>
-                </div> */}
-                {/* ---------------end------------------ */}
+                <div className="col-md-6">
+                    <div className="container mt-2">
+                        <div className="p-2 d-flex justify-content-between">
+                            <h4 className="w-75">{state.title}</h4>
+                            <FiHeart className="fs-5 text-primary" />
+                        </div>
+                        <div className="d-flex ms-2 align-items-center">
+                            <div className="fs-4">Rs {(state.price - (((parseInt(state.discountPercentage * state.price) / 100).toFixed(2)) * 1)).toFixed(2)} | </div>
+                            <div className="ms-2 p-2" style={{ fontSize: "14px" }}><AiFillStar className="text-warning" /> {state.rating} <span style={{ fontSize: "12px" }} className="ms-1">rating</span></div>
+                        </div>
+                        <hr className="mt-3" />
+                        <div className="mt-3">{state.description}</div>
+                        <div className="mt-4 d-flex align-items-center">
+                            <CiDeliveryTruck className="fs-5 text-secondary" />
+                            <span className="ms-2" style={{ fontSize: "13px" }}>Free Domestic shipping on all orders over Rs 250</span>
+                        </div>
+                        <div className="mt-3 d-flex align-items-center">
+                            <GiReturnArrow className="me-1 text-secondary" />
+                            <span className="ms-2" style={{ fontSize: "13px" }}>Delivers in 3-7 working days shipping & return </span>
+                        </div>
+                        <div className="mt-4 d-flex justify-content-between align-items-center">
+                            <div className="d-flex align-items-center p-2" style={{ borderRadius: "50px", border: "1px solid #0D6EFD", height: "40px" }}>
+                                <button className="fs-5" style={{ border: 'none', backgroundColor: "white", width: "20px" }} onClick={decrement}>-</button>
+                                <input min={1} style={{ paddingLeft: "15px", width: '40px', border: "none" }} readOnly type="number" value={inputValue} id="qty" />
+                                <button style={{ border: 'none', backgroundColor: "white", width: "20px" }} className="fs-5" onClick={() => setInputValue(inputValue + 1)}>+</button>
+                            </div>
+                            <div className="container">
+                                <button onClick={() => addToCart(state.id)} style={{ height: '40px', borderRadius: "50px", color: "#0D6EFD", border: "1px solid #0D6EFD", backgroundColor: "white" }} className="w-100 addtocartbutton">Add to Cart</button>
+                            </div>
+                        </div>
+                        <div className="mt-3">
+                            <button onClick={() => buyNow(state.id, state.price)} style={{ color: "white", backgroundColor: "#0D6EFD", border: 'none', borderRadius: "50px", height: '40px' }} className="w-100">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
-            <Outlet />
+        </div>
+
+
+        {/* --------------Rating----------- */}
+        <div>
+            <Link to={{ ...location, state: { data: state.title } }}>
+            </Link>
+        </div>
+        <Outlet />
         {/* -------------------------------------------Related Products-------------------------------- */}
 
 
-        <div>
-        <h4 className="container border p-4">Related Products</h4>
-            <div className="container border p-2 mb-4 " id="related-products">
-                {categoryProduct?.map((product, index) => <div key={index} id="related-products-child" className="m-2 p-2 h-auto border d-flex flex-column rounded position-relative">
-                    <img width="100%" onClick={() => viewMore(product)} height="250px" id="view-image" src={product.thumbnail} />
-                    <div className="d-flex position-absolute" id="buttons">
-                        <div><CiHeart style={{ width: '25px', height: '25px' }} /></div>
-                        <div><PiShoppingCartSimpleThin style={{ width: '20px', height: '20px' }} /></div>
-                        <div><AiOutlineEye onClick={() => viewMore(product)} style={{ width: '20px', height: '20px' }} /></div>
-                    </div>
-                    <h6 className="mt-4">{product.title.split(" ").slice(0, 3).join(' ')}</h6>
-                    <div className="d-flex">
-                        <BiRupee /><span style={{ fontWeight: 'bold' }}>{product.price} </span><span className="text-secondary"><del>{product.price}</del></span>
-                        &nbsp; <span className="text-success p-1" style={{ backgroundColor: 'lightgrey', fontSize: '14px', borderRadius: '5px', fontWeight: 'bold' }}>({product.discountPercentage} % off )</span>
-                        &nbsp;&nbsp; <span className="bg-success d-flex p-1 text-light"><AiFillStar style={{ color: 'white' }} /> {product.rating}</span>
+        <div className="container mt-5 p-0 mb-4" style={{ borderRadius: "20px", boxShadow: '0px 0px 2px 2px #F7FAFC' }}>
+            <h4 className="container p-3 d-flex align-items-center" ><div className="ms-3" style={{ borderRadius: "5px", width: '30px', height: '40px', backgroundColor: "#0D6EFD" }}></div>&nbsp; Related Products</h4>
+            <div className="container p-2 " style={{ borderBottomLeftRadius: "20px", borderBottomRightRadius: "20px", backgroundColor: "#F7FAFC" }} id="related-products">
+                {categoryProduct?.map((product, index) => <div className=" mt-2 col-lg-3 d-flex justify-content-center align-items-center">
+
+                    <div style={{ width: "250px", borderRadius: "10px" }} className="bg-white  p-2 m-2 d-flex flex-column align-items-center">
+
+                        <img src={product.thumbnail} className='gift-image' style={{ width: "220px", height: "200px", borderRadius: "10px" }} />
+                        <div className='icon-div' style={{ marginTop: "130px" }}>
+                            <div className='heart-icon'><FaHeart id={`save${product.id}`} onClick={() => addToWishlist(product.id)} /></div>
+                            <div onClick={() => viewMore(product)} className='heart-icon'><IoEye className=' ' /></div>
+                        </div>
+                        <div className="w-100 mt-2 d-flex justify-content-between">
+                            <h6 className="mt-2 ms-2">{product.title.slice(0, 22)}</h6>
+                            <div className="d-flex align-items-center justify-content-center ms-2  rounded" style={{ width: "55px" }}>
+                                <AiFillStar className="text-warning" />
+                                <span style={{ fontSize: "14px" }} className=" text-dark rounded d-flex justify-content-center align-items-center fw-bold ">{product.rating}</span>
+                            </div>
+
+                        </div>
+                        <div className="w-100 d-flex justify-content-between align-items-center">
+                            <div className="d-flex align-items-center justify-content-around  ms-2">
+                                <h5 className="" style={{ fontSize: "15px" }}>₹ {(product.price - (((parseInt(product.discountPercentage * product.price) / 100).toFixed(2)) * 1)).toFixed(2)}</h5>
+                                <del style={{ fontSize: '11px' }} className="ms-2 text-secondary">MRP{product.price}</del>
+                            </div>
+                            <div className="ms-2 d-flex align-items-center justify-content-center text-primary" style={{ borderRadius: "5px", width: "60px", height: "20px", fontSize: '10px', backgroundColor: "#C7E1FF" }}>
+                                {product.discountPercentage}% off
+                            </div>
+                        </div>
                     </div>
                 </div>)}
             </div>

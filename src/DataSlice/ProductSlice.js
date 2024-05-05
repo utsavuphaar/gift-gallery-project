@@ -86,7 +86,12 @@ export const deleteProductFromCart = createAsyncThunk(
             alert("Item deleted successfully");
             return response.data;
         } catch (error) {
-            alert("Something went wrong while deleting the item.");
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Something went wrong ",
+                
+            });
             console.error(error);
             return thunkAPI.rejectWithValue(error.response.data);
         }
@@ -109,10 +114,9 @@ export const deleteProductFromWishList = createAsyncThunk(
     async ({ userId, productId }, thunkAPI) => {
         try {
             const response = await axios.delete(`http://localhost:3000/wishlist/removeItemFromWishList/${userId}/${productId}`);
-            alert("Item deleted successfully");
             return response.data;
         } catch (error) {
-            alert("Something went wrong while deleting the item.");
+            
             console.error(error);
             return thunkAPI.rejectWithValue(error.response.data);
         }

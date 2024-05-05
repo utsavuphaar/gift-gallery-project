@@ -26,7 +26,6 @@ export default function Home() {
             .then((result)=>{
                 categoryRef = result.data.data.map(item => item.categoryName); // Extract categoryName values
                 setCategoryRef(categoryRef);
-                console.log(categoryRef.current);
             })
             .catch(err=>{
                 console.log(err);

@@ -7,6 +7,7 @@ import Footer from './footer';
 import Header from './Header';
 import '../Style.css'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 function Wishlist() {
   const userId = localStorage.getItem("userId")
   const { wishList } = useSelector(store => store.Product);
@@ -16,13 +17,44 @@ function Wishlist() {
   }, [])
 
   let products = Object.values(wishList.flatMap(user => user.Wishlists.map(wishlist => wishlist.product)));
+  
   const removeItemFromWishlist = (index, productId) => {
-    if (window.confirm("Are your sure ?")) {
-      // dispatch(removeProductFromWishlist(index))
-      products.slice(index, 1);
-      dispatch(deleteProductFromWishList({ userId, productId }));
-    }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success ms-3",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: "Are you sure?",
+      text: "You want to delete from wishlist",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        products.splice(index, 1); // Corrected: Changed slice to splice to remove the item
+        dispatch(deleteProductFromWishList({ userId, productId }));
+        swalWithBootstrapButtons.fire({
+          title: "Deleted!",
+          text: "Your gift has been deleted.",
+          icon: "success"
+        });
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: "Cancelled",
+          text: "Your gift is safe :)",
+          icon: "error"
+        });
+      }
+    });
   }
+  
 
   const addToCart = (productId) => {
     dispatch(addProductIntoCart({ userId, productId, quantity: 1 }));
@@ -59,7 +91,7 @@ function Wishlist() {
                 <div style={{ paddingLeft: "10px", fontSize: "12px", height: "35px" }} className='w-100'>{(product.description).slice(0, 50)}</div>
                 <div className='w-100 d-flex justify-content-around mt-2 mb-3'>
                   <button style={{ fontSize: "12px" }} onClick={() => removeItemFromWishlist(index, product.id)} className='btn btn-outline-primary'>Remove</button>
-                  <button style={{ fontSize: "12px" }} onClick={()=> addToCart(product.id)} className='btn btn-primary'><BsCart2 className='fs-5' /> Move to Cart</button>
+                  <button style={{ fontSize: "12px" }} onClick={() => addToCart(product.id)} className='btn btn-primary'><BsCart2 className='fs-5' /> Move to Cart</button>
                 </div>
               </div>
             </div>)}
