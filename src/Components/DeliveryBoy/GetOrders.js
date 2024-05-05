@@ -32,18 +32,6 @@ function GetOrders() {
     return (
         <>
             <div className='container-fluid w-75 p-2' style={{ backgroundColor: "#f7fafc" }}>
-                {/* <div className='mb-4 ms-2 form-group row'>
-                    <label className='fs-4'>Order :
-                        <input className='col-md-3 ms-2 fs-6 p-2 rounded border' style={{borderRadius:"20px"}} type='search' placeholder='type order id..' />
-                        <select className='col-md-3 fs-5 cursor-pointer border float-end rounded p-1'>
-                            <option>All Orers</option>
-                            <option>Confirmed</option>
-                            <option>On the way</option>
-                            <option>Shipped</option>
-                            <option>Cancelled</option>
-                        </select>
-                    </label>
-                </div> */}
 
                 <div className='container p-2 mt-4 row ' style={{ overflow: "auto", height: '550px' }}>
                     <table className='table border  col-md-10 position-relative' style={{ maxHeight: '80vh', overflow: "scroll" }}>
