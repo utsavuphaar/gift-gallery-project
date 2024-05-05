@@ -42,6 +42,7 @@ import DeliveryBoySignUpForm from './Components/Admin/CreateDeliveryBoy.js';
 import DashBoard from './Components/DeliveryBoy/DashBoard.js';
 import GetOrders from './Components/DeliveryBoy/GetOrders.js';
 import OrderDetails from './Components/DeliveryBoy/OrderDetails.js';
+import Help from './Components/User/Help.js';
 
 
 
@@ -67,7 +68,7 @@ function App() {
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/paymentsuccess" element={<PaymentSuccess />} />
       <Route path = "/orderDetail" element={<OrderDetails/>}/>
-
+      <Route path='/help' element={<Help/>}/>
       <Route path='viewmore/:productId' element={<ViewMore />} >
         <Route index element={<ViewReviewRating />} />
       </Route>
