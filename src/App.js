@@ -42,7 +42,12 @@ import DeliveryBoySignUpForm from './Components/Admin/CreateDeliveryBoy.js';
 import DashBoard from './Components/DeliveryBoy/DashBoard.js';
 import GetOrders from './Components/DeliveryBoy/GetOrders.js';
 import OrderDetails from './Components/DeliveryBoy/OrderDetails.js';
+
 import Help from './Components/User/Help.js';
+
+import AuthDeliveryBoy from './Components/DeliveryBoy/AuthDeliveryBoy.js';
+import MyOrders from './Components/User/MyOrders.js';
+
 
 
 
@@ -67,8 +72,11 @@ function App() {
       <Route path='/order' element={<Order />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+
       <Route path = "/orderDetail" element={<OrderDetails/>}/>
       <Route path='/help' element={<Help/>}/>
+
+      <Route path="/myorders" element={<MyOrders />} />
       <Route path='viewmore/:productId' element={<ViewMore />} >
         <Route index element={<ViewReviewRating />} />
       </Route>
@@ -89,10 +97,12 @@ function App() {
       <Route path="/newAccount" element={<DeliveryBoySignUpForm />} />
       <Route path="/signIndeliveryboy" element={<SignInFormDeliveryBoy />} />
 
-      <Route path='deliveryBoy' element={<DeliveryBoyDeshbord />}>
+      <Route path='deliveryBoy' element={<AuthDeliveryBoy><DeliveryBoyDeshbord /></AuthDeliveryBoy>}>
         <Route index element={<DashBoard />} />
         <Route path='getOrder' element={<GetOrders />} />
       </Route>
+
+
     </Routes>
   </>
 }

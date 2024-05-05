@@ -98,8 +98,8 @@ export const UserProfile = () => {
 
                               </div>
 
-                              <div id='checkout-left' className='col-md-8 me-3 border card m-2 ' style={{ backgroundColor: "white", height: 'auto', width: '70%' }}>
-                                    <div className='row form-group p-5'>
+                              <div id='checkout-left' className='col-md-8 me-3 border card m-2 mb-0' style={{ backgroundColor: "white", height: 'auto', width: '70%' }}>
+                                    <div className='row m-0 p-5'>
                                           <p style={{ color: "#0D6EFD" }} className='fs-5 fw-semibold'>Edit Your Profile <FiEdit onClick={enableEntity} className="float-end" style={{ cursor: 'pointer' }} /> <hr /></p>
                                           <div className='col-md-6 mt-2'>
                                                 <label className='fs-8'>First Name*</label><br />
@@ -142,11 +142,6 @@ export const UserProfile = () => {
                                                       <button onClick={changePassword} class="btn btn-primary btn" type="button">Save & Changes</button>
                                                 </div>
                                           </div>
-                                          {/* <div className="mt-2  col-md-12">
-                                                <h4>FAQs</h4>
-                                                <p className="fw-bold mb-0">What happens when I update my email address (or mobile number)?</p>
-                                                <p className="m-0">Your login email id (or mobile number) changes, likewise. You'll receive all your account related communication on your updated email address (or mobile number).</p>
-                                          </div> */}
                                     </div>
                               </div>
                         </section>

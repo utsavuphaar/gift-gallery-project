@@ -13,5 +13,7 @@ export default {
     branlist: "http://localhost:3000/product/brand",
     getproductbybrand: "http://localhost:3000/product/getproductbybrand",
     fewcategory: "http://localhost:3000/category/fewcategory",
-    viewAllOrders:"http://localhost:3000/order/viewAllOrders"
+    updateOrderStatus:"http://localhost:3000/order/updateOrderStatus",
+    viewAllOrders:"http://localhost:3000/order/viewAllOrders",
+    getOrder:"http://localhost:3000/deliverydata/getOrder"
 }
