@@ -14,6 +14,7 @@ export default function Home() {
     // const [buttonDisabled, setButtonDisabled] = useState(false);
     let userId = localStorage.getItem('userId')
     const navigate = useNavigate();
+
     // const categoryRef = useRef([]);
     let [categoryRef,setCategoryRef] = useState([]);
     const call = useDispatch();
@@ -25,7 +26,9 @@ export default function Home() {
             axios.get(URL.fewcategory)
             .then((result)=>{
                 categoryRef = result.data.data.map(item => item.categoryName); // Extract categoryName values
+
                 setCategoryRef(categoryRef);
+                
             })
             .catch(err=>{
                 console.log(err);

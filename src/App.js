@@ -35,6 +35,13 @@ import AddProduct from './Components/Admin/AddProduct.js';
 import ViewReviewRating from './Components/User/View-Review-Rating.js';
 import RateProduct from './Components/User/rating.js';
 import BuyNow from './Components/User/BuyNow.js';
+import DeliveryBoyDeshbord from './Components/DeliveryBoy/DeliveryBoyProfile.js';
+import DeliveryBoyList from './Components/Admin/DeliveryBoyList.js';
+import SignInFormDeliveryBoy from './Components/DeliveryBoy/SignInDeliveryBoy.js';
+import DeliveryBoySignUpForm from './Components/Admin/CreateDeliveryBoy.js';
+import DashBoard from './Components/DeliveryBoy/DashBoard.js';
+import GetOrders from './Components/DeliveryBoy/GetOrders.js';
+import OrderDetails from './Components/DeliveryBoy/OrderDetails.js';
 
 
 
@@ -59,12 +66,12 @@ function App() {
       <Route path='/order' element={<Order />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+      <Route path = "/orderDetail" element={<OrderDetails/>}/>
 
-
-        <Route path='viewmore/:productId' element={<ViewMore />} >
-        <Route index element={<ViewReviewRating/>}/>
-        </Route>
-        <Route path='/viewmore/rate-product' element={<RateProduct/>}/>
+      <Route path='viewmore/:productId' element={<ViewMore />} >
+        <Route index element={<ViewReviewRating />} />
+      </Route>
+      <Route path='/viewmore/rate-product' element={<RateProduct />} />
 
 
       <Route path='/buynow' element={<BuyNow />} />
@@ -74,8 +81,16 @@ function App() {
         <Route path="addProduct" element={<AddProduct />} />
         <Route path="productList" element={<ProductList />} />
         <Route path='userList' element={<Userlist />} />
+        <Route path='deliveryBoyList' element={<DeliveryBoyList />} />
         <Route path="orderList" element={<OrderList />} />
+      </Route>
 
+      <Route path="/newAccount" element={<DeliveryBoySignUpForm />} />
+      <Route path="/signIndeliveryboy" element={<SignInFormDeliveryBoy />} />
+
+      <Route path='deliveryBoy' element={<DeliveryBoyDeshbord />}>
+        <Route index element={<DashBoard />} />
+        <Route path='getOrder' element={<GetOrders />} />
       </Route>
     </Routes>
   </>
