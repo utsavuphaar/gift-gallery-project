@@ -32,6 +32,7 @@ function GetOrders() {
     return (
         <>
             <div className='container-fluid w-75 p-2' style={{ backgroundColor: "#f7fafc" }}>
+
                 <div className='container p-2 mt-4 row ' style={{ overflow: "auto", height: '550px' }}>
                     <table className='table border  col-md-10 position-relative' style={{ maxHeight: '80vh', overflow: "scroll" }}>
                         <thead className='position-sticky' style={{top:'-10px'}} >

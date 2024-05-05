@@ -119,7 +119,7 @@ export default function Signin() {
                         icon: "error",
                         title: "Unauthorized User",
                         text: "Something went wrong ",
-                        footer: '<a href="/">create a new one?</a>'
+                        footer: '<a href="/signup">create a new one?</a>'
                     });
                     console.log(err);
                 })

@@ -31,28 +31,28 @@ export const ContactUs = () => {
                         <div class="row row-div">
                               <h1 className="text-center mt-5 fs-2" style={{ color: "#0D6EFD" }}>Get In Touch</h1>
                               <div class="col-lg-4">
-                                    <section class="box-1 ml-5 mt-sm-3">
-                                          <div class="row ma">
-                                                <div class="col-lg-12">
-                                                      <div className="contactUs-icons-circle" style={{ width: "35px", height: "35px", borderRadius: "50px" }}>
-                                                            <LuPhoneCall className="contactUs-icons ml-2 mt-2" />
+                                    <section class="box-1 ">
+                                          <div class="row">
+                                                <div class="col-lg-12 d-flex flex-column justfiy-content-center align-items-center">
+                                                      <div className="contactUs-icons-circle d-flex align-items-center justify-content-center bg-white" style={{ width: "40px", height: "40px", borderRadius: "50px" }}>
+                                                            <LuPhoneCall className="fs-5 text-primary" />
                                                       </div>
                                                       <h6 style={{ fontSize: "1.3rem" }} className="ml-2 mt-1 h6-tag">Call To Us</h6>
-                                                      <p className="p-tag" style={{ fontSize: "18px", marginBottom: "1rem" }}>We are available 24/7, 7 days a week</p>
-                                                      <p className="p-tag" style={{ fontSize: "18px", marginBottom: "2rem" }}>Phone: 8801611112222 </p>
+                                                      <p className="p-tag" style={{ fontSize: "16px", marginBottom: "1rem" }}>We are available 24/7, 7 days a week</p>
+                                                      <p className="p-tag" style={{ fontSize: "16px", marginBottom: "2rem" }}>Phone: 7000718505 </p>
                                                 </div>
-                                          </div>
+                                          </div>      
                                     </section>
-                                    <section class="box-1 ml-5 mt-sm-3">
-                                          <div class="row ma">
-                                                <div class="col-lg-12">
-                                                      <div className="contactUs-icons-circle" style={{ width: "35px", height: "35px", borderRadius: "50px" }}>
-                                                            <IoMdMail className="contactUs-icons ml-2 mt-2" />
+                                    <section class="box-1 mt-3">
+                                          <div class="row">
+                                                <div class="col-lg-12 d-flex flex-column align-items-center justify-content-center">
+                                                      <div className="contactUs-icons-circle bg-white d-flex justify-content-center align-items-center" style={{ width: "40px", height: "40px", borderRadius: "50px" }}>
+                                                            <IoMdMail className="contactUs-icons text-primary fs-5" />
                                                       </div>
                                                       <h6 style={{ fontSize: "1.3rem" }} className="ml-2 mt-1 h6-tag">Write To Us</h6>
-                                                      <p className="p-tag" style={{ fontSize: "18px", marginBottom: "1rem" }}>Fill out our form and we will contact you within 24 hours</p>
+                                                      <p className="p-tag" style={{ fontSize: "16px", marginBottom: "1rem" }}>Fill out our form and we will contact you within 24 hours</p>
                                                       <p className="p-tag" style={{ fontSize: "15px", marginBottom: "1rem" }}>Email: GiftGallery@gmail.com </p>
-                                                      <p className="p-tag" style={{ fontSize: "15px", position: "relative", bottom: "14px" }}>Email: UtsavUphar@gmail.com.com </p>
+                                                      <p className="p-tag" style={{ fontSize: "15px", position: "relative", bottom: "14px" }}>Email: UtsavUphar@gmail.com </p>
                                                 </div>
                                           </div>
                                     </section>

@@ -53,15 +53,35 @@ function Product() {
     useEffect(() => {
         fetchData();
         brandlist();
+        fetchwishlist();
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const fetchwishlist = () => {
-        axios.get(URL.getWishlist)
+        axios.post(URL.getWishlist, { userId })
             .then((result) => {
-                document.getElementById(`save${result.data.result.productId}`)
+                console.log("Result: ", result.data.wishlist);
+
+                // Assuming result.data.wishlist is an array of wishlist items
+                const updatedWishlist = result.data.wishlist.map(wishlistItem => {
+                    const productId = wishlistItem.product.productId;
+                    console.log(productId);
+                    // Update the style of the HTML element with id `save${productId}`
+                    let save = document.getElementById(`save${productId}`);
+                    if (save) {
+                        save.style.color = 'red';
+                    }
+
+                    return wishlistItem; // Return the original wishlist item
+                });
+
+                // Use updatedWishlist if needed
             })
+            .catch(err => {
+                console.error("Error: ", err);
+            });
+
     }
 
     const fetchData = () => {
@@ -165,7 +185,7 @@ function Product() {
         <div className="container-fluid " style={{ backgroundColor: "#F7FAFC" }}>
             <div className="row p-0  mb-3 ">
                 <div className="col-lg-3 p-0 " >
-                    <div style={{position:"sticky",top:"10"}}>
+                    <div style={{ position: "sticky", top: "10" }}>
                         <Accordion style={{ backgroundColor: "", boxShadow: "none", border: "none" }} defaultExpanded  >
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}

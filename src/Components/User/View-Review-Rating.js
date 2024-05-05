@@ -33,7 +33,7 @@ export const ViewReviewRating = () => {
 
 
       return <>
-            <div className="container mt-3 border w-75">
+            <div className="container mt-5 border w-75">
                   <div className="row">
                         <p className="fw-semibold fs-5 ml-2 mt-3 d-flex">Ratings & Reviews  &nbsp;&nbsp;
                               <button className='btn btn-light border float-end' onClick={() => navigate("/viewmore/rate-product", { state: productId })}> Rate Product</button>
