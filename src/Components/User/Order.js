@@ -20,6 +20,28 @@ function Order() {
         }
     }, { orderList: [] });
 
+    let statusColor = '';
+
+    const status = "Shipped";
+    // Assign color based on status
+    switch (status) {
+        case 'order Confirmed':
+            statusColor = '#333333'; // Black
+            break;
+        case 'Shipped':
+            statusColor = 'green';
+            break;
+        case 'Out for delivery':
+            statusColor = 'orange';
+            break;
+        case 'Delivered':
+            statusColor = 'teal';
+            break;
+        default:
+            // Default color or handle other statuses
+            statusColor = 'black';
+    }
+
     useEffect(() => {
         axios.post(ApiUrl.orderForParticularUser, { userId: userId })
             .then(response => {
@@ -38,7 +60,7 @@ function Order() {
                 <h3 className='p-2 fs-4'>Your Order ({state.orderList.length})</h3>
             </div>
             {state.orderList.length != 0 ? (
-                <table className='table ' >
+                <table className='table container border mb-2' >
                     <thead className=' text-center thead-light' >
                         <tr className='bg-primary'>
                             <th>Order no.</th>
@@ -61,13 +83,13 @@ function Order() {
 
                                 <td><div className='row ' style={{ height: "100px" }}>
                                     <div className='col-md-12 d-flex align-items-center justify-content-center'>
-                                        <img onClick={()=>navigate("/myorders",{state:order})} src={order.orderItems[0].product.thumbnail} width="100px" height="100px" />
+                                        <img style={{ cursor: 'pointer' }} onClick={() => navigate("/myorders", { state: order })} src={order.orderItems[0].product.thumbnail} width="100px" height="100px" />
                                     </div>
                                 </div></td>
 
                                 <td><div className='row ' style={{ height: "100px" }}>
                                     <div className='col-md-12 d-flex align-items-center justify-content-center'>
-                                        {order.orderItems[0].product.title}
+                                        {(order.orderItems[0].product.title).slice(0, 30)}
                                     </div>
                                 </div></td>
 
@@ -79,7 +101,10 @@ function Order() {
                                 </div></td>
                                 <td><div className='row ' style={{ height: "100px" }}>
                                     <div className='col-md-12 d-flex align-items-center justify-content-center'>
-                                        <button className='btn btn-primary'>{order.status}</button>
+                                    <p className="font-weight-bold" style={{ color: statusColor }}>{order.status}</p>
+
+
+                                        {/* <button className='btn btn-primary'>{order.status}</button> */}
                                     </div>
                                 </div></td>
                                 <td><div className='row ' style={{ height: "100px" }}>

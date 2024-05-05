@@ -6,6 +6,7 @@ import "./myOrder.css"
 import { IoIosGift } from 'react-icons/io';
 function MyOrders() {
     const { state } = useLocation();
+    const status = state.status;
     return (
         <>
             <div className='container-fluid d-flex flex-column' style={{ backgroundColor: "#f1f3f6", height: '96vh' }}>
@@ -38,6 +39,7 @@ function MyOrders() {
                         {state.orderItems.map((data, ind) =>
                             <img key={ind} className='mt-3' src={data.product.thumbnail} width="150px" height="150px" />
                         )}
+                        <button className='btn btn-outline-danger center m-4'>Cancel</button>
                     </div>
                     {state.orderItems.map((data, ind) =>
                         <div className='col-md-4'>
@@ -48,41 +50,41 @@ function MyOrders() {
                         </div>
                     )}
                     <div className='col-md-6'>
-                        <div class="card m-1 p-0">
-                            <div class="d-flex flex-column justify-content-around align-content-around ms-auto" style={{ width: '97%' }}>
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-12">
-                                        <ul id="progressbar" class="text-center">
-                                            <li class="active step0"></li>
-                                            <li class="active step0"></li>
-                                            <li class="active step0"></li>
-                                            <li class="step0"></li>
-                                        </ul>
+                        <div className="card m-1 p-0">
+                            <div className="d-flex flex-column justify-content-around align-content-around ms-auto" style={{ width: '97%' }}>
+                                <div className="row d-flex justify-content-center">
+                                    <div className="col-12">
+                                    <ul id="progressbar" className="text-center">
+                                        <li className="active step0"></li>
+                                        <li className={`step0 ${status === 'Order Shipped' || status === 'Out for delivery' || status === 'Delivered' ? 'active' : ''}`}></li>
+                                        <li className={`step0 ${status === 'Out for delivery' || status === 'Delivered' ? 'active' : ''}`}></li>
+                                        <li className={`step0 ${status === 'Delivered' ? 'active' : ''}`}></li>
+                                    </ul>
                                     </div>
                                 </div>
                                 <div className='d-flex justify-content-around'>
-                                    <div class="row d-flex icon-content ms-3">
-                                        <img class="icon" src="https://i.imgur.com/9nnc9Et.png" />
-                                        <div class="d-flex flex-column">
-                                            <p class="font-weight-bold">Order<br />Confirmed</p>
+                                    <div className="row d-flex icon-content ms-3">
+                                        <img className="icon" src="https://i.imgur.com/9nnc9Et.png" />
+                                        <div className="d-flex flex-column">
+                                            <p className="font-weight-bold">Order<br />Confirmed</p>
                                         </div>
                                     </div>
-                                    <div class="row d-flex icon-content">
-                                        <img class="icon" src="https://i.imgur.com/u1AzR7w.png" />
-                                        <div class="d-flex flex-column">
-                                            <p class="font-weight-bold">Order<br />Shipped</p>
+                                    <div className="row d-flex icon-content">
+                                        <img className="icon" src="https://i.imgur.com/u1AzR7w.png" />
+                                        <div className="d-flex flex-column">
+                                            <p className="font-weight-bold">Order<br />Shipped</p>
                                         </div>
                                     </div>
-                                    <div class="row d-flex icon-content">
-                                        <img class="icon" src="https://i.imgur.com/TkPm63y.png" />
-                                        <div class="d-flex flex-column">
-                                            <p class="font-weight-bold">Order<br />En Route</p>
+                                    <div className="row d-flex icon-content">
+                                        <img className="icon" src="https://i.imgur.com/TkPm63y.png" />
+                                        <div className="d-flex flex-column">
+                                            <p className="font-weight-bold">On<br />the way</p>
                                         </div>
                                     </div>
-                                    <div class="row d-flex icon-content">
-                                        <img class="icon" src="https://i.imgur.com/HdsziHP.png" />
-                                        <div class="d-flex flex-column">
-                                            <p class="font-weight-bold">Order<br />Arrived</p>
+                                    <div className="row d-flex icon-content">
+                                        <img className="icon" src="https://i.imgur.com/HdsziHP.png" />
+                                        <div className="d-flex flex-column">
+                                            <p className="font-weight-bold">Order<br />Arrived</p>
                                         </div>
                                     </div>
                                 </div>
