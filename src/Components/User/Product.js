@@ -49,7 +49,7 @@ function Product() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { productList, isLoading, error, page } = useSelector(store => store.Product);
-
+    const [productlist,setproductlist] = useState(productList);
     useEffect(() => {
         fetchData();
         brandlist();
@@ -102,11 +102,12 @@ function Product() {
     const getproductbybrand = (brand) => {
         axios.post(URL.getproductbybrand, { brand })
             .then((result) => {
-                productList = result.data.product;
+                const newProductList = result.data.product;
+                setproductlist(newProductList); // Update the product list state
             })
             .catch(err => {
                 console.log(err);
-            })
+            });
     }
 
     const handleScroll = () => {
@@ -325,12 +326,6 @@ function Product() {
                                 <div className="ms-2 d-flex align-items-center justify-content-center text-primary" style={{ borderRadius: "5px", width: "60px", height: "20px", fontSize: '10px', backgroundColor: "#C7E1FF" }}>
                                     {product.discountPercentage}% off
                                 </div>
-                                {/* <div className=" d-flex align-items-center justify-content-center " >
-                                    <div className="d-flex align-items-center justify-content-center ms-2  rounded" style={{ width: "55px" }}>
-                                        <AiFillStar className="text-warning" />
-                                        <span style={{ fontSize: "12px" }} className="p-1 text-dark rounded d-flex justify-content-center align-items-center fw-bold ">{product.rating}</span>
-                                    </div>
-                                </div> */}
                             </div>
                             <div className="w-100 mt-2 d-flex justify-content-around align-items-center mb-1" >
                                 {/* <button className="btn btn-outline-primary" onClick={() => addToCart(product.id)}>Move to cart</button> */}

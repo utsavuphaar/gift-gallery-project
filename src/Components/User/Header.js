@@ -96,7 +96,7 @@ export default function Header() {
                         <button onClick={() => navigate("/contactus")} className="nav-link rounded-5" id="profile-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Contact</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                        <button className="nav-link rounded-5" id="profile-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Help</button>
+                        <button onClick={()=> navigate("/help")} className="nav-link rounded-5" id="profile-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Help</button>
                     </li>
                 </ul>
             </div >
