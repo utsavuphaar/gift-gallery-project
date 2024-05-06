@@ -38,12 +38,12 @@ export const ViewReviewRating = () => {
             <div className="container mt-5 border w-75">
                   <div className="row">
                         <p className="fw-semibold fs-5 ml-2 mt-3 d-flex">Ratings & Reviews  &nbsp;&nbsp;
-                              <button className='btn btn-light border float-end' onClick={rateProduct}> Rate Product</button>
+
+                              <button className='btn btn-primary border float-end' onClick={() => navigate("/viewmore/rate-product", { state: productId })}> Rate Product</button>
                         </p>
                         <div className='col-md-4 mt-1 '>
-                              <p className='fs-2 d-flex'>{avgRating.toFixed(1)}&nbsp; <FaStar className='text-success mt-2 fs-3' /></p>
-                              <p>{reviews.length} Ratings &<br />
-                                    Reviews
+                              <p className='fs-2 d-flex'>{avgRating.toFixed(1)}&nbsp; <FaStar className='text-primary mt-2 fs-3' /></p>
+                              <p>{reviews.length} Ratings & Reviews
                               </p>
                         </div>
                         <div className='col-md-8'>
@@ -51,21 +51,21 @@ export const ViewReviewRating = () => {
                                     <h5 className='d-flex mt-3 fs-6'>5
                                           <FaStar style={{ fontSize: "10px" }} className='text-dark mt-1' />&nbsp;
                                           <div class="progress mt-1">
-                                                <div class="progress-bar bg-success" role="progressbar" style={{ width: "50%" }} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-primary" role="progressbar" style={{ width: "50%" }} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                           </div>
                                           <div class="rating-hit">914</div>
                                     </h5>
                                     <h5 className='d-flex mt-2 fs-6'>4
                                           <FaStar style={{ fontSize: "10px" }} className='text-dark mt-1' />&nbsp;
                                           <div class="progress mt-1">
-                                                <div class="progress-bar bg-success" role="progressbar" style={{ width: "40%" }} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-primary" role="progressbar" style={{ width: "40%" }} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                           </div>
                                           <div class="rating-hit">419</div>
                                     </h5>
                                     <h5 className='d-flex mt-2 fs-6'>3
                                           <FaStar style={{ fontSize: "10px" }} className='text-dark mt-1' />&nbsp;
                                           <div class="progress mt-1">
-                                                <div class="progress-bar bg-success" role="progressbar" style={{ width: "30%" }} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-primary" role="progressbar" style={{ width: "30%" }} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                           </div>
                                           <div class="rating-hit">148</div>
                                     </h5>
@@ -76,13 +76,13 @@ export const ViewReviewRating = () => {
                                           </div>
                                           <div class="rating-hit">40</div>
                                     </h5>
-                                    <h6 className='d-flex mt-2 fs-6'>1
+                                    <h5 className='d-flex mt-2 fs-6'>1
                                           <FaStar style={{ fontSize: "10px" }} className='text-gray-200 mt-1' />&nbsp;
-                                          <div class="progress mt-1">
+                                          <div class="progress mt-1 ms-1">
                                                 <div class="progress-bar bg-danger" role="progressbar" style={{ width: "5%", color: "red" }} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                           </div>
                                           <div class="rating-hit">50</div>
-                                    </h6>
+                                    </h5>
 
                               </div>
                         </div>

@@ -27,7 +27,7 @@ export const ContactUs = () => {
       return (
             <>
                   <Header />
-                  <div class="container margin ml-5 mb-5 main-container">
+                  <div class="container margin ml-5 mb-5 main-container" >
                         <div class="row row-div">
                               <h1 className="text-center mt-5 fs-2" style={{ color: "#0D6EFD" }}>Get In Touch</h1>
                               <div class="col-lg-4">
@@ -50,7 +50,7 @@ export const ContactUs = () => {
                                                             <IoMdMail className="contactUs-icons text-primary fs-5" />
                                                       </div>
                                                       <h6 style={{ fontSize: "1.3rem" }} className="ml-2 mt-1 h6-tag">Write To Us</h6>
-                                                      <p className="p-tag" style={{ fontSize: "16px", marginBottom: "1rem" }}>Fill out our form and we will contact you within 24 hours</p>
+                                                      <p className="p-tag text-center" style={{ fontSize: "16px", marginBottom: "1rem" }}>Fill out our form and we will contact you within 24 hours</p>
                                                       <p className="p-tag" style={{ fontSize: "15px", marginBottom: "1rem" }}>Email: GiftGallery@gmail.com </p>
                                                       <p className="p-tag" style={{ fontSize: "15px", position: "relative", bottom: "14px" }}>Email: UtsavUphar@gmail.com </p>
                                                 </div>

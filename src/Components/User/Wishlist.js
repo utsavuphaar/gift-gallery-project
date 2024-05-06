@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 function Wishlist() {
   const userId = localStorage.getItem("userId")
   const { wishList } = useSelector(store => store.Product);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchWishList({ userId }));
@@ -63,6 +64,7 @@ function Wishlist() {
   const viewMore = (product) => {
     navigate(`/viewmore/${product.id}`, { state: product });    
 }
+
   return (
     <>
       <Header />
@@ -76,16 +78,12 @@ function Wishlist() {
       {products.length != 0 ? (
         <section className='container-fluid d-flex justify-content-center' id='wishlist-section'>
           <div className='row container-fluid mb-4'>
-            {/* {products.map((product, index) =>
-              <div key={index} className='container bg-white border rounded m-1' id='wishlist-component'>
-                <img width="230px" height="280px" src={product.thumbnail} alt='image' />
-                <h6><BsCurrencyRupee className='d-inline' />{product.price}</h6>
-                <p className='text-secondary m-1'>{(product.description).slice(0, 50)}</p>
-                <button onClick={() => removeItemFromWishlist(index, product.id)} className='btn btn-outline-primary'>Remove</button> &nbsp;
-              </div>)} */}
+           
             {products.map((product, index) => <div className='col-lg-3 mt-3  d-flex justify-content-center align-items-center'>
               <div className='container bg-white d-flex flex-column align-items-center justify-content-center' style={{ width: "300px" }}>
-                <img onClick={() => viewMore(product)} style={{cursor:"pointer", borderRadius: "10px" }} className='mt-3' width="260px" height="220px" src={product.thumbnail} alt='image' />
+
+                <img style={{ borderRadius: "10px",cursor:"pointer"}} className='mt-3' width="260px" height="220px" onClick={()=>viewmore(product)} src={product.thumbnail} alt='image' />
+
                 <div className='w-100 d-flex mt-2  justify-content-between  align-items-center'>
                   <h6 style={{ paddingLeft: "10px" }}>{(product.title).slice(0, 20)}</h6>
                   <h6 style={{ paddingRight: "10px" }}>₹{product.price}</h6>
