@@ -26,7 +26,7 @@ function Userlist() {
 
     return (
         <>
-            <section className='row mt-5' style={{ width: '80%' }}>
+            <section className='row mt-5' style={{ width: '75%' }}>
                 <div className='mb-4 ms-2 form-group row'>
                     <label className='fs-4'>User :
                         <input className='col-md-3 ms-2 fs-6 p-2 rounded border' type='search' placeholder='search user..' />
