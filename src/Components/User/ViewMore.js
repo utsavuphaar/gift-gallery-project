@@ -53,7 +53,7 @@ export default function ViewMore() {
 
 
     const viewMore = (product) => {
-        navigate("/viewmore", { state: product })
+        navigate(`/viewmore/${product.id}`, { state: product });    
     }
     const decrement = () => {
         if (inputValue > 1) {

@@ -6,7 +6,7 @@ import { BsCurrencyRupee } from 'react-icons/bs';
 import Footer from './footer';
 import Header from './Header';
 import '../Style.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 function Wishlist() {
   const userId = localStorage.getItem("userId")
@@ -15,7 +15,7 @@ function Wishlist() {
   useEffect(() => {
     dispatch(fetchWishList({ userId }));
   }, [])
-
+  const navigate = useNavigate();
   let products = Object.values(wishList.flatMap(user => user.Wishlists.map(wishlist => wishlist.product)));
   
   const removeItemFromWishlist = (index, productId) => {
@@ -60,7 +60,9 @@ function Wishlist() {
     dispatch(addProductIntoCart({ userId, productId, quantity: 1 }));
   }
 
-
+  const viewMore = (product) => {
+    navigate(`/viewmore/${product.id}`, { state: product });    
+}
   return (
     <>
       <Header />
@@ -83,7 +85,7 @@ function Wishlist() {
               </div>)} */}
             {products.map((product, index) => <div className='col-lg-3 mt-3  d-flex justify-content-center align-items-center'>
               <div className='container bg-white d-flex flex-column align-items-center justify-content-center' style={{ width: "300px" }}>
-                <img style={{ borderRadius: "10px" }} className='mt-3' width="260px" height="220px" src={product.thumbnail} alt='image' />
+                <img onClick={() => viewMore(product)} style={{cursor:"pointer", borderRadius: "10px" }} className='mt-3' width="260px" height="220px" src={product.thumbnail} alt='image' />
                 <div className='w-100 d-flex mt-2  justify-content-between  align-items-center'>
                   <h6 style={{ paddingLeft: "10px" }}>{(product.title).slice(0, 20)}</h6>
                   <h6 style={{ paddingRight: "10px" }}>₹{product.price}</h6>

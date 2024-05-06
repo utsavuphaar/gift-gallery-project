@@ -5,7 +5,6 @@ import ApiUrl from '../ApiUrl';
 import { useNavigate } from 'react-router-dom';
 function GetOrders() {
     const navigate = useNavigate();
-    const [, forceUpdate] = useReducer(x => x + 1, 0);
     var deliveryBoy = localStorage.getItem("deliveryBoy");
     deliveryBoy = JSON.parse(deliveryBoy);
     const [state, dispatch] = useReducer((state, action) => {
@@ -38,8 +37,15 @@ function GetOrders() {
      const result =   await axios.post(ApiUrl.getOrder,{deliveryBoyId:deliveryBoy.id,orderItemId:orderItemId,userId:userId})
         if(result){
             await axios.put(ApiUrl.updateOrderStatus,{id:orderId,status:"Out for delivery"});
+            axios.get(ApiUrl.viewAllOrders)
+            .then(response => {
+                console.log(response.data.result)
+                dispatch({ type: "set-order", payload: response.data.result });
+            }).catch(err => {
+                console.log(err);
+            })
+            orderList = state.orderList.filter(order => order.status === 'Order Confirmed');
             alert("Order get Successfully...")
-            forceUpdate();
         }
     };
     

@@ -31,12 +31,14 @@ export const ViewReviewRating = () => {
             setAvgRating(avgRating);
       }, [reviews]);
 
-
+      const rateProduct = ()=>{
+            navigate("/viewmore/rate-product", { state: productId })
+      }
       return <>
             <div className="container mt-5 border w-75">
                   <div className="row">
                         <p className="fw-semibold fs-5 ml-2 mt-3 d-flex">Ratings & Reviews  &nbsp;&nbsp;
-                              <button className='btn btn-light border float-end' onClick={() => navigate("/viewmore/rate-product", { state: productId })}> Rate Product</button>
+                              <button className='btn btn-light border float-end' onClick={rateProduct}> Rate Product</button>
                         </p>
                         <div className='col-md-4 mt-1 '>
                               <p className='fs-2 d-flex'>{avgRating.toFixed(1)}&nbsp; <FaStar className='text-success mt-2 fs-3' /></p>
