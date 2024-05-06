@@ -24,7 +24,7 @@ import GoogleSign from "./Components/User/GoogleSign.js"
 import Order from './Components/User/Order.js';
 import ProductList from './Components/Admin/ProductList.js';
 import AdminHomePage from './Components/Admin/AdminHomePage.js';
-import Userlist from './Components/Admin/Userlist.js';
+// import Userlist from './Components/Admin/Userlist.js';
 import OrderList from './Components/Admin/OrderList.js';
 import ChatBot from './Components/User/ChatBot.js';
 import UserProfile from './Components/User/UserProfile.js';
@@ -42,6 +42,7 @@ import DeliveryBoySignUpForm from './Components/Admin/CreateDeliveryBoy.js';
 import DashBoard from './Components/DeliveryBoy/DashBoard.js';
 import GetOrders from './Components/DeliveryBoy/GetOrders.js';
 import OrderDetails from './Components/DeliveryBoy/OrderDetails.js';
+import Userlist from './Components/Admin/UserList.js';
 
 import Help from './Components/User/Help.js';
 
@@ -58,7 +59,7 @@ function App() {
   return <>
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='ChatBot' element={<ChatBot />} />
+      <Route path='/ChatBot' element={<ChatBot />} />
       <Route path='/aboutus' element={<AboutUs />} />
       <Route path='/contactus' element={<ContactUs />} />
       <Route path="/product" element={<Product />} />

@@ -34,7 +34,7 @@ const AddProduct = () => {
             const formData = new FormData();
             formData.append('excelFile', file);
 
-            await axios.post('http://localhost:3000/product/uploadExcelSheet', formData, {
+            await axios.post('http://localhost:3000/product/uploadExcelSheet', {formData}, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
