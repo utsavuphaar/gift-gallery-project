@@ -42,8 +42,8 @@ import DeliveryBoySignUpForm from './Components/Admin/CreateDeliveryBoy.js';
 import DashBoard from './Components/DeliveryBoy/DashBoard.js';
 import GetOrders from './Components/DeliveryBoy/GetOrders.js';
 import OrderDetails from './Components/DeliveryBoy/OrderDetails.js';
+import OrderCancellationForm from './Components/User/CancelOrder.js';
 import Userlist from './Components/Admin/UserList.js';
-
 import Help from './Components/User/Help.js';
 
 import AuthDeliveryBoy from './Components/DeliveryBoy/AuthDeliveryBoy.js';
@@ -77,12 +77,13 @@ function App() {
       <Route path = "/orderDetail" element={<OrderDetails/>}/>
       <Route path='/help' element={<Help/>}/>
 
-      <Route path="/myorders" element={<MyOrders />} />
       <Route path='viewmore/:productId' element={<ViewMore />} >
         <Route index element={<ViewReviewRating />} />
       </Route>
       <Route path='/viewmore/rate-product' element={<RateProduct />} />
 
+      <Route path="/myorders" element={<MyOrders />} />
+      <Route path="/cancel" element={<OrderCancellationForm/>}/>
 
       <Route path='/buynow' element={<BuyNow />} />
       <Route path="/user" element={<Auth><UserProfile /></Auth>} />
@@ -102,7 +103,6 @@ function App() {
         <Route index element={<DashBoard />} />
         <Route path='getOrder' element={<GetOrders />} />
       </Route>
-
 
     </Routes>
   </>

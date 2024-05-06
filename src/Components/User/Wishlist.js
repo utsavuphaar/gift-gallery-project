@@ -11,7 +11,6 @@ import Swal from 'sweetalert2';
 function Wishlist() {
   const userId = localStorage.getItem("userId")
   const { wishList } = useSelector(store => store.Product);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchWishList({ userId }));
@@ -82,7 +81,7 @@ function Wishlist() {
             {products.map((product, index) => <div className='col-lg-3 mt-3  d-flex justify-content-center align-items-center'>
               <div className='container bg-white d-flex flex-column align-items-center justify-content-center' style={{ width: "300px" }}>
 
-                <img style={{ borderRadius: "10px",cursor:"pointer"}} className='mt-3' width="260px" height="220px" onClick={()=>viewmore(product)} src={product.thumbnail} alt='image' />
+                <img style={{ borderRadius: "10px",cursor:"pointer"}} className='mt-3' width="260px" height="220px" onClick={()=>viewMore(product)} src={product.thumbnail} alt='image' />
 
                 <div className='w-100 d-flex mt-2  justify-content-between  align-items-center'>
                   <h6 style={{ paddingLeft: "10px" }}>{(product.title).slice(0, 20)}</h6>
