@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import "./adminstyle.css";
 import { FaUserGroup } from "react-icons/fa6";
 import { AiOutlineStock } from "react-icons/ai";
 import { IoCubeOutline } from "react-icons/io5";

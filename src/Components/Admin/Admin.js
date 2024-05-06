@@ -10,7 +10,7 @@ import { IoPowerSharp } from "react-icons/io5";
 import { BiBox } from "react-icons/bi";
 import { Link, Outlet } from "react-router-dom";
 import { FaUsers } from "react-icons/fa";
-import "./adminstyle.css";
+
 import { color } from "@chakra-ui/react";
 const AdminProfile = () => {
     return <>

@@ -39,7 +39,7 @@ export default function Home() {
         }
 
     return <>
-        <Header />
+        <Header/>
         <div className="container-fluid home ">
             <div className="row banner ">
                 <div className="col-md-3  mt-3 first p-0">
