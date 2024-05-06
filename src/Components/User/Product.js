@@ -44,16 +44,19 @@ function valuetext(value) {
 }
 
 function Product() {
+
     let userId = localStorage.getItem("userId")
     const [brand, setbrand] = useState([])
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { productList, isLoading, error, page } = useSelector(store => store.Product);
-    const [productlist,setproductlist] = useState(productList);
+    const [productlist, setproductlist] = useState([]);
+    const [status, setStatus] = useState(false);
     useEffect(() => {
         fetchData();
         brandlist();
         fetchwishlist();
+        setproductlist(productList)
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -100,6 +103,14 @@ function Product() {
     }
 
     const getproductbybrand = (brand) => {
+
+        if (brand)
+            setStatus(true)
+        else
+            setStatus(false);
+
+        if (status)
+            setproductlist(productList)
         axios.post(URL.getproductbybrand, { brand })
             .then((result) => {
                 const newProductList = result.data.product;
@@ -146,9 +157,24 @@ function Product() {
 
 
     const addToWishlist = (productId) => {
-        dispatch(addProductIntoWishlist({ userId, productId }));
-        let save = document.getElementById(`save${productId}`);
-        save.style.color = 'red'
+        if(!userId){
+            toast.info("Sign-in first", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
+        }else{
+            
+            dispatch(addProductIntoWishlist({ userId, productId }));
+            let save = document.getElementById(`save${productId}`);
+            save.style.color = 'red'
+        }
     };
 
     const buyNow = (product) => {

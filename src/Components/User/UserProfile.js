@@ -23,7 +23,7 @@ export const UserProfile = () => {
       let oldPassword = useRef(null);
       let newPassword = useRef(null);
       let confirmPassword = useRef(null);
-      
+
       const logout = () => {
             if (user)
                   localStorage.clear();
@@ -35,7 +35,7 @@ export const UserProfile = () => {
                   title: "Login Out ",
                   showConfirmButton: false,
                   timer: 1500
-                });
+            });
             navigate("/signup")
 
       }
@@ -46,8 +46,8 @@ export const UserProfile = () => {
             oldPassword = oldPassword.current.value;
             newPassword = newPassword.current.value;
             confirmPassword = confirmPassword.current.value;
-            alert(oldPassword+" "+newPassword+" "+confirmPassword)
-            axios.post("http://localhost:3000/user/updatePassword", { email, password: oldPassword, newPassword:newPassword }).then(res => {
+            alert(oldPassword + " " + newPassword + " " + confirmPassword)
+            axios.post("http://localhost:3000/user/updatePassword", { email, password: oldPassword, newPassword: newPassword }).then(res => {
                   console.log(res)
                   alert("successfully")
                   setDisabled(true)
@@ -67,90 +67,90 @@ export const UserProfile = () => {
       return (
             <>
                   <Header />
-                  <section className='container-fluid p-4 border' style={{ backgroundColor: "#F7FAFC" }}>
-                        <section className='container p-2  row align-content-around m-auto d-flex' id='checkout-page'>
-                              {/* justify-content-center */}
-                              <div className='checkout-right border col-md-3 p-5 card mt-2' style={{ backgroundColor: "white", height: 'auto', width: '300px' }}>
-                                    <div className="d-flex justify-content-center align-content-center">
-                                          <img src={userImg} className="" style={{ width: '130px', height: '100px', textAlign: 'center' }}></img>
-                                          <div className="mt-3">
-                                                <h6>Hello,</h6>
-                                                <h5 className="text-primary">{user.name}</h5>
-                                          </div>
-                                    </div>
-                                    <div className="row">
-                                          <span className="mt-3 fw-semibold text-mdiaa" style={{ marginLeft: "10px" }}>Manage My Account</span>
-                                          <p className="mt-3 d-flex text-mdia" style={{ marginLeft: "30px" }}><FaRegGrinBeam className="mt-1" />&nbsp;My Profile</p>
-                                          <p className="d-flex text-mdia" style={{ marginLeft: "30px" }}><PiAddressBook className="mt-1" />&nbsp;Address Book</p>
-                                          <p className="d-flex text-mdia" style={{ marginLeft: "30px" }}><FaAmazonPay className="mt-1" />&nbsp;My Payment Option</p>
-                                          <p className="mt-1 fw-semibold text-mdia" style={{ marginLeft: "10px" }}> My Orders</p>
-                                          <p className="d-flex text-mdia" style={{ marginLeft: "30px" }}> <GiReturnArrow className="mt-1" />&nbsp;Delivered</p>
-                                          <p className="d-flex text-mdia" style={{ marginLeft: "30px" }}> <GiReturnArrow className="mt-1" />&nbsp;My Returns</p>
-                                          <p className="d-flex text-mdia" style={{ marginLeft: "30px" }}><MdOutlineCancel className="mt-1" />&nbsp;My Cancellations</p>
-                                          <p className="d-flex text-mdia" style={{ marginLeft: "30px" }}><MdOutlineCancel className="mt-1" />&nbsp;On the way</p>
-                                          <p className="mt-1 fw-semibold text-mdia" style={{ marginLeft: "10px" }}> Other</p>
-                                          <p className="d-flex text-mdia" style={{ marginLeft: "30px" }}><MdFavoriteBorder className="mt-1" />&nbsp;My Wishlist</p>
-                                          <p className="d-flex text-mdia" style={{ marginLeft: "30px" }}><BsCart2 className="mt-1" />&nbsp;My Cart</p>
-                                          <p onClick={logout} className="d-flex text-mdia" style={{ cursor: 'pointer', marginLeft: "30px" }}><IoIosPower className="mt-1" />&nbsp;Logout</p>
-                                          <p>
-                                          </p>
-                                    </div>
+                  <section className="container-fluid p-4 " style={{ backgroundColor: "#F7FAFC" }}>
+                        <div className="row justify-content-center">
 
-                              </div>
-
-                              <div id='checkout-left' className='col-md-8 me-3 border card m-2 ' style={{ backgroundColor: "white", height: 'auto', width: '70%' }}>
-                                    <div className='row form-group p-5'>
-                                          <p style={{ color: "#0D6EFD" }} className='fs-5 fw-semibold'>Edit Your Profile <FiEdit onClick={enableEntity} className="float-end" style={{ cursor: 'pointer' }} /> <hr /></p>
-                                          <div className='col-md-6 mt-2'>
-                                                <label className='fs-8'>First Name*</label><br />
-                                                <input type='text' disabled={disabledEntity} required className='form-control mt-1' style={{ backgroundColor: "#f5f5f5" }} />
-                                          </div>
-                                          <div className='col-md-6 mt-2'>
-                                                <label className='fs-8'>Last Name*</label><br />
-                                                <input type='text' disabled={disabledEntity} required className='form-control mt-1' style={{ backgroundColor: "#f5f5f5" }} />
-                                          </div>
-                                          <div className='col-md-6 mt-4'>
-                                                <label className='fs-6'>Email*</label><br />
-                                                <input type='text' disabled={disabledEntity} required className='form-control mt-1' style={{ backgroundColor: "#f5f5f5" }} />
-                                          </div>
-                                          <div className='col-md-6 mt-4'>
-                                                <label className='fs-6'>Address*</label><br />
-                                                <input type='text' disabled={disabledEntity} required className='form-control mt-1' style={{ backgroundColor: "#f5f5f5" }} />
-                                          </div>
-                                          <div className='col-md-6 mt-4'>
-                                                <button class="btn btn-primary btn" type="button">Save & Changes</button>
-                                          </div>
-                                          &nbsp;
-                                          <div className="form-group ms-2">
-                                                <p className='fs-7 mt-2'>Password Changes <FiEdit onClick={enablePassword} className="float-end text-primary" style={{ cursor: 'pointer' }} /> </p>
-
-                                                <div className='col-md-12'>
-                                                      <input disabled={disabled} type='text' className='form-control' ref={oldPassword} placeholder='Current Password' style={{ backgroundColor: "#f5f5f5" }} />
-                                                      <br />
-                                                </div>
-
-                                                <div className='col-md-12 mt-2'>
-                                                      <input disabled={disabled} type='text' className='form-control' ref={newPassword} placeholder='New Password' style={{ backgroundColor: "#f5f5f5" }} />
-                                                      <br />
-                                                </div>
-                                                <div className='col-md-12 mt-2'>
-
-                                                      <input disabled={disabled} type='text' className='form-control' ref={confirmPassword} placeholder='Confirm New Password' style={{ backgroundColor: "#f5f5f5" }} />
-                                                      <br />
-                                                </div>
-                                                <div className='col-md-6 mt-3'>
-                                                      <button onClick={changePassword} class="btn btn-primary btn" type="button">Save & Changes</button>
+                              <div className="col-md-3 col-lg-3 mt-2">
+                                    <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
+                                          <div className="d-flex align-items-center">
+                                                <img src={userImg} className="rounded-circle" style={{ width: '140px', height: '100px' }} alt="User" />
+                                                <div className=" mt-3">
+                                                      <h6>Hello,</h6>
+                                                      <h5 className="text-primary">{user.name}</h5>
                                                 </div>
                                           </div>
-                                          {/* <div className="mt-2  col-md-12">
-                                                <h4>FAQs</h4>
-                                                <p className="fw-bold mb-0">What happens when I update my email address (or mobile number)?</p>
-                                                <p className="m-0">Your login email id (or mobile number) changes, likewise. You'll receive all your account related communication on your updated email address (or mobile number).</p>
-                                          </div> */}
+                                          <div className="mt-4  container p-3">
+                                                <h6 className="fw-bold">Manage My Account</h6>
+                                                <ul className="list-unstyled">
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><FaRegGrinBeam className="me-1" />My Profile</li>
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><PiAddressBook className="me-1" />Address Book</li>
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><FaAmazonPay className="me-1" />My Payment Option</li>
+                                                </ul>
+                                                <h6 className="mt-4 fw-bold">My Orders</h6>
+                                                <ul className="list-unstyled">
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><GiReturnArrow className="me-1" />Delivered</li>
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><GiReturnArrow className="me-1" />My Returns</li>
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><MdOutlineCancel className="me-1" />My Cancellations</li>
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><MdOutlineCancel className="me-1" />On the way</li>
+                                                </ul>
+                                                <h6 className="mt-4 fw-bold">Other</h6>
+                                                <ul className="list-unstyled">
+                                                      <li style={{cursor:"pointer"}} className="mt-2" onClick={()=>navigate('/wishlist')}><MdFavoriteBorder className="me-1" />My Wishlist</li>
+                                                      <li style={{cursor:"pointer"}} className="mt-2" onClick={()=>navigate('/cart')}><BsCart2 className="me-1" />My Cart</li>
+                                                </ul>
+                                                <p onClick={logout} className="mt-4 text-primary" style={{ cursor: 'pointer' }}><IoIosPower className="me-1" />Logout</p>
+                                          </div>
                                     </div>
                               </div>
-                        </section>
+
+                              <div className="col-md-8 col-lg-6 mt-2">
+                                    <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
+                                          <h5 className="fw-bold mb-4">Edit Your Profile <FiEdit onClick={enableEntity} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
+                                          <div className="row g-3">
+                                                <div className="col-md-6">
+                                                      <label htmlFor="firstName" className="form-label">First Name*</label>
+                                                      <input type="text" disabled={disabledEntity} className="form-control" id="firstName" required />
+                                                </div>
+                                                <div className="col-md-6">
+                                                      <label htmlFor="lastName" className="form-label">Last Name*</label>
+                                                      <input type="text" disabled={disabledEntity} className="form-control" id="lastName" required />
+                                                </div>
+                                                <div className="col-md-6">
+                                                      <label htmlFor="email" className="form-label">Email*</label>
+                                                      <input type="email" disabled={disabledEntity} className="form-control" id="email" required />
+                                                </div>
+                                                <div className="col-md-6">
+                                                      <label htmlFor="address" className="form-label">Address*</label>
+                                                      <input type="text" disabled={disabledEntity} className="form-control" id="address" required />
+                                                </div>
+                                                <div className="col-md-12">
+                                                      <button className="btn btn-primary" type="button">Save Changes</button>
+                                                </div>
+                                          </div>
+                                          <div className="mt-4">
+                                                <h5 className="fw-bold">Password Changes <FiEdit onClick={enablePassword} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
+                                                <div className="row g-4">
+                                                      <div className="col-md-12">
+                                                            <input disabled={disabled} type="password" className="form-control" id="oldPassword" placeholder="Current Password" required />
+                                                      </div>
+                                                      <div className="col-md-12">
+                                                            <input disabled={disabled} type="password" className="form-control" id="newPassword" placeholder="New Password" required />
+                                                      </div>
+                                                      <div className="col-md-12">
+                                                            <input disabled={disabled} type="password" className="form-control" id="confirmPassword" placeholder="Confirm New Password" required />
+                                                      </div>
+                                                      <div className="col-md-12">
+                                                            <button onClick={changePassword} className="btn btn-primary" type="button">Save Changes</button>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+
+                        </div>
                   </section>
+
+
             </>
       );
 };

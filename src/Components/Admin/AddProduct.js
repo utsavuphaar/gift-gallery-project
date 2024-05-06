@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
+import { Zoom } from 'react-toastify';
+import Swal from "sweetalert2";
 
 
 const AddProduct = () => {
@@ -26,7 +29,18 @@ const AddProduct = () => {
 
     const handleUpload = async () => {
         if (!file) {
-            alert('Please select a file.');
+            // alert('Please select a file.');
+            toast.info("Please select a file", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
             return;
         }
 
@@ -40,10 +54,21 @@ const AddProduct = () => {
                 }
             });
 
-            alert('File uploaded successfully!');
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "File Uploaded Successfully",
+                showConfirmButton: false,
+                timer: 3000
+            });
         } catch (error) {
             console.error('Error uploading file:', error);
-            alert('Error uploading file.');
+            // alert('Error uploading file.');
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Error Uploading file ",
+            });
         }
     };
     const handleFileChange = (e) => {
@@ -51,7 +76,18 @@ const AddProduct = () => {
         if (selectedFile && selectedFile.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
             setFile(selectedFile);
         } else {
-            alert('Please select an Excel file.');
+            // alert('Please select an Excel file.');
+            toast.info("Please select an Excel file", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
         }
     };
 
@@ -60,17 +96,41 @@ const AddProduct = () => {
     // Validate each field
     if (!productdata.title || !productdata.description || !productdata.categoryName || !productdata.brand || !productdata.price || !productdata.stock || !productdata.rating || !productdata.discountPercentage || !productdata.thumbnail || !productdata.image1 || !productdata.image2 || !productdata.image3) {
         alert('Please fill in all fields.');
+        toast.info("Please fill all fields ", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+        });
         return;
     }
 
     // If all fields are filled, proceed to send data to the server
     axios.post("http://localhost:3000/product/addSingleProduct", { productdata })
         .then(() => {
-            alert("Item added successfully");
+            // alert("Item added successfully");
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Item added successfully",
+                showConfirmButton: false,
+                timer: 3000
+            });
         })
         .catch(err => {
             console.log(err);
-            alert("Something went wrong");
+            // alert("Something went wrong");
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Something went wrong ",
+            });
+
         });
 };
 

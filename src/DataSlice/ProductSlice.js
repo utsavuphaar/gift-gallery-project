@@ -56,6 +56,11 @@ export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ us
         });
         return res.data;
     } catch (err) {
+        Swal.fire({
+            icon: "error",
+            title: "Some Network Issue",
+            text: "Something went wrong ",
+        });
         console.log(err)
     }
 })

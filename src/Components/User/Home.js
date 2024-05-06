@@ -2,6 +2,9 @@ import { Outlet } from '@mui/icons-material';
 import Header from './Header';
 import Product from './Product';
 import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
+import image2 from './friends-making-surprise-cake-canles-600nw-1290973357.jpg'
+import image3 from './2309091530199150.webp'
+import image4 from './gifts-horizontal-web-banner-colorful-cardboard-boxes-with-bows-for-presents-for-birthdays-christmas-and-other-holidays-illustration-for-header-website-cover-templates-in-modern-design-ve.jpg'
 import { SlUser } from "react-icons/sl";
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from 'react';
