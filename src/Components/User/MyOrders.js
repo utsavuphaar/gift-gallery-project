@@ -1,6 +1,6 @@
 import React from 'react'
 import { BiRupee } from 'react-icons/bi';
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import gift from './Images/gift.png'
 import "./myOrder.css"
 import { IoIosGift } from 'react-icons/io';
@@ -39,7 +39,9 @@ function MyOrders() {
                         {state.orderItems.map((data, ind) =>
                             <img key={ind} className='mt-3' src={data.product.thumbnail} width="150px" height="150px" />
                         )}
+                        <Link to="/cancel">
                         <button className='btn btn-outline-danger center m-4'>Cancel</button>
+                        </Link>
                     </div>
                     {state.orderItems.map((data, ind) =>
                         <div className='col-md-4'>
