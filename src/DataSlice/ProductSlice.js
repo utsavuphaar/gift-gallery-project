@@ -106,10 +106,23 @@ export const deleteProductFromCart = createAsyncThunk(
 export const deleteAllProductsFromCart = createAsyncThunk("cart/removeAllItems", async ({ userId }) => {
     try {
         let res = await axios.delete(`http://localhost:3000/cart/removeAllItems/${userId}`)
-        alert("Removed all items successfully");
+        // alert("Removed all items successfully");
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Items removed successfully",
+            showConfirmButton: false,
+            timer: 2000
+        });
         return res.data;
     } catch (err) {
-        alert("something wrong")
+        // alert("something wrong")
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Something went wrong ",
+            
+        });
         console.log(err)
     }
 })
