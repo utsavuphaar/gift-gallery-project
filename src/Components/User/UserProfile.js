@@ -70,7 +70,7 @@ export const UserProfile = () => {
                   <section className="container-fluid p-4 " style={{ backgroundColor: "#F7FAFC" }}>
                         <div className="row justify-content-center">
 
-                              <div className="col-md-3 col-lg-3 mt-2">
+                              <div className=" col-lg-3 mt-2">
                                     <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
                                           <div className="d-flex align-items-center">
                                                 <img src={userImg} className="rounded-circle" style={{ width: '140px', height: '100px' }} alt="User" />
@@ -103,7 +103,7 @@ export const UserProfile = () => {
                                     </div>
                               </div>
 
-                              <div className="col-md-8 col-lg-6 mt-2">
+                              <div className=" col-lg-7 mt-2">
                                     <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
                                           <h5 className="fw-bold mb-4">Edit Your Profile <FiEdit onClick={enableEntity} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
                                           <div className="row g-3">

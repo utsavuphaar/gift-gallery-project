@@ -43,6 +43,35 @@ export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct",
     }
 })
 
+export const fetchproductbyprice = createAsyncThunk("product/getproductbyprice", async({min,max}) => {
+    try {
+
+        let res = await axios.post(URL.getprductbyprice,{min,max})
+        return res.data.productlist;
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+export const fetchproductbybrand = createAsyncThunk("product/getproductbybrand", async(brand) =>{
+    try {
+        let res = await axios.post(URL.getproductbybrand,{brand})
+        return res.data.product;
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+export const fetchproductbyrating = createAsyncThunk("product/getproductbyrating",async(rating) =>{
+    try {
+        let res = await axios.post(URL.getproductbyrating,{rating})
+        return res.data.products;
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ userId, productId,quantity }) => {
     try {
 
@@ -226,6 +255,12 @@ const slice = createSlice({
                 state.wishList = action.payload;
             }).addCase(fetchWishList.rejected, (state, action) => {
                 state.error = true;
+            }).addCase(fetchproductbyprice.fulfilled,(state,action) => {
+                state.productList = action.payload
+            }).addCase(fetchproductbybrand.fulfilled,(state,action) => {
+                state.productList = action.payload
+            }).addCase(fetchproductbyrating.fulfilled,(state,action) => {
+                state.productList = action.payload
             })
     },
 })

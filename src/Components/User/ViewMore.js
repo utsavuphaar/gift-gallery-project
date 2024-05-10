@@ -70,9 +70,12 @@ export default function ViewMore() {
         save.style.color = 'red'
     };
 
-    const buyNow = (productId, price) => {
+    const buyNow = () => {
+        let price = state.price - ((parseInt(state.discountPercentage * state.price) / 100))
         const finalPrice = (price * inputValue)
-        alert(productId + " " + finalPrice)
+        // alert(finalPrice)
+        
+
     }
     // alert(inputValue)
     return <>
@@ -149,7 +152,7 @@ export default function ViewMore() {
                             </div>
                         </div>
                         <div className="mt-3">
-                            <button onClick={() => buyNow(state.id, state.price)} style={{ color: "white", backgroundColor: "#0D6EFD", border: 'none', borderRadius: "50px", height: '40px' }} className="w-100">Buy Now</button>
+                            <button onClick={() => buyNow()} style={{ color: "white", backgroundColor: "#0D6EFD", border: 'none', borderRadius: "50px", height: '40px' }} className="w-100">Buy Now</button>
                         </div>
                     </div>
                 </div>

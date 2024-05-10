@@ -94,21 +94,23 @@ const AddProduct = () => {
 
   const additem = () => {
     // Validate each field
-    if (!productdata.title || !productdata.description || !productdata.categoryName || !productdata.brand || !productdata.price || !productdata.stock || !productdata.rating || !productdata.discountPercentage || !productdata.thumbnail || !productdata.image1 || !productdata.image2 || !productdata.image3) {
-        alert('Please fill in all fields.');
-        toast.info("Please fill all fields ", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Zoom,
-        });
-        return;
-    }
+    // if (!productdata.title || !productdata.description || !productdata.categoryName || !productdata.brand || !productdata.price || !productdata.stock || !productdata.rating || !productdata.discountPercentage || !productdata.thumbnail || !productdata.image1 || !productdata.image2 || !productdata.image3) {
+    //     alert('Please fill in all fields.');
+    //     toast.info("Please fill all fields ", {
+    //         position: "top-center",
+    //         autoClose: 5000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "light",
+    //         transition: Zoom,
+    //     });
+    //     return;
+    // }
+
+    console.log(productdata);
 
     // If all fields are filled, proceed to send data to the server
     axios.post("http://localhost:3000/product/addSingleProduct", { productdata })

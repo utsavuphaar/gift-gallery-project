@@ -3,20 +3,44 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Container, Row, Col } from 'react-bootstrap';
 import Header from '../User/Header';
+import axios from 'axios';
+import URL from '../ApiUrl'
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function SignInFormDeliveryBoy() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate()
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // handle form submission here
-    console.log(email, password);
+    // alert(email+""+password);
+    axios.post(URL.deliveryboysignin, { email, password })
+      .then((result) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: result.data.message,
+          showConfirmButton: false,
+          timer: 2000
+        });
+        navigate('/deliveryBoy')
+      })
+      .catch(err => {
+        Swal.fire({
+          icon: "error",
+          title: "Unauthorized Access",
+          text: "Something went wrong ",
+        });
+        console.log(err);
+      })
   };
+
 
   return (
     <>
-    <Header/>
+      <Header />
       <Container fluid className="p-5">
         <Row className="justify-content-md-center">
           <Col md={6}>
