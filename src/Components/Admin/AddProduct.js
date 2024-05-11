@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
-
+import ApiUrl from "../ApiUrl";
 
 const AddProduct = () => {
     const [file, setFile] = useState(null);
@@ -34,7 +34,7 @@ const AddProduct = () => {
             const formData = new FormData();
             formData.append('excelFile', file);
 
-            await axios.post('http://localhost:3000/product/uploadExcelSheet', formData, {
+            await axios.post(ApiUrl.addExcelSheet, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -64,7 +64,7 @@ const AddProduct = () => {
     }
 
     // If all fields are filled, proceed to send data to the server
-    axios.post("http://localhost:3000/product/addSingleProduct", { productdata })
+    axios.post(ApiUrl.addProduct, { productdata })
         .then(() => {
             alert("Item added successfully");
         })
@@ -73,7 +73,7 @@ const AddProduct = () => {
             alert("Something went wrong");
         });
 };
-
+ 
     return <>
         <div className="container-fluid " style={{ backgroundColor: "#FAF7FC", width: "75%" }}>
             <div className="row ">
