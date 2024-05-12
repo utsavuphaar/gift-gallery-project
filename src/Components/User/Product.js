@@ -130,8 +130,16 @@ function Product() {
     }
 
     const getproductbyrating = (rating) => {
-        // dispatch(fetchproductbyrating(rating))
-        // console.log(productList);
+        var checkbox = document.getElementById(`CheckDefault${rating}`);
+
+        // Then, you can check its checked property to see if it's checked or not
+        if (checkbox.checked) {
+            // The checkbox is checked
+            dispatch(fetchproductbyrating(rating))
+        } else {
+            // The checkbox is not checked
+            fetchData()
+        }
     }
 
     const handleScroll = () => {
@@ -310,7 +318,7 @@ function Product() {
 
                             <AccordionDetails className='ms-5'>
                                 <div className="form-check ">
-                                    <input className="form-check-input" onClick={() => getproductbyrating(5)} type="checkbox" value="" id="flexCheckDefault" />
+                                    <input className="form-check-input" onClick={() => getproductbyrating(5)} type="checkbox" value="" id={`CheckDefault${5}`} />
                                     <label className="form-check-label" for="flexCheckDefault">
                                         <ImStarFull className='text-warning' />
                                         <ImStarFull className='text-warning' />
@@ -320,7 +328,7 @@ function Product() {
                                     </label>
                                 </div>
                                 <div className="form-check mt-2 ">
-                                    <input className="form-check-input" onClick={() => getproductbyrating(4)} type="checkbox" value="" id="flexCheckDefault" />
+                                    <input className="form-check-input" onClick={() => getproductbyrating(4)} type="checkbox" value="" id={`CheckDefault${4}`} />
                                     <label className="form-check-label" for="flexCheckDefault">
                                         <ImStarFull className='text-warning' />
                                         <ImStarFull className='text-warning' />
@@ -330,7 +338,7 @@ function Product() {
                                     </label>
                                 </div>
                                 <div className="form-check mt-2 ">
-                                    <input className="form-check-input" onClick={() => getproductbyrating(3)} type="checkbox" value="" id="flexCheckDefault" />
+                                    <input className="form-check-input" onClick={() => getproductbyrating(3)} type="checkbox" value="" id={`CheckDefault${3}`} />
                                     <label className="form-check-label" for="flexCheckDefault">
                                         <ImStarFull className='text-warning' />
                                         <ImStarFull className='text-warning' />
@@ -340,7 +348,7 @@ function Product() {
                                     </label>
                                 </div>
                                 <div className="form-check mt-2 ">
-                                    <input className="form-check-input" onClick={() => getproductbyrating(2)} type="checkbox" value="" id="flexCheckDefault" />
+                                    <input className="form-check-input" onClick={() => getproductbyrating(2)} type="checkbox" value="" id={`CheckDefault${2}`} />
                                     <label className="form-check-label" for="flexCheckDefault">
                                         <ImStarFull className='text-warning' />
                                         <ImStarFull className='text-warning' />

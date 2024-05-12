@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { TextField} from "@mui/material";
 import axios from "axios";
 import { event } from "jquery";
 import { useState } from "react";
@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 import Header from "./Header";
 import OTPInput from "react-otp-input";
 import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
+import { ToastContainer, toast } from "react-toastify";
+import { Zoom } from 'react-toastify';
 
 
 export default function ForgetPassword() {
@@ -18,42 +20,37 @@ export default function ForgetPassword() {
     const [otpvisible, setotpvisible] = useState(false);
     const [otp, setotp] = useState("");
 
-    // const checkaccount = () =>{
-    //     axios.post("http://localhost:3000/user/findbyemail",{email})
-    //     .then(()=>{
-    //         Swal.fire({
-    //             position: "center",
-    //             icon: "success",
-    //             title: "Email Verified",
-    //             showConfirmButton: false,
-    //             timer: 3000
-    //         });
-    //         navigate('/resetpassword',{state:{email}})
-    //     })
-    //     .catch(err=>{
-    //         Swal.fire({
-    //             icon: "error",
-    //             title: "Unauthorized User",
-    //             text: "Email is not exist ",
-    //             footer: '<a href="/">create a new one?</a>'
-    //         });
-    //         console.log(err);
-    //     })
-    // }
-
-    const handleChange = otp => {
-        setotp(otp);
-    };
-
     const checkaccount = async () => {
         let user = await axios.post("http://localhost:3000/user/findbyemail", { email })
         if (user) {
             axios.post("http://localhost:8080/otp/request", { email })
                 .then((res) => {
-                    alert("OTP send successfully");
+                    // alert("OTP send successfully");
+                    toast.success("OTP send successfully", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Zoom,
+                    });
                     setotpvisible(true);
                 })
                 .catch(err => {
+                    toast.error("Something went wrong", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Zoom,
+                    });
                     console.log(err);
                 })
         }
@@ -62,48 +59,34 @@ export default function ForgetPassword() {
     const verifyOTP = () => {
         axios.post("http://localhost:8080/otp/verify", { email, otp })
             .then((res) => {
-                alert("OTP verification successful")
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "OTP verification successful",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
                 navigate('/resetpassword', { state: { email } })
             })
             .catch(err => {
-                alert("OTP is incorrect")
+                // alert("OTP is incorrect")
+                toast.error("OTP is incorrect", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Zoom,
+                });
                 console.log(err);
             })
     }
 
     return <>
-        {/* <div style={{ width: "99vw", height: "98vh" }} className="forget-page  container-fluid d-flex justify-content-center align-items-center">
-            <div className="container  d-flex flex-column justify-content-center bg-light align-items-center" style={{ opacity: "0.9", borderRadius: "50px", boxShadow: "0px 0px 1px 1px gainsboro" }}>
-                <div className='w-100 mt-3 d-flex justify-content-center title'>
-                    <div className='mt-3 mb-2 ms-3 icon  d-flex justify-content-center align-items-center'>
-                        <IoIosGift className='fs-2 text-light' />
-                    </div>
-                    <span className='ms-2 fs-3 name'>
-                        UtsavUphaar
-                    </span>
-                </div>
-                <div className="w-100 mt-2 d-flex justify-content-center">
-                    <span className="fs-5">Account Recovery</span>
-                </div>
-                <div className="w-100 mt-2 d-flex justify-content-center">
-                    <span className="">Recover your <span className="text-primary fw-bold">UtsavUphaar</span> Account</span>
-                </div>
-                <div className="w-75 mt-4 d-flex justify-content-start">
-                    <label className="fs-5">Email or phone</label>
-                </div>
-                <div className="w-100 mt-2 d-flex justify-content-center">
-                    <TextField className="w-75" onChange={event => setemail(event.target.value)} id="outlined-basic" label="Email or phone" variant="outlined" />
-                </div>
-                <div className={otpvisible?'w-100 mt-2 d-block':'d-none'}>
-                    <input type="text" placeholder="Enter otp" onChange={event => setotp(event.target.value)} className='form-control' />
-                </div>
-
-                <div className="w-75 mt-5 mb-5 d-flex justify-content-center">
-                    <button className={otpvisible?'d-none':'btn btn-primary'} onClick={() => checkaccount()} style={{ width: "100px", height: "50px", borderRadius: "50px" }}>Next</button>
-                    <button className={otpvisible?'d-block btn btn-primary':'d-none'} onClick={()=>verifyOTP()}>Verify Otp</button>
-                </div>
-            </div>
-        </div> */}
+        <ToastContainer/>
         <Header />
 
         <div className='container-fluid m-0 p-0' style={{ maxWidth: "100%", height: "100vh", backgroundColor: "#ececec" }}>
