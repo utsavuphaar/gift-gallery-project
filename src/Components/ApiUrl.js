@@ -15,5 +15,7 @@ export default {
     fewcategory: "http://localhost:3000/category/fewcategory",
     updateOrderStatus:"http://localhost:3000/order/updateOrderStatus",
     viewAllOrders:"http://localhost:3000/order/viewAllOrders",
-    getOrder:"http://localhost:3000/deliverydata/getOrder"
+    getOrder:"http://localhost:3000/deliverydata/getOrder",
+    addProduct:"http://localhost:3000/product/addSingleProduct",
+    addExcelSheet:"http://localhost:3000/product/uploadExcelSheet"
 }
