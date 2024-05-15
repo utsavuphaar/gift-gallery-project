@@ -67,70 +67,88 @@ export const UserProfile = () => {
       return (
             <>
                   <Header />
-                  <section className='container-fluid p-4 border' style={{ backgroundColor: "#F7FAFC" }}>
-                        <div className='row justify-content-center'>
-                              <div className='col-md-3 mt-2'>
-                                    <div className='checkout-right border card p-4' style={{ backgroundColor: "white" }}>
-                                          <div className="text-center">
-                                                <img src={userImg} className="img-fluid" style={{ maxWidth: '130px', height: 'auto' }} alt="User" />
-                                                <div className="mt-3">
+                  <section className="container-fluid p-4 " style={{ backgroundColor: "#F7FAFC" }}>
+                        <div className="row justify-content-center">
+
+                              <div className=" col-lg-3 mt-2">
+                                    <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
+                                          <div className="d-flex align-items-center">
+                                                <img src={userImg} className="rounded-circle" style={{ width: '140px', height: '100px' }} alt="User" />
+                                                <div className=" mt-3">
                                                       <h6>Hello,</h6>
                                                       <h5 className="text-primary">{user.name}</h5>
                                                 </div>
                                           </div>
-                                          <div className="mt-4 border">
-                                                <span className="fw-semibold text-mdiaa">Manage My Account</span>
-                                                <p className="mt-2 d-flex align-items-center text-mdia"><FaRegGrinBeam className="me-1" />My Profile</p>
-                                                <p className="d-flex align-items-center text-mdia"><PiAddressBook className="me-1" />Address Book</p>
-                                                <p className="d-flex align-items-center text-mdia"><FaAmazonPay className="me-1" />My Payment Option</p>
-                                                <span className="mt-3 fw-semibold text-mdia">My Orders</span>
-                                                <p className="mt-2 d-flex align-items-center text-mdia"><GiReturnArrow className="me-1" />Delivered</p>
-                                                <p className="d-flex align-items-center text-mdia"><GiReturnArrow className="me-1" />My Returns</p>
-                                                <p className="d-flex align-items-center text-mdia"><MdOutlineCancel className="me-1" />My Cancellations</p>
-                                                <p className="d-flex align-items-center text-mdia"><MdOutlineCancel className="me-1" />On the way</p>
-                                                <span className="mt-3 fw-semibold text-mdia">Other</span>
-                                                <p className="mt-2 d-flex align-items-center text-mdia"><MdFavoriteBorder className="me-1" />My Wishlist</p>
-                                                <p className="d-flex align-items-center text-mdia"><BsCart2 className="me-1" />My Cart</p>
-                                                <p onClick={logout} className="mt-3 d-flex align-items-center text-mdia" style={{ cursor: 'pointer' }}><IoIosPower className="me-1" />Logout</p>
+                                          <div className="mt-4  container p-3">
+                                                <h6 className="fw-bold">Manage My Account</h6>
+                                                <ul className="list-unstyled">
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><FaRegGrinBeam className="me-1" />My Profile</li>
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><PiAddressBook className="me-1" />Address Book</li>
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><FaAmazonPay className="me-1" />My Payment Option</li>
+                                                </ul>
+                                                <h6 className="mt-4 fw-bold">My Orders</h6>
+                                                <ul className="list-unstyled">
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><GiReturnArrow className="me-1" />Delivered</li>
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><GiReturnArrow className="me-1" />My Returns</li>
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><MdOutlineCancel className="me-1" />My Cancellations</li>
+                                                      <li style={{cursor:"pointer"}} className="mt-2"><MdOutlineCancel className="me-1" />On the way</li>
+                                                </ul>
+                                                <h6 className="mt-4 fw-bold">Other</h6>
+                                                <ul className="list-unstyled">
+                                                      <li style={{cursor:"pointer"}} className="mt-2" onClick={()=>navigate('/wishlist')}><MdFavoriteBorder className="me-1" />My Wishlist</li>
+                                                      <li style={{cursor:"pointer"}} className="mt-2" onClick={()=>navigate('/cart')}><BsCart2 className="me-1" />My Cart</li>
+                                                </ul>
+                                                <p onClick={logout} className="mt-4 text-primary" style={{ cursor: 'pointer' }}><IoIosPower className="me-1" />Logout</p>
                                           </div>
                                     </div>
                               </div>
-                              <div className='col-md-8 mt-2'>
-                                    <div className='checkout-left border card p-4' style={{ backgroundColor: "white" }}>
-                                          <p style={{ color: "#0D6EFD" }} className='fs-5 fw-semibold'>Edit Your Profile <FiEdit onClick={enableEntity} className="float-end" style={{ cursor: 'pointer' }} /> <hr /></p>
-                                          <div className='row g-3'>
-                                                <div className='col-md-6'>
-                                                      <label className='fs-8'>First Name*</label>
-                                                      <input type='text' disabled={disabledEntity} required className='form-control' style={{ backgroundColor: "#f5f5f5" }} />
+
+                              <div className=" col-lg-7 mt-2">
+                                    <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
+                                          <h5 className="fw-bold mb-4">Edit Your Profile <FiEdit onClick={enableEntity} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
+                                          <div className="row g-3">
+                                                <div className="col-md-6">
+                                                      <label htmlFor="firstName" className="form-label">First Name*</label>
+                                                      <input type="text" disabled={disabledEntity} className="form-control" id="firstName" required />
                                                 </div>
-                                                <div className='col-md-6'>
-                                                      <label className='fs-8'>Last Name*</label>
-                                                      <input type='text' disabled={disabledEntity} required className='form-control' style={{ backgroundColor: "#f5f5f5" }} />
+                                                <div className="col-md-6">
+                                                      <label htmlFor="lastName" className="form-label">Last Name*</label>
+                                                      <input type="text" disabled={disabledEntity} className="form-control" id="lastName" required />
                                                 </div>
-                                                <div className='col-md-6'>
-                                                      <label className='fs-8'>Email*</label>
-                                                      <input type='email' disabled={disabledEntity} required className='form-control' style={{ backgroundColor: "#f5f5f5" }} />
+                                                <div className="col-md-6">
+                                                      <label htmlFor="email" className="form-label">Email*</label>
+                                                      <input type="email" disabled={disabledEntity} className="form-control" id="email" required />
                                                 </div>
-                                                <div className='col-md-6'>
-                                                      <label className='fs-8'>Address*</label>
-                                                      <input type='text' disabled={disabledEntity} required className='form-control' style={{ backgroundColor: "#f5f5f5" }} />
+                                                <div className="col-md-6">
+                                                      <label htmlFor="address" className="form-label">Address*</label>
+                                                      <input type="text" disabled={disabledEntity} className="form-control" id="address" required />
                                                 </div>
-                                                <div className='col-md-12'>
-                                                      <button className="btn btn-primary" type="button">Save & Changes</button>
+                                                <div className="col-md-12">
+                                                      <button className="btn btn-primary" type="button">Save Changes</button>
                                                 </div>
                                           </div>
-                                          <div className="form-group mt-4">
-                                                <p className='fs-7'>Password Changes <FiEdit onClick={enablePassword} className="float-end text-primary" style={{ cursor: 'pointer' }} /> </p>
-                                                <input disabled={disabled} type='password' className='form-control mb-3' ref={oldPassword} placeholder='Current Password' style={{ backgroundColor: "#f5f5f5" }} />
-                                                <input disabled={disabled} type='password' className='form-control mb-3' ref={newPassword} placeholder='New Password' style={{ backgroundColor: "#f5f5f5" }} />
-                                                <input disabled={disabled} type='password' className='form-control mb-3' ref={confirmPassword} placeholder='Confirm New Password' style={{ backgroundColor: "#f5f5f5" }} />
-                                                <button onClick={changePassword} className="btn btn-primary" type="button">Save & Changes</button>
+                                          <div className="mt-4">
+                                                <h5 className="fw-bold">Password Changes <FiEdit onClick={enablePassword} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
+                                                <div className="row g-4">
+                                                      <div className="col-md-12">
+                                                            <input disabled={disabled} type="password" className="form-control" id="oldPassword" placeholder="Current Password" required />
+                                                      </div>
+                                                      <div className="col-md-12">
+                                                            <input disabled={disabled} type="password" className="form-control" id="newPassword" placeholder="New Password" required />
+                                                      </div>
+                                                      <div className="col-md-12">
+                                                            <input disabled={disabled} type="password" className="form-control" id="confirmPassword" placeholder="Confirm New Password" required />
+                                                      </div>
+                                                      <div className="col-md-12">
+                                                            <button onClick={changePassword} className="btn btn-primary" type="button">Save Changes</button>
+                                                      </div>
+                                                </div>
                                           </div>
                                     </div>
                               </div>
+
                         </div>
                   </section>
-
             </>
       );
 };

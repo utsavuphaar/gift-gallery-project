@@ -28,7 +28,7 @@ import store from "../../Store/store"
 import { AiFillStar } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
 import { useEffect } from "react";
-import { addProductIntoCart, addProductIntoWishlist, fetchProduct, fetchWishList } from "../../DataSlice/ProductSlice";
+import { addProductIntoCart, addProductIntoWishlist, fetchProduct, fetchWishList, fetchproductbybrand, fetchproductbyprice, fetchproductbyrating } from "../../DataSlice/ProductSlice";
 
 import { Link, useNavigate } from "react-router-dom";
 import { Stack } from '@mui/material';
@@ -36,6 +36,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import URL from '../ApiUrl'
 import { useState } from 'react';
+import { useRef } from 'react';
 // -------------price range----------------
 
 
@@ -44,16 +45,26 @@ function valuetext(value) {
 }
 
 function Product() {
+
     let userId = localStorage.getItem("userId")
     const [brand, setbrand] = useState([])
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { productList, isLoading, error, page } = useSelector(store => store.Product);
-    const [productlist,setproductlist] = useState(productList);
+
+    const [min, setMinValue] = useState(0);
+    const [max, setMaxValue] = useState(9999);
+
+    const handleApplyFilter = () => {
+        dispatch(fetchproductbyprice({ min, max }))
+    };
+
+
     useEffect(() => {
         fetchData();
         brandlist();
         fetchwishlist();
+        // setproductlist(productList)
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -99,15 +110,36 @@ function Product() {
             })
     }
 
-    const getproductbybrand = (brand) => {
-        axios.post(URL.getproductbybrand, { brand })
-            .then((result) => {
-                const newProductList = result.data.product;
-                setproductlist(newProductList); // Update the product list state
-            })
-            .catch(err => {
-                console.log(err);
-            });
+    // const handleCheckboxChange = (data) => {
+    //     setIsChecked(event.target.checked);
+    // };
+
+    const getproductbybrand = (brand,index) => {
+        // Assuming you have already assigned an id to your input field, let's say "flexCheckDefault"
+        var checkbox = document.getElementById(`flexCheckDefault${index}`);
+
+        // Then, you can check its checked property to see if it's checked or not
+        if (checkbox.checked) {
+            // The checkbox is checked
+            dispatch(fetchproductbybrand(brand))
+        } else {
+            // The checkbox is not checked
+            fetchData()
+        }
+
+    }
+
+    const getproductbyrating = (rating) => {
+        var checkbox = document.getElementById(`CheckDefault${rating}`);
+
+        // Then, you can check its checked property to see if it's checked or not
+        if (checkbox.checked) {
+            // The checkbox is checked
+            dispatch(fetchproductbyrating(rating))
+        } else {
+            // The checkbox is not checked
+            fetchData()
+        }
     }
 
     const handleScroll = () => {
@@ -146,9 +178,24 @@ function Product() {
 
 
     const addToWishlist = (productId) => {
-        dispatch(addProductIntoWishlist({ userId, productId }));
-        let save = document.getElementById(`save${productId}`);
-        save.style.color = 'red'
+        if (!userId) {
+            toast.info("Sign-in first", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
+        } else {
+
+            dispatch(addProductIntoWishlist({ userId, productId }));
+            let save = document.getElementById(`save${productId}`);
+            save.style.color = 'red'
+        }
     };
 
     const buyNow = (product) => {
@@ -198,7 +245,7 @@ function Product() {
                             {brand.map((item, index) =>
                                 <AccordionDetails className='ms-5'>
                                     <Typography key={index} >
-                                        <input className="form-check-input ms-3" type="checkbox" onClick={() => getproductbybrand(item)} value="" id="flexCheckDefault" />
+                                        <input className="form-check-input ms-3" type="checkbox" onClick={() => getproductbybrand(item,index)} value="" id={`flexCheckDefault${index}`} />
                                         <label className="form-check-label ms-3" for="flexCheckDefault">
                                             {item}
                                         </label>
@@ -230,14 +277,31 @@ function Product() {
                                     <div className='row d-flex'>
                                         <div className='col-sm-6 d-flex flex-column justify-content-center align-items-center'>
                                             <label>Min</label>
-                                            <input className='w-50' style={{ height: "30px", border: '2px solid #0D6EFD', outline: 'none', borderRadius: "5px" }} type='number' min={0} />
+                                            <input
+                                                className='w-50'
+                                                style={{ height: "30px", paddingLeft: "10px", border: '2px solid #0D6EFD', outline: 'none', borderRadius: "5px" }}
+                                                type='number'
+                                                min={0}
+                                                value={min}
+                                                onChange={(e) => setMinValue(e.target.value)}
+                                            />
                                         </div>
                                         <div className='col-sm-6 d-flex flex-column align-items-center'>
                                             <label>Max</label>
-                                            <input className='w-50' style={{ height: "30px", paddingLeft: "5px", border: '2px solid #0D6EFD', outline: 'none', borderRadius: "5px" }} type='number' min={9999} />
+                                            <input
+                                                className='w-50'
+                                                style={{ height: "30px", paddingLeft: "10px", border: '2px solid #0D6EFD', outline: 'none', borderRadius: "5px" }}
+                                                type='number'
+                                                min={9999}
+                                                value={max}
+                                                onChange={(e) => setMaxValue(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className='w-100 d-flex justify-content-center'>
+                                            <button className='w-75 mt-3 btn btn-primary' onClick={() => handleApplyFilter()}>Apply</button>
+
                                         </div>
                                     </div>
-                                    <button className='w-75 mt-3 btn btn-primary'>Apply</button>
                                 </div>
 
                             </AccordionDetails>
@@ -253,8 +317,8 @@ function Product() {
                             </AccordionSummary >
 
                             <AccordionDetails className='ms-5'>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <div className="form-check ">
+                                    <input className="form-check-input" onClick={() => getproductbyrating(5)} type="checkbox" value="" id={`CheckDefault${5}`} />
                                     <label className="form-check-label" for="flexCheckDefault">
                                         <ImStarFull className='text-warning' />
                                         <ImStarFull className='text-warning' />
@@ -263,8 +327,8 @@ function Product() {
                                         <ImStarFull className='text-warning' />
                                     </label>
                                 </div>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <div className="form-check mt-2 ">
+                                    <input className="form-check-input" onClick={() => getproductbyrating(4)} type="checkbox" value="" id={`CheckDefault${4}`} />
                                     <label className="form-check-label" for="flexCheckDefault">
                                         <ImStarFull className='text-warning' />
                                         <ImStarFull className='text-warning' />
@@ -273,8 +337,8 @@ function Product() {
                                         <ImStarFull className='text-secondary' />
                                     </label>
                                 </div>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <div className="form-check mt-2 ">
+                                    <input className="form-check-input" onClick={() => getproductbyrating(3)} type="checkbox" value="" id={`CheckDefault${3}`} />
                                     <label className="form-check-label" for="flexCheckDefault">
                                         <ImStarFull className='text-warning' />
                                         <ImStarFull className='text-warning' />
@@ -283,8 +347,8 @@ function Product() {
                                         <ImStarFull className='text-secondary' />
                                     </label>
                                 </div>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <div className="form-check mt-2 ">
+                                    <input className="form-check-input" onClick={() => getproductbyrating(2)} type="checkbox" value="" id={`CheckDefault${2}`} />
                                     <label className="form-check-label" for="flexCheckDefault">
                                         <ImStarFull className='text-warning' />
                                         <ImStarFull className='text-warning' />
@@ -299,9 +363,9 @@ function Product() {
 
                     </div>
                 </div>
-                <div className="col-lg-9 p-0  d-flex flex-wrap justify-content-around align-items-center">
+                <div className="col-lg-9 p-0  d-flex flex-wrap justify-content-around align-items-start">
 
-                    {productList?.map((product, index) => <div className=" mt-2 col-lg-4 d-flex justify-content-center align-items-center">
+                    {productList.map((product, index) => <div className=" mt-2 col-lg-4 d-flex justify-content-center align-items-center">
 
                         <div style={{ width: "300px", borderRadius: "10px" }} className="bg-white  p-2 m-2 d-flex flex-column align-items-center">
 
