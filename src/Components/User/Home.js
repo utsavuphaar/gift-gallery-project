@@ -45,11 +45,10 @@ export default function Home() {
                 <div className="col-md-3  mt-3 first p-0">
                     <div className='row category p-0'>
                         <div className='col-md-10'>
-                        {categoryRef?.map((category,index) => <div onClick={()=>displayCategoryItem(category)} className='category1 mt-1' key={index}>
+                        {categoryRef?.map((category,index) => <div onClick={()=>displayCategoryItem(category)} className='category1 mt-1' style={{cursor:"pointer"}} key={index}>
                             {category}</div>
                                 )}
                         </div>
-
                     </div>
                 </div>
                 <div className={!userId ? "col-md-6 mt-3 middle p-0" : "col-md-9 mt-3 middle p-0"}>
