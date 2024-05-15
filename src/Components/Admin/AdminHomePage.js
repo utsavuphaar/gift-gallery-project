@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import "./adminstyle.css";
 import { FaUserGroup } from "react-icons/fa6";
 import { AiOutlineStock } from "react-icons/ai";
 import { IoCubeOutline } from "react-icons/io5";
@@ -148,9 +147,9 @@ function AdminHomePage() {
                 </div>
 
                 {/* new start last */}
-                <div className="container w-100 p-0">
-                    <div className="row mt-4 w-100 p-0">
-                        <div className="col-md-12 w-100">
+               
+                    <div className="row m-0 w-100 p-0">
+                        <div className="col-md-12 m-0 p-0 w-100">
                             <div className="card">
                                 <div className="card-body  ">
                                     <div className="row d-flex">
@@ -242,7 +241,6 @@ function AdminHomePage() {
                             </div>
                         </div>
                     </div>
-                </div>
 
 
             </div>

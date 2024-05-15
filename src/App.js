@@ -24,7 +24,7 @@ import GoogleSign from "./Components/User/GoogleSign.js"
 import Order from './Components/User/Order.js';
 import ProductList from './Components/Admin/ProductList.js';
 import AdminHomePage from './Components/Admin/AdminHomePage.js';
-import Userlist from './Components/Admin/Userlist.js';
+// import Userlist from './Components/Admin/Userlist.js';
 import OrderList from './Components/Admin/OrderList.js';
 import ChatBot from './Components/User/ChatBot.js';
 import UserProfile from './Components/User/UserProfile.js';
@@ -42,7 +42,13 @@ import DeliveryBoySignUpForm from './Components/Admin/CreateDeliveryBoy.js';
 import DashBoard from './Components/DeliveryBoy/DashBoard.js';
 import GetOrders from './Components/DeliveryBoy/GetOrders.js';
 import OrderDetails from './Components/DeliveryBoy/OrderDetails.js';
+import OrderCancellationForm from './Components/User/CancelOrder.js';
+import Userlist from './Components/Admin/UserList.js';
 import Help from './Components/User/Help.js';
+
+import AuthDeliveryBoy from './Components/DeliveryBoy/AuthDeliveryBoy.js';
+import MyOrders from './Components/User/MyOrders.js';
+
 
 
 
@@ -53,7 +59,7 @@ function App() {
   return <>
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='ChatBot' element={<ChatBot />} />
+      <Route path='/ChatBot' element={<ChatBot />} />
       <Route path='/aboutus' element={<AboutUs />} />
       <Route path='/contactus' element={<ContactUs />} />
       <Route path="/product" element={<Product />} />
@@ -67,13 +73,17 @@ function App() {
       <Route path='/order' element={<Order />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+
       <Route path = "/orderDetail" element={<OrderDetails/>}/>
       <Route path='/help' element={<Help/>}/>
+
       <Route path='viewmore/:productId' element={<ViewMore />} >
         <Route index element={<ViewReviewRating />} />
       </Route>
       <Route path='/viewmore/rate-product' element={<RateProduct />} />
 
+      <Route path="/myorders" element={<MyOrders />} />
+      <Route path="/cancel" element={<OrderCancellationForm/>}/>
 
       <Route path='/buynow' element={<BuyNow />} />
       <Route path="/user" element={<Auth><UserProfile /></Auth>} />
@@ -89,10 +99,11 @@ function App() {
       <Route path="/newAccount" element={<DeliveryBoySignUpForm />} />
       <Route path="/signIndeliveryboy" element={<SignInFormDeliveryBoy />} />
 
-      <Route path='deliveryBoy' element={<DeliveryBoyDeshbord />}>
+      <Route path='deliveryBoy' element={<AuthDeliveryBoy><DeliveryBoyDeshbord /></AuthDeliveryBoy>}>
         <Route index element={<DashBoard />} />
         <Route path='getOrder' element={<GetOrders />} />
       </Route>
+
     </Routes>
   </>
 }

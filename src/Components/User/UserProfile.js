@@ -149,8 +149,6 @@ export const UserProfile = () => {
 
                         </div>
                   </section>
-
-
             </>
       );
 };

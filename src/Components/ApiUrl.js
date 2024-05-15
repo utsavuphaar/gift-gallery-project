@@ -13,8 +13,12 @@ export default {
     branlist: "http://localhost:3000/product/brand",
     getproductbybrand: "http://localhost:3000/product/getproductbybrand",
     fewcategory: "http://localhost:3000/category/fewcategory",
-    viewAllOrders:"http://localhost:3000/order/viewAllOrders",
+   viewAllOrders:"http://localhost:3000/order/viewAllOrders",
     getprductbyprice : "http://localhost:3000/product/getproductbyprice",
     getproductbyrating : "http://localhost:3000/review/getproductbyrating",
-    deliveryboysignin : "http://localhost:3000/deliveryBoy/signIn"
+    deliveryboysignin : "http://localhost:3000/deliveryBoy/signIn",
+    updateOrderStatus:"http://localhost:3000/order/updateOrderStatus",
+    getOrder:"http://localhost:3000/deliverydata/getOrder",
+    addProduct:"http://localhost:3000/product/addSingleProduct",
+    addExcelSheet:"http://localhost:3000/product/uploadExcelSheet"
 }

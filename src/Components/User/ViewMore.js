@@ -51,10 +51,10 @@ export default function ViewMore() {
         setcurrentimage(image);
     };
 
-
     const viewmore = (product) =>{
         navigate(`/viewmore/${product.id}`, { state: product });
       }
+
     const decrement = () => {
         if (inputValue > 1) {
             setInputValue(inputValue - 1);

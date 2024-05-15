@@ -3,7 +3,7 @@ import React, { useEffect, useReducer } from 'react'
 import axios from 'axios';
 import ApiUrl from '../ApiUrl';
 import { useNavigate } from 'react-router-dom';
-function GetOrders() {
+function YourOrders() {
     const navigate = useNavigate();
     var deliveryBoy = localStorage.getItem("deliveryBoy");
     deliveryBoy = JSON.parse(deliveryBoy);
@@ -30,7 +30,7 @@ function GetOrders() {
             })
     }, []);
 
-    let orderList = state.orderList.filter(order => order.status === 'Order Confirmed');
+    let orderList = state.orderList.filter(order => order.status !== 'Order Confirmed');
     const getProduct = async (orderItemId, userId,orderId) => {
         // Assuming deliveryBoy is defined somewhere accessible in your code
         // alert(orderItemId + " " + userId + " " + deliveryBoy.id+" "+orderId);
@@ -94,4 +94,4 @@ function GetOrders() {
     )
 }
 
-export default GetOrders;
+export default YourOrders;
