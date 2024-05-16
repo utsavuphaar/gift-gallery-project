@@ -29,6 +29,7 @@ import { IoEye } from "react-icons/io5";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { GiReturnArrow } from "react-icons/gi";
 import ReactImageMagnify from 'react-image-magnify';
+import { Zoom, toast } from "react-toastify";
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -51,10 +52,10 @@ export default function ViewMore() {
         setcurrentimage(image);
     };
 
+    const viewmore = (product) =>{
+        navigate(`/viewmore/${product.id}`, { state: product });
+      }
 
-    const viewMore = (product) => {
-        navigate(`/viewmore/${product.id}`, { state: product });    
-    }
     const decrement = () => {
         if (inputValue > 1) {
             setInputValue(inputValue - 1);
@@ -70,10 +71,28 @@ export default function ViewMore() {
         save.style.color = 'red'
     };
 
-    const buyNow = (productId, price) => {
-        const finalPrice = (price * inputValue)
-        alert(productId + " " + finalPrice)
+
+
+
+    const buyNow = (product) => {
+        if (localStorage.getItem("userId")) {
+            navigate("/buynow", { state: product });
+        } else {
+            toast.info("Sign-in first", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
+        }
     }
+
+
     // alert(inputValue)
     return <>
         <Header />
@@ -149,7 +168,9 @@ export default function ViewMore() {
                             </div>
                         </div>
                         <div className="mt-3">
-                            <button onClick={() => buyNow(state.id, state.price)} style={{ color: "white", backgroundColor: "#0D6EFD", border: 'none', borderRadius: "50px", height: '40px' }} className="w-100">Buy Now</button>
+
+                            <button onClick={() => buyNow(state)} style={{ color: "white", backgroundColor: "#0D6EFD", border: 'none', borderRadius: "50px", height: '40px' }} className="w-100">Buy Now</button>
+
                         </div>
                     </div>
                 </div>
@@ -176,7 +197,7 @@ export default function ViewMore() {
                         <img src={product.thumbnail} className='gift-image' style={{ width: "220px", height: "200px", borderRadius: "10px" }} />
                         <div className='icon-div' style={{ marginTop: "130px" }}>
                             <div className='heart-icon'><FaHeart id={`save${product.id}`} onClick={() => addToWishlist(product.id)} /></div>
-                            <div onClick={() => viewMore(product)} className='heart-icon'><IoEye className=' ' /></div>
+                            <div onClick={() => viewmore(product)} className='heart-icon'><IoEye className=' ' /></div>
                         </div>
                         <div className="w-100 mt-2 d-flex justify-content-between">
                             <h6 className="mt-2 ms-2">{product.title.slice(0, 22)}</h6>

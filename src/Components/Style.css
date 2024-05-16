@@ -445,6 +445,7 @@
 
 .box-area{
     width: 930px;
+    /* background-color: #9ba0a7; */
 }
 
 /*------------ Right box ------------*/
@@ -740,5 +741,5 @@
     color: white !important;
     cursor: pointer !important;
     transition: 0.5s;
+    
   }
-
