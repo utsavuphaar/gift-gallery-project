@@ -11,6 +11,7 @@ import userImg from "./Images/user.png";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import ApiUrl from "../ApiUrl";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -19,6 +20,7 @@ export const UserProfile = () => {
       const [disabled, setDisabled] = useState(true);
       const [disabledEntity, setDisabledEntity] = useState(true);
       const navigate = useNavigate();
+
       let user = localStorage.getItem("user");
       user = JSON.parse(user);
       let email = user.email;
@@ -108,11 +110,11 @@ export const UserProfile = () => {
       return (
             <>
                   <Header />
-                  <section className="container-fluid " style={{ backgroundColor: "#F7FAFC" }}>
+                  <section className="container-fluid" style={{ backgroundColor: "#F7FAFC" }}>
                         <div className="row justify-content-center">
 
-                              <div className="col-lg-3 mt-2">
-                                    <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
+                              <div className="col-lg-3 col-md-6 mt-2 d-flex">
+                                    <div className="card p-4 w-100" style={{ backgroundColor: "white" }}>
                                           <div className="d-flex align-items-center">
                                                 <img src={userImg} className="rounded-circle" style={{ width: '140px', height: '100px' }} alt="User" />
                                                 <div className="mt-3">
@@ -143,26 +145,26 @@ export const UserProfile = () => {
                                           </div>
                                     </div>
                               </div>
-
-                              <div className="col-lg-7 mt-2">
-                                    <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
+                        <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
+                              <div className="col-lg-7 col-md-12 mt-2 d-flex">
+                                    <div className="card p-4 w-100" style={{ backgroundColor: "white" }}>
                                           <h5 className="fw-bold mb-4">Edit Your Profile <FiEdit onClick={enableEntity} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
                                           <div className="row g-3">
                                                 <div className="col-md-6">
                                                       <label htmlFor="firstName" className="form-label">First Name*</label>
-                                                      <input type="text" disabled={disabledEntity} className="form-control" id="firstName" required />
+                                                      <input value={user.name.split(" ")[0]} type="text" disabled={disabledEntity} className="form-control" id="firstName" required />
                                                 </div>
                                                 <div className="col-md-6">
                                                       <label htmlFor="lastName" className="form-label">Last Name*</label>
-                                                      <input type="text" disabled={disabledEntity} className="form-control" id="lastName" required />
+                                                      <input value={user.name.split(" ")[1]} type="text" disabled={disabledEntity} className="form-control" id="lastName" required />
                                                 </div>
                                                 <div className="col-md-6">
                                                       <label htmlFor="email" className="form-label">Email*</label>
-                                                      <input type="email" disabled={disabledEntity} className="form-control" id="email" required />
+                                                      <input value={user.email} type="email" disabled={disabledEntity} className="form-control" id="email" required />
                                                 </div>
                                                 <div className="col-md-6">
-                                                      <label htmlFor="address" className="form-label">Address*</label>
-                                                      <input type="text" disabled={disabledEntity} className="form-control" id="address" required />
+                                                      <label htmlFor="address" className="form-label">Contact*</label>
+                                                      <input value={user.contact} type="text" disabled={disabledEntity} className="form-control" id="address" required />
                                                 </div>
                                                 <div className="col-md-12">
                                                       <button className="btn btn-primary" type="button">Save Changes</button>
@@ -190,6 +192,7 @@ export const UserProfile = () => {
 
                         </div>
                   </section>
+
             </>
       );
 };

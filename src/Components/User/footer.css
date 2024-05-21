@@ -38,12 +38,13 @@ ul {
 }
 
 .icon {
-      width: 50px;
+      width: 70px;
       height: 40px;
       border-radius: 10px;
       box-shadow: 1px 0px 2px 2px gainsboro;
       /* margin-top: 35px;
       margin-left: 130px; */
+
       background-color: #0D6EFD;
 }
 

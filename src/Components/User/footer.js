@@ -12,7 +12,7 @@ export const Footer = () => {
                         <div className="row">
                               <div className="footer-col ml-3">
                                     <div className='col-md-6 ms-1 title' style={{ width: "250px" }}>
-                                          <div className='mt-1 mb-2 icon  d-flex justify-content-center align-items-center'>
+                                          <div className='mt-1 p-2 mb-2 icon  d-flex justify-content-center align-items-center'>
                                                 <IoIosGift className='fs-3 text-light' />
                                           </div>
                                           <span className='ms-3 fs-3 name'>
