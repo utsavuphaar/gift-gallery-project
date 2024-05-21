@@ -3,7 +3,6 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import axios from 'axios'; // Import Axios
 import Header from '../User/Header';
 import axios from 'axios';
 import URL from '../ApiUrl'

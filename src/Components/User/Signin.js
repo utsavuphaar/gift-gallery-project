@@ -145,7 +145,7 @@ export default function Signin() {
 
         <Header/>
 
-        <div className='container-fluid'  style={{width:"100vw",height:"100vh",backgroundColor:"#ececec"}}>
+        <div className='container-fluid m-0 p-0'  style={{maxWidth:"100%",height:"100vh",backgroundColor:"#ececec"}}>
 
         
         <div className="container d-flex justify-content-center align-items-start min-vh-100" style={{backgroundColor:"#ececec"}}>
