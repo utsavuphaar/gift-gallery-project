@@ -5,7 +5,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // Import Axios
 import Header from '../User/Header';
-import axios from 'axios';
 import URL from '../ApiUrl'
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -20,6 +19,10 @@ function SignInFormDeliveryBoy() {
     // alert(email+""+password);
     axios.post(URL.deliveryboysignin, { email, password })
       .then((result) => {
+        // console.log(result.data.deliveryBoy.id);
+        localStorage.setItem("deliveryBoy",result.data.deliveryBoy.id)
+        const deliveryBoyDetails = JSON.stringify(result.data.deliveryBoy);
+        localStorage.setItem("deliveryBoyDetails",deliveryBoyDetails)
         Swal.fire({
           position: "center",
           icon: "success",
@@ -27,7 +30,7 @@ function SignInFormDeliveryBoy() {
           showConfirmButton: false,
           timer: 2000
         });
-        navigate('/deliveryBoy')
+        navigate(-1)
       })
       .catch(err => {
         Swal.fire({
@@ -42,7 +45,6 @@ function SignInFormDeliveryBoy() {
 
   return (
     <>
-      <Header />
       <Container fluid className="p-5">
         <Row className="justify-content-md-center">
           <Col md={6}>
@@ -75,43 +77,6 @@ function SignInFormDeliveryBoy() {
           </Col>
         </Row>
       </Container>
-      <div className='container-fluid w-100 p-2 d-flex justify-content-center align-content-center' style={{ height: "90vh", backgroundColor: "#f7fafc" }}>
-        <Container fluid className="p-5 border h-75 mt-5" >
-          <Row className="justify-content-md-center w-100">
-            <Col md={6}>
-              <h2 className='text-center'>Sign In</h2>
-              <p className='text-center'>Welcome back! Please sign in with your email and password.</p>
-              <form onSubmit={handleSubmit}>
-                <TextField
-                  label="Email address"
-                  variant="outlined"
-                  fullWidth
-                  margin="normal"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <TextField
-                  label="Password"
-                  variant="outlined"
-                  fullWidth
-                  margin="normal"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <Button variant="contained" type="submit" color="primary" fullWidth margin="normal">
-                  SIGN IN
-                </Button>
-                <Link to="/forgot-password" className="text-decoration-none">
-                  <p className="text-center mt-2">Forgot your password?</p>
-                </Link>
-              </form>
-            </Col>
-          </Row>
-        </Container>
-      </div>
     </>
   );
 }

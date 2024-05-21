@@ -7,12 +7,14 @@ import { GiReturnArrow } from "react-icons/gi";
 import { MdOutlineCancel } from "react-icons/md";
 import { MdFavoriteBorder } from "react-icons/md";
 import { IoIosPower } from "react-icons/io";
-import userImg from "./Images/user.png"
+import userImg from "./Images/user.png";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import ApiUrl from "../ApiUrl";
 import { useRef, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+
 export const UserProfile = () => {
       const [disabled, setDisabled] = useState(true);
       const [disabledEntity, setDisabledEntity] = useState(true);
@@ -23,87 +25,126 @@ export const UserProfile = () => {
       let oldPassword = useRef(null);
       let newPassword = useRef(null);
       let confirmPassword = useRef(null);
-
       const logout = () => {
-            if (user)
-                  localStorage.clear();
+            if (user) localStorage.clear();
 
-            // alert("logout successfully..")
             Swal.fire({
                   position: "top-end",
                   icon: "success",
-                  title: "Login Out ",
+                  title: "Logged Out",
                   showConfirmButton: false,
                   timer: 1500
             });
-            navigate("/signup")
-
-      }
-
-
+            navigate("/signup");
+      };
 
       const changePassword = () => {
-            oldPassword = oldPassword.current.value;
-            newPassword = newPassword.current.value;
-            confirmPassword = confirmPassword.current.value;
-            alert(oldPassword + " " + newPassword + " " + confirmPassword)
-            axios.post("http://localhost:3000/user/updatePassword", { email, password: oldPassword, newPassword: newPassword }).then(res => {
-                  console.log(res)
-                  alert("successfully")
-                  setDisabled(true)
-            }).catch(err => {
-                  alert(err.response.data.message)
-                  setDisabled(true)
-            });
-      }
+            const oldPasswordValue = oldPassword.current.value;
+            const newPasswordValue = newPassword.current.value;
+            const confirmPasswordValue = confirmPassword.current.value;
+
+            // Password validation function
+            const validatePassword = (password) => {
+                  const minLength = 8;
+                  const hasLetter = /[a-zA-Z]/.test(password);
+                  const hasNumber = /[0-9]/.test(password);
+                  return password.length >= minLength && hasLetter && hasNumber;
+            };
+
+            if (!oldPasswordValue || !newPasswordValue || !confirmPasswordValue) {
+                  Swal.fire({
+                        icon: 'warning',
+                        title: 'Missing Fields',
+                        text: 'Please fill all the fields',
+                  });
+                  return;
+            }
+
+            if (newPasswordValue !== confirmPasswordValue) {
+                  Swal.fire({
+                        icon: 'error',
+                        title: 'Password Mismatch',
+                        text: 'New password and confirm password do not match',
+                  });
+                  return;
+            }
+
+            if (!validatePassword(newPasswordValue)) {
+                  Swal.fire({
+                        icon: 'warning',
+                        title: 'Invalid Password',
+                        text: 'New password must be at least 8 characters long and contain both letters and numbers',
+                  });
+                  return;
+            }
+
+            axios.post(ApiUrl.updatePassword, { email, password: oldPasswordValue, newPassword: newPasswordValue })
+                  .then(res => {
+                        Swal.fire({
+                              icon: 'success',
+                              title: 'Password Changed',
+                              text: 'Password changed successfully',
+                        });
+                        setDisabled(true);
+                  })
+                  .catch(err => {
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Error',
+                              text: err.response.data.message,
+                        });
+                        setDisabled(true);
+                  });
+      };
 
       const enablePassword = () => {
-            disabled === true ? setDisabled(false) : setDisabled(true);
-      }
+            setDisabled(!disabled);
+      };
+
       const enableEntity = () => {
-            disabledEntity === true ? setDisabledEntity(false) : setDisabledEntity(true);
-      }
+            setDisabledEntity(!disabledEntity);
+      };
 
       return (
             <>
                   <Header />
-                  <section className="container-fluid p-4 " style={{ backgroundColor: "#F7FAFC" }}>
+                  <section className="container-fluid " style={{ backgroundColor: "#F7FAFC" }}>
                         <div className="row justify-content-center">
 
-                              <div className=" col-lg-3 mt-2">
+                              <div className="col-lg-3 mt-2">
                                     <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
                                           <div className="d-flex align-items-center">
                                                 <img src={userImg} className="rounded-circle" style={{ width: '140px', height: '100px' }} alt="User" />
-                                                <div className=" mt-3">
+                                                <div className="mt-3">
                                                       <h6>Hello,</h6>
                                                       <h5 className="text-primary">{user.name}</h5>
                                                 </div>
                                           </div>
-                                          <div className="mt-4  container p-3">
+                                          <div className="mt-4 container p-3">
                                                 <h6 className="fw-bold">Manage My Account</h6>
                                                 <ul className="list-unstyled">
-                                                      <li style={{cursor:"pointer"}} className="mt-2"><FaRegGrinBeam className="me-1" />My Profile</li>
-                                                      <li style={{cursor:"pointer"}} className="mt-2"><PiAddressBook className="me-1" />Address Book</li>
-                                                      <li style={{cursor:"pointer"}} className="mt-2"><FaAmazonPay className="me-1" />My Payment Option</li>
+                                                      <li style={{ cursor: "pointer" }} className="mt-2"><FaRegGrinBeam className="me-1" />My Profile</li>
+                                                      <li style={{ cursor: "pointer" }} className="mt-2"><PiAddressBook className="me-1" />Address Book</li>
+                                                      <li style={{ cursor: "pointer" }} className="mt-2"><FaAmazonPay className="me-1" />My Payment Option</li>
                                                 </ul>
                                                 <h6 className="mt-4 fw-bold">My Orders</h6>
                                                 <ul className="list-unstyled">
-                                                      <li style={{cursor:"pointer"}} className="mt-2"><GiReturnArrow className="me-1" />Delivered</li>
-                                                      <li style={{cursor:"pointer"}} className="mt-2"><GiReturnArrow className="me-1" />My Returns</li>
-                                                      <li style={{cursor:"pointer"}} className="mt-2"><MdOutlineCancel className="me-1" />My Cancellations</li>
-                                                      <li style={{cursor:"pointer"}} className="mt-2"><MdOutlineCancel className="me-1" />On the way</li>
+                                                      <li style={{ cursor: "pointer" }} className="mt-2"><GiReturnArrow className="me-1" />Delivered</li>
+                                                      <li style={{ cursor: "pointer" }} className="mt-2"><GiReturnArrow className="me-1" />My Returns</li>
+                                                      <li style={{ cursor: "pointer" }} className="mt-2"><MdOutlineCancel className="me-1" />My Cancellations</li>
+                                                      <li style={{ cursor: "pointer" }} className="mt-2"><MdOutlineCancel className="me-1" />On the way</li>
                                                 </ul>
                                                 <h6 className="mt-4 fw-bold">Other</h6>
                                                 <ul className="list-unstyled">
-                                                      <li style={{cursor:"pointer"}} className="mt-2" onClick={()=>navigate('/wishlist')}><MdFavoriteBorder className="me-1" />My Wishlist</li>
-                                                      <li style={{cursor:"pointer"}} className="mt-2" onClick={()=>navigate('/cart')}><BsCart2 className="me-1" />My Cart</li>
+                                                      <li style={{ cursor: "pointer" }} className="mt-2" onClick={() => navigate('/wishlist')}><MdFavoriteBorder className="me-1" />My Wishlist</li>
+                                                      <li style={{ cursor: "pointer" }} className="mt-2" onClick={() => navigate('/cart')}><BsCart2 className="me-1" />My Cart</li>
                                                 </ul>
                                                 <p onClick={logout} className="mt-4 text-primary" style={{ cursor: 'pointer' }}><IoIosPower className="me-1" />Logout</p>
                                           </div>
                                     </div>
                               </div>
 
-                              <div className=" col-lg-7 mt-2">
+                              <div className="col-lg-7 mt-2">
                                     <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
                                           <h5 className="fw-bold mb-4">Edit Your Profile <FiEdit onClick={enableEntity} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
                                           <div className="row g-3">
@@ -131,13 +172,13 @@ export const UserProfile = () => {
                                                 <h5 className="fw-bold">Password Changes <FiEdit onClick={enablePassword} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
                                                 <div className="row g-4">
                                                       <div className="col-md-12">
-                                                            <input disabled={disabled} type="password" className="form-control" id="oldPassword" placeholder="Current Password" required />
+                                                            <input disabled={disabled} ref={oldPassword} type="password" className="form-control" id="oldPassword" placeholder="Current Password" required />
                                                       </div>
                                                       <div className="col-md-12">
-                                                            <input disabled={disabled} type="password" className="form-control" id="newPassword" placeholder="New Password" required />
+                                                            <input disabled={disabled} ref={newPassword} type="password" className="form-control" id="newPassword" placeholder="New Password" required />
                                                       </div>
                                                       <div className="col-md-12">
-                                                            <input disabled={disabled} type="password" className="form-control" id="confirmPassword" placeholder="Confirm New Password" required />
+                                                            <input disabled={disabled} ref={confirmPassword} type="password" className="form-control" id="confirmPassword" placeholder="Confirm New Password" required />
                                                       </div>
                                                       <div className="col-md-12">
                                                             <button onClick={changePassword} className="btn btn-primary" type="button">Save Changes</button>
@@ -152,4 +193,5 @@ export const UserProfile = () => {
             </>
       );
 };
+
 export default UserProfile;

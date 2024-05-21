@@ -11,11 +11,11 @@ import "./adminstyle.css";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { IoIosPower } from "react-icons/io";
 const DeliveryBoyDeshbord = () => {
-  var deliveryBoy = localStorage.getItem("deliveryBoy");
+  var deliveryBoy = localStorage.getItem("deliveryBoyDetails");
   deliveryBoy = JSON.parse(deliveryBoy);
   const navigate = useNavigate();
   const logout = ()=>{
-    localStorage.removeItem("deliveryBoy");
+    localStorage.removeItem("deliveryBoyDetails");
     navigate("/signIndeliveryboy")
   }
   return <>
@@ -38,8 +38,11 @@ const DeliveryBoyDeshbord = () => {
             <Link to="" style={{ textDecoration: "none", }}>
               <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<IoQrCodeSharp className="mb-1 ml-4 fs-3" style={{ color: "#FCBE2D" }} />&nbsp;&nbsp;Dashbord</span>
             </Link>
-
+            <Link to="myOrders">
             <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<CiDeliveryTruck className="mb-1 ml-4 fs-3" style={{ color: "#FCBE2D" }} />&nbsp;&nbsp;My Delivery</span>
+            </Link>
+
+
             <Link to="getOrder"  style={{ textDecoration: "none", }}>
               <span className="d-flex mt-3  p-0" style={{ color: "black" }}> &nbsp;&nbsp;<HiOutlineCurrencyRupee className="mb-1 fs-3" style={{ color: "#FCBE2D" }} />&nbsp;&nbsp;Orders</span>
             </Link>
