@@ -12,40 +12,40 @@ import { Zoom } from "react-toastify";
 export default function ResetPassword() {
 
     const location = useLocation();
-    const {email} = location.state ;
+    const { email } = location.state;
     // console.log(email);
 
-    const [newpassword,setnewpassword] = useState("");
-    const [confirmpassword,setconfirmpassword] = useState("");
+    const [newpassword, setnewpassword] = useState("");
+    const [confirmpassword, setconfirmpassword] = useState("");
     const navigate = useNavigate();
 
-    
 
-    const resetpassword = () =>{
-        if(validatePassword()){
-            if(newpassword===confirmpassword){
-                axios.post("http://localhost:3000/user/updatePassword",{email,newpassword})
-                .then(()=>{
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Password Reset Successfully",
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
-                    navigate("/signin");
-                })
-                .catch(err=>{
-                    Swal.fire({
-                        position: "center",
-                        icon: "error",
-                        title: "Something went wrong",
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
-                    console.log(err);
-                })
-            }else{
+
+    const resetpassword = () => {
+        if (validatePassword()) {
+            if (newpassword === confirmpassword) {
+                axios.post("http://localhost:3000/user/updatePassword", { email, newpassword })
+                    .then(() => {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Password Reset Successfully",
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        navigate("/signin");
+                    })
+                    .catch(err => {
+                        Swal.fire({
+                            position: "center",
+                            icon: "error",
+                            title: "Something went wrong",
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        console.log(err);
+                    })
+            } else {
                 toast.error("Confirm password is different", {
                     position: "top-center",
                     autoClose: 5000,
@@ -58,7 +58,7 @@ export default function ResetPassword() {
                     transition: Zoom,
                 });
             }
-        }else{
+        } else {
             toast.error("Try Again", {
                 position: "top-center",
                 autoClose: 5000,
@@ -84,40 +84,36 @@ export default function ResetPassword() {
 
         // Check if it contains at least one uppercase letter
         else if (!/[A-Z]/.test(newpassword)) {
-            passworderror.innerHTML =  "Password must contain at least one uppercase letter.";
+            passworderror.innerHTML = "Password must contain at least one uppercase letter.";
         }
 
         // Check if it contains at least one lowercase letter
         else if (!/[a-z]/.test(newpassword)) {
-            passworderror.innerHTML =  "Password must contain at least one lowercase letter.";
+            passworderror.innerHTML = "Password must contain at least one lowercase letter.";
         }
 
         // Check if it contains at least one digit
         else if (!/\d/.test(newpassword)) {
-            passworderror.innerHTML =  "Password must contain at least one digit.";
+            passworderror.innerHTML = "Password must contain at least one digit.";
         }
 
         // Check if it contains at least one special character
         else if (!/[^a-zA-Z0-9]/.test(newpassword)) {
-            passworderror.innerHTML =  "Password must contain at least one special character.";
+            passworderror.innerHTML = "Password must contain at least one special character.";
         }
-        else{
+        else {
             // If all conditions pass, return null indicating valid password
             status = true;
         }
         return status;
     };
 
-
-
-
     return <>
-        <ToastContainer/>
+        <ToastContainer />
 
         <Header />
 
         <div className='container-fluid m-0 p-0' style={{ maxWidth: "100%", height: "100vh", backgroundColor: "#ececec" }}>
-
 
             <div className="container d-flex justify-content-center align-items-start min-vh-100" style={{ backgroundColor: "#ececec" }}>
                 <div className="row border rounded-5 p-3 bg-white shadow box-area mt-5">
@@ -135,17 +131,17 @@ export default function ResetPassword() {
                                 <p className="ms-2">Recover Your <span className="text-primary fw-bold">UtsavUphaar</span> Account</p>
                             </div>
                             <div className="input-group">
-                                <input type="text" onKeyUp={()=>validatePassword()} onChange={event =>setnewpassword(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Enter New Password" />
+                                <input type="text" onKeyUp={() => validatePassword()} onChange={event => setnewpassword(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Enter New Password" />
                             </div>
                             <small className='text-danger' id='passworderror'></small>
 
                             <div className="input-group mt-4">
-                                <input type="text"  onChange={event =>setconfirmpassword(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Confirm Password" />
+                                <input type="text" onChange={event => setconfirmpassword(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Confirm Password" />
                             </div>
                             <small className='text-danger' id='passworderror2'></small>
 
                             <div className="input-group mb-3 d-flex justify-content-center mt-5">
-                                <button onClick={()=>resetpassword()} className="btn btn-lg btn-primary w-100 fs-6">Reset Password</button>
+                                <button onClick={() => resetpassword()} className="btn btn-lg btn-primary w-100 fs-6">Reset Password</button>
                             </div>
                         </div>
                     </div>
