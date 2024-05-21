@@ -20,5 +20,7 @@ export default {
     updateOrderStatus:"http://localhost:3000/order/updateOrderStatus",
     getOrder:"http://localhost:3000/deliverydata/getOrder",
     addProduct:"http://localhost:3000/product/addSingleProduct",
-    addExcelSheet:"http://localhost:3000/product/uploadExcelSheet"
+    addExcelSheet:"http://localhost:3000/product/uploadExcelSheet",
+    updatePassword:"http://localhost:3000/user/updatePassword",
+    getParticularDeliveryBoyOrder:"http://localhost:3000/deliverydata/deliveryBoyOrder"
 }

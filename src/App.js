@@ -48,6 +48,9 @@ import Help from './Components/User/Help.js';
 
 import AuthDeliveryBoy from './Components/DeliveryBoy/AuthDeliveryBoy.js';
 import MyOrders from './Components/User/MyOrders.js';
+import YourOrders from './Components/DeliveryBoy/YourOrders.js';
+import OrderData from './Components/DeliveryBoy/OrderData.js';
+import VerifyOtp from './Components/DeliveryBoy/VerifyOTP.js';
 
 
 
@@ -82,6 +85,7 @@ function App() {
       </Route>
       <Route path='/viewmore/rate-product' element={<RateProduct />} />
 
+        <Route path = "/orderData" element={<OrderData/>}/>
       <Route path="/myorders" element={<MyOrders />} />
       <Route path="/cancel" element={<OrderCancellationForm/>}/>
 
@@ -102,8 +106,10 @@ function App() {
       <Route path='deliveryBoy' element={<AuthDeliveryBoy><DeliveryBoyDeshbord /></AuthDeliveryBoy>}>
         <Route index element={<DashBoard />} />
         <Route path='getOrder' element={<GetOrders />} />
+        <Route path ="myOrders" element={<YourOrders/>}/>
       </Route>
 
+      <Route path='/otpVerification' element={<VerifyOtp/>}/>
     </Routes>
   </>
 }
