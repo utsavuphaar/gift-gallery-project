@@ -294,3 +294,130 @@
        margin-left: auto !important;
        }
      }
+
+
+     /* ------------------Categorylist Css------------------- */
+/* styles.css */
+
+:root {
+  --primary-color: #007bff; /* Define your primary color here */
+}
+
+.responsive-table-container {
+  max-height: 80vh;
+  max-width: 70%;
+  margin: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.custom-scroll {
+  overflow-y: auto;
+  height: 450px;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+.custom-scroll::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table thead {
+  position: sticky;
+  top: 0;
+  background-color: var(--primary-color) !important; /* Use primary color */
+  color: white; /* White font color */
+  z-index: 1;
+}
+
+.table th, .table td {
+  padding: 15px;
+  text-align: center;
+}
+
+.table th {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+  background-color: #ddd;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.edit-icon {
+  color: #28a745; /* Green for edit */
+}
+
+.delete-icon {
+  color: #dc3545; /* Red for delete */
+}
+
+@media (max-width: 768px) {
+  .responsive-table-container {
+    max-width: 100%;
+  }
+
+  .custom-scroll {
+    height: auto; /* Adjust height for smaller screens */
+  }
+
+  .table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on touch devices */
+  }
+  
+  .table thead,
+  .table tbody,
+  .table tr,
+  .table td,
+  .table th {
+    display: block; /* Make table elements block-level */
+  }
+  
+  .table tr {
+    margin-bottom: 1rem; /* Space between rows */
+  }
+
+  .table th {
+    text-align: right; /* Align headers to the right */
+  }
+
+  .table td {
+    text-align: left; /* Align data cells to the left */
+    padding-left: 50%; /* Create space for the header */
+    position: relative;
+  }
+
+  .table td:before {
+    content: attr(data-label); /* Use the data-label attribute for the header content */
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 1rem;
+    font-weight: bold;
+  }
+}
+
+/* ------------------Admin.js--------------------- */
+
+.dashbord-list:hover{
+  color: #0D6EFD !important;
+}

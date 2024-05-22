@@ -27,7 +27,7 @@ function DeliveryBoyList() {
 
     return (
         <>
-            <section className='row mt-4' style={{ width: '75%' }}>
+            {/* <section className='row mt-4' style={{ width: '75%' }}>
                 <Link to="/newAccount">
                     <button className='btn btn-light border ms-2' style={{width:"100px"}}>Add New</button>
                 </Link>
@@ -65,7 +65,40 @@ function DeliveryBoyList() {
                         </tbody>
                     </table>
                 </div>
-            </section>
+            </section> */}
+
+            <div className="responsive-table-container">
+                <div className="w-100 p-4 d-flex justify-content-between align-items-center">
+                    <h1 className="mt-3 text-primary">DeliveryBoy List</h1>
+                    <Link to="/newAccount">
+                        <button className='btn btn-primary' style={{ width: "100px" }}>Add New</button>
+                    </Link>
+                </div>
+                <div className="custom-scroll">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {state.userList?.map((user, index) => <tr key={index} >
+                                <td className='text-center'>{index + 1}</td>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                <td>{user.contact}</td>
+                                <td>
+                                    <button className='btn'>Edit</button>
+                                </td>
+                            </tr>)}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </>
     )
 }
