@@ -1,11 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useReducer } from 'react'
 import ApiUrl from '../ApiUrl';
-import './adminstyle.css'
-function Userlist() {
+function InboxList() {
     const [state, dispatch] = useReducer((state, action) => {
-        if (action.type === "set-product") {
-            return { ...state, userList: action.payload };
+        if (action.type === "set-user") {
+            return { ...state, inboxList: action.payload };
         }
         else if (action.type === "delete-product") {
             if (window.confirm("Are you sure ?")) {
@@ -17,9 +16,10 @@ function Userlist() {
     }, { userList: [] });
 
     useEffect(() => {
-        axios.get(ApiUrl.userList)
+        axios.get(ApiUrl.getContactUs)
             .then(response => {
-                dispatch({ type: "set-product", payload: response.data.users });
+                console.log(response.data.admin);
+                dispatch({ type: "set-user", payload: response.data.admin });
             }).catch(err => {
                 console.log(err);
             })
@@ -27,37 +27,29 @@ function Userlist() {
 
     return (
         <>
-            {/* <section className="row mt-5" style={{ width: "75%", margin: "0 auto" }}>
+            {/* <section className="row mt-5 mb-5" style={{ width: "75%", margin: "0 auto" }}>
             <div className='' >
-                    <div className="col-md-6 mt-2">
-                        <select style={{paddingLeft:"10px",border:"1px solid blue"}} className="form-select cursor-pointer rounded p-1">
-                            <option>All User</option>
-                            <option>New User</option>
-                        </select>
-                    </div>
+              <h1 className='text-primary text-center mt-5 mb-1'>Contact Us Information</h1>
             </div>
-                
-                <div className="col-md-12" style={{ overflowY: "auto", maxHeight: "450px" }}>
-                    <table className="table p-2 text-center border position-relative">
+
+                <div className="col-md-12 mb-5" style={{ overflowY: "auto", maxHeight: "450px" }}>
+                    <table className="table p-2 text-center border position-relative mb-5">
                         <thead className="position-sticky bg-primary text-white" style={{ top: "-5px", zIndex: "1" }}>
                             <tr>
                                 <th>Sr. No.</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Contact</th>
-                                <th>Action</th>
+                                <th>Message</th>
                             </tr>
                         </thead>
                         <tbody className="text-center">
-                            {state.userList?.map((user, index) => (
+                            {state.inboxList?.map((user, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
-                                    <td>{user.contact}</td>
-                                    <td>
-                                        <button className="btn btn-primary">Edit</button>
-                                    </td>
+                                    <td>{user.message}</td>
+                                   
                                 </tr>
                             ))}
                         </tbody>
@@ -67,11 +59,11 @@ function Userlist() {
 
             <div className="responsive-table-container">
                 <div className="w-100 p-4 d-flex justify-content-between align-items-center">
-                    <h1 className="mt-3 text-primary">User List</h1>
-                    <select style={{ paddingLeft: "10px", border: "1px solid blue",outline:"none" }} className=" cursor-pointer rounded p-1">
-                        <option>All User</option>
-                        <option>New User</option>
-                    </select>
+                    <h1 className="mt-3 text-primary">Inbox List</h1>
+                    <select className='col-md-3 cursor-pointer border float-end rounded p-1 border-primary' style={{outline:"none"}}>
+                            <option>All message</option>
+                            <option>New message</option>
+                        </select>
                 </div>
                 <div className="custom-scroll">
                     <table className="table">
@@ -80,16 +72,17 @@ function Userlist() {
                                 <th>Sr. No.</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Contact</th>
+                                <th>Message</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {state.userList?.map((user, index) => (
+                        {state.inboxList?.map((user, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
-                                    <td>{user.contact}</td>
+                                    <td>{user.message}</td>
+                                   
                                 </tr>
                             ))}
                         </tbody>
@@ -97,8 +90,9 @@ function Userlist() {
                 </div>
             </div>
 
+
         </>
     )
 }
 
-export default Userlist
+export default InboxList;

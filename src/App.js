@@ -48,6 +48,8 @@ import Help from './Components/User/Help.js';
 
 import AuthDeliveryBoy from './Components/DeliveryBoy/AuthDeliveryBoy.js';
 import MyOrders from './Components/User/MyOrders.js';
+import CategoryList from './Components/Admin/CategoryList.js';
+import InboxList from './Components/Admin/InboxList.js';
 import YourOrders from './Components/DeliveryBoy/YourOrders.js';
 import OrderData from './Components/DeliveryBoy/OrderData.js';
 import VerifyOtp from './Components/DeliveryBoy/VerifyOTP.js';
@@ -93,8 +95,10 @@ function App() {
       <Route path="/user" element={<Auth><UserProfile /></Auth>} />
       <Route path='admin' element={<AdminProfile />} >
         <Route index element={<AdminHomePage />} />
+        <Route path="inbox" element={<InboxList/>}/>
         <Route path="addProduct" element={<AddProduct />} />
         <Route path="productList" element={<ProductList />} />
+        <Route path="categorylist" element={<CategoryList/>}/>
         <Route path='userList' element={<Userlist />} />
         <Route path='deliveryBoyList' element={<DeliveryBoyList />} />
         <Route path="orderList" element={<OrderList />} />
