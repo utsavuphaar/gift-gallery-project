@@ -61,59 +61,6 @@ function ProductList() {
     return (
         <>
 
-            {/* <section className='row mt-5' style={{ width: '75%' }}>
-                <div className='mb-4 ms-2 form-group row'>
-                    <label className='fs-4'>Product :
-                        <input className='col-md-3 ms-2 fs-6 p-2 rounded border' type='search' placeholder='search product..' />
-                        <div className='float-end'>
-                            <select className='rounded fs-6 cursor-pointer p-2 border' onChange={getCategoryName}>
-                                <option className='border' value="All Category">All category</option>
-                                {state.categoryList?.map((category, index) => <option key={index} value={category.categoryName}>
-                                    {category.categoryName}
-                                </option>)}
-                            </select>
-                            <button className='btn btn-primary' style={{ border: 'none' }} onClick={displayCategoryItem}>Search</button>
-                        </div>
-
-                    </label>
-                </div>
-
-                <div className='col-md-12' style={{overflowY:"auto",height:'450px'}}>
-                    <table className='table p-2 border text-center position-relative' style={{ maxHeight: '70vh', overflow: "scroll" }}>
-                        <thead className='position-sticky' style={{top:'-5px'}}>
-                            <tr className='bg-primary text-white text-center'>
-                                <th>Sr. No.</th>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                                <th>Category</th>
-                                <th>Price</th>
-                                <th>Stock</th>
-                                <th>Rating</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody className='text-center'>
-                            {state.productList.map((product, index) => <tr key={index} >
-                                <td className='text-center'>{index + 1}</td>
-                                <td><img src={product.thumbnail} id='p-image' width="120px" height="80px" /></td>
-                                <td>{product.title.slice(0, 30)}</td>
-                                <td>{product.categoryName}</td>
-                                <td>{product.price}</td>
-                                <td>{product.stock}</td>
-                                <td>{product.rating}</td>
-                                <td>
-                                    <button className='btn text-primary'>Edit</button>
-                                </td>
-                                <td>
-                                    <button className='btn text-danger' onClick={() => dispatch({ type: "delete-product", payload: index })}>Delete</button>
-                                </td>
-                            </tr>)}
-                        </tbody>
-                    </table>
-                </div>
-            </section> */}
-
             <div className="responsive-table-container">
                 <div className="w-100 p-4 d-flex justify-content-between align-items-center">
                     <h1 className="mt-3 text-primary">Product List</h1>

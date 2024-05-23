@@ -110,19 +110,19 @@ export const UserProfile = () => {
                                           <div className="row g-3">
                                                 <div className="col-md-6">
                                                       <label htmlFor="firstName" className="form-label">First Name*</label>
-                                                      <input value={user.name.split(" ")[0]} type="text" disabled={disabledEntity} className="form-control" id="firstName" required />
+                                                      <input defaultValue={user.name.split(" ")[0]} type="text" disabled={disabledEntity} className="form-control" id="firstName" required />
                                                 </div>
                                                 <div className="col-md-6">
                                                       <label htmlFor="lastName" className="form-label">Last Name*</label>
-                                                      <input value={user.name.split(" ")[1]} type="text" disabled={disabledEntity} className="form-control" id="lastName" required />
+                                                      <input defaultValue={user.name.split(" ")[1]} type="text" disabled={disabledEntity} className="form-control" id="lastName" required />
                                                 </div>
                                                 <div className="col-md-6">
                                                       <label htmlFor="email" className="form-label">Email*</label>
-                                                      <input value={user.email} type="email" disabled={disabledEntity} className="form-control" id="email" required />
+                                                      <input defaultValue={user.email} type="email" disabled={disabledEntity} className="form-control" id="email" required />
                                                 </div>
                                                 <div className="col-md-6">
                                                       <label htmlFor="address" className="form-label">Contact*</label>
-                                                      <input value={user.contact} type="text" disabled={disabledEntity} className="form-control" id="address" required />
+                                                      <input defaultValue={user.contact} type="text" disabled={disabledEntity} className="form-control" id="address" required />
                                                 </div>
                                                 <div className="col-md-12">
                                                       <button className="btn btn-primary" type="button">Save Changes</button>

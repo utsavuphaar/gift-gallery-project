@@ -14,9 +14,11 @@ function AdminHomePage() {
     const [categoryList, setCategoryList] = useState(0);
     const [userList, setUserList] = useState(0);
     const { productList, category } = useSelector(store => store.Product);
+    const [orderlist,setorderlist] = useState("");
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchProduct());
+        fetchorder()
         axios.get(ApiUrl.getCategories)
             .then(response => {
                 setCategoryList(response.data.categories.length);
@@ -32,7 +34,14 @@ function AdminHomePage() {
 
 
     const fetchorder = () => {
-        axios.get()
+      axios.get(ApiUrl.getOrderdetail)
+      .then((response)=>{
+        console.log(response.data.result);
+        setorderlist(response.data.result);
+      })
+      .catch(err=>{
+        console.log(err);
+      })
     }
 
     return (
@@ -59,9 +68,6 @@ function AdminHomePage() {
                                     </div>
 
                                 </div>
-
-
-
                             </div>
                         </div>
                     </div>
@@ -166,7 +172,7 @@ function AdminHomePage() {
 
                                 </div>
                                 <br></br>
-                                <div className="border w-100 table-responsive table-responsive-sm">
+                                <div className=" w-100 table-responsive table-responsive-sm">
                                     <table className="table w-100 table-hover ">
                                         <thead >
                                             <tr className="table-info">
@@ -179,7 +185,16 @@ function AdminHomePage() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            {/* {orderlist.map((order,index)=><tr key={index}>
+                                                <td>
+                                                    {order.orderitems.map((product,index) =>
+                                                         product['thumbnail']                                                          
+                                                    )}
+                                                </td>
+                                                
+                                            </tr>)} */}
+                                                
+                                            {/* <tr>
                                                 <th scope="row">
 
                                                     <div className="col-md-5 d-flex">
@@ -193,7 +208,7 @@ function AdminHomePage() {
                                                 <td>@mdo</td>
                                                 <td>  <button type="button" class="btn success">Deliverid</button></td>
 
-                                            </tr>
+                                            </tr> */}
                                             <tr>
                                                 <th scope="row">
                                                     <div className="col-md-5 d-flex">
@@ -208,23 +223,17 @@ function AdminHomePage() {
                                                 <td>  <button type="button" class="btn warning">Pending</button></td>
                                             </tr>
                                             <tr>
-                                                {/* scope="row" */}
                                                 <th >
-                                                    {/* <img src="watch.webp" className="img-fluid imgwatch"></img> */}
                                                     <div className="col-md-5 d-flex">
                                                         <img src="watch.webp" className="img-fluid imgwatch"></img>
                                                         &nbsp;<span className="textcolor" >Apple Watch</span>
                                                     </div>
-
                                                 </th>
                                                 <td>Larry the Bird</td>
                                                 <td>@twitter</td>
                                                 <td>@twitter</td>
                                                 <td>@twitter</td>
                                                 <td>  <button type="button" class="btn danger">Rejected</button></td>
-
-                                                {/* </th> */}
-
                                             </tr>
                                         </tbody>
                                     </table>
