@@ -7,6 +7,7 @@ import { IoIosGift } from 'react-icons/io';
 function MyOrders() {
     const { state } = useLocation();
     const status = state.status;
+    console.log(state)
     return (
         <>
             <div className='container-fluid d-flex flex-column' style={{ backgroundColor: "#f1f3f6", height: '96vh' }}>
