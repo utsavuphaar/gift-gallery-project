@@ -11,7 +11,7 @@ import userImg from "./Images/user.png";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import ApiUrl from "../ApiUrl";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useRef, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -113,7 +113,7 @@ export const UserProfile = () => {
                   <section className="container-fluid" style={{ backgroundColor: "#F7FAFC" }}>
                         <div className="row justify-content-center">
 
-                              <div className="col-lg-3 col-md-6 mt-2 d-flex">
+                              <div className="col-lg-3 col-md-3 mt-2 d-flex">
                                     <div className="card p-4 w-100" style={{ backgroundColor: "white" }}>
                                           <div className="d-flex align-items-center">
                                                 <img src={userImg} className="rounded-circle" style={{ width: '140px', height: '100px' }} alt="User" />
@@ -145,51 +145,52 @@ export const UserProfile = () => {
                                           </div>
                                     </div>
                               </div>
-                        <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
-                              <div className="col-lg-7 col-md-12 mt-2 d-flex">
-                                    <div className="card p-4 w-100" style={{ backgroundColor: "white" }}>
-                                          <h5 className="fw-bold mb-4">Edit Your Profile <FiEdit onClick={enableEntity} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
-                                          <div className="row g-3">
-                                                <div className="col-md-6">
-                                                      <label htmlFor="firstName" className="form-label">First Name*</label>
-                                                      <input value={user.name.split(" ")[0]} type="text" disabled={disabledEntity} className="form-control" id="firstName" required />
-                                                </div>
-                                                <div className="col-md-6">
-                                                      <label htmlFor="lastName" className="form-label">Last Name*</label>
-                                                      <input value={user.name.split(" ")[1]} type="text" disabled={disabledEntity} className="form-control" id="lastName" required />
-                                                </div>
-                                                <div className="col-md-6">
-                                                      <label htmlFor="email" className="form-label">Email*</label>
-                                                      <input value={user.email} type="email" disabled={disabledEntity} className="form-control" id="email" required />
-                                                </div>
-                                                <div className="col-md-6">
-                                                      <label htmlFor="address" className="form-label">Contact*</label>
-                                                      <input value={user.contact} type="text" disabled={disabledEntity} className="form-control" id="address" required />
-                                                </div>
-                                                <div className="col-md-12">
-                                                      <button className="btn btn-primary" type="button">Save Changes</button>
-                                                </div>
-                                          </div>
-                                          <div className="mt-4">
-                                                <h5 className="fw-bold">Password Changes <FiEdit onClick={enablePassword} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
-                                                <div className="row g-4">
-                                                      <div className="col-md-12">
-                                                            <input disabled={disabled} ref={oldPassword} type="password" className="form-control" id="oldPassword" placeholder="Current Password" required />
+                              <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
+                                    <div className="col-lg-7 col-md-12 mt-2 d-flex">
+                                          <div className="card p-4 w-100" style={{ backgroundColor: "white" }}>
+                                                <h5 className="fw-bold mb-4">Edit Your Profile <FiEdit onClick={enableEntity} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
+                                                <div className="row g-3">
+                                                      <div className="col-md-6">
+                                                            <label htmlFor="firstName" className="form-label">First Name*</label>
+                                                            <input value={user.name.split(" ")[0]} type="text" disabled={disabledEntity} className="form-control" id="firstName" required />
+                                                      </div>
+                                                      <div className="col-md-6">
+                                                            <label htmlFor="lastName" className="form-label">Last Name*</label>
+                                                            <input value={user.name.split(" ")[1]} type="text" disabled={disabledEntity} className="form-control" id="lastName" required />
+                                                      </div>
+                                                      <div className="col-md-6">
+                                                            <label htmlFor="email" className="form-label">Email*</label>
+                                                            <input value={user.email} type="email" disabled={disabledEntity} className="form-control" id="email" required />
+                                                      </div>
+                                                      <div className="col-md-6">
+                                                            <label htmlFor="address" className="form-label">Contact*</label>
+                                                            <input value={user.contact} type="text" disabled={disabledEntity} className="form-control" id="address" required />
                                                       </div>
                                                       <div className="col-md-12">
-                                                            <input disabled={disabled} ref={newPassword} type="password" className="form-control" id="newPassword" placeholder="New Password" required />
+                                                            <button className="btn btn-primary" type="button">Save Changes</button>
                                                       </div>
-                                                      <div className="col-md-12">
-                                                            <input disabled={disabled} ref={confirmPassword} type="password" className="form-control" id="confirmPassword" placeholder="Confirm New Password" required />
-                                                      </div>
-                                                      <div className="col-md-12">
-                                                            <button onClick={changePassword} className="btn btn-primary" type="button">Save Changes</button>
+                                                </div>
+                                                <div className="mt-4">
+                                                      <h5 className="fw-bold">Password Changes <FiEdit onClick={enablePassword} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
+                                                      <div className="row g-4">
+                                                            <div className="col-md-12">
+                                                                  <input disabled={disabled} ref={oldPassword} type="password" className="form-control" id="oldPassword" placeholder="Current Password" required />
+                                                            </div>
+                                                            <div className="col-md-12">
+                                                                  <input disabled={disabled} ref={newPassword} type="password" className="form-control" id="newPassword" placeholder="New Password" required />
+                                                            </div>
+                                                            <div className="col-md-12">
+                                                                  <input disabled={disabled} ref={confirmPassword} type="password" className="form-control" id="confirmPassword" placeholder="Confirm New Password" required />
+                                                            </div>
+                                                            <div className="col-md-12">
+                                                                  <button onClick={changePassword} className="btn btn-primary" type="button">Save Changes</button>
+                                                            </div>
                                                       </div>
                                                 </div>
                                           </div>
                                     </div>
-                              </div>
 
+                              </div>
                         </div>
                   </section>
 

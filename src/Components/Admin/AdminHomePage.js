@@ -32,7 +32,7 @@ function AdminHomePage() {
 
 
     const fetchorder = () => {
-        axios.get()
+      
     }
 
     return (

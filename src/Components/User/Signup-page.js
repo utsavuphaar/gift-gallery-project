@@ -174,52 +174,55 @@ export default function Signup() {
             pauseOnHover
             theme="colored"
         />
-        <Header/>
-        <div className='container-fluid m-0 p-0'  style={{maxWidth:"100%",height:"100vh",backgroundColor:"#ececec"}}>
+        <Header />
+        <div className='container-fluid m-0 p-0' style={{ maxWidth: "100%", height: "100vh", backgroundColor: "#ececec" }}>
 
-        
-<div className="container d-flex justify-content-center align-items-start min-vh-100" style={{backgroundColor:"#ececec"}}>
-    <div className="row border rounded-5 p-3 bg-white shadow box-area mt-4">
-        <div className="col-md-6 p-0 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style={{ background: "#103cbe" }}>
-            <div className="featured-image">
-                <img src={image} className="rounded-4" style={{ width: "300px" }} />
+
+            <div className="container d-flex justify-content-center align-items-start min-vh-100" style={{ backgroundColor: "#ececec" }}>
+                <div className="row border rounded-5 p-3 bg-white shadow box-area mt-4">
+                    <div className="col-md-6 p-0 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style={{ background: "#103cbe" }}>
+                        <div className="featured-image">
+                            <img src={image} className="rounded-4" style={{ width: "300px" }} />
+                        </div>
+
+                        <p className="text-white fs-2 mt-3 text" style={{ fontWeight: "600" }}>Be Verified</p>
+                        <small className="text-white text-wrap text-center text" style={{ width: "17rem" }}>Join experienced Designers on this platform.</small>
+                    </div>
+                    <div className="col-md-6 right-box">
+                        <div className="row align-items-center">
+                            <div className="header-text">
+                                <h2>Welcome,</h2>
+                                <p className='ms-2'>We are happy to have you come here.</p>
+                            </div>
+                            <div className="input-group">
+                                <input type="text" onKeyUp={() => validationname()} onChange={event => setName(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Username" />
+                            </div>
+                            <small className='text-danger' id='firstname'></small>
+                            <div className="input-group mt-3">
+                                <input type="text" onKeyUp={() => validationemail()} onChange={event => setemail(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Email address" />
+                            </div>
+                            <small className='text-danger' id='emailerror'></small>
+                            <div className="input-group mt-3">
+                                <input type="number" onKeyUp={() => validationphone()} onChange={event => setcontact(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Phone" />
+                            </div>
+                            <small className='text-danger' id='phoneerror'></small>
+                            <div className="input-group mt-3">
+                                <input type="password" onKeyUp={() => validatepassword()} onChange={event => setpassword(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Password" />
+                            </div>
+                            <small className='text-danger' id='passworderror'></small>
+
+                            <div className="input-group mt-5 mb-3">
+                                <button className="btn btn-lg btn-primary w-100 fs-6" onClick={() => createAccount()}>Sign up</button>
+                            </div>
+                            <GoogleSign />
+                            <div className="row">
+                                <small>Already have an account? <a className='text-primary' onClick={() => navigate('/signin')} style={{ cursor: "pointer" }}>Log in</a></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <p className="text-white fs-2 mt-3 text" style={{ fontWeight: "600"}}>Be Verified</p>
-            <small className="text-white text-wrap text-center text" style={{ width: "17rem"}}>Join experienced Designers on this platform.</small>
         </div>
-        <div className="col-md-6 right-box">
-            <div className="row align-items-center">
-                <div className="header-text">
-                    <h2>Welcome,</h2>
-                    <p className='ms-2'>We are happy to have you come here.</p>
-                </div>
-                <div className="input-group">
-                    <input type="text" onKeyUp={()=>validationname()} onChange={event => setName(event.target.value)}  className="form-control form-control-lg bg-light fs-6" placeholder="Username" />
-                </div>
-                    <small className='text-danger' id='firstname'></small>
-                <div className="input-group mt-3">
-                    <input type="text" onKeyUp={()=>validationemail()} onChange={event => setemail(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Email address" />
-                </div>
-                <small className='text-danger' id='emailerror'></small>
-                <div className="input-group mt-3">
-                    <input type="number" onKeyUp={()=>validationphone()} onChange={event => setcontact(event.target.value)}  className="form-control form-control-lg bg-light fs-6" placeholder="Phone" />
-                </div>
-                    <small className='text-danger' id='phoneerror'></small>
-                <div className="input-group mt-3">
-                    <input type="password" onKeyUp={()=>validatepassword()} onChange={event => setpassword(event.target.value)} className="form-control form-control-lg bg-light fs-6" placeholder="Password" />
-                </div>
-                    <small className='text-danger'  id='passworderror'></small>
-                
-                <div className="input-group mt-5 mb-3">
-                    <button className="btn btn-lg btn-primary w-100 fs-6" onClick={()=>createAccount()}>Sign up</button>
-                </div>
-                <GoogleSign/>
-                <div className="row">
-                    <small>Already have an account? <a className='text-primary' onClick={()=>navigate('/signin')} style={{cursor:"pointer"}}>Log in</a></small>
-                </div>
-            </div>
-        </div>
-        <Footer />
+        {/* <Footer /> */}
     </>
 }
