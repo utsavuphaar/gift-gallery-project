@@ -331,10 +331,10 @@
 }
 
 .table thead {
-  position: sticky;
+  position: sticky !important;
   top: 0;
-  background-color: var(--primary-color) !important; /* Use primary color */
-  color: white; /* White font color */
+  background-color: var(--primary-color) !important;
+  color: white; 
   z-index: 1;
 }
 

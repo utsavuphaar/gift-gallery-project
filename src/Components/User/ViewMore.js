@@ -29,7 +29,11 @@ import { IoEye } from "react-icons/io5";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { GiReturnArrow } from "react-icons/gi";
 import ReactImageMagnify from 'react-image-magnify';
+
 import { ToastContainer, Zoom, toast } from "react-toastify";
+
+import { Zoom, toast } from "react-toastify";
+
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -136,13 +140,28 @@ export default function ViewMore() {
         }
     };
 
-    const buyNow = () => {
-        let price = state.price - ((parseInt(state.discountPercentage * state.price) / 100))
-        const finalPrice = (price * inputValue)
-        // alert(finalPrice)
-        
 
+
+
+    const buyNow = (product) => {
+        if (localStorage.getItem("userId")) {
+            navigate("/buynow", { state: product });
+        } else {
+            toast.info("Sign-in first", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
+        }
     }
+
+
     // alert(inputValue)
     return <>
     <ToastContainer/>
@@ -219,7 +238,9 @@ export default function ViewMore() {
                             </div>
                         </div>
                         <div className="mt-3">
-                            <button onClick={() => buyNow()} style={{ color: "white", backgroundColor: "#0D6EFD", border: 'none', borderRadius: "50px", height: '40px' }} className="w-100">Buy Now</button>
+
+                            <button onClick={() => buyNow(state)} style={{ color: "white", backgroundColor: "#0D6EFD", border: 'none', borderRadius: "50px", height: '40px' }} className="w-100">Buy Now</button>
+
                         </div>
                     </div>
                 </div>
