@@ -32,9 +32,7 @@ function GetOrders() {
 
     let orderList = state.orderList.filter(order => order.status === 'Order Confirmed');
     const getProduct = async (orderItemId, userId,orderId) => {
-        // Assuming deliveryBoy is defined somewhere accessible in your code
-        // alert(orderItemId + " " + userId + " " + deliveryBoy.id+" "+orderId);
-     const result =   await axios.post(ApiUrl.getOrder,{deliveryBoyId:deliveryBoy.id,orderItemId:orderItemId,userId:userId})
+     const result =   await axios.post(ApiUrl.getOrder,{deliveryBoyId:deliveryBoy,orderItemId:orderItemId,userId:userId})
         if(result){
             await axios.put(ApiUrl.updateOrderStatus,{id:orderId,status:"Out for delivery"});
             axios.get(ApiUrl.viewAllOrders)
