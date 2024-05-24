@@ -109,7 +109,7 @@ const OrderCancellationForm = () => {
                             />
                             <TextField
                                 label="Date of Original Purchase"
-                                type="date"
+                                // type="date"
                                 variant="outlined"
                                 value={dateOfPurchase}
                                 onChange={(e) => setDateOfPurchase(e.target.value)}
