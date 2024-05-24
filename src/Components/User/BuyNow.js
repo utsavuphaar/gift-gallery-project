@@ -5,6 +5,7 @@ import { BsCurrencyRupee } from "react-icons/bs";
 import {toast,ToastContainer} from 'react-toastify'
 import Header from "./Header";
 import Footer from "./footer";
+import Swal from "sweetalert2";
 function BuyNow() {
 
     let firstName = useRef(null);
@@ -88,7 +89,13 @@ function BuyNow() {
                                     userId,
                                     productId: state.id,
                                 });
-                                alert("Payment Done")
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Payment Done",
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                });
                                 navigate("/")
                                 console.log("PlaceOrder API response:", myOrder.data);
                             } else {
