@@ -1,15 +1,77 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BiRupee } from 'react-icons/bi';
 import { useLocation, useNavigate } from 'react-router-dom'
 import gift from './gift.png'
 import { IoIosGift } from 'react-icons/io';
+import axios from 'axios';
+import { ToastContainer, Zoom, toast } from 'react-toastify';
 function OrderData() {
     const { state } = useLocation();
     const navigate = useNavigate();
-    // console.log(state);
+    const [message, setMessage] = useState('');
+    const deliveryBoyId = localStorage.getItem("deliveryBoy");
     const contactNum = state.orderItem.Order.contact;
+    console.log(state)
+    const email = state.orderItem.Order.user.email;
+    const orderId = state.orderItem.Order.id;
+    // const handleSubmit = async (event) => {
+    //   event.preventDefault();
+  
+    //   try {
+    //     const response = await axios.post('http://localhost:3000/request/send-otp', { phoneNumber:contactNum });
+    //     if (response.data.success) {
+    //       setMessage(`OTP sent successfully. Your OTP is ${response.data.otp}`);
+    //     //   console.l
+    //       navigate("/otpVerification",{state:contactNum})
+    //     } else {
+    //       setMessage('Failed to send OTP. Please try again.');
+    //     }
+    //   } catch (error) {
+    //     console.log(error)
+    //     setMessage('An error occurred while sending OTP. Please try again.');
+    //   }
+    // };
+
+    const handleSubmit=()=>{
+        axios.post("http://localhost:8080/otp/request", { email })
+                .then((res) => {
+                    toast.success("OTP send successfully", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Zoom,
+                    });
+                    navigate("/otpVerification",{state:{email,orderId}})
+                })
+                .catch(err => {
+                    toast.error("Something went wrong", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Zoom,
+                    });
+                    console.log(err);
+                })
+    }
+
+
+
+
+
+    // console.log(state);
     return (
         <>
+        <ToastContainer/>
             <div className='container-fluid d-flex flex-column' style={{ backgroundColor: "#f1f3f6", height: '90vh' }}>
                 <div className='container border bg-white w-100'>
                     <div className='row'>
@@ -38,7 +100,7 @@ function OrderData() {
                 <div className='container border row mt-2 bg-white' style={{ height: 'auto' }}>
                     <div className='col-md-2'>
                             <img  className='mt-3' src={state.orderItem.product.thumbnail} width="150px" height="150px" />
-                            <button className='btn btn-primary m-2' onClick={()=>navigate("/otpVerification",{state:contactNum})}>Delivered</button>
+                            <button className='btn btn-primary m-2' onClick={handleSubmit} >Delivered</button>
                     </div>
                         <div className='col-md-4'>
                             <p className='mt-3 p-0' ><span className='fw-bold'>Product: </span> {state.orderItem.product.title} </p>

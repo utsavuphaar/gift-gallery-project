@@ -23,13 +23,20 @@ function YourOrders() {
     useEffect(() => {
         const deliveryBoy = localStorage.getItem("deliveryBoy");
         const parsedDeliveryBoy = JSON.parse(deliveryBoy);
-
         if (parsedDeliveryBoy && parsedDeliveryBoy) {
             axios.post(ApiUrl.getParticularDeliveryBoyOrder, { deliveryBoyId: parsedDeliveryBoy })
                 .then(response => {
                     const data = response.data.result;
+                    console.log(data)
+                    const filteredData = [];
+
+                    data.forEach(item => {
+                        if (item.orderItem.Order.status !== 'Delivered') {
+                            filteredData.push(item);
+                        }
+                    });
                     console.log("Data fetched from API:", data); // Debugging log
-                    dispatch({ type: 'SET_ORDERS', payload: data });
+                    dispatch({ type: 'SET_ORDERS', payload: filteredData });
                 })
                 .catch(err => {
                     console.log("Error fetching data:", err);
@@ -40,6 +47,7 @@ function YourOrders() {
     const handleProductClick = (order) => {
         navigate("/orderData", { state: order });
     };
+
 
     return (
         <div className='container-fluid w-75 p-2' style={{ backgroundColor: "#f7fafc" }}>
@@ -62,7 +70,7 @@ function YourOrders() {
                                 <td>
                                     <img src={order.orderItem.product.thumbnail} onClick={() => handleProductClick(order)} style={{ cursor: 'pointer' }} width="100px" height="100px" alt="Product" />
                                 </td>
-                                <td>{order.orderItem.product.title.slice(0,20)}</td>
+                                <td>{order.orderItem.product.title.slice(0, 20)}</td>
                                 <td>{order.orderItem.product.price}</td>
                                 <td>{new Date(order.orderItem.Order.orderDate).toLocaleDateString()}</td>
                                 <td>{order.orderItem.Order.user.name}</td>
