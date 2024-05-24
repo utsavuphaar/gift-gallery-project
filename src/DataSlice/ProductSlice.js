@@ -98,7 +98,7 @@ export const addProductIntoWishlist = createAsyncThunk("wishlist/addProductIntoW
     try {
         let res = await axios.post(URL.addToWishlist, { userId, productId })
          Swal.fire({
-            position: "top-end",
+            position: "center",
             icon: "success",
             title: res.data.message,
             showConfirmButton: false,
@@ -161,6 +161,13 @@ export const deleteProductFromWishList = createAsyncThunk(
     async ({ userId, productId }, thunkAPI) => {
         try {
             const response = await axios.delete(`http://localhost:3000/wishlist/removeItemFromWishList/${userId}/${productId}`);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Items removed successfully",
+                showConfirmButton: false,
+                timer: 2000
+            });
             return response.data;
         } catch (error) {
             

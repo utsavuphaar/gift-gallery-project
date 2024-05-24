@@ -2,7 +2,7 @@ import { Link, Outlet, useLocation } from "react-router-dom"
 import { FiHeart } from "react-icons/fi";
 import store from "../../Store/store"
 import { CiHeart } from "react-icons/ci";
-import { addProductIntoCart, addProductIntoWishlist, fetchProduct } from "../../DataSlice/ProductSlice";
+import { addProductIntoCart, addProductIntoWishlist, deleteProductFromWishList, fetchProduct } from "../../DataSlice/ProductSlice";
 import { PiShoppingCartSimpleThin } from "react-icons/pi";
 import { AiOutlineEye } from "react-icons/ai";
 import { BiRupee } from "react-icons/bi";
@@ -29,7 +29,11 @@ import { IoEye } from "react-icons/io5";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { GiReturnArrow } from "react-icons/gi";
 import ReactImageMagnify from 'react-image-magnify';
+
+import { ToastContainer, Zoom, toast } from "react-toastify";
+
 import { Zoom, toast } from "react-toastify";
+
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -39,6 +43,7 @@ export default function ViewMore() {
     const userId = localStorage.getItem("userId");
     const [inputValue, setInputValue] = useState(1)
     const navigate = useNavigate("")
+    const [wishlist, setWishlist] = useState(false);
     const { categoryProduct } = useSelector(store => store.Product);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -65,10 +70,74 @@ export default function ViewMore() {
         dispatch(addProductIntoCart({ userId: userId, productId: productId, quantity: inputValue }))
     }
 
+    // const addToWishlist = (productId) => {
+    //     dispatch(addProductIntoWishlist({ userId, productId }));
+    //     let save = document.getElementById(`save${productId}`);
+    //     save.style.color = 'red'
+    // };
+
+    // const addToWishlist = (productId) => {
+    //     alert("Rahul")
+    //     if (!userId) {
+    //         toast.info("Sign-in first", {
+    //             position: "top-center",
+    //             autoClose: 5000,
+    //             hideProgressBar: false,
+    //             closeOnClick: true,
+    //             pauseOnHover: true,
+    //             draggable: true,
+    //             progress: undefined,
+    //             theme: "light",
+    //             transition: Zoom,
+    //         });
+    //     } else {
+
+    //         // dispatch(addProductIntoWishlist({ userId, productId }));
+    //         // let save = document.getElementById(`save${productId}`);
+    //         // save.style.color = 'red'
+    //         // Assuming you have already assigned an id to your input field, let's say "flexCheckDefault"
+    //     var checkbox = document.getElementById(`save${productId}`);
+
+    //     // Then, you can check its checked property to see if it's checked or not
+    //     if (checkbox.checked) {
+    //         // The checkbox is checked
+    //         dispatch(addProductIntoWishlist({ userId, productId }));
+    //         let save = document.getElementById(`save${productId}`);
+    //         save.style.color = 'red'
+    //     } else {
+    //         // The checkbox is not checked
+    //         dispatch(deleteProductFromWishList({ userId, productId }));
+    //         let save = document.getElementById(`save${productId}`);
+    //         save.style.color = 'none'
+    //     }
+
+
+
+    //     }
+    // };
+
     const addToWishlist = (productId) => {
-        dispatch(addProductIntoWishlist({ userId, productId }));
-        let save = document.getElementById(`save${productId}`);
-        save.style.color = 'red'
+        if (!userId) {
+            toast.info("Sign-in first", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
+        } else {
+            if (wishlist) {
+                dispatch(deleteProductFromWishList({ userId, productId }));
+                setWishlist(false);
+            } else {
+                dispatch(addProductIntoWishlist({ userId, productId }));
+                setWishlist(true);
+            }
+        }
     };
 
 
@@ -95,6 +164,7 @@ export default function ViewMore() {
 
     // alert(inputValue)
     return <>
+    <ToastContainer/>
         <Header />
 
         <div className="container p-0 mt-5" style={{ maxWidth: "90%", boxShadow: '0px 0px 1px 1px gainsboro' }}>
@@ -141,7 +211,7 @@ export default function ViewMore() {
                     <div className="container mt-2">
                         <div className="p-2 d-flex justify-content-between">
                             <h4 className="w-75">{state.title}</h4>
-                            <FiHeart className="fs-5 text-primary" />
+                            <FaHeart id={`save${state.id}`} type="checkbox" className="fs-5" style={{cursor:"pointer"}} onClick={() => addToWishlist(state.id)} />
                         </div>
                         <div className="d-flex ms-2 align-items-center">
                             <div className="fs-4">Rs {(state.price - (((parseInt(state.discountPercentage * state.price) / 100).toFixed(2)) * 1)).toFixed(2)} | </div>
@@ -196,7 +266,12 @@ export default function ViewMore() {
 
                         <img src={product.thumbnail} className='gift-image' style={{ width: "220px", height: "200px", borderRadius: "10px" }} />
                         <div className='icon-div' style={{ marginTop: "130px" }}>
-                            <div className='heart-icon'><FaHeart id={`save${product.id}`} onClick={() => addToWishlist(product.id)} /></div>
+                            <div className='heart-icon'> <FaHeart 
+                    id={`save${state.id}`} 
+                    className="fs-5" 
+                    style={{ cursor: "pointer", color: wishlist ? 'red' : 'black' }} 
+                    onClick={() => addToWishlist(state.id)} 
+                /></div>
                             <div onClick={() => viewmore(product)} className='heart-icon'><IoEye className=' ' /></div>
                         </div>
                         <div className="w-100 mt-2 d-flex justify-content-between">

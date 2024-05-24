@@ -110,41 +110,37 @@ export const UserProfile = () => {
       return (
             <>
                   <Header />
-                  <section className="container-fluid" style={{ backgroundColor: "#F7FAFC" }}>
-                        <div className="row justify-content-center">
 
-                              <div className="col-lg-3 col-md-3 mt-2 d-flex">
+                              <div className="col-lg-7 col-md-12 mt-2 d-flex">
                                     <div className="card p-4 w-100" style={{ backgroundColor: "white" }}>
-                                          <div className="d-flex align-items-center">
-                                                <img src={userImg} className="rounded-circle" style={{ width: '140px', height: '100px' }} alt="User" />
-                                                <div className="mt-3">
-                                                      <h6>Hello,</h6>
-                                                      <h5 className="text-primary">{user.name}</h5>
+                                          <h5 className="fw-bold mb-4">Edit Your Profile <FiEdit onClick={enableEntity} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
+                                          <div className="row g-3">
+                                                <div className="col-md-6">
+                                                      <label htmlFor="firstName" className="form-label">First Name*</label>
+                                                      <input defaultValue={user.name.split(" ")[0]} type="text" disabled={disabledEntity} className="form-control" id="firstName" required />
+                                                </div>
+                                                <div className="col-md-6">
+                                                      <label htmlFor="lastName" className="form-label">Last Name*</label>
+                                                      <input defaultValue={user.name.split(" ")[1]} type="text" disabled={disabledEntity} className="form-control" id="lastName" required />
+                                                </div>
+                                                <div className="col-md-6">
+                                                      <label htmlFor="email" className="form-label">Email*</label>
+                                                      <input defaultValue={user.email} type="email" disabled={disabledEntity} className="form-control" id="email" required />
+                                                </div>
+                                                <div className="col-md-6">
+                                                      <label htmlFor="address" className="form-label">Contact*</label>
+                                                      <input defaultValue={user.contact} type="text" disabled={disabledEntity} className="form-control" id="address" required />
+                                                </div>
+                                                <div className="col-md-12">
+                                                      <button className="btn btn-primary" type="button">Save Changes</button>
                                                 </div>
                                           </div>
-                                          <div className="mt-4 container p-3">
-                                                <h6 className="fw-bold">Manage My Account</h6>
-                                                <ul className="list-unstyled">
-                                                      <li style={{ cursor: "pointer" }} className="mt-2"><FaRegGrinBeam className="me-1" />My Profile</li>
-                                                      <li style={{ cursor: "pointer" }} className="mt-2"><PiAddressBook className="me-1" />Address Book</li>
-                                                      <li style={{ cursor: "pointer" }} className="mt-2"><FaAmazonPay className="me-1" />My Payment Option</li>
-                                                </ul>
-                                                <h6 className="mt-4 fw-bold">My Orders</h6>
-                                                <ul className="list-unstyled">
-                                                      <li style={{ cursor: "pointer" }} className="mt-2"><GiReturnArrow className="me-1" />Delivered</li>
-                                                      <li style={{ cursor: "pointer" }} className="mt-2"><GiReturnArrow className="me-1" />My Returns</li>
-                                                      <li style={{ cursor: "pointer" }} className="mt-2"><MdOutlineCancel className="me-1" />My Cancellations</li>
-                                                      <li style={{ cursor: "pointer" }} className="mt-2"><MdOutlineCancel className="me-1" />On the way</li>
-                                                </ul>
-                                                <h6 className="mt-4 fw-bold">Other</h6>
-                                                <ul className="list-unstyled">
-                                                      <li style={{ cursor: "pointer" }} className="mt-2" onClick={() => navigate('/wishlist')}><MdFavoriteBorder className="me-1" />My Wishlist</li>
-                                                      <li style={{ cursor: "pointer" }} className="mt-2" onClick={() => navigate('/cart')}><BsCart2 className="me-1" />My Cart</li>
-                                                </ul>
-                                                <p onClick={logout} className="mt-4 text-primary" style={{ cursor: 'pointer' }}><IoIosPower className="me-1" />Logout</p>
-                                          </div>
-                                    </div>
-                              </div>
+                                          <div className="mt-4">
+                                                <h5 className="fw-bold">Password Changes <FiEdit onClick={enablePassword} className="float-end text-primary" style={{ cursor: 'pointer' }} /></h5>
+                                                <div className="row g-4">
+                                                      <div className="col-md-12">
+                                                            <input disabled={disabled} type="password" className="form-control" id="oldPassword" placeholder="Current Password" required />
+=======
                               <div className="card p-4 h-100" style={{ backgroundColor: "white" }}>
                                     <div className="col-lg-7 col-md-12 mt-2 d-flex">
                                           <div className="card p-4 w-100" style={{ backgroundColor: "white" }}>
@@ -153,6 +149,7 @@ export const UserProfile = () => {
                                                       <div className="col-md-6">
                                                             <label htmlFor="firstName" className="form-label">First Name*</label>
                                                             <input value={user.name.split(" ")[0]} type="text" disabled={disabledEntity} className="form-control" id="firstName" required />
+
                                                       </div>
                                                       <div className="col-md-6">
                                                             <label htmlFor="lastName" className="form-label">Last Name*</label>
