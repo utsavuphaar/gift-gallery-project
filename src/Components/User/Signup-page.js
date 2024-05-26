@@ -175,7 +175,7 @@ export default function Signup() {
             theme="colored"
         />
         <Header />
-        <div className='container-fluid ' style={{ width: "100vw", height: "100vh", backgroundColor: "#ececec" }}>
+        <div className='container-fluid m-0 p-0' style={{ maxWidth: "100%", height: "100vh", backgroundColor: "#ececec" }}>
 
 
             <div className="container d-flex justify-content-center align-items-start min-vh-100" style={{ backgroundColor: "#ececec" }}>
@@ -184,6 +184,7 @@ export default function Signup() {
                         <div className="featured-image">
                             <img src={image} className="rounded-4" style={{ width: "300px" }} />
                         </div>
+
                         <p className="text-white fs-2 mt-3 text" style={{ fontWeight: "600" }}>Be Verified</p>
                         <small className="text-white text-wrap text-center text" style={{ width: "17rem" }}>Join experienced Designers on this platform.</small>
                     </div>
@@ -222,6 +223,6 @@ export default function Signup() {
                 </div>
             </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
     </>
 }
