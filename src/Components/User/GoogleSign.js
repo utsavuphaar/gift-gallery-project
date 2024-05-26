@@ -53,7 +53,6 @@ function GoogleSign() {
                     });
                 }
 
-                // navigate("/");
             } else {
                 Swal.fire({
                     position: "center",
