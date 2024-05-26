@@ -13,6 +13,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export const UserProfile = () => {
+    
     const [disabled, setDisabled] = useState(true);
     const [disabledEntity, setDisabledEntity] = useState(true);
     const [oldPassword, setOldPassword] = useState("");
