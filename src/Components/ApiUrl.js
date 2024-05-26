@@ -23,7 +23,7 @@ export default {
     addExcelSheet:"http://localhost:3000/product/uploadExcelSheet",
     getContactUs:"http://localhost:3000/contact/getContactUsData",
 
-    getOrderdetail : "http://localhost:3000/order/viewAllOrders",
+    getOrderdetail : "http://localhost:3000/order/viewAllOrders"
 
     updatePassword:"http://localhost:3000/user/updatePassword",
     getParticularDeliveryBoyOrder:"http://localhost:3000/deliverydata/deliveryBoyOrder"

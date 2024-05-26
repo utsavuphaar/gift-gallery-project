@@ -32,24 +32,24 @@ const DeliveryBoyDeshbord = () => {
 
 
             <span className="d-flex mt-3">    &nbsp; &nbsp;{deliveryBoy.name} </span>
-            <span className="d-flex mt-1"> &nbsp;&nbsp;&nbsp;    <IoStarSharp className="mt-1"  />&nbsp;&nbsp;<IoStarSharp className="mt-1"  />&nbsp;&nbsp;<IoStarSharp className="mt-1"  />&nbsp;&nbsp;</span>
+            <span className="d-flex mt-1"> &nbsp;&nbsp;&nbsp;    <IoStarSharp className="mt-1" style={{ color: "#FCBE2D" }} />&nbsp;&nbsp;<IoStarSharp className="mt-1" style={{ color: "#FCBE2D" }} />&nbsp;&nbsp;<IoStarSharp className="mt-1" style={{ color: "#FCBE2D" }} />&nbsp;&nbsp;</span>
 
             <hr></hr>
             <Link to="" style={{ textDecoration: "none", }}>
-              <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<IoQrCodeSharp className="mb-1 ml-4 fs-3 text-primary" />&nbsp;&nbsp;Dashbord</span>
+              <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<IoQrCodeSharp className="mb-1 ml-4 fs-3" style={{ color: "#FCBE2D" }} />&nbsp;&nbsp;Dashbord</span>
             </Link>
-            <Link to="myOrders" style={{textDecoration:"none"}}>
-            <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<CiDeliveryTruck className="mb-1 ml-4 fs-3 text-primary" />&nbsp;&nbsp;My Delivery</span>
+            <Link to="myOrders">
+            <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<CiDeliveryTruck className="mb-1 ml-4 fs-3" style={{ color: "#FCBE2D" }} />&nbsp;&nbsp;My Delivery</span>
             </Link>
 
 
             <Link to="getOrder"  style={{ textDecoration: "none", }}>
-              <span className="d-flex mt-3  p-0" style={{ color: "black" }}> &nbsp;&nbsp;<HiOutlineCurrencyRupee className="text-primary mb-1 fs-3"  />&nbsp;&nbsp;Orders</span>
+              <span className="d-flex mt-3  p-0" style={{ color: "black" }}> &nbsp;&nbsp;<HiOutlineCurrencyRupee className="mb-1 fs-3" style={{ color: "#FCBE2D" }} />&nbsp;&nbsp;Orders</span>
             </Link>
 
-            <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<HiOutlineCurrencyRupee className="text-primary mb-1 ml-4 fs-3"  />&nbsp;&nbsp;Earnings</span>
-            <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<FaRegUser className="mb-2 ml-4 fs-3 text-primary"  />&nbsp;&nbsp;Profile</span>
-            <span className="d-flex mt-3" style={{cursor:'pointer', color: "black" }} onClick={logout}> &nbsp;&nbsp;<IoIosPower className="mb-1 ml-4 fs-3 text-primary"  />&nbsp;&nbsp;Logout</span>
+            <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<HiOutlineCurrencyRupee className="mb-1 ml-4 fs-3" style={{ color: "#FCBE2D" }} />&nbsp;&nbsp;Earnings</span>
+            <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<FaRegUser className="mb-2 ml-4 fs-3" style={{ color: "#FCBE2D" }} />&nbsp;&nbsp;Profile</span>
+            <span className="d-flex mt-3" style={{cursor:'pointer', color: "black" }} onClick={logout}> &nbsp;&nbsp;<IoIosPower className="mb-1 ml-4 fs-3" style={{ color: "#FCBE2D" }} />&nbsp;&nbsp;Logout</span>
 
           </div>
         </div>
