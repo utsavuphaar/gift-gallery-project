@@ -43,7 +43,7 @@ function Order() {
     }
 
     useEffect(() => {
-        axios.post(ApiUrl.orderForParticularUser, { userId: userId })
+        axios.post(process.env.REACT_APP_ORDER_FOR_PARTICULAR_USER, { userId: userId })
             .then(response => {
                 console.log(response.data.result)
                 dispatch({ type: "set-order", payload: response.data.result });

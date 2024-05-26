@@ -49,7 +49,7 @@ const AddProduct = () => {
             const formData = new FormData();
             formData.append('excelFile', file);
 
-            await axios.post(ApiUrl.addExcelSheet, formData, {
+            await axios.post(process.env.REACT_APP_ADD_EXCEL_SHEET, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -114,7 +114,7 @@ const AddProduct = () => {
     console.log(productdata);
 
     // If all fields are filled, proceed to send data to the server
-    axios.post(ApiUrl.addProduct, { productdata })
+    axios.post(process.env.REACT_APP_ADD_PRODUCT, { productdata })
         .then(() => {
             // alert("Item added successfully");
             Swal.fire({

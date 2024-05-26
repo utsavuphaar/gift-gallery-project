@@ -17,7 +17,7 @@ function DeliveryBoyList() {
     }, { userList: [] });
 
     useEffect(() => {
-        axios.get(ApiUrl.deliveryBoyList)
+        axios.get(process.env.REACT_APP_DELIVERY_BOY_LIST)
             .then(response => {
                 dispatch({ type: "set-product", payload: response.data.users });
             }).catch(err => {

@@ -16,7 +16,7 @@ function InboxList() {
     }, { userList: [] });
 
     useEffect(() => {
-        axios.get(ApiUrl.getContactUs)
+        axios.get(process.env.REACT_APP_GET_CONTACT_US)
             .then(response => {
                 console.log(response.data.admin);
                 dispatch({ type: "set-user", payload: response.data.admin });

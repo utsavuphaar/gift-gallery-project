@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios'; // Import Axios
 import { toast } from 'react-toastify'; // Import toast from react-toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for toastify
+import Swal from 'sweetalert2';
 
 function DeliveryBoySignUpForm() {
   const [contact, setContact] = useState('');
@@ -61,7 +62,7 @@ function DeliveryBoySignUpForm() {
     if (isValid) {
       try {
         // Make API call using Axios
-        const response = await axios.post('http://localhost:3000/deliveryBoy/signup', {
+        const response = await axios.post(process.env.REACT_APP_DELIVERY_BOY_SIGNUP, {
           contact,
           name: username,
           email,
@@ -69,8 +70,15 @@ function DeliveryBoySignUpForm() {
         });
         console.log(response.data); // Handle successful response
         // Show success message using toastify
-        toast.success('Account created successfully!');
-        alert("Account Create Successfully..")
+        // toast.success('Account created successfully!');
+        // alert("Account Create Successfully..")
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Account Created Successfully",
+          showConfirmButton: false,
+          timer: 2000
+      });
         // Clear form fields
         setContact('');
         setUsername('');

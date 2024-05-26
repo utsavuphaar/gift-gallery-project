@@ -134,7 +134,7 @@ export default function Signup() {
     const createAccount = () => {
 
         if (validation()) {
-            axios.post(URL.signup, { name, email, password, contact })
+            axios.post(process.env.REACT_APP_SIGNUP, { name, email, password, contact })
                 .then(res => {
                     Swal.fire({
                         position: "center",
@@ -223,6 +223,8 @@ export default function Signup() {
                 </div>
             </div>
         </div>
+
         {/* <Footer /> */}
+
     </>
 }
