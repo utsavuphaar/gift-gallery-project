@@ -51,16 +51,6 @@ function YourOrders() {
 
     return (
         <div className='container-fluid w-75 p-2' style={{ backgroundColor: "#f7fafc" }}>
-            <div class="dropdown mt-1">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>
             <div className='container p-2 mt-4 row' style={{ overflow: "auto", height: '550px' }}>
                 <table className='table border col-md-10 position-relative' style={{ maxHeight: '80vh', overflow: "scroll" }}>
                     <thead className='position-sticky' style={{ top: '-10px' }}>

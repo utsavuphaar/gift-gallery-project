@@ -32,6 +32,8 @@ import ReactImageMagnify from 'react-image-magnify';
 
 import { ToastContainer, Zoom, toast } from "react-toastify";
 
+import { Zoom, toast } from "react-toastify";
+
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
