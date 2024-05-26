@@ -10,6 +10,10 @@ function MyOrders() {
     const { state } = useLocation();
     const status = state.status;
 
+
+
+    console.log(state)
+
     return (
         <>
             <div className='container-fluid d-flex flex-column' style={{ backgroundColor: "#f1f3f6", height: '96vh' }}>
@@ -42,9 +46,13 @@ function MyOrders() {
                         {state.orderItems.map((data, ind) =>
                             <img key={ind} className='mt-3' src={data.product.thumbnail} width="150px" height="150px" />
                         )}
+                        {status!=="Delivered"?(
                         <Link to="/cancel">
                         <button className='btn btn-outline-danger center m-4'>Cancel</button>
                         </Link>
+                        ):(
+                            <p></p>
+                        )}
                     </div>
                     {state.orderItems.map((data, ind) =>
                         <div className='col-md-4'>

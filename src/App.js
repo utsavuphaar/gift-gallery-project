@@ -50,6 +50,9 @@ import AuthDeliveryBoy from './Components/DeliveryBoy/AuthDeliveryBoy.js';
 import MyOrders from './Components/User/MyOrders.js';
 import CategoryList from './Components/Admin/CategoryList.js';
 import InboxList from './Components/Admin/InboxList.js';
+import YourOrders from './Components/DeliveryBoy/YourOrders.js';
+import OrderData from './Components/DeliveryBoy/OrderData.js';
+import VerifyOtp from './Components/DeliveryBoy/VerifyOTP.js';
 
 
 
@@ -76,25 +79,26 @@ function App() {
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/paymentsuccess" element={<PaymentSuccess />} />
 
-      <Route path = "/orderDetail" element={<OrderDetails/>}/>
-      <Route path='/help' element={<Help/>}/>
+      <Route path="/orderDetail" element={<OrderDetails />} />
+      <Route path='/help' element={<Help />} />
 
       <Route path='viewmore/:productId' element={<ViewMore />} >
         <Route index element={<ViewReviewRating />} />
       </Route>
       <Route path='/viewmore/rate-product' element={<RateProduct />} />
 
+      <Route path="/orderData" element={<OrderData />} />
       <Route path="/myorders" element={<MyOrders />} />
-      <Route path="/cancel" element={<OrderCancellationForm/>}/>
+      <Route path="/cancel" element={<OrderCancellationForm />} />
 
       <Route path='/buynow' element={<BuyNow />} />
       <Route path="/user" element={<Auth><UserProfile /></Auth>} />
       <Route path='admin' element={<AdminProfile />} >
         <Route index element={<AdminHomePage />} />
-        <Route path="inbox" element={<InboxList/>}/>
+        <Route path="inbox" element={<InboxList />} />
         <Route path="addProduct" element={<AddProduct />} />
         <Route path="productList" element={<ProductList />} />
-        <Route path="categorylist" element={<CategoryList/>}/>
+        <Route path="categorylist" element={<CategoryList />} />
         <Route path='userList' element={<Userlist />} />
         <Route path='deliveryBoyList' element={<DeliveryBoyList />} />
         <Route path="orderList" element={<OrderList />} />
@@ -106,8 +110,10 @@ function App() {
       <Route path='deliveryBoy' element={<AuthDeliveryBoy><DeliveryBoyDeshbord /></AuthDeliveryBoy>}>
         <Route index element={<DashBoard />} />
         <Route path='getOrder' element={<GetOrders />} />
+        <Route path="myOrders" element={<YourOrders />} />
       </Route>
 
+      <Route path='/otpVerification' element={<VerifyOtp />} />
     </Routes>
   </>
 }

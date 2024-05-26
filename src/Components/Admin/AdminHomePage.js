@@ -34,6 +34,7 @@ function AdminHomePage() {
 
 
     const fetchorder = () => {
+
       axios.get(ApiUrl.getOrderdetail)
       .then((response)=>{
         console.log(response.data.result);
@@ -42,6 +43,7 @@ function AdminHomePage() {
       .catch(err=>{
         console.log(err);
       })
+
     }
 
     return (
@@ -255,7 +257,6 @@ function AdminHomePage() {
                         </div>
                     </div>
                 </div>
-
 
             </div>
         </div>
