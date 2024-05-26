@@ -421,3 +421,20 @@
 .dashbord-list:hover{
   color: #0D6EFD !important;
 }
+
+
+
+/* ________________________________________________________________________________________-*/
+
+.custom-scroll1 {
+  max-height: 160px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.custom-scroll1 table thead {
+  top: 0;
+  position: sticky !important;
+  background-color: white; /* Ensure the header has a background color */
+  z-index: 1; /* Ensure the header stays above the table body */
+}

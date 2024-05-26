@@ -4,6 +4,7 @@ import URL from '../ApiUrl'
 import { FaRegEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 import './adminstyle.css'
+import ApiUrl from "../ApiUrl";
 import Swal from "sweetalert2";
 
 export default function CategoryList() {
@@ -20,6 +21,7 @@ export default function CategoryList() {
                 console.log(err);
             })
     }, [])
+
 
     const deleteCategory = (categoryName) =>{
         axios.post(process.env.REACT_APP_DELETE_CATEGORY,{categoryName})
@@ -62,7 +64,9 @@ export default function CategoryList() {
                                     <FaRegEdit className="fs-4 text-primary" />
                                 </td>
                                 <td>
+
                                     <AiFillDelete onClick={()=>deleteCategory(user.categoryName)} className="fs-4 text-secondary" />
+
                                 </td>
                             </tr>
                         ))}

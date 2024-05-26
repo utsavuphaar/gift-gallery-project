@@ -14,7 +14,7 @@ function AdminHomePage() {
     const [categoryList, setCategoryList] = useState(0);
     const [userList, setUserList] = useState(0);
     const { productList, category } = useSelector(store => store.Product);
-    const [orderlist,setorderlist] = useState("");
+    const [orderlist, setorderlist] = useState([]);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchProduct());
@@ -35,14 +35,14 @@ function AdminHomePage() {
 
     const fetchorder = () => {
 
-      axios.get(ApiUrl.getOrderdetail)
-      .then((response)=>{
-        console.log(response.data.result);
-        setorderlist(response.data.result);
-      })
-      .catch(err=>{
-        console.log(err);
-      })
+        axios.get(ApiUrl.getOrderdetail)
+            .then((response) => {
+                console.log(response.data.result);
+                setorderlist(response.data.result);
+            })
+            .catch(err => {
+                console.log(err);
+            })
 
     }
 
@@ -174,72 +174,45 @@ function AdminHomePage() {
 
                                 </div>
                                 <br></br>
-                                <div className=" w-100 table-responsive table-responsive-sm">
-                                    <table className="table w-100 table-hover ">
-                                        <thead >
+                                <div className="w-100 table-responsive custom-scroll1 table-responsive-sm position-relative">
+                                    <table className="table w-100 table-hover position-relative">
+                                        <thead className="position-sticky">
                                             <tr className="table-info">
-                                                <th scope="col">Product Name</th>
-                                                <th scope="col" >Location</th>
+                                                <th scope="col">Product</th>
+                                                <th scope="col">Name</th>
                                                 <th scope="col">Date-time</th>
-                                                <th scope="col">piece</th>
                                                 <th scope="col">Amount</th>
+                                                <th scope="col">Location</th>
                                                 <th scope="col">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {/* {orderlist.map((order,index)=><tr key={index}>
-                                                <td>
-                                                    {order.orderitems.map((product,index) =>
-                                                         product['thumbnail']                                                          
-                                                    )}
-                                                </td>
-                                                
-                                            </tr>)} */}
-                                                
-                                            {/* <tr>
-                                                <th scope="row">
-
-                                                    <div className="col-md-5 d-flex">
-                                                        <img src="watch.webp" className="img-fluid imgwatch"></img>
-                                                        &nbsp;<span className="textcolor " >Apple Watch</span>
-                                                    </div>
-                                                </th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>  <button type="button" class="btn success">Deliverid</button></td>
-
-                                            </tr> */}
-                                            <tr>
-                                                <th scope="row">
-                                                    <div className="col-md-5 d-flex">
-                                                        <img src="watch.webp" className="img-fluid imgwatch"></img>
-                                                        &nbsp;<span className="textcolor" >Apple Watch</span>
-                                                    </div>
-                                                </th>
-                                                <td>Jacob</td>
-                                                <td>Jacob</td>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>  <button type="button" class="btn warning">Pending</button></td>
-                                            </tr>
-                                            <tr>
-                                                <th >
-                                                    <div className="col-md-5 d-flex">
-                                                        <img src="watch.webp" className="img-fluid imgwatch"></img>
-                                                        &nbsp;<span className="textcolor" >Apple Watch</span>
-                                                    </div>
-                                                </th>
-                                                <td>Larry the Bird</td>
-                                                <td>@twitter</td>
-                                                <td>@twitter</td>
-                                                <td>@twitter</td>
-                                                <td>  <button type="button" class="btn danger">Rejected</button></td>
-                                            </tr>
+                                            {orderlist.map((order, index) => (
+                                                <tr key={index}>
+                                                    {order.orderItems.map((data, ind) => (
+                                                        <td key={ind}>
+                                                            <img src={data.product.thumbnail} alt="abc" width="100px" height="100px" />
+                                                        </td>
+                                                    ))}
+                                                    {order.orderItems.map((data, ind) => (
+                                                        <td key={ind}>
+                                                            {data.product.title}
+                                                        </td>
+                                                    ))}
+                                                    <td>{order.orderDate}</td>
+                                                    {order.orderItems.map((data, ind) => (
+                                                        <td key={ind}>
+                                                            {data.product.price}
+                                                        </td>
+                                                    ))}
+                                                    <td>{order.address}</td>
+                                                    <td>{order.status}</td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </div>
+
                                 <br></br>
                                 <div className="row d-flex">
                                     <div className="col-md-1">

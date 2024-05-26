@@ -4,6 +4,7 @@ export default {
     getProducts:"http://localhost:3000/product/viewAllProducts",
     getWishlist:"http://localhost:3000/wishlist/viewAllfavoriteproduct",
     getCategories:"http://localhost:3000/category/viewAllCategory",
+    removecategory:"http//localhost:3000/category/removecategory",
     addToCart:"http://localhost:3000/cart/addToCart",
     addToWishlist:"http://localhost:3000/wishlist/addWishlist", 
     userList:"http://localhost:3000/user/userList",

@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from 'react'
-
+import './adminstyle.css'
 import axios from 'axios';
 import ApiUrl from '../ApiUrl';
 function OrderList() {
@@ -89,8 +89,8 @@ function OrderList() {
                             <option>Cancelled</option>
                         </select>
                 </div>
-                <div className="custom-scroll">
-                    <table className="table">
+                <div className="custom-scroll" style={{maxHeight:'300px',overflowY:'auto'}}>
+                    <table className="table table-striped">
                         <thead>
                             <tr>
                                 <th>Sr.No.</th>
