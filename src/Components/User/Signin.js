@@ -6,14 +6,14 @@ import axios from 'axios'
 import Swal from 'sweetalert2';
 import { ToastContainer, toast } from 'react-toastify'
 import GoogleSign from './GoogleSign';
-
+import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
+import Footer from './footer';
 import Header from './Header';
+
 
 
 // -------------------New sign in page----------------
 
-import image from './d4d7c1b4-98c5-4859-836b-294d65cbd56c.be0ab837448c28bf10ffa8eb4955cdf8.webp'
-import Footer from './footer';
 
 
 
@@ -25,6 +25,7 @@ export default function Signin() {
     const [userId, setuserId] = useState("")
     const { error } = useSelector(store => store.Product);
     const dispatch = useDispatch();
+
 
     const validationemail = () => {
         var status = true;
@@ -98,7 +99,7 @@ export default function Signin() {
 
     const signin = () => {
         if (validation()) {
-            axios.post(URL.signin, { email, password })
+            axios.post(process.env.REACT_APP_SIGNIN, { email, password })
                 .then(res => {
                     console.log(res.data.user);
                     setuserId(userId);

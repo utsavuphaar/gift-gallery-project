@@ -21,6 +21,33 @@ function YourOrders() {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
+
+        axios.get(process.env.REACT_APP_VIEW_ALL_ORDERS)
+            .then(response => {
+                console.log(response.data.result)
+                dispatch({ type: "set-order", payload: response.data.result });
+            }).catch(err => {
+                console.log(err);
+            })
+    }, []);
+
+    let orderList = state.orderList.filter(order => order.status !== 'Order Confirmed');
+    const getProduct = async (orderItemId, userId,orderId) => {
+        // Assuming deliveryBoy is defined somewhere accessible in your code
+        // alert(orderItemId + " " + userId + " " + deliveryBoy.id+" "+orderId);
+     const result =   await axios.post(process.env.REACT_APP_GET_ORDER,{deliveryBoyId:deliveryBoy.id,orderItemId:orderItemId,userId:userId})
+        if(result){
+            await axios.put(process.env.REACT_APP_UPDATE_ORDER_STATUS,{id:orderId,status:"Out for delivery"});
+            axios.get(process.env.REACT_APP_VIEW_ALL_ORDERS)
+            .then(response => {
+                console.log(response.data.result)
+                dispatch({ type: "set-order", payload: response.data.result });
+            }).catch(err => {
+                console.log(err);
+            })
+            orderList = state.orderList.filter(order => order.status === 'Order Confirmed');
+            alert("Order get Successfully...")
+
         const deliveryBoy = localStorage.getItem("deliveryBoy");
         const parsedDeliveryBoy = JSON.parse(deliveryBoy);
         if (parsedDeliveryBoy && parsedDeliveryBoy) {
@@ -41,6 +68,7 @@ function YourOrders() {
                 .catch(err => {
                     console.log("Error fetching data:", err);
                 });
+
         }
     }, []);
 
@@ -51,16 +79,6 @@ function YourOrders() {
 
     return (
         <div className='container-fluid w-75 p-2' style={{ backgroundColor: "#f7fafc" }}>
-            <div class="dropdown mt-1">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>
             <div className='container p-2 mt-4 row' style={{ overflow: "auto", height: '550px' }}>
                 <table className='table border col-md-10 position-relative' style={{ maxHeight: '80vh', overflow: "scroll" }}>
                     <thead className='position-sticky' style={{ top: '-10px' }}>

@@ -17,7 +17,7 @@ export const ContactUs = () => {
             email = email.current.value;
             contact = contact.current.value;
             message = message.current.value;
-            axios.post("http://localhost:3000/contact/addContact",{name,email,contact,message,userId}).then(res=>{
+            axios.post(process.env.REACT_APP_ADDCONTACT,{name,email,contact,message,userId}).then(res=>{
                   alert("Thanks to contact")
             }).catch(err=>{
                   console.log(err)

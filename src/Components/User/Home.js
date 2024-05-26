@@ -26,7 +26,7 @@ export default function Home() {
         buttonDisabled = true;
 
         useEffect(() => {
-            axios.get(URL.fewcategory)
+            axios.get(process.env.REACT_APP_FEW_CATEGORY)
             .then((result)=>{
                 categoryRef = result.data.data.map(item => item.categoryName); // Extract categoryName values
 
