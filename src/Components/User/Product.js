@@ -63,14 +63,14 @@ function Product() {
     useEffect(() => {
         fetchData();
         brandlist();
-        fetchwishlist();
+        fetchwishlist()
         // setproductlist(productList)
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const fetchwishlist = () => {
-        axios.post(URL.getWishlist, { userId })
+        axios.post(process.env.REACT_APP_GET_WISHLIST, { userId })
             .then((result) => {
                 console.log("Result: ", result.data.wishlist);
 
@@ -100,7 +100,7 @@ function Product() {
     };
 
     const brandlist = () => {
-        axios.get(URL.branlist)
+        axios.get(process.env.REACT_APP_BRAND_LIST)
             .then((result) => {
                 console.log(result.data.data);
                 setbrand(result.data.data)
@@ -110,9 +110,6 @@ function Product() {
             })
     }
 
-    // const handleCheckboxChange = (data) => {
-    //     setIsChecked(event.target.checked);
-    // };
 
     const getproductbybrand = (brand,index) => {
         // Assuming you have already assigned an id to your input field, let's say "flexCheckDefault"

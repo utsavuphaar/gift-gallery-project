@@ -17,7 +17,7 @@ function Userlist() {
     }, { userList: [] });
 
     useEffect(() => {
-        axios.get(ApiUrl.userList)
+        axios.get(process.env.REACT_APP_USER_LIST)
             .then(response => {
                 dispatch({ type: "set-product", payload: response.data.users });
             }).catch(err => {

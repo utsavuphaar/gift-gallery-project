@@ -18,7 +18,7 @@ function OrderList() {
     }, { orderList: [] });
 
     useEffect(() => {
-        axios.get("http://localhost:3000/order/viewAllOrders",)
+        axios.get(process.env.REACT_APP_VIEW_ALL_ORDERS,)
             .then(response => {
                 console.log(response.data.result)
                 dispatch({ type: "set-order", payload: response.data.result });

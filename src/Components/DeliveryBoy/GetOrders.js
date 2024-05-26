@@ -21,7 +21,7 @@ function GetOrders() {
     }, { orderList: [] });
 
     useEffect(() => {
-        axios.get(ApiUrl.viewAllOrders)
+        axios.get(process.env.REACT_APP_VIEW_ALL_ORDERS)
             .then(response => {
                 console.log(response.data.result)
                 dispatch({ type: "set-order", payload: response.data.result });
@@ -34,10 +34,10 @@ function GetOrders() {
     const getProduct = async (orderItemId, userId,orderId) => {
         // Assuming deliveryBoy is defined somewhere accessible in your code
         // alert(orderItemId + " " + userId + " " + deliveryBoy.id+" "+orderId);
-     const result =   await axios.post(ApiUrl.getOrder,{deliveryBoyId:deliveryBoy.id,orderItemId:orderItemId,userId:userId})
+     const result =   await axios.post(process.env.REACT_APP_GET_ORDER,{deliveryBoyId:deliveryBoy.id,orderItemId:orderItemId,userId:userId})
         if(result){
-            await axios.put(ApiUrl.updateOrderStatus,{id:orderId,status:"Out for delivery"});
-            axios.get(ApiUrl.viewAllOrders)
+            await axios.put(process.env.REACT_APP_UPDATE_ORDER_STATUS,{id:orderId,status:"Out for delivery"});
+            axios.get(process.env.REACT_APP_VIEW_ALL_ORDERS)
             .then(response => {
                 console.log(response.data.result)
                 dispatch({ type: "set-order", payload: response.data.result });

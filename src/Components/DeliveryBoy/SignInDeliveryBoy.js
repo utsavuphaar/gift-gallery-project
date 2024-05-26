@@ -17,7 +17,7 @@ function SignInFormDeliveryBoy() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // alert(email+""+password);
-    axios.post(URL.deliveryboysignin, { email, password })
+    axios.post(process.env.REACT_APP_DELIVERY_BOY_SIGNIN, { email, password })
       .then((result) => {
         Swal.fire({
           position: "center",

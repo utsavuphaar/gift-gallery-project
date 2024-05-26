@@ -33,7 +33,7 @@ export default function Header() {
             return { ...state, categoryList: action.payload };
     }, { categoryList: [] });
     useEffect(() => {
-        axios.get(URL.getCategories)
+        axios.get(process.env.REACT_APP_GET_CATEGORIES)
             .then(response => {
                 dispatch({ type: "set-category", payload: response.data.categories });
             }).catch(err => {

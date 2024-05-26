@@ -4,9 +4,12 @@ import { Link, useLocation } from 'react-router-dom'
 import gift from './Images/gift.png'
 import "./myOrder.css"
 import { IoIosGift } from 'react-icons/io';
+
 function MyOrders() {
+
     const { state } = useLocation();
     const status = state.status;
+
     return (
         <>
             <div className='container-fluid d-flex flex-column' style={{ backgroundColor: "#f1f3f6", height: '96vh' }}>
