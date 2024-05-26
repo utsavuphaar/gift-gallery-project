@@ -4,6 +4,7 @@ import URL from '../ApiUrl'
 import { FaRegEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 import './adminstyle.css'
+import ApiUrl from "../ApiUrl";
 
 export default function CategoryList() {
 
@@ -20,6 +21,11 @@ export default function CategoryList() {
             })
     }, [])
 
+
+    const deleteCategory = (index)=>{
+        axios.delete(ApiUrl.removecategory,index);
+        
+    }
     return <>
         <div className="responsive-table-container">
             <div className="w-100 p-4 d-flex justify-content-between align-items-center">
@@ -45,7 +51,7 @@ export default function CategoryList() {
                                     <FaRegEdit className="fs-4 text-primary" />
                                 </td>
                                 <td>
-                                    <AiFillDelete className="fs-4 text-secondary" />
+                                    <AiFillDelete onClick={()=>deleteCategory(index)} className="fs-4 text-secondary" />
                                 </td>
                             </tr>
                         ))}
