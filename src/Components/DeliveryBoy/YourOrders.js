@@ -53,9 +53,8 @@ function YourOrders() {
 
         <div className="responsive-table-container " style={{marginTop:"100px"}}>
                 <div className="w-100 p-4 d-flex justify-content-between align-items-center">
-                    <h1 className="mt-3 text-primary">MyDelivery List</h1>
+                    <h1 className="mt-3 text-primary">My Orders </h1>
                     {/* <button className="btn btn-primary">Add Category</button> */}
-                    <img src='blob:http://localhost:3000/c095087c-9ac5-440b-85ad-6b4256b25900' width={200} />
                 </div>
                 <div className="custom-scroll">
                     <table className="table">
