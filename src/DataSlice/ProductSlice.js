@@ -4,7 +4,6 @@ import URL from "../Components/ApiUrl";
 import Swal from 'sweetalert2';
 
 
-
 export const fetchProduct = createAsyncThunk(
     "products/fetchProducts",
     async (_, { getState }) => {
@@ -117,7 +116,7 @@ export const deleteProductFromCart = createAsyncThunk(
     async ({ userId, productId }, thunkAPI) => {
         try {
             const response = await axios.delete(`http://localhost:3000/cart/removeItem/${userId}/${productId}`);
-            alert("Item deleted successfully");
+            // alert("Item deleted successfully");
             return response.data;
         } catch (error) {
             Swal.fire({

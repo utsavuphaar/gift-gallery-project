@@ -7,7 +7,7 @@ const initialState = {
     orderList: [],
 };
 
-function reducer(state, action) {
+function reducer(state, action) {   
     switch (action.type) {
         case 'SET_ORDERS':
             return { ...state, orderList: action.payload };
@@ -21,33 +21,6 @@ function YourOrders() {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-
-        axios.get(process.env.REACT_APP_VIEW_ALL_ORDERS)
-            .then(response => {
-                console.log(response.data.result)
-                dispatch({ type: "set-order", payload: response.data.result });
-            }).catch(err => {
-                console.log(err);
-            })
-    }, []);
-
-    let orderList = state.orderList.filter(order => order.status !== 'Order Confirmed');
-    const getProduct = async (orderItemId, userId,orderId) => {
-        // Assuming deliveryBoy is defined somewhere accessible in your code
-        // alert(orderItemId + " " + userId + " " + deliveryBoy.id+" "+orderId);
-     const result =   await axios.post(process.env.REACT_APP_GET_ORDER,{deliveryBoyId:deliveryBoy.id,orderItemId:orderItemId,userId:userId})
-        if(result){
-            await axios.put(process.env.REACT_APP_UPDATE_ORDER_STATUS,{id:orderId,status:"Out for delivery"});
-            axios.get(process.env.REACT_APP_VIEW_ALL_ORDERS)
-            .then(response => {
-                console.log(response.data.result)
-                dispatch({ type: "set-order", payload: response.data.result });
-            }).catch(err => {
-                console.log(err);
-            })
-            orderList = state.orderList.filter(order => order.status === 'Order Confirmed');
-            alert("Order get Successfully...")
-
         const deliveryBoy = localStorage.getItem("deliveryBoy");
         const parsedDeliveryBoy = JSON.parse(deliveryBoy);
         if (parsedDeliveryBoy && parsedDeliveryBoy) {
@@ -68,7 +41,6 @@ function YourOrders() {
                 .catch(err => {
                     console.log("Error fetching data:", err);
                 });
-
         }
     }, []);
 
@@ -78,36 +50,43 @@ function YourOrders() {
 
 
     return (
-        <div className='container-fluid w-75 p-2' style={{ backgroundColor: "#f7fafc" }}>
-            <div className='container p-2 mt-4 row' style={{ overflow: "auto", height: '550px' }}>
-                <table className='table border col-md-10 position-relative' style={{ maxHeight: '80vh', overflow: "scroll" }}>
-                    <thead className='position-sticky' style={{ top: '-10px' }}>
-                        <tr className='bg-primary text-center text-white'>
+
+        <div className="responsive-table-container " style={{marginTop:"100px"}}>
+                <div className="w-100 p-4 d-flex justify-content-between align-items-center">
+                    <h1 className="mt-3 text-primary">MyDelivery List</h1>
+                    {/* <button className="btn btn-primary">Add Category</button> */}
+                    <img src='blob:http://localhost:3000/c095087c-9ac5-440b-85ad-6b4256b25900' width={200} />
+                </div>
+                <div className="custom-scroll">
+                    <table className="table">
+                        <thead>
+                            <tr>
                             <th>Sr.No.</th>
-                            <th>Product Thumbnail</th>
-                            <th>Product Title</th>
-                            <th>Product Price</th>
-                            <th>Order Date</th>
-                            <th>User Name</th>
-                        </tr>
-                    </thead>
-                    <tbody className='bg-light'>
-                        {state.orderList.map((order, index) => (
-                            <tr key={index} className='text-center'>
-                                <td>{index + 1}</td>
-                                <td>
-                                    <img src={order.orderItem.product.thumbnail} onClick={() => handleProductClick(order)} style={{ cursor: 'pointer' }} width="100px" height="100px" alt="Product" />
-                                </td>
-                                <td>{order.orderItem.product.title.slice(0, 20)}</td>
-                                <td>{order.orderItem.product.price}</td>
-                                <td>{new Date(order.orderItem.Order.orderDate).toLocaleDateString()}</td>
-                                <td>{order.orderItem.Order.user.name}</td>
+                             <th>Product Thumbnail</th>
+                             <th>Product Title</th>
+                             <th>Product Price</th>
+                             <th>Order Date</th>
+                             <th>User Name</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {state.orderList.map((order, index) => (
+                             <tr key={index} className='text-center'>
+                                 <td>{index + 1}</td>
+                                 <td>
+                                     <img src={order.orderItem.product.thumbnail} onClick={() => handleProductClick(order)} style={{ cursor: 'pointer' }} width="100px" height="100px" alt="Product" />
+                                 </td>
+                                 <td>{order.orderItem.product.title.slice(0, 20)}</td>
+                                 <td>{order.orderItem.product.price}</td>
+                                 <td>{new Date(order.orderItem.Order.orderDate).toLocaleDateString()}</td>
+                                 <td>{order.orderItem.Order.user.name}</td>
+                             </tr>
+                         ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+
     );
 }
 

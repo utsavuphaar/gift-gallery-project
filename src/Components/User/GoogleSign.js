@@ -27,6 +27,8 @@ function GoogleSign() {
             // console.log(emailRef.current);
             console.log(result.data);
             if (result.data.user==null) {
+
+                
                 let res = await axios.post(process.env.REACT_APP_SIGNUP, { 
                     name: nameRef.current, 
                     email: emailRef.current, 
