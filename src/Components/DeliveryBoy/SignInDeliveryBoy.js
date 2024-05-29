@@ -16,7 +16,7 @@ function SignInFormDeliveryBoy() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // alert(email+""+password);
-    axios.post(process.env.REACT_APP_DELIVERY_BOY_SIGNIN, { email, password })
+    axios.post(URL.deliveryboysignin, { email, password })
       .then((result) => {
         // console.log(result.data.deliveryBoy.id);
         localStorage.setItem("deliveryBoy",result.data.deliveryBoy.id)

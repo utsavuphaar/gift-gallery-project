@@ -9,7 +9,7 @@ import { IoIosGift } from "react-icons/io";
 function DashBoard() {
     return (
         <>
-            <div className="col-md-10 bg-light d-flex">
+            <div className="col-md-10  d-flex mt-5">
                 <div className="container ">
                     <div className="row">
                         <div className="col-md-3 mt-2 ">
@@ -28,7 +28,7 @@ function DashBoard() {
                                             <p className="autline mt-2"><AiOutlineStock /></p>
                                         </div>
                                         <div className="col-md-10 text-center">
-                                            <span style={{ fontSize: "20px" }}>Completed Deliveries</span>
+                                            <span style={{ fontSize: "20px" }}>Delivery Done</span>
                                         </div>
 
                                     </div>
@@ -122,7 +122,7 @@ function DashBoard() {
 
                     {/* new start last */}
 
-                    <div className="container w-100 p-0 m-0 "  >
+                    <div className="container w-100 p-0 m-0 mt-4"  >
                         <div className="row  w-100 m-0 p-0 ">
 
                             <div className="col-md-6 bg-primry d-flex mx-auto justify-content-center rounded" style={{ boxShadow: "5px 5px 20px #bebebe", height: "200px" }} >
