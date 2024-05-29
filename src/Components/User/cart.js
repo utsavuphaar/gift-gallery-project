@@ -67,6 +67,7 @@ export default () => {
                 dispatch(removeProductFromCart(index));
                 swalWithBootstrapButtons.fire({
                     title: "Deleted!",
+                    
                     text: "Your cart has been deleted.",
                     icon: "success"
                 });
