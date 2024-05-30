@@ -59,7 +59,6 @@ function Product() {
         dispatch(fetchproductbyprice({ min, max }))
     };
 
-
     useEffect(() => {
         fetchData();
         brandlist();
@@ -140,7 +139,6 @@ function Product() {
     }
 
     const handleScroll = () => {
-        // alert("next page")
         if (
             window.innerHeight + document.documentElement.scrollTop ===
             document.documentElement.offsetHeight

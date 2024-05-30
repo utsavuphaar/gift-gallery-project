@@ -199,6 +199,9 @@ const slice = createSlice({
         page: 1
     },
     reducers: {
+        setProductList: (state, action) => {
+            state.productList = action.payload;
+        },
         deleteProduct: (state, action) => {
             const index = state.productList.findIndex(item => item.id === action.payload)
             if (index !== -1) {
@@ -273,4 +276,4 @@ const slice = createSlice({
 
 
 export default slice.reducer;
-export const { removeProductFromCart, searchProduct, removeAllProductsFromCart, removeProductFromWishlist } = slice.actions;
+export const { removeProductFromCart,setProductList , searchProduct, removeAllProductsFromCart, removeProductFromWishlist } = slice.actions;

@@ -62,10 +62,9 @@ function ProductList() {
     }
     return (
         <>
-
             <div className="responsive-table-container">
                 <div className="w-100 p-4 d-flex justify-content-between align-items-center">
-                    <h1 className="mt-3 text-primary">Product List {state.productList.length}</h1>
+                    <h1 className="mt-3 text-primary">Product List  ({state.productList.length})</h1>
                     <select className='rounded cursor-pointer p-2 border border-primary' style={{outline:"none"}} onChange={getCategoryName}>
                         <option className='border' value="All Category">All category</option>
                         {state.categoryList?.map((category, index) => <option key={index} value={category.categoryName}>
