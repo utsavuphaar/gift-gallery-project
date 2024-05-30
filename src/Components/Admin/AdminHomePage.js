@@ -165,7 +165,7 @@ function AdminHomePage() {
                 <div className="row m-0 w-100 p-0">
                     <div className="col-md-12 m-0 p-0 w-100">
                         <div className="card">
-                            <div className="card-body  ">
+                            <div className="card-body" >
                                 <div className="row d-flex">
                                     <div className="col-md-9 ">Deals Details </div>
                                     <div className="col-md-3">
@@ -175,9 +175,10 @@ function AdminHomePage() {
 
                                 </div>
                                 <br></br>
+                               
                                 <div className="w-100 table-responsive custom-scroll1 table-responsive-sm position-relative">
                                     <table className="table w-100 table-hover position-relative">
-                                        <thead className="position-sticky">
+                                        <thead className="position-sticky" id='thead'>
                                             <tr className="table-info">
                                                 <th scope="col">Product</th>
                                                 <th scope="col">Name</th>
@@ -213,6 +214,8 @@ function AdminHomePage() {
                                         </tbody>
                                     </table>
                                 </div>
+
+
 
                                 <br></br>
                                 <div className="row d-flex">

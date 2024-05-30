@@ -60,69 +60,132 @@ function Order() {
                 <h3 className='p-2 fs-4'>Your Order ({state.orderList.length})</h3>
             </div>
             {state.orderList.length != 0 ? (
-                <table className='table container border mb-2' >
-                    <thead className=' text-center thead-light' >
-                        <tr className='bg-primary'>
-                            <th>Order no.</th>
-                            <th>Image</th>
-                            <th>Item</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                            <th>Order Date</th>
-                            <th>Order Id</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            state.orderList?.map((order, index) => <tr key={index} className='text-center'>
-                                <td><div className='row ' style={{ height: "100px" }}>
-                                    <div className='col-md-12 d-flex align-items-center justify-content-center'>
-                                        {index + 1}
-                                    </div>
-                                </div></td>
+                // <table className='table container border mb-2' >
+                //     <thead className=' text-center thead-light' >
+                //         <tr className='bg-primary'>
+                //             <th>Order no.</th>
+                //             <th>Image</th>
+                //             <th>Item</th>
+                //             <th>Price</th>
+                //             <th>Status</th>
+                //             <th>Order Date</th>
+                //             <th>Order Id</th>
+                //         </tr>
+                //     </thead>
+                //     <tbody>
+                //         {
+                //             state.orderList?.map((order, index) => <tr key={index} className='text-center'>
+                //                 <td><div className='row ' style={{ height: "100px" }}>
+                //                     <div className='col-md-12 d-flex align-items-center justify-content-center'>
+                //                         {index + 1}
+                //                     </div>
+                //                 </div></td>
 
-                                <td><div className='row ' style={{ height: "100px" }}>
-                                    <div className='col-md-12 d-flex align-items-center justify-content-center'>
-                                        <img style={{ cursor: 'pointer' }} onClick={() => navigate("/myorders", { state: order })} src={order.orderItems[0].product.thumbnail} width="100px" height="100px" />
-                                    </div>
-                                </div></td>
+                //                 <td><div className='row ' style={{ height: "100px" }}>
+                //                     <div className='col-md-12 d-flex align-items-center justify-content-center'>
+                //                         <img style={{ cursor: 'pointer' }} onClick={() => navigate("/myorders", { state: order })} src={order.orderItems[0].product.thumbnail} width="100px" height="100px" />
+                //                     </div>
+                //                 </div></td>
 
-                                <td><div className='row ' style={{ height: "100px" }}>
-                                    <div className='col-md-12 d-flex align-items-center justify-content-center'>
-                                        {(order.orderItems[0].product.title).slice(0, 30)}
-                                    </div>
-                                </div></td>
+                //                 <td><div className='row ' style={{ height: "100px" }}>
+                //                     <div className='col-md-12 d-flex align-items-center justify-content-center'>
+                //                         {(order.orderItems[0].product.title).slice(0, 30)}
+                //                     </div>
+                //                 </div></td>
 
-                                {/* <td>{order.orderItems[0].product.title}</td> */}
-                                <td><div className='row ' style={{ height: "100px" }}>
-                                    <div className='col-md-12 d-flex align-items-center justify-content-center'>
-                                        {order.orderItems[0].product.price}
-                                    </div>
-                                </div></td>
-                                <td><div className='row ' style={{ height: "100px" }}>
-                                    <div className='col-md-12 d-flex align-items-center justify-content-center'>
-                                    <p className="font-weight-bold" style={{ color: statusColor }}>{order.status}</p>
+                //                 {/* <td>{order.orderItems[0].product.title}</td> */}
+                //                 <td><div className='row ' style={{ height: "100px" }}>
+                //                     <div className='col-md-12 d-flex align-items-center justify-content-center'>
+                //                         {order.orderItems[0].product.price}
+                //                     </div>
+                //                 </div></td>
+                //                 <td><div className='row ' style={{ height: "100px" }}>
+                //                     <div className='col-md-12 d-flex align-items-center justify-content-center'>
+                //                     <p className="font-weight-bold" style={{ color: statusColor }}>{order.status}</p>
 
 
-                                        {/* <button className='btn btn-primary'>{order.status}</button> */}
-                                    </div>
-                                </div></td>
-                                <td><div className='row ' style={{ height: "100px" }}>
-                                    <div className='col-md-12 d-flex align-items-center justify-content-center'>
-                                        {order.orderDate}
-                                    </div>
-                                </div></td>
-                                <td><div className='row ' style={{ height: "100px" }}>
-                                    <div className='col-md-12 d-flex align-items-center justify-content-center text-primary' style={{ cursor: "pointer" }}>
-                                        {order.orderId}
-                                    </div>
-                                </div></td>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
-                // </div>
-                // </div>
+                //                         {/* <button className='btn btn-primary'>{order.status}</button> */}
+                //                     </div>
+                //                 </div></td>
+                //                 <td><div className='row ' style={{ height: "100px" }}>
+                //                     <div className='col-md-12 d-flex align-items-center justify-content-center'>
+                //                         {order.orderDate}
+                //                     </div>
+                //                 </div></td>
+                //                 <td><div className='row ' style={{ height: "100px" }}>
+                //                     <div className='col-md-12 d-flex align-items-center justify-content-center text-primary' style={{ cursor: "pointer" }}>
+                //                         {order.orderId}
+                //                     </div>
+                //                 </div></td>
+                //             </tr>)
+                //         }
+                //     </tbody>
+                // </table>
+                <div className='container-fluid'>
+
+                    <table class="table table-striped" >
+                        <thead className='table-primary  text-center '>
+                            <tr className='bg-primary'>
+                                <th>Order no.</th>
+                                <th>Image</th>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Order Date</th>
+                                <th>Order Id</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                state.orderList?.map((order, index) => <tr key={index} className='text-center'>
+                                    <td><div className='row ' style={{ height: "100px" }}>
+                                        <div className='col-md-12 d-flex align-items-center justify-content-center'>
+                                            {index + 1}
+                                        </div>
+                                    </div></td>
+
+                                    <td><div className='row ' style={{ height: "100px" }}>
+                                        <div className='col-md-12 d-flex align-items-center justify-content-center'>
+                                            <img style={{ cursor: 'pointer' }} onClick={() => navigate("/myorders", { state: order })} src={order.orderItems[0].product.thumbnail} width="100px" height="100px" />
+                                        </div>
+                                    </div></td>
+
+                                    <td><div className='row ' style={{ height: "100px" }}>
+                                        <div className='col-md-12 d-flex align-items-center justify-content-center'>
+                                            {(order.orderItems[0].product.title).slice(0, 30)}
+                                        </div>
+                                    </div></td>
+
+                                    {/* <td>{order.orderItems[0].product.title}</td> */}
+                                    <td><div className='row ' style={{ height: "100px" }}>
+                                        <div className='col-md-12 d-flex align-items-center justify-content-center'>
+                                            {order.orderItems[0].product.price}
+                                        </div>
+                                    </div></td>
+                                    <td><div className='row ' style={{ height: "100px" }}>
+                                        <div className='col-md-12 d-flex align-items-center justify-content-center'>
+                                            <p className="font-weight-bold" style={{ color: statusColor }}>{order.status}</p>
+
+
+                                            {/* <button className='btn btn-primary'>{order.status}</button> */}
+                                        </div>
+                                    </div></td>
+                                    <td><div className='row ' style={{ height: "100px" }}>
+                                        <div className='col-md-12 d-flex align-items-center justify-content-center'>
+                                            {order.orderDate}
+                                        </div>
+                                    </div></td>
+                                    <td><div className='row ' style={{ height: "100px" }}>
+                                        <div className='col-md-12 d-flex align-items-center justify-content-center text-primary' style={{ cursor: "pointer" }}>
+                                            {order.orderId}
+                                        </div>
+                                    </div></td>
+                                </tr>)
+                            }
+                        </tbody>
+                    </table>
+                </div>
+               
             ) : (
                 <div className='container-fluid d-flex p-4 justify-content-center align-content-center border' id='blackCart'>
                     <div>
