@@ -9,7 +9,7 @@ import ApiUrl from '../ApiUrl';
 function VerifyOtp() {
     const { state } = useLocation();
     const [otp, setotp] = useState("");
-    alert(state.email + " " + state.orderId);
+    // alert(state.email + " " + state.orderId);
     const email = state.email;
     const navigate = useNavigate();
     document.addEventListener("DOMContentLoaded", function (event) {
@@ -46,6 +46,7 @@ function VerifyOtp() {
             .then((res) => {
                 Swal.fire({
                     position: "center",
+                    position: "center",
                     icon: "success",
                     title: "OTP verification successful",
                     showConfirmButton: false,
@@ -59,8 +60,15 @@ function VerifyOtp() {
                     }).catch(err => {
                         console.log(err);
                     })
-                    alert("Order Delivered Successfully...")
-                    navigate(-1)
+                    Swal.fire({
+                        position: "center",
+                        position: "center",
+                        icon: "success",
+                        title: "Order Delivered Successfully",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                    navigate("/deliveryboy")
                 }
 
             })
@@ -88,30 +96,25 @@ function VerifyOtp() {
         <section id="otp" >
             <div class="container d-flex justify-content-center align-items-center" style={{ height: '94vh' }}>
                 <div class="position-relative">
-                    <div class="card p-2 text-center">
+                    <div class="card p-4 text-center">
                         <h6>Please enter the one time password <br /> to verify your account</h6>
                         <div> <span>A code has been sent to</span> <small>*******{state.email.slice(6, 10)}</small>
                         </div> <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
-                            {/* <input class="m-2 text-center form-control rounded" type="text" id="first" maxlength="1" />
-                            <input class="m-2 text-center form-control rounded" type="text" id="second" maxlength="1" />
-                            <input class="m-2 text-center form-control rounded" type="text" id="third" maxlength="1" />
-                            <input class="m-2 text-center form-control rounded" type="text" id="fourth" maxlength="1" />
-                            <input class="m-2 text-center form-control rounded" type="text" id="fifth" maxlength="1" />
-                            <input class="m-2 text-center form-control rounded" type="text" id="sixth" maxlength="1" /> */}
+                            
                             <OTPInput
                                 value={otp}
                                 onChange={setotp}
                                 numInputs={6}
                                 otpType="number"
                                 autoFocus
-                                className="otp-container"
-                                inputStyle={{ backgroundColor: "#9ba0a7", color: 'white', outline: 'none', marginRight: "10px", border: 'none', borderRadius: "10px", width: "30px", height: '40px' }}
+                                className="otp-container mt-3"
+                                inputStyle={{ backgroundColor: "whitesmoke", outline: 'none', marginRight: "10px", border: 'none', borderRadius: "10px", width: "30px", height: '40px' }}
                                 renderInput={(props) => <input {...props} />}
                             />
 
 
 
-                        </div> <div class="mt-4"> <button onClick={verificationOtp} class="btn btn-danger px-4 validate">Validate</button> </div>
+                        </div> <div class="mt-4"> <button onClick={verificationOtp} class="btn btn-primary px-4 validate">Validate</button> </div>
                     </div>
                     <div class="card-2 p-2 m-3">
                         <div class="content d-flex justify-content-center align-items-center">

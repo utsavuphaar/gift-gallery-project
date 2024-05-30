@@ -13,21 +13,19 @@ import axios from 'axios';
 function AdminHomePage() {
     const [categoryList, setCategoryList] = useState(0);
     const [userList, setUserList] = useState(0);
+    const { productList, category } = useSelector(store => store.Product);
     const [orderlist, setorderlist] = useState([]);
-    const [productLength,setProductLength] = useState();
     const dispatch = useDispatch();
     useEffect(() => {
+        dispatch(fetchProduct());
         fetchorder()
-        axios.get(ApiUrl.displayAllProducts).then(res=>{
-            setProductLength(res.data.result.length)
-        })
-        axios.get(ApiUrl.getCategories)
+        axios.get(process.env.REACT_APP_GET_CATEGORIES)
             .then(response => {
                 setCategoryList(response.data.categories.length);
             }).catch(err => {
                 console.log(err);
             })
-        axios.get(ApiUrl.userList).then(response => {
+        axios.get(process.env.REACT_APP_USER_LIST).then(response => {
             setUserList(response.data.users.length);
         }).catch(err => {
             console.log(err);
@@ -88,7 +86,7 @@ function AdminHomePage() {
 
                                 </div>
                                 <br></br>
-                                <p className="fs-4">{productLength}</p>
+                                <p className="fs-4">{productList.length}</p>
                                 <br></br>
                                 <div className="row d-flex">
                                     <div className="col-md-1">
@@ -232,7 +230,6 @@ function AdminHomePage() {
                         </div>
                     </div>
                 </div>
-
 
             </div>
         </div>

@@ -23,9 +23,11 @@ export default {
     addProduct:"http://localhost:3000/product/addSingleProduct",
     addExcelSheet:"http://localhost:3000/product/uploadExcelSheet",
     getContactUs:"http://localhost:3000/contact/getContactUsData",
-    displayAllProducts:"http://localhost:3000/product/displayAllProducts",
+
     getOrderdetail : "http://localhost:3000/order/viewAllOrders",
+
     updatePassword:"http://localhost:3000/user/updatePassword",
     getParticularDeliveryBoyOrder:"http://localhost:3000/deliverydata/deliveryBoyOrder"
+
 
 }

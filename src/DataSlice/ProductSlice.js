@@ -4,14 +4,13 @@ import URL from "../Components/ApiUrl";
 import Swal from 'sweetalert2';
 
 
-
 export const fetchProduct = createAsyncThunk(
     "products/fetchProducts",
     async (_, { getState }) => {
         try {
             const { Product } = getState();
             const page = Math.ceil(Product.productList.length / 10) + 1;
-            const response = await axios.get(URL.getProducts, {
+            const response = await axios.get(process.env.REACT_APP_GET_PRODUCTS, {
                 params: { page, limit: 9 },
             });
             return response.data.products;
@@ -36,7 +35,7 @@ export const fetchCartItems = createAsyncThunk("cart/cartItems", async (userId) 
 
 export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct", async ({ userId }) => {
     try {
-        let res = await axios.post(URL.getWishlist, { userId: userId })
+        let res = await axios.post(process.env.REACT_APP_GET_WISHLIST, { userId: userId })
         return res.data.wishlist;
     } catch (err) {
         console.log(err)
@@ -46,7 +45,7 @@ export const fetchWishList = createAsyncThunk("wishlist/viewAllfavoriteproduct",
 export const fetchproductbyprice = createAsyncThunk("product/getproductbyprice", async({min,max}) => {
     try {
 
-        let res = await axios.post(URL.getprductbyprice,{min,max})
+        let res = await axios.post(process.env.REACT_APP_GET_PRODUCT_BY_PRICE,{min,max})
         return res.data.productlist;
     } catch (error) {
         console.log(error);
@@ -55,7 +54,7 @@ export const fetchproductbyprice = createAsyncThunk("product/getproductbyprice",
 
 export const fetchproductbybrand = createAsyncThunk("product/getproductbybrand", async(brand) =>{
     try {
-        let res = await axios.post(URL.getproductbybrand,{brand})
+        let res = await axios.post(process.env.REACT_APP_GET_PRODUCT_BY_BRAND,{brand})
         return res.data.product;
 
     } catch (error) {
@@ -65,7 +64,7 @@ export const fetchproductbybrand = createAsyncThunk("product/getproductbybrand",
 
 export const fetchproductbyrating = createAsyncThunk("product/getproductbyrating",async(rating) =>{
     try {
-        let res = await axios.post(URL.getproductbyrating,{rating})
+        let res = await axios.post(process.env.REACT_APP_GET_PRODUCT_BY_RATING,{rating})
         return res.data.products;
     } catch (error) {
         console.log(error);
@@ -75,7 +74,7 @@ export const fetchproductbyrating = createAsyncThunk("product/getproductbyrating
 export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ userId, productId,quantity }) => {
     try {
 
-        let res = await axios.post(URL.addToCart, { userId, productId,quantity })
+        let res = await axios.post(process.env.REACT_APP_ADD_TO_CART, { userId, productId,quantity })
         Swal.fire({
             position: "center",
             icon: "success",
@@ -96,7 +95,7 @@ export const addProductIntoCart = createAsyncThunk("cart/addToCart", async ({ us
 
 export const addProductIntoWishlist = createAsyncThunk("wishlist/addProductIntoWishlist", async ({ userId, productId }) => {
     try {
-        let res = await axios.post(URL.addToWishlist, { userId, productId })
+        let res = await axios.post(process.env.REACT_APP_ADD_TO_WISHLIST, { userId, productId })
          Swal.fire({
             position: "center",
             icon: "success",
@@ -117,7 +116,7 @@ export const deleteProductFromCart = createAsyncThunk(
     async ({ userId, productId }, thunkAPI) => {
         try {
             const response = await axios.delete(`http://localhost:3000/cart/removeItem/${userId}/${productId}`);
-            alert("Item deleted successfully");
+            // alert("Item deleted successfully");
             return response.data;
         } catch (error) {
             Swal.fire({

@@ -5,13 +5,14 @@ import { FaRegEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 import './adminstyle.css'
 import ApiUrl from "../ApiUrl";
+import Swal from "sweetalert2";
 
 export default function CategoryList() {
 
     const [categorylist, setcategorylist] = useState([]);
 
     useEffect(() => {
-        axios.get(URL.getCategories)
+        axios.get(process.env.REACT_APP_GET_CATEGORIES)
             .then((response) => {
                 console.log(response.data.categories);
                 setcategorylist(response.data.categories);
@@ -22,10 +23,22 @@ export default function CategoryList() {
     }, [])
 
 
-    const deleteCategory = (index)=>{
-        axios.delete(ApiUrl.removecategory,index);
-        
+    const deleteCategory = (categoryName) =>{
+        axios.post(process.env.REACT_APP_DELETE_CATEGORY,{categoryName})
+        .then((response)=>{
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Category removed successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        })
+        .catch(err=>{
+            console.log(err);
+        })
     }
+
     return <>
         <div className="responsive-table-container">
             <div className="w-100 p-4 d-flex justify-content-between align-items-center">
@@ -51,7 +64,9 @@ export default function CategoryList() {
                                     <FaRegEdit className="fs-4 text-primary" />
                                 </td>
                                 <td>
-                                    <AiFillDelete onClick={()=>deleteCategory(index)} className="fs-4 text-secondary" />
+
+                                    <AiFillDelete onClick={()=>deleteCategory(user.categoryName)} className="fs-4 text-secondary" />
+
                                 </td>
                             </tr>
                         ))}

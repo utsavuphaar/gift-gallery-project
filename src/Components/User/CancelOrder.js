@@ -3,7 +3,13 @@ import { Container, Row, Col, Button } from 'react-bootstrap'; // Remove Form, F
 import TextField from '@mui/material/TextField';
 import { Form, FormGroup, FormCheck } from 'react-bootstrap';
 import gift from "./Images/gift.png"
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import ApiUrl from '../ApiUrl';
+import cancelOrderImg from './Images/cancelled.png'
+import { useLocation, useNavigate } from 'react-router-dom';
 const OrderCancellationForm = () => {
+    const { state } = useLocation();
     const [orderNumber, setOrderNumber] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -18,44 +24,71 @@ const OrderCancellationForm = () => {
     const [romanka, setRomanka] = useState(''); // Additional field (optional)
     const [cancellationReason, setCancellationReason] = useState('');
     const [termsAgreed, setTermsAgreed] = useState(false);
-
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+    // console.log(state)
+    // alert(state[0].orderId)
+    const id = state[0].orderId;
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Form validation (example)
-        if (!orderNumber || !firstName || !lastName || !phone || !email || !dateOfPurchase || !orderTotal || !address || !city || !region || !postalCode) {
+        if (!orderNumber || !firstName || !lastName || !phone || !email || !dateOfPurchase) {
             alert('Please fill in all required fields.');
             return;
         }
 
         // Submission logic
-        console.log(orderNumber, firstName, lastName, phone, email, dateOfPurchase, orderTotal, address, city, region, postalCode, romanka, cancellationReason, termsAgreed);
+        const result = await axios.post("http://localhost:3000/order/getParticularOrder", { id })
+        console.log(result.data.result)
+        const orderId = result.data.result.orderId;
+        const fName = result.data.result.firstName;
+        const lName = result.data.result.lastName;
+        const contact = result.data.result.contact;
+        console.log(orderId + " " + fName + " " + lName + " " + contact)
 
+        if (orderId == orderNumber && fName == firstName && lastName == lName && contact == phone) {
+            await axios.put(ApiUrl.updateOrderStatus, { id, status: "Cancelled" });
+            Swal.fire({
+                position: "center",
+                position: "center",
+                icon: "success",
+                title: "Order Cancelled Successfully",
+                showConfirmButton: false,
+                timer: 2000
+            });
+            console.log(orderNumber, firstName, lastName, phone, email, dateOfPurchase, orderTotal, address, city, region, postalCode, romanka, cancellationReason, termsAgreed);
+            setOrderNumber('');
+            setFirstName('');
+            setLastName('');
+            setPhone('');
+            setEmail('');
+            setDateOfPurchase('');
+            setCancellationReason('');
+            setTermsAgreed(false);
+            navigate(-2);
+        }else{
+            Swal.fire({
+                position: "center",
+                position: "center",
+                icon: "error",
+                title: "Please fill correct details",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
         // Clear form after submission
-        setOrderNumber('');
-        setFirstName('');
-        setLastName('');
-        setPhone('');
-        setEmail('');
-        setDateOfPurchase('');
-        setOrderTotal('');
-        setAddress('');
-        setCity('');
-        setRegion('');
-        setPostalCode('');
-        setRomanka('');
-        setCancellationReason('');
-        setTermsAgreed(false);
     };
 
     return (
         <>
-            <Container>
-                <Row className="justify-content-md-center">
-                    
-                    <Col className='border p-2 mt-2 rounded' xs={12} md={6}>
+            <Container className='d-flex'>
+                <Row className="d-flex align-content-center justify-content-center justify-content-md-center border">
+                    <Col>
+                        <img src={cancelOrderImg} alt='not found' style={{ width: '400px', height: '600px' }} />
+                    </Col>
+                    <Col className='border p-2 mt-2 border rounded' xs={12} md={6}>
                         <form onSubmit={handleSubmit}>
-                            <h1 className="mb-4">Order Cancellation Form</h1>
+                            <h3 className="mb-4">Order Cancellation Form</h3>
                             <TextField
                                 label="Order Number / Transaction ID"
                                 variant="outlined"
@@ -109,15 +142,18 @@ const OrderCancellationForm = () => {
                             />
                             <TextField
                                 label="Date of Original Purchase"
-                                type="date"
+                                type="date" // Uncomment this line to use a date picker
                                 variant="outlined"
                                 value={dateOfPurchase}
                                 onChange={(e) => setDateOfPurchase(e.target.value)}
                                 fullWidth
                                 required
                                 className="mb-3"
+                                InputLabelProps={{
+                                    shrink: true, // This makes sure the label stays above the input when a date is selected
+                                }}
                             />
-                            <TextField
+                            {/* <TextField
                                 label="Order Total"
                                 type="number"
                                 variant="outlined"
@@ -126,8 +162,8 @@ const OrderCancellationForm = () => {
                                 fullWidth
                                 required
                                 className="mb-3"
-                            />
-                            <TextField
+                            /> */}
+                            {/* <TextField
                                 label="Address"
                                 variant="outlined"
                                 value={address}
@@ -135,8 +171,8 @@ const OrderCancellationForm = () => {
                                 fullWidth
                                 required
                                 className="mb-3"
-                            />
-                            <Row>
+                            /> */}
+                            {/* <Row>
                                 <Col>
                                     <TextField
                                         label="City"
@@ -170,15 +206,7 @@ const OrderCancellationForm = () => {
                                         className="mb-3"
                                     />
                                 </Col>
-                            </Row>
-                            <TextField
-                                label="Romanka (Optional)"
-                                variant="outlined"
-                                value={romanka}
-                                onChange={(e) => setRomanka(e.target.value)}
-                                fullWidth
-                                className="mb-3"
-                            />
+                            </Row> */}
                             <TextField
                                 label="Cancellation Reason"
                                 variant="outlined"
@@ -203,7 +231,7 @@ const OrderCancellationForm = () => {
                             <Button type="submit" className="btn btn-primary">Submit</Button>
                         </form>
                     </Col>
-                    
+
                 </Row>
             </Container>
         </>

@@ -47,7 +47,7 @@ const DeliveryBoyDeshbord = () => {
               <span className="d-flex mt-3  p-0" style={{ color: "black" }}> &nbsp;&nbsp;<HiOutlineCurrencyRupee className="text-primary mb-1 fs-3"  />&nbsp;&nbsp;Orders</span>
             </Link>
 
-            <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<HiOutlineCurrencyRupee className="text-primary mb-1 ml-4 fs-3"  />&nbsp;&nbsp;Earnings</span>
+            {/* <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<HiOutlineCurrencyRupee className="text-primary mb-1 ml-4 fs-3"  />&nbsp;&nbsp;Earnings</span> */}
             <span className="d-flex mt-3" style={{ color: "black" }}> &nbsp;&nbsp;<FaRegUser className="mb-2 ml-4 fs-3 text-primary"  />&nbsp;&nbsp;Profile</span>
             <span className="d-flex mt-3" style={{cursor:'pointer', color: "black" }} onClick={logout}> &nbsp;&nbsp;<IoIosPower className="mb-1 ml-4 fs-3 text-primary"  />&nbsp;&nbsp;Logout</span>
 

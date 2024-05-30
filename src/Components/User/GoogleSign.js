@@ -23,11 +23,13 @@ function GoogleSign() {
     // Function to handle sign in
     const signin = async () => {
         try {
-            let result = await axios.post(`http://localhost:3000/user/findbyemail`, { email: emailRef.current });
+            let result = await axios.post(process.env.REACT_APP_FINDBYEMAIL, { email: emailRef.current });
             // console.log(emailRef.current);
             console.log(result.data);
             if (result.data.user==null) {
-                let res = await axios.post(`http://localhost:3000/user/signup`, { 
+
+                
+                let res = await axios.post(process.env.REACT_APP_SIGNUP, { 
                     name: nameRef.current, 
                     email: emailRef.current, 
                     password: passwordRef.current 
@@ -53,7 +55,6 @@ function GoogleSign() {
                     });
                 }
 
-                // navigate("/");
             } else {
                 Swal.fire({
                     position: "center",

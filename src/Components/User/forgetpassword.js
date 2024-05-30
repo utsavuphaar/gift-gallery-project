@@ -30,9 +30,9 @@ export default function ForgetPassword() {
     };
 
     const checkaccount = async () => {
-        let user = await axios.post("http://localhost:3000/user/findbyemail", { email })
+        let user = await axios.post(process.env.REACT_APP_FINDBYEMAIL, { email })
         if (user) {
-            axios.post("http://localhost:8080/otp/request", { email })
+            axios.post(process.env.REACT_APP_SENDOTP, { email })
                 .then((res) => {
                     // alert("OTP send successfully");
                     toast.success("OTP send successfully", {
@@ -66,7 +66,7 @@ export default function ForgetPassword() {
     }
 
     const verifyOTP = () => {
-        axios.post("http://localhost:8080/otp/verify", { email, otp })
+        axios.post(process.env.REACT_APP_VERIFYOTP, { email, otp })
             .then((res) => {
                 Swal.fire({
                     position: "center",
