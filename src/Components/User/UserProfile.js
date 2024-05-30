@@ -1,3 +1,9 @@
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import { json, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import userImg from "./Images/user.png";
+import Header from "./Header";
 import { BsCart2 } from "react-icons/bs";
 import { FaRegGrinBeam, FaAmazonPay } from "react-icons/fa";
 import { PiAddressBook } from "react-icons/pi";
@@ -5,25 +11,25 @@ import { FiEdit } from "react-icons/fi";
 import { GiReturnArrow } from "react-icons/gi";
 import { MdOutlineCancel, MdFavoriteBorder } from "react-icons/md";
 import { IoIosPower } from "react-icons/io";
-import userImg from "./Images/user.png";
-import Header from "./Header";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios";
-import Swal from "sweetalert2";
 
 export const UserProfile = () => {
-    
     const [disabled, setDisabled] = useState(true);
     const [disabledEntity, setDisabledEntity] = useState(true);
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+
     const navigate = useNavigate();
 
     let user = localStorage.getItem("user");
     user = JSON.parse(user);
-    let email = user.email;
+    let userId = localStorage.getItem("userId");
+
+    const [email, setEmail] = useState(user.email);
+    const [contact, setContact] = useState(user.contact);
+    const [name, setName] = useState(user.name);
+    const [firstname, setFirstname] = useState(user.name.split(" ")[0]);
+    const [lastname, setLastname] = useState(user.name.split(" ")[1]);
 
     const logout = () => {
         if (user) localStorage.clear();
@@ -48,12 +54,11 @@ export const UserProfile = () => {
             return;
         }
 
-        axios
-            .post(process.env.REACT_APP_UPDATE_PASSWORD, {
-                email,
-                password: oldPassword,
-                newPassword: newPassword,
-            })
+        axios.post(process.env.REACT_APP_UPDATE_PASSWORD, {
+            email,
+            password: oldPassword,
+            newPassword: newPassword,
+        })
             .then((res) => {
                 Swal.fire({
                     position: "top-end",
@@ -62,6 +67,9 @@ export const UserProfile = () => {
                     showConfirmButton: false,
                     timer: 1500,
                 });
+                setNewPassword("");
+                setOldPassword("");
+                setConfirmPassword("");
                 setDisabled(true);
             })
             .catch((err) => {
@@ -81,6 +89,35 @@ export const UserProfile = () => {
 
     const enableEntity = () => {
         setDisabledEntity(!disabledEntity);
+    };
+
+    const editProfile = () => {
+        const updatedName = firstname + " " + lastname;
+        localStorage.setItem("user", JSON.stringify({ id: user.id, name: updatedName, email, contact, userId }));
+        axios.post(process.env.REACT_APP_UPDATE_PROFILE, { name: updatedName, email, contact, userId })
+            .then((result) => {
+                const updatedUser = result.data.user;
+                setName(updatedUser.name);
+                setEmail(updatedUser.email);
+                setContact(updatedUser.contact);
+
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Profile Updated",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Something went wrong",
+                    showConfirmButton: true,
+                });
+            });
     };
 
     return (
@@ -127,22 +164,22 @@ export const UserProfile = () => {
                             <div className="row g-3">
                                 <div className="col-md-6">
                                     <label htmlFor="firstName" className="form-label">First Name*</label>
-                                    <input defaultValue={user.name.split(" ")[0]} type="text" disabled={disabledEntity} className="form-control" id="firstName" required />
+                                    <input defaultValue={firstname} type="text" onChange={(event) => setFirstname(event.target.value)} disabled={disabledEntity} className="form-control" id="firstName" required />
                                 </div>
                                 <div className="col-md-6">
                                     <label htmlFor="lastName" className="form-label">Last Name*</label>
-                                    <input defaultValue={user.name.split(" ")[1]} type="text" disabled={disabledEntity} className="form-control" id="lastName" required />
+                                    <input defaultValue={lastname} type="text" onChange={(event) => setLastname(event.target.value)} disabled={disabledEntity} className="form-control" id="lastName" required />
                                 </div>
                                 <div className="col-md-6">
                                     <label htmlFor="email" className="form-label">Email*</label>
-                                    <input defaultValue={user.email} type="email" disabled={disabledEntity} className="form-control" id="email" required />
+                                    <input defaultValue={email} type="email" disabled={disabledEntity} onChange={(event) => setEmail(event.target.value)} className="form-control" id="email" required />
                                 </div>
                                 <div className="col-md-6">
                                     <label htmlFor="address" className="form-label">Contact*</label>
-                                    <input defaultValue={user.contact} type="text" disabled={disabledEntity} className="form-control" id="address" required />
+                                    <input defaultValue={contact} type="text" disabled={disabledEntity} onChange={(event) => setContact(event.target.value)} className="form-control" id="address" required />
                                 </div>
                                 <div className="col-md-12">
-                                    <button className="btn btn-primary" type="button">Save Changes</button>
+                                    <button onClick={editProfile} className="btn btn-primary" type="button">Save Changes</button>
                                 </div>
                             </div>
                             <div className="mt-4">
