@@ -42,7 +42,7 @@ function VerifyOtp() {
 
 
     const verificationOtp = async () => {
-        await axios.post("http://localhost:8080/otp/verify", { email, otp })
+        await axios.post("http://localhost:3000/otp/verify", { email, otp })
             .then((res) => {
                 Swal.fire({
                     position: "center",

@@ -33,7 +33,7 @@ function OrderData() {
     // };
 
     const handleSubmit=()=>{
-        axios.post("http://localhost:8080/otp/request", { email })
+        axios.post("http://localhost:3000/otp/request", { email })
                 .then((res) => {
                     toast.success("OTP send successfully", {
                         position: "top-center",

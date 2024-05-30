@@ -26,7 +26,7 @@ function ProductList() {
     }, { productList: [], categoryList: [] });
 
     useEffect(() => {
-        axios.get("http://localhost:3000/product/displayAllProducts")
+        axios.get(ApiUrl.displayAllProducts)
             .then(response => {
                 dispatch({ type: "set-product", payload: response.data.result });
             }).catch(err => {
@@ -43,10 +43,11 @@ function ProductList() {
     const getCategoryName = (e) => {
         const categoryName = e.target.value;
         setCategory(categoryName);
+        displayCategoryItem(categoryName);
     }
-    const displayCategoryItem = () => {
+    const displayCategoryItem = (category) => {
         if (category == "All Category") {
-            axios.get("http://localhost:3000/product/displayAllProducts")
+            axios.get(ApiUrl.displayAllProducts)
                 .then(response => {
                     dispatch({ type: "set-product", payload: response.data.result });
                 }).catch(err => {
@@ -55,6 +56,7 @@ function ProductList() {
         } else {
             call(fetchProductByCategory(category));
             dispatch({ type: "set-product", payload: categoryProduct });
+            setCategory(category)
         }
 
     }
@@ -63,7 +65,7 @@ function ProductList() {
 
             <div className="responsive-table-container">
                 <div className="w-100 p-4 d-flex justify-content-between align-items-center">
-                    <h1 className="mt-3 text-primary">Product List</h1>
+                    <h1 className="mt-3 text-primary">Product List {state.productList.length}</h1>
                     <select className='rounded cursor-pointer p-2 border border-primary' style={{outline:"none"}} onChange={getCategoryName}>
                         <option className='border' value="All Category">All category</option>
                         {state.categoryList?.map((category, index) => <option key={index} value={category.categoryName}>
