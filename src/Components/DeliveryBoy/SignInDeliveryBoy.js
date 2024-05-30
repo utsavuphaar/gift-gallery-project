@@ -44,11 +44,11 @@ function SignInFormDeliveryBoy() {
 
   return (
     <>
-      <Container fluid className="p-5">
+      <Container fluid className="p-5 mt-5">
         <Row className="justify-content-md-center">
           <Col md={6}>
-            <h2>Sign In</h2>
-            <p>Welcome back! Please sign in with your email and password.</p>
+            <h2 className='text-center'>Sign In</h2>
+            <p className='text-center'>Welcome back! Please sign in with your email and password.</p>
             <form onSubmit={handleSubmit}>
               <TextField
                 label="Email address"

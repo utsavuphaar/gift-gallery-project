@@ -5,27 +5,31 @@ import { IoCubeOutline } from "react-icons/io5";
 import { GoGraph } from "react-icons/go";
 import { LiaStopwatchSolid } from "react-icons/lia";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { IoIosGift } from "react-icons/io";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProduct } from '../../DataSlice/ProductSlice';
+
 import ApiUrl from '../ApiUrl';
 import axios from 'axios';
 function AdminHomePage() {
     const [categoryList, setCategoryList] = useState(0);
     const [userList, setUserList] = useState(0);
-    const { productList, category } = useSelector(store => store.Product);
+    const [productList, setProductList] = useState("");
     const [orderlist, setorderlist] = useState([]);
-    const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchProduct());
         fetchorder()
-        axios.get(process.env.REACT_APP_GET_CATEGORIES)
+         axios.get(ApiUrl.displayAllProducts)
+            .then(response => {
+                console.log(response)
+                setProductList(response.data.result);
+            }).catch(err => {
+                console.log(err);
+            })
+
+         axios.get(process.env.REACT_APP_GET_CATEGORIES)
             .then(response => {
                 setCategoryList(response.data.categories.length);
             }).catch(err => {
                 console.log(err);
             })
-        axios.get(process.env.REACT_APP_USER_LIST).then(response => {
+         axios.get(process.env.REACT_APP_USER_LIST).then(response => {
             setUserList(response.data.users.length);
         }).catch(err => {
             console.log(err);
@@ -34,7 +38,6 @@ function AdminHomePage() {
 
 
     const fetchorder = () => {
-
         axios.get(ApiUrl.getOrderdetail)
             .then((response) => {
                 console.log(response.data.result);
@@ -132,16 +135,14 @@ function AdminHomePage() {
                     <div className="col-md-3 mt-2">
                         <div className="card">
                             <div className="card-body">
-                                {/* <p>Total Pending</p>
-                        <p>2040</p> */}
                                 <div className="row d-flex">
-                                    <div className="col-md-9 ">Total User </div>
+                                    <div className="col-md-9 ">Total Orders </div>
                                     <div className="col-md-3">
                                         <LiaStopwatchSolid className="fs-3 watchicon" /></div>
 
                                 </div>
                                 <br></br>
-                                <p className="fs-4">40,689</p>
+                                <p className="fs-4">{orderlist.length}</p>
                                 <br></br>
                                 <div className="row d-flex">
                                     <div className="col-md-1">

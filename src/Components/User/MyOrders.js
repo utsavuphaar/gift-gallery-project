@@ -12,6 +12,9 @@ function MyOrders() {
     const navigate = useNavigate();
 
 
+    const viewMore = (product)=>{
+        navigate(`/viewmore/${product.id}`, { state: product });
+    }
     console.log(state)
     // alert(status)
     return (
@@ -47,7 +50,7 @@ function MyOrders() {
                 <div className='container border row mt-2 bg-white' style={{ height: 'auto' }}>
                     <div className='col-md-2'>
                         {state.orderItems.map((data, ind) =>
-                            <img key={ind} className='mt-3' src={data.product.thumbnail} width="150px" height="150px" />
+                            <img onClick={()=>viewMore(data.product)} key={ind} className='mt-3' src={data.product.thumbnail} width="150px" height="150px" style={{cursor:'pointer'}}/>
                         )}
                         {status === "Delivered" || status === "Cancelled" ? (
                             <p></p>

@@ -5,13 +5,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Check } from '@mui/icons-material';
+import Swal from 'sweetalert2';
 export const ViewReviewRating = () => {
       const [reviews, setReviews] = useState([]);
       const location = useLocation();
       const [avgRating, setAvgRating] = useState(0);
       const navigate = useNavigate();
       const productId = location.state.id;
-
+      const userId = localStorage.getItem("userId");
       useEffect(() => {
             axios.get(`http://localhost:3000/review/viewallreview/${productId}/`)
                   .then(res => {
@@ -31,15 +32,47 @@ export const ViewReviewRating = () => {
             setAvgRating(avgRating);
       }, [reviews]);
 
-      const rateProduct = ()=>{
-            navigate("/viewmore/rate-product", { state: productId })
+      const rateProduct = (productId) => {
+            axios.post(process.env.REACT_APP_ORDER_FOR_PARTICULAR_USER, { userId: userId })
+                  .then(response => {
+                        const orders = response.data.result;
+                        const foundOrder = orders.find(order => {
+                              return order.orderItems.some(item => item.productId === productId);
+                        });
+
+                        if (foundOrder) {
+                              console.log("Order found:");
+                              console.log(foundOrder);
+                              const status = foundOrder.status;
+                              console.log(`Status: ${status}`);
+                              if (status !== "Delivered") {
+                                    Swal.fire({
+                                          icon: 'warning',
+                                          title: 'Oops...',
+                                          text: "You can't rate the product before it is delivered"
+                                    });
+                              } else {
+                                    navigate("/viewmore/rate-product", { state: productId })
+                              }
+                        } else {
+                              Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Oops...',
+                                    text: "Buy this product first"
+                                });
+                              console.log(`Order with productId ${productId} not found.`);
+                        }
+                        console.log(response.data.result)
+                  }).catch(err => {
+                        console.log(err);
+                  })
       }
       return <>
             <div className="container mt-5 border w-75">
                   <div className="row">
                         <p className="fw-semibold fs-5 ml-2 mt-3 d-flex">Ratings & Reviews  &nbsp;&nbsp;
 
-                              <button className='btn btn-primary border float-end' onClick={() => navigate("/viewmore/rate-product", { state: productId })}> Rate Product</button>
+                              <button className='btn btn-primary border float-end' onClick={() => rateProduct(productId)}> Rate Product</button>
                         </p>
                         <div className='col-md-4 mt-1 '>
                               <p className='fs-2 d-flex'>{avgRating.toFixed(1)}&nbsp; <FaStar className='text-primary mt-2 fs-3' /></p>

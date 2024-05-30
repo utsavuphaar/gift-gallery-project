@@ -56,7 +56,7 @@ const OrderCancellationForm = () => {
                 showConfirmButton: false,
                 timer: 2000
             });
-            console.log(orderNumber, firstName, lastName, phone, email, dateOfPurchase, orderTotal, address, city, region, postalCode, romanka, cancellationReason, termsAgreed);
+            // console.log(orderNumber, firstName, lastName, phone, email, dateOfPurchase, orderTotal, address, city, region, postalCode, romanka, cancellationReason, termsAgreed);
             setOrderNumber('');
             setFirstName('');
             setLastName('');
