@@ -21,15 +21,9 @@ export const Footer = () => {
                                     </div>
                                     <div className="p-3">
                                           <p style={{ color: "black" }}>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis consequat. Nulla facilisi. Sed id nisi sit amet tellus hendrerit aliquam.
+                                                Thank you for visiting our Gift Gallery! We offer a wide range of unique and personalized gifts for every occasion. Follow us on social media for the latest updates and special offers.
                                           </p>
 
-                                    </div>
-                                    <div className="social-links mt-0">
-                                          <a href="https://www.facebook.com/" target="_blank"> <FaFacebook className="fs-4" />   </a>
-                                          <a href="https://www.twitter.com/" target="_blank"><AiFillTwitterCircle className="fs-4" /></a>
-                                          <a href="https://www.instagram.com/" target="_blank"><RiInstagramFill className="fs-4" /></a>
-                                          <a href="https://www.youtube.com/" target="_blank"><FaYoutube className="fs-4" /></a>
                                     </div>
                               </div>
                               <div className="footer-col">
@@ -60,13 +54,21 @@ export const Footer = () => {
                                           <li><a href="#">dress</a></li>
                                     </ul>
                               </div>
+                              <div className="footer-col">
+                                    <ul className="social-links mt-0">
+                                          <a href="https://www.facebook.com/" target="_blank"> <FaFacebook className="fs-4" />   </a>
+                                          <a href="https://www.twitter.com/" target="_blank"><AiFillTwitterCircle className="fs-4" /></a>
+                                          <a href="https://www.instagram.com/" target="_blank"><RiInstagramFill className="fs-4" /></a>
+                                          <a href="https://www.youtube.com/" target="_blank"><FaYoutube className="fs-4" /></a>
+                                    </ul>
+                              </div>
                         </div>
                   </div>
-            <div className="container-fluid p-2 bg-secondary d-flex justify-content-center align-items-center">
-                  {/* <div className=" d-flex justify-content-center align-items-center p-1 copyright"> */}
-                       <h6 className="mt-2 text-white"> &copy; 2024 UtsavUphar. All rights reserved.</h6>
-                  {/* </div> */}
-            </div>
+                  <div className="container-fluid p-2 bg-secondary d-flex justify-content-center align-items-center">
+                        {/* <div className=" d-flex justify-content-center align-items-center p-1 copyright"> */}
+                        <h6 className="mt-2 text-white"> &copy; 2024 UtsavUphar. All rights reserved.</h6>
+                        {/* </div> */}
+                  </div>
             </footer>
       </>
 

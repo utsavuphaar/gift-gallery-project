@@ -111,7 +111,7 @@ function Product() {
     }
 
 
-    const getproductbybrand = (brand,index) => {
+    const getproductbybrand = (brand, index) => {
         // Assuming you have already assigned an id to your input field, let's say "flexCheckDefault"
         var checkbox = document.getElementById(`flexCheckDefault${index}`);
 
@@ -140,6 +140,7 @@ function Product() {
     }
 
     const handleScroll = () => {
+        // alert("next page")
         if (
             window.innerHeight + document.documentElement.scrollTop ===
             document.documentElement.offsetHeight
@@ -242,7 +243,7 @@ function Product() {
                             {brand.map((item, index) =>
                                 <AccordionDetails className='ms-5'>
                                     <Typography key={index} >
-                                        <input className="form-check-input ms-3" type="checkbox" onClick={() => getproductbybrand(item,index)} value="" id={`flexCheckDefault${index}`} />
+                                        <input className="form-check-input ms-3" type="checkbox" onClick={() => getproductbybrand(item, index)} value="" id={`flexCheckDefault${index}`} />
                                         <label className="form-check-label ms-3" for="flexCheckDefault">
                                             {item}
                                         </label>
