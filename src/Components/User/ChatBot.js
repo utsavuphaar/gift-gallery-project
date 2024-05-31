@@ -1,6 +1,7 @@
 import React from 'react';
 import ChatBot from 'react-simple-chatbot';
 import { Segment } from 'semantic-ui-react';
+import Header from './Header';
 
 const ChatBotComponent = () => {
     const steps = [
@@ -104,9 +105,12 @@ const ChatBotComponent = () => {
     ];
 
     return (
+        <>
+        <Header/>
         <Segment className="float-end">
             <ChatBot steps={steps} />
         </Segment>
+        </>
     );
 }
 

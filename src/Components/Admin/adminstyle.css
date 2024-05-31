@@ -427,7 +427,7 @@
 /* ________________________________________________________________________________________-*/
 
 .custom-scroll1 {
-  max-height: 160px;
+  max-height: 500px;
   position: relative;
   overflow-y: auto;
 }
@@ -437,4 +437,43 @@
   position: sticky !important;
   background-color: white; /* Ensure the header has a background color */
   z-index: 1; /* Ensure the header stays above the table body */
+}
+
+/* ----------------Dashboard Table------------------- */
+/* Custom scroll container to hide scrollbar */
+.custom-scroll1 {
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-scroll1::after {
+  content: "";
+  display: block;
+  height: 20px; /* Height to compensate for the hidden scrollbar */
+}
+
+.custom-scroll1 table {
+  display: block;
+  overflow-y: auto; /* Enable scrolling within the table */
+  max-height: 400px; /* Adjust based on your needs */
+  padding-right: 20px; /* Space for pseudo scrollbar */
+  margin-right: -20px; /* Hide the scrollbar */
+}
+
+.table-responsive-sm {
+  overflow: hidden;
+}
+
+/* Sticky header */
+#thead{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #f8f9fa; /* Background color for better visibility */
+}
+
+/* Style to keep scrollbar hidden */
+.custom-scroll1 table::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
