@@ -26,7 +26,8 @@ export default {
     getOrderdetail : "http://localhost:3000/order/viewAllOrders",
     deleteCategory : "http://localhost:3000/category/removecategory",
     updatePassword:"http://localhost:3000/user/updatePassword",
-    getParticularDeliveryBoyOrder:"http://localhost:3000/deliverydata/deliveryBoyOrder"
+    getParticularDeliveryBoyOrder:"http://localhost:3000/deliverydata/deliveryBoyOrder",
+    addCategory:"http://localhost:3000/category/addCategory"
 
 
 }
