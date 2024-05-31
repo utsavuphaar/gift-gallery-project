@@ -5,6 +5,7 @@ import { BsCurrencyRupee } from "react-icons/bs";
 import { toast, ToastContainer } from 'react-toastify'
 import Header from "./Header";
 import Footer from "./footer";
+import Swal from "sweetalert2";
 function Checkout() {
     const navigate = useNavigate();
     let firstName = useRef(null);
@@ -104,7 +105,13 @@ function Checkout() {
                                     userId,
                                     productId: state.id,
                                 });
-                                alert("Order placed successfully..")
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Order Placed Successfully",
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                });
                                 navigate("/cart")
                                 console.log("PlaceOrder API response:", myOrder.data);
                             } else {
