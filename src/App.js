@@ -53,6 +53,7 @@ import InboxList from './Components/Admin/InboxList.js';
 import YourOrders from './Components/DeliveryBoy/YourOrders.js';
 import OrderData from './Components/DeliveryBoy/OrderData.js';
 import VerifyOtp from './Components/DeliveryBoy/VerifyOTP.js';
+import AddCategory from './Components/Admin/AddCategory.js';
 
 
 
@@ -103,6 +104,7 @@ function App() {
         <Route path='deliveryBoyList' element={<DeliveryBoyList />} />
         <Route path="orderList" element={<OrderList />} />
       </Route>
+      <Route path="/admin/AddCategory" element={<AddCategory/>}/>
 
       <Route path="/newAccount" element={<DeliveryBoySignUpForm />} />
       <Route path="/signIndeliveryboy" element={<SignInFormDeliveryBoy />} />

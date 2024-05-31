@@ -26,7 +26,8 @@ export default {
     displayAllProducts:"http://localhost:3000/product/displayAllProducts",
     getOrderdetail : "http://localhost:3000/order/viewAllOrders",
     updatePassword:"http://localhost:3000/user/updatePassword",
-    getParticularDeliveryBoyOrder:"http://localhost:3000/deliverydata/deliveryBoyOrder"
+    getParticularDeliveryBoyOrder:"http://localhost:3000/deliverydata/deliveryBoyOrder",
+    addCategory:"http://localhost:3000/category/addCategory"
 
 
 }
