@@ -103,7 +103,7 @@ export default function Home() {
         </div>
         <div>
         <Link to="/ChatBot">
-                <button className='position-fixed btn btn-primary float-end h-10 p-4' style={{marginTop:'-100px',marginRight:'10px',right:'0px',zIndex:2 , borderRadius : "50%"}}><SiChatbot style={{fontSize : "25px"}}  /></button><br />
+                <button className='position-fixed btn btn-primary float-end h-10 p-4' style={{marginTop:'-150px',marginRight:'10px',right:'0px',zIndex:2 , borderRadius : "50%"}}><SiChatbot style={{fontSize : "25px"}}  /></button><br />
         </Link>
         </div>
         <Product />

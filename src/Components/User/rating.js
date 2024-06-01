@@ -4,6 +4,7 @@ import $, { event } from 'jquery';
 import ApiUrl from '../ApiUrl';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const RateProduct = () => {
       const {state} =useLocation();
@@ -96,7 +97,14 @@ const RateProduct = () => {
       const handleSubmitClick = () => {
             setSubmitClicked(true);
             axios.post(ApiUrl.addReview,{userId,productId,rating,comment}).then(res=>{
-                  alert("success")
+                  // alert("success")
+                  Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Review Send Successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                   navigate("/")
             }).catch(err=>{
                   console.log(err)
