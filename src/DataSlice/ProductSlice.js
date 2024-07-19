@@ -277,3 +277,7 @@ const slice = createSlice({
 
 export default slice.reducer;
 export const { removeProductFromCart,setProductList , searchProduct, removeAllProductsFromCart, removeProductFromWishlist } = slice.actions;
+
+
+
+

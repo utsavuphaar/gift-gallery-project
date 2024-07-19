@@ -198,7 +198,7 @@ export default function ViewMore() {
                                         onClick={() => changeimage(imageUrl)}
                                         src={imageUrl}
                                         alt={`Image ${index + 1}`}
-                                        style={{ cursor: 'pointer' }}
+                                        style={{ cursor: 'pointer',width:'400px',height:'400px' }}
                                     />
                                 );
                             }

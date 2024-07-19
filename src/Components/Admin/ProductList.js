@@ -80,7 +80,7 @@ function ProductList() {
         });
     };
 
-    return (
+    return   (
         <>
             <div className="responsive-table-container">
                 <div className="w-100 p-4 d-flex justify-content-between align-items-center">
