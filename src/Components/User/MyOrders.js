@@ -55,7 +55,7 @@ function MyOrders() {
                         {status === "Delivered" || status === "Cancelled" ? (
                             <p></p>
                         ) : (
-                            <button className='btn btn-outline-danger center m-4' onClick={() => navigate("/cancel", { state: state.orderItems })}>Cancel</button>
+                            <button className='btn btn-outline-danger center m-4' onClick={() => navigate("/cancel", { state: state })}>Cancel</button>
                         )}
                     </div>
                     {state.orderItems.map((data, ind) =>

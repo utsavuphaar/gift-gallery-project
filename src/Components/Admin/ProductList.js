@@ -1,6 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { fetchProduct, fetchProductByCategory } from '../../DataSlice/ProductSlice';
 import axios from 'axios';
 import ApiUrl from '../ApiUrl';
@@ -8,34 +7,37 @@ import { AiFillDelete } from 'react-icons/ai';
 import Swal from 'sweetalert2';
 
 function ProductList() {
-    const call = useDispatch();
+    const dispatch = useDispatch();
     const { categoryProduct } = useSelector(store => store.Product);
 
     const [category, setCategory] = useState("All Category");
-    const [state, dispatch] = useReducer((state, action) => {
-        if (action.type === "set-product") {
-            return { ...state, productList: action.payload };
-        } else if (action.type === "delete-product") {
-            state.productList.splice(action.payload, 1);
-            return { ...state };
-        } else if (action.type === "set-category") {
-            return { ...state, categoryList: action.payload };
+    const [state, stateDispatch] = useReducer((state, action) => {
+        switch (action.type) {
+            case "set-product":
+                return { ...state, productList: action.payload };
+            case "delete-product":
+                return { ...state, productList: state.productList.filter((_, index) => index !== action.payload) };
+            case "set-category":
+                return { ...state, categoryList: action.payload };
+            default:
+                return state;
         }
     }, { productList: [], categoryList: [] });
 
     useEffect(() => {
-        axios.get(ApiUrl.displayAllProducts)
-            .then(response => {
-                dispatch({ type: "set-product", payload: response.data.result });
-            }).catch(err => {
-                console.log(err);
-            });
-        axios.get(ApiUrl.getCategories)
-            .then(response => {
-                dispatch({ type: "set-category", payload: response.data.categories });
-            }).catch(err => {
-                console.log(err);
-            });
+        const fetchData = async () => {
+            try {
+                const productResponse = await axios.get(ApiUrl.displayAllProducts);
+                stateDispatch({ type: "set-product", payload: productResponse.data.result });
+
+                const categoryResponse = await axios.get(ApiUrl.getCategories);
+                stateDispatch({ type: "set-category", payload: categoryResponse.data.categories });
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
     }, []);
 
     const getCategoryName = (e) => {
@@ -48,14 +50,12 @@ function ProductList() {
         if (category === "All Category") {
             axios.get(ApiUrl.displayAllProducts)
                 .then(response => {
-                    dispatch({ type: "set-product", payload: response.data.result });
+                    stateDispatch({ type: "set-product", payload: response.data.result });
                 }).catch(err => {
                     console.log(err);
                 });
         } else {
-            call(fetchProductByCategory(category));
-            dispatch({ type: "set-product", payload: categoryProduct });
-            setCategory(category);
+            dispatch(fetchProductByCategory(category));
         }
     };
 
@@ -70,7 +70,10 @@ function ProductList() {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch({ type: "delete-product", payload: index });
+                // Perform the delete operation here if needed, e.g., making an API call
+                // Example: axios.delete(`${ApiUrl.deleteProduct}/${productId}`)
+                // After deletion, update the local state
+                stateDispatch({ type: "delete-product", payload: index });
                 Swal.fire(
                     'Deleted!',
                     'Your product has been deleted.',
@@ -109,7 +112,7 @@ function ProductList() {
                         <tbody>
                             {state.productList.map((product, index) => <tr key={index} >
                                 <td className='text-center'>{index + 1}</td>
-                                <td><img src={product.thumbnail} id='p-image' width="100px" height="50px" /></td>
+                                <td><img src={product.thumbnail} id='p-image' width="100px" height="50px" alt={product.title} /></td>
                                 <td>{product.title.slice(0, 30)}</td>
                                 <td>{product.categoryName}</td>
                                 <td>{product.price}</td>

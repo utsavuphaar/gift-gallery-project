@@ -35,7 +35,7 @@ export const UserProfile = () => {
         if (user) localStorage.clear();
 
         Swal.fire({
-            position: "top-end",
+            position: "center",
             icon: "success",
             title: "Logged Out",
             showConfirmButton: false,
@@ -61,7 +61,7 @@ export const UserProfile = () => {
         })
             .then((res) => {
                 Swal.fire({
-                    position: "top-end",
+                    position: "center",
                     icon: "success",
                     title: "Password Updated",
                     showConfirmButton: false,
@@ -102,7 +102,7 @@ export const UserProfile = () => {
                 setContact(updatedUser.contact);
 
                 Swal.fire({
-                    position: "top-end",
+                    position: "center",
                     icon: "success",
                     title: "Profile Updated",
                     showConfirmButton: false,

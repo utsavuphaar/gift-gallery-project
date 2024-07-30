@@ -108,8 +108,15 @@ const RateProduct = () => {
                   navigate("/")
             }).catch(err=>{
                   console.log(err)
-                  alert("error")
+                  Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: "You have already rate this product",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
             });
+
       };
 
       return <>

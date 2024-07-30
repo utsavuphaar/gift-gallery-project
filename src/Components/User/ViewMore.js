@@ -56,9 +56,9 @@ export default function ViewMore() {
         setcurrentimage(image);
     };
 
-    const viewmore = (product) =>{
+    const viewmore = (product) => {
         navigate(`/viewmore/${product.id}`, { state: product });
-      }
+    }
 
     const decrement = () => {
         if (inputValue > 1) {
@@ -66,6 +66,7 @@ export default function ViewMore() {
         }
     };
     const addToCart = (productId) => {
+        // alert(inputValue)
         dispatch(addProductIntoCart({ userId: userId, productId: productId, quantity: inputValue }))
     }
 
@@ -144,7 +145,8 @@ export default function ViewMore() {
 
     const buyNow = (product) => {
         if (localStorage.getItem("userId")) {
-            navigate("/buynow", { state: product });
+            product.qty = inputValue;
+            navigate("/buynow", { state: product});
         } else {
             toast.info("Sign-in first", {
                 position: "top-center",
@@ -163,7 +165,7 @@ export default function ViewMore() {
 
     // alert(inputValue)
     return <>
-    <ToastContainer/>
+        <ToastContainer />
         <Header />
 
         <div className="container p-0 mt-5" style={{ maxWidth: "90%", boxShadow: '0px 0px 1px 1px gainsboro' }}>
@@ -198,7 +200,7 @@ export default function ViewMore() {
                                         onClick={() => changeimage(imageUrl)}
                                         src={imageUrl}
                                         alt={`Image ${index + 1}`}
-                                        style={{ cursor: 'pointer' }}
+                                        style={{ cursor: 'pointer', width: '400px', height: '400px' }}
                                     />
                                 );
                             }
@@ -210,7 +212,7 @@ export default function ViewMore() {
                     <div className="container mt-2">
                         <div className="p-2 d-flex justify-content-between">
                             <h4 className="w-75">{state.title}</h4>
-                            <FaHeart id={`save${state.id}`} type="checkbox" className="fs-5" style={{cursor:"pointer"}} onClick={() => addToWishlist(state.id)} />
+                            <FaHeart id={`save${state.id}`} type="checkbox" className="fs-5" style={{ cursor: "pointer" }} onClick={() => addToWishlist(state.id)} />
                         </div>
                         <div className="d-flex ms-2 align-items-center">
                             <div className="fs-4">Rs {(state.price - (((parseInt(state.discountPercentage * state.price) / 100).toFixed(2)) * 1)).toFixed(2)} | </div>
@@ -265,12 +267,12 @@ export default function ViewMore() {
 
                         <img src={product.thumbnail} className='gift-image' style={{ width: "220px", height: "200px", borderRadius: "10px" }} />
                         <div className='icon-div' style={{ marginTop: "130px" }}>
-                            <div className='heart-icon'> <FaHeart 
-                    id={`save${state.id}`} 
-                    className="fs-5" 
-                    style={{ cursor: "pointer", color: wishlist ? 'red' : 'black' }} 
-                    onClick={() => addToWishlist(state.id)} 
-                /></div>
+                            <div className='heart-icon'> <FaHeart
+                                id={`save${state.id}`}
+                                className="fs-5"
+                                style={{ cursor: "pointer", color: wishlist ? 'red' : 'black' }}
+                                onClick={() => addToWishlist(state.id)}
+                            /></div>
                             <div onClick={() => viewmore(product)} className='heart-icon'><IoEye className=' ' /></div>
                         </div>
                         <div className="w-100 mt-2 d-flex justify-content-between">

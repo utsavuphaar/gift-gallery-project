@@ -7,6 +7,7 @@ import Header from "./Header";
 import Footer from "./footer";
 import Swal from "sweetalert2";
 function BuyNow() {
+    
 
     let firstName = useRef(null);
     let lastName = useRef(null);
@@ -18,8 +19,8 @@ function BuyNow() {
     const navigate = useNavigate();
     let status = "Order Confirmed";
     const userId = localStorage.getItem("userId");
-    var { state } = useLocation();
-
+    var { state} = useLocation();
+    console.log(state.qty);
     const userArr = localStorage.getItem("user");
     const user = JSON.parse(userArr);
 
@@ -85,7 +86,7 @@ function BuyNow() {
                                     city: cityValue,
                                     pinCode: pinCodeValue,
                                     status: "Order Confirmed",
-                                    quantity: 1,
+                                    quantity: state.qty===undefined?1:state.qty,
                                     userId,
                                     productId: state.id,
                                 });
@@ -292,7 +293,7 @@ function BuyNow() {
                                     <small className='text-danger' id='pinerror'></small>
                                 </div>
                                 <div className='col-md-6 mt-3'>
-                                    <button onClick={() => checkoutHandler((state.price-((state.price*state.discountPercentage)/100)).toFixed(2))} className='btn btn-primary mt-2'>Proceed to Pay</button>
+                                    <button onClick={() => checkoutHandler((state.price*(state.qty===undefined?1:state.qty)-((state.price*(state.qty===undefined?1:state.qty)*state.discountPercentage)/100)).toFixed(2))} className='btn btn-primary mt-2'>Proceed to Pay</button>
                                 </div>
                             </div>
                         </div>
@@ -315,7 +316,7 @@ function BuyNow() {
                                 <tbody>
                                    <tr>
                                         <td>{state.title}</td>
-                                        <td className="text-center">1</td>
+                                        <td className="text-center"> {state.qty===undefined?1:state.qty}</td>
                                         <td className="text-center">{state.price}</td>
                                     </tr>
                                 </tbody>
@@ -323,17 +324,17 @@ function BuyNow() {
                                     <tr>
                                         <td>Subtotal</td>
                                         <td></td>
-                                        <td className="text-center">{state.price}</td>
+                                        <td className="text-center">{state.price*(state.qty===undefined?1:state.qty)}</td>
                                     </tr>
                                     <tr>
                                         <th>Discount</th>
                                         <td className="float-end"><BsCurrencyRupee /></td>
-                                        <th className="text-success">-{((state.price*state.discountPercentage)/100).toFixed(2)}</th>
+                                        <th className="text-success">-{(((state.price*state.discountPercentage)/100).toFixed(2)*(state.qty===undefined?1:state.qty)).toFixed(2)}</th>
                                     </tr>
                                     <tr>
                                         <th>Total</th>
                                         <td></td>
-                                        <th>{(state.price-((state.price*state.discountPercentage)/100)).toFixed(2)}</th>
+                                        <th>{(state.price-((state.price*state.discountPercentage)/100)).toFixed(2)*(state.qty===undefined?1:state.qty)}</th>
                                     </tr>
                                 </tfoot>
                             </table>

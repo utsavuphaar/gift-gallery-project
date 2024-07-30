@@ -14,7 +14,7 @@ root.render(
     <BrowserRouter>
       <GoogleOAuthProvider clientId="789075636203-9loq49mt0j7mdsjeqoej8jsbogua9uuf.apps.googleusercontent.com"> <App /></GoogleOAuthProvider>,
 
-    </BrowserRouter>
+    </BrowserRouter>  
   </Provider>
 );
 
