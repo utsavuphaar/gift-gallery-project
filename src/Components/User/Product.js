@@ -196,6 +196,7 @@ function Product() {
 
     const buyNow = (product) => {
         if (localStorage.getItem("userId")) {
+            // product.qty = 1; // Set the quantity directly in the product object
             navigate("/buynow", { state: product });
         } else {
             toast.info("Sign-in first", {
@@ -210,7 +211,7 @@ function Product() {
                 transition: Zoom,
             });
         }
-    }
+    };
 
     const [expanded, setExpanded] = React.useState(false);
 
@@ -226,6 +227,12 @@ function Product() {
 
     return <>
         <ToastContainer />
+        {productList.length == 0 ? (
+            <div className="container-fluid d-flex justify-content-center align-items-center" style={{ backgroundColor: "#F7FAFC" }}>
+                <img src='https://notebookstore.in/image/no-product-found.png' />
+            </div>
+        ): (
+
         <div className="container-fluid " style={{ backgroundColor: "#F7FAFC" }}>
             <div className="row p-0  mb-3 ">
                 <div className="col-lg-3 p-0 " >
@@ -417,7 +424,9 @@ function Product() {
                 </div>
             </div>
         </div>
-        {/* {isLoading && <div className="container text-center fs-4">Loading...</div>}s */}
+    )
+}
+{/* {isLoading && <div className="container text-center fs-4">Loading...</div>}s */ }
     </>
 };
 

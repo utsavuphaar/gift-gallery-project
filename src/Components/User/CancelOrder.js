@@ -25,15 +25,22 @@ const OrderCancellationForm = () => {
     const [cancellationReason, setCancellationReason] = useState('');
     const [termsAgreed, setTermsAgreed] = useState(false);
     const navigate = useNavigate();
-    // console.log(state)
+    console.log(state)
     // alert(state[0].orderId)
-    const id = state[0].orderId;
+    const id = state.orderItems[0].orderId;
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Form validation (example)
-        if (!orderNumber || !firstName || !lastName || !phone || !email || !dateOfPurchase) {
-            alert('Please fill in all required fields.');
+        if ( !email ) {
+            Swal.fire({
+                position: "center",
+                position: "center",
+                icon: "success",
+                title: "Please fill all details",
+                showConfirmButton: false,
+                timer: 2000
+            });
             return;
         }
 
@@ -46,7 +53,7 @@ const OrderCancellationForm = () => {
         const contact = result.data.result.contact;
         console.log(orderId + " " + fName + " " + lName + " " + contact)
 
-        if (orderId == orderNumber && fName == firstName && lastName == lName && contact == phone) {
+        if (email && cancellationReason) {
             await axios.put(ApiUrl.updateOrderStatus, { id, status: "Cancelled" });
             Swal.fire({
                 position: "center",
@@ -92,7 +99,7 @@ const OrderCancellationForm = () => {
                             <TextField
                                 label="Order Number / Transaction ID"
                                 variant="outlined"
-                                value={orderNumber}
+                                value={state.orderId}
                                 onChange={(e) => setOrderNumber(e.target.value)}
                                 fullWidth
                                 required
@@ -103,7 +110,7 @@ const OrderCancellationForm = () => {
                                     <TextField
                                         label="First Name"
                                         variant="outlined"
-                                        value={firstName}
+                                        value={state.firstName}
                                         onChange={(e) => setFirstName(e.target.value)}
                                         fullWidth
                                         required
@@ -114,7 +121,7 @@ const OrderCancellationForm = () => {
                                     <TextField
                                         label="Last Name"
                                         variant="outlined"
-                                        value={lastName}
+                                        value={state.lastName}
                                         onChange={(e) => setLastName(e.target.value)}
                                         fullWidth
                                         required
@@ -125,7 +132,7 @@ const OrderCancellationForm = () => {
                             <TextField
                                 label="Phone"
                                 variant="outlined"
-                                value={phone}
+                                value={state.contact}
                                 onChange={(e) => setPhone(e.target.value)}
                                 fullWidth
                                 required
@@ -142,9 +149,9 @@ const OrderCancellationForm = () => {
                             />
                             <TextField
                                 label="Date of Original Purchase"
-                                type="date" // Uncomment this line to use a date picker
+                                type="text" // Uncomment this line to use a date picker
                                 variant="outlined"
-                                value={dateOfPurchase}
+                                value={state.orderDate}
                                 onChange={(e) => setDateOfPurchase(e.target.value)}
                                 fullWidth
                                 required
